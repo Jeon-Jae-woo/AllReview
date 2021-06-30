@@ -15,12 +15,16 @@
 	<%@ include file="Fix/header.jsp" %>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	
-	
-	<input type="button" value="테스트" onclick="location.href='userController?command=test'">
-	<input type="button" value="테스트2" onclick="location.href='shopcontroller?command=test2'">
-	
-	
+
+	<!-- admin 페이지 작업을 위해서 임시로 만들어놓은 form 입니다 -->	
+	<form method="get" action="userController">
+		<input type="hidden" name="email" value="jaewoo68@naver.com">
+		<input type="hidden" name="levelNo" value="1">
+		<input type="hidden" name="command" value="adminLevelUpdate">
+		<input type="submit">
+	</form>
+		
+		
 	<%@ include file="Fix/footer.jsp" %>
 </body>
 </html>
