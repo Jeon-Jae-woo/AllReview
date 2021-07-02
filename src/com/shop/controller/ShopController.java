@@ -44,7 +44,7 @@ public class ShopController extends HttpServlet {
 		}else if(command.equals("shopinsert")){
 			HttpSession session = request.getSession();
 			
-			String email = (String)session.getAttribute("email");
+			String nickname = (String)session.getAttribute("nickname");
 			int cate = Integer.parseInt(request.getParameter("category"));
 			int group = Integer.parseInt(request.getParameter("group"));
 			String title = request.getParameter("shoptitle");
@@ -57,7 +57,7 @@ public class ShopController extends HttpServlet {
 			
 			
 			ShopDto dto = new ShopDto();
-			dto.setEmail(email);
+			dto.setnickname(nickname);
 			dto.setCate_no(cate);
 			dto.setGroup_no(group);
 			dto.setTitle(title);
@@ -95,9 +95,9 @@ public class ShopController extends HttpServlet {
 		}else if(command.equals("shopwriteform")) {
 			HttpSession session = request.getSession();
 			
-			System.out.println(session.getAttribute("email"));
+			System.out.println(session.getAttribute("nickname"));
 			
-			if(session.getAttribute("email") == null) {
+			if(session.getAttribute("nickname") == null) {
 				jsResponse("로그인을 해주세요.", "index.jsp", response);
 			}else {
 				response.sendRedirect("shopwrite.jsp");
@@ -124,11 +124,11 @@ public class ShopController extends HttpServlet {
 			ShopDto dto = biz.selectOne(shopno);
 			
 			
-			String dtoEmail = dto.getEmail();
-			String email = (String)session.getAttribute("email");
-			System.out.println(dtoEmail +"/"+session.getAttribute("email"));
+			String dtonickname = dto.getnickname();
+			String nickname = (String)session.getAttribute("nickname");
+			System.out.println(dtonickname +"/"+session.getAttribute("nickname"));
 			
-			if(email.equals(dtoEmail) ) {
+			if(nickname.equals(dtonickname) ) {
 				request.setAttribute("dto", dto);
 				dispatch("shopupdate.jsp", request, response);
 			}else {

@@ -94,7 +94,7 @@ public class ShopDao {
 
 		try {
 			pstm = con.prepareStatement(sql);
-			pstm.setString(1, dto.getEmail());
+			pstm.setString(1, dto.getnickname());
 			pstm.setInt(2, dto.getCate_no());
 			pstm.setInt(3, dto.getGroup_no());
 			pstm.setString(4, dto.getTitle());
