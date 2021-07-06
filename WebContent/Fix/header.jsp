@@ -14,9 +14,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!--<link rel="stylesheet" href="resources/bootstrap-3.3.2-dist/css/bootstrap.css"> -->
-<!--<script type="text/javascript" src="resources/bootstrap-3.3.2-dist/js/bootstrap.js"></script>-->
 
 </head>
 <body>
@@ -51,11 +50,11 @@
 				<input type="hidden" name="command" value="logout">
 				</form>
 			</li>
-			<li><button type="button" class="btn btn-default" onclick="location.href='mypageInfo.jsp'">마이페이지</button></li>
+			<li><button type="button" class="btn btn-default" onclick="location.href='userController?command=mypageInfo'">마이페이지</button></li>
 		<% } %>
 		<% if(session.getAttribute("email")!=null){
 			if((Integer)session.getAttribute("level") == 1 || (Integer)session.getAttribute("level") == 2) {%>
-      			<li><button type="button" class="btn btn-default" onclick="location.href='Admin/adminMain.jsp'">관리자페이지</button></li>
+      			<li><button type="button" class="btn btn-default" onclick="location.href='adminController?command=userList'">관리자페이지</button></li>
       	<% 		} 
 			}%>
 	
