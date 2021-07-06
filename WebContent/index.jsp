@@ -15,7 +15,9 @@
 	<%@ include file="Fix/header.jsp" %>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
+	<a href="indexshoptest.jsp">매장</a>
+	
+	
 	<!-- admin 페이지 작업을 위해서 임시로 만들어놓은 form 입니다 -->	
 	<form method="get" action="userController">
 		<input type="hidden" name="email" value="jaewoo68@naver.com">
