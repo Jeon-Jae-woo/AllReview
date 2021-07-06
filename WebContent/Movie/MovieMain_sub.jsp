@@ -158,6 +158,12 @@ clear: both;
 </head>
 <body>
 
+
+
+	<!-- header -->
+	<%@ include file="../Fix/header.jsp" %>
+	
+
 	<div class="container">
 		<!--  목록 페이지 상단 (카테고리명, 정렬, 검색) -->
 		<div class="top">
@@ -211,6 +217,11 @@ clear: both;
 
 
 
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br>
+	
+	<!-- footer -->
+	<%@ include file="../Fix/footer.jsp" %>
 
 
 

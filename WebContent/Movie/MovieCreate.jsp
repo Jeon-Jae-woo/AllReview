@@ -147,8 +147,8 @@ text-align: center;
 			</div>
 			
 			<div>
-				<input class="create" type="submit" value="등록" onclick="" >
-				<input class="cancel" type="button" value="취소" onclick="" >
+				<input class="create" type="submit" value="등록" onclick="location='MovieMain.jsp'" >
+				<input class="cancel" type="button" value="취소" onclick="location='MovieMain.jsp'" >
 			</div>
 			
 			

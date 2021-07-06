@@ -23,8 +23,9 @@
 		<input type="hidden" name="command" value="adminLevelUpdate">
 		<input type="submit">
 	</form>
-		
-		
+	
+	<a href="MovieController?command=list">영화</a>	
+	
 	<%@ include file="Fix/footer.jsp" %>
 </body>
 </html>

@@ -13,31 +13,33 @@
 <style type="text/css">
 
 .side_table{
-float: right;
-position: relative;
-right: 80px;
-top: 300px;
-position: fixed;
-
+	border: 1px dashed red;
+	float: right;
+	position: absolute;
+	right: 30px;
+	height: 600px;
+	top: 650px;
 }
+
+/* .side_table01{
+	position: relative;
+}
+.side_table02{
+	position: relative;
+} */
 
 #reco_tb{
 	width: 300px;
 	text-align: center;
 	height: 200px;
+	
 
 }
 #view_tb{
-	position: absolute;
 	top:350px;
 	width: 300px;
 	text-align: center;
 	height: 200px;
-}
-
-#side_title02{
-	position: absolute;
-	top:290px;
 }
 
 </style>
@@ -46,13 +48,15 @@ position: fixed;
 </head>
 <body>
 
-<%-- 	<!-- header -->
-	<%@ include file="../Fix/header.jsp" %> --%>
+	<!-- header -->
+	<%-- <%@ include file="../Fix/header.jsp" %> --%>
 	
 	
 	<div class="side_table">
-		<div id="side_title01"><h4> 영화 리뷰 추천수 상위 top5 </h4></div>
-		
+		<div class="side_title01">
+			<h4> 영화 리뷰 추천수 상위 top5 </h4>
+		</div>
+			
 		<div>
 			<form>
 				<table id="reco_tb" border=1 >
@@ -93,11 +97,12 @@ position: fixed;
 					
 				</table>
 			</form>
-		
 		</div>
 		
-		
-		<div id="side_title02"><h4> 영화 리뷰 조회수 상위 top5 </h4></div>
+		<br>
+		<div class="side_title02">
+			<h4> 영화 리뷰 조회수 상위 top5 </h4>
+		</div>
 		
 		<div>
 			<form>
@@ -139,22 +144,14 @@ position: fixed;
 					
 				</table>
 			</form>
-		
 		</div>
-	
+		
 	</div>
 	
 	
 	
-<%-- 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br>
-	
-	
-	
 	<!-- footer -->
-	<%@ include file="../Fix/footer.jsp" %> --%>
+	<%-- <%@ include file="../Fix/footer.jsp" %> --%>
 
 
 

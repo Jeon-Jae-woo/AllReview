@@ -3,6 +3,9 @@
     
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; UTF-8"); %>      
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
     
 <!DOCTYPE html>
 <html>
@@ -141,26 +144,27 @@ text-align: center;
 	border:1px solid #ccc;
 }
 .page_nation .pprev {
-	background:#f8f8f8 url('Image/page_pprev.png') no-repeat center center;
-	margin-left:0;
+/* 	background:#f8f8f8 url('Image/page_pprev.png') no-repeat center center;
+ */	margin-left:0;
 }
 .page_nation .prev {
-	background:#f8f8f8 url('Image/page_prev.png') no-repeat center center;
-	margin-right:7px;
+	/* background:#f8f8f8 url('Image/page_prev.png') no-repeat center center;
+	 */margin-right:7px;
 }
 .page_nation .next {
-	background:#f8f8f8 url('Image/page_next.png') no-repeat center center;
-	margin-left:7px;
+/* 	background:#f8f8f8 url('Image/page_next.png') no-repeat center center;
+ */	margin-left:7px;
 }
 .page_nation .nnext {
-	background:#f8f8f8 url('Image/page_nnext.png') no-repeat center center;
-	margin-right:0;
+/* 	background:#f8f8f8 url('Image/page_nnext.png') no-repeat center center;
+ */	margin-right:0;
 }
 .page_nation a.active {
 	background-color:#42454c;
 	color:#fff;
 	border:1px solid #42454c;
 }
+
 
 </style>
 
@@ -172,7 +176,7 @@ text-align: center;
 	
 	<div>
 		<div class="category">
-			<h1> 액션 </h1>
+			<h2>액션</h2>
 		</div>
 	
 		<!-- 영화 기본 정보 -->
@@ -181,27 +185,28 @@ text-align: center;
 				<div class="poster">영화포스터</div>
 			</div>
 		     <table class="list"  style="text-align: left">
-	            <tr>
-	                <th style="width:100px" >영화제목 : </th>
-	                <td style="width:250px">어벤져스 앤드게임</td>
-	                
-	            </tr>
-	            <tr>
-	                <th>기본정보 : </th>
-	                <td>액션,SF</td>
-	            </tr>
-	             <tr>
-	                <th>감독 : </th>
-	                <td>안소니 루소</td>
-	            </tr>
-	             <tr>
-	                <th>출연 : </th>
-	                <td>로버트다우니주니어</td>
-	            </tr>
-	             <tr>
-	                <th>영화 평점 : </th>
-	                <td>★★★★★ 10</td>
-	            </tr>
+							<tr>
+					        	<th style="width:100px" >영화제목 : </th>
+					            <td style="width:250px"></td>
+				            </tr>
+				            <tr>
+				                <th>기본정보 : </th>
+				                <td>${dto.movie_title}</td>
+				            </tr>
+				             <tr>
+				                <th>감독 : </th>
+				                <td>${dto.director}</td>
+				            </tr>
+				             <tr>
+				                <th>출연 : </th>
+				                <td>${dto.actor }</td>
+				            </tr>
+				             <tr>
+				                <th>영화 평점 : </th>
+				                <td></td>
+				            </tr>
+		     	
+
 	        </table>	
 		</div>
 	
@@ -222,7 +227,7 @@ text-align: center;
 				<thead>
 					<tr>
 						<th class="active text-center" style="width:250px; height:45px;">제목</th>
-						<th class="active text-center" style="width:100px">글쓴이</th>
+						<th class="active text-center" style="width:100px">닉네임</th>
 						<th class="active text-center" style="width:100px">날짜</th>
 						<th class="active text-center" style="width:100px">평점</th>
 						<th class="active text-center" style="width:80px">추천</th>
@@ -232,7 +237,7 @@ text-align: center;
 				<tbody >
 					<tr>
 						<td style="height:45px"><a href="">리뷰 제목입니다</a></td>
-						<td>아이디</td>
+						<td>닉네임</td>
 						<td>21.06.10</td>
 						<td>4.95</td>
 						<td>10</td>
@@ -240,7 +245,7 @@ text-align: center;
 					</tr>
 					<tr>
 						<td style="height:45px"><a href="">리뷰 제목입니다</a></td>
-						<td>아이디</td>
+						<td>닉네임</td>
 						<td>21.06.10</td>
 						<td>4.95</td>
 						<td>10</td>
@@ -248,7 +253,7 @@ text-align: center;
 					</tr>
 					<tr>
 						<td style="height:45px"><a href="">리뷰 제목입니다</a></td>
-						<td>아이디</td>
+						<td>닉네임</td>
 						<td>21.06.10</td>
 						<td>4.95</td>
 						<td>10</td>
@@ -256,7 +261,7 @@ text-align: center;
 					</tr>
 					<tr>
 						<td style="height:45px"><a href="">리뷰 제목입니다</a></td>
-						<td>아이디</td>
+						<td>닉네임</td>
 						<td>21.06.10</td>
 						<td>4.95</td>
 						<td>10</td>
@@ -264,7 +269,7 @@ text-align: center;
 					</tr>
 					<tr>
 						<td style="height:45px"><a href="">리뷰 제목입니다</a></td>
-						<td>아이디</td>
+						<td>닉네임</td>
 						<td>21.06.10</td>
 						<td>4.95</td>
 						<td>10</td>
@@ -275,7 +280,7 @@ text-align: center;
 			
 			<!-- 게시글 작성 버튼  -->
 			<div class="bottombutton">
-				<input id="writebutton" type="button" value="리뷰 등록하기" onclick="">
+				<input id="writebutton" type="button" value="리뷰 등록하기" onclick="location='MovieWrite.jsp'">
 			</div>
 			
 			<!-- 페이징처리 -->
@@ -298,8 +303,8 @@ text-align: center;
 	
 	
 	</div>
-	
-	
+
+	<%@ include file="MovieTop5.jsp" %>
 	
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

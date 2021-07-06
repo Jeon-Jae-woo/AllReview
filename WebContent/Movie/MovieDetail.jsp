@@ -12,7 +12,7 @@
 
 <style type="text/css">
 
-.totalbox{
+/* .totalbox{
 	border: 1px solid gray;
 	top: 480px;
 	left: 9%;
@@ -38,7 +38,6 @@
 
 #reviewtitle{
 	border: 1px dashed red;
-/* 	position: absolute; */
 	top: 21px;
 	
 }
@@ -67,7 +66,6 @@
 	left: 73%;
 	top: 21px;
 }
-
 #report{
 	border: 1px dashed red;
 	position: absolute;
@@ -81,7 +79,6 @@
 	width: 96%;
 	height: 660px;
 }
-
 #date{
 	border: 1px dashed red;
 	position: absolute;
@@ -89,8 +86,6 @@
 	top: 21px;
 	width: 140px;
 }
-
-
 .reco_bu{
 	float: left;
 	left: 83%;
@@ -126,7 +121,114 @@
 	font-size: 15px;
 	width: 100px;
 }
+ */
 
+.title{
+	position: absolute;
+	float: left;
+	left: 9%;
+	top: 520px;
+}
+.totalbox{
+	height: 800px;
+	left: 9%;
+	width: 60%;
+	top: 480px;
+	position: relative;
+}
+.titlebox{
+	border: 1px solid gray;
+	height: 60px;
+	left: 1%;
+	width: 98%;
+	top: 10px;
+	position: relative
+}
+#title{
+	position: relative;
+	left: 20px;
+	top: 20px;
+}
+#nickname{
+	position: relative;
+	left: 38%;	
+}
+#moviegrade{
+	position: relative;
+	left: 56%;
+	bottom: 20px;
+}
+#recommand{
+	position: relative;
+	left: 76%;
+	bottom: 39px;
+}
+#view{
+	position: relative;
+	left: 83%;
+	bottom: 59px;
+}
+#report{
+	position: relative;
+	left: 90%;
+	bottom: 79px;
+}
+#date{
+	position: relative;
+	float: right;
+	right: 20px;
+	top: 14px;
+}
+.contentbox{
+	border: 1px solid gray;
+	height: 580px;
+	left: 1%;
+	width: 98%;
+	top: 20px;
+	position: relative
+}
+#content{
+	position: relative;
+	left: 5px;
+	top: 30px;
+}
+
+.bottombox{
+	position: relative;
+	bottom: 25px;
+}
+#reco_button{
+ 	position: absolute;
+	float:right;
+	right: 120px;
+	width: 80px;
+}
+#repo_button{
+	position: absolute;
+	float:right;
+	right: 25px;
+	width: 80px;
+}
+.lastbutton{
+	position: relative;
+	top: 40px;
+}
+#list{
+	position: relative;
+	width: 80px;
+	left: 36%;
+}
+#update{
+	position: relative;
+	width: 80px;
+	left: 38%;
+} 
+#delete{
+	position: relative;
+	width: 80px;
+	left: 40%;
+}
+ 
 </style>
 
 </head>
@@ -134,10 +236,61 @@
 
 	<!-- header -->
 	<%@ include file="../Fix/header.jsp" %>
-
+	
+	
+	<div class="title">
+		<h3>영화 리뷰 상세조회</h3>
+	</div>
 
 	<!-- 게시글 상세보기 -->
-	<div class="totalbox">
+	<div>
+		<!-- 전체박스 -->
+		<div class="totalbox">
+			<!-- 상단 제목 박스 -->
+			<div class="titlebox">
+				<div id="title">
+					<div>리뷰 제목</div>
+				</div>
+				<div id="nickname">
+					<div>닉네임 임시닉네임</div>
+				</div>
+				<div id="moviegrade">
+					<div>영화평점 ★★★★★ 10</div>
+				</div>
+				<div id="recommand">
+					<div>추천 7</div>
+				</div>
+				<div id="view">
+					<div>조회 8</div>
+				</div>
+				<div id="report">
+					<div>신고 0</div>
+				</div>
+			</div>
+			<!-- 내용박스 -->
+			<div class="contentbox">
+				<div id="date">
+					<div>작성일 2021.06.30</div>
+				</div>
+				<div id="content">
+					<textarea rows="23" cols="118" readonly="readonly"></textarea>
+				</div>
+			</div>
+			<div class="bottombox">
+				<input id="reco_button" type="submit" value="추천">
+				<input id="repo_button" type="submit" value="신고">
+			</div>
+			<div class="lastbutton">
+				<input id="list" type="button" value="수정" onclick="location='MovieUpdate.jsp'">
+				<input id="update" type="button" value="목록" onclick="location='MovieList.jsp'">
+				<input id="delete" type="button" value="삭제" onclick="location.href=''">
+			</div>
+		</div>
+	</div>
+	
+
+	<!-- 게시글 상세보기 -->
+<!-- 	<div class="totalbox">
 		<div class="titlebox">
 				<table id="table">
 					<tr id="reviewtitle" style="width: 400px;">
@@ -170,18 +323,10 @@
 					</tr>
 					<tr id="content">
 						<th></th>
-						<td><textarea rows ="30" cols="140" readonly="readonly"> ??? </textarea></td>
+						<td><textarea rows ="30" cols="100" readonly="readonly"> ??? </textarea></td>
 					</tr>
-					<tr>
-						
-					
-					</tr>
-						
-						
 				</table>
-		</div>
-		<div class="contentborder"></div>
-		
+		</div>		
 		<div>
 			<input class="reco_bu" type="submit" value="추천" onclick="" >
 			<input class="report_bu" type="submit" value="신고" onclick="" >
@@ -192,13 +337,13 @@
 			<input class="delete" type="button" value="삭제" onclick="">
 			<input class="update" type="submit" value="수정" onclick="location='MovieUpdate.jsp'">
 		</div>
-	</div>
+	</div> -->
 
 
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br>
-	
 	<%@ include file="MovieTop5.jsp" %>
+	
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	
 	<!-- footer -->
 	<%@ include file="../Fix/footer.jsp" %>

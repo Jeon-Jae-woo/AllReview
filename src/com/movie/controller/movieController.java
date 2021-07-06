@@ -1,40 +1,81 @@
 package com.movie.controller;
 
 import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class movieController
- */
-@WebServlet("/movieController")
-public class movieController extends HttpServlet {
+import com.movie.dto.MovieBoardDto;
+import com.movie.biz.MovieBiz;
+import com.movie.biz.MovieBizImple;
+
+
+@WebServlet("/MovieController")
+public class MovieController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public movieController() {
+
+    public MovieController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+		
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		String command = request.getParameter("command");
+		System.out.println("["+command+"]");
+		
+		MovieBiz biz = new MovieBizImple();
+		
+		//영화목록조회
+		if(command.equals("list")) {
+			List<MovieBoardDto> list = biz.movieselectAll();
+	
+			request.setAttribute("list", list);
+			
+			for(MovieBoardDto dto : list) {
+				System.out.println(dto.getMovie_id());
+			}
+			
+			dispatch("Movie/MovieMain.jsp", request, response);
+		}else if(command.equals("detail")){
+			int movie_id = Integer.parseInt(request.getParameter("movie_id"));
+			
+			MovieBoardDto dto = biz.movieselectOne(movie_id);
+			
+			request.setAttribute("dto", dto);
+			dispatch("MovieList.jsp", request, response);
+			
+		}
+		
+		
+		//영화리뷰목록조회
+//		else if(command.equals("")) {
+//			
+//		}
+		//영화리뷰상세조회
+//		else if(command.equals("")) {
+//			
+//		}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+		
+		
+		
+	}	 	
+
+	
+	private void dispatch(String url, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher dispatch = request.getRequestDispatcher(url);
+		dispatch.forward(request, response);
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
