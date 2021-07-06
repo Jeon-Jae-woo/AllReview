@@ -41,6 +41,14 @@ public class ShopController extends HttpServlet {
 			dispatch("shopcate.jsp",request, response);
 			
 			
+		}else if(command.equals("shoplistcate")) {
+			
+			int cate = Integer.parseInt(request.getParameter("cate"));
+			List<ShopDto> list = biz.selectAllCate(cate);
+			
+			request.setAttribute("list", list);
+			dispatch("shopcate.jsp", request, response);
+			
 		}else if(command.equals("shopinsert")){
 			HttpSession session = request.getSession();
 			
@@ -79,6 +87,9 @@ public class ShopController extends HttpServlet {
 			
 			
 		}else if(command.equals("shopdetail")) {
+			HttpSession session = request.getSession();
+			String nickname = (String)session.getAttribute("nickname");
+			
 			int shopno = Integer.parseInt(request.getParameter("shopno"));
 			
 			ShopDto dto = biz.selectOne(shopno);
@@ -86,6 +97,13 @@ public class ShopController extends HttpServlet {
 			ShopCateDto catedto = biz.selectCate(dto.getCate_no());
 			
 			ShopGroupDto groupdto = biz.selectGroup(dto.getGroup_no());
+			
+			int res = biz.inserthit(shopno, nickname);
+			
+			if(res>0) {
+				biz.updatehit(shopno);
+			}
+			
 			
 			request.setAttribute("dto", dto);
 			request.setAttribute("catedto", catedto);
@@ -155,6 +173,22 @@ public class ShopController extends HttpServlet {
 				jsResponse("글 수정 실패", "shop.do?command=shopdetail&shopno="+shopno, response);
 			}
 			
+			
+			
+		}else if(command.equals("reco")) {
+			HttpSession session = request.getSession();
+			String nickname = (String)session.getAttribute("nickname");
+			
+			int shopno = Integer.parseInt(request.getParameter("shopno"));
+			
+			int res = biz.insertreco(shopno,nickname);
+			
+			if(res>0) {
+				biz.updatereco(shopno);
+				jsResponse("글 추천 완료", "shop.do?command=shopdetail&shopno="+shopno, response);
+			}else {
+				jsResponse("이미 추천한 글 입니다.", "shop.do?command=shopdetail&shopno="+shopno, response);
+			}
 			
 			
 		}
