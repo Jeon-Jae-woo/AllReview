@@ -23,6 +23,8 @@
 		<input type="hidden" name="command" value="adminLevelUpdate">
 		<input type="submit">
 	</form>
+	
+	<h1><%= session.getAttribute("level")  %></h1>
 		
 		
 	<%@ include file="Fix/footer.jsp" %>

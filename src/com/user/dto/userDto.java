@@ -12,6 +12,7 @@ public class userDto {
 	private String birth;
 	private String gender;
 	private String address;
+	private String address_detail;
 	private Date createdAt;
 	private Date updatedAt;
 	private int statusNo;
@@ -88,6 +89,16 @@ public class userDto {
 	}
 	public void setStatusNo(int statusNo) {
 		this.statusNo = statusNo;
+	}
+
+
+	public String getAddress_detail() {
+		return address_detail;
+	}
+
+
+	public void setAddress_detail(String address_detail) {
+		this.address_detail = address_detail;
 	}
 
 
