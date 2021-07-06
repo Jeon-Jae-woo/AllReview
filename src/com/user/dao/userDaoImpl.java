@@ -36,6 +36,7 @@ public class userDaoImpl implements userDao {
 			pstm.setString(5, dto.getBirth());
 			pstm.setString(6, dto.getGender());
 			pstm.setString(7, dto.getAddress());
+			pstm.setString(8, dto.getAddress_detail());
 			
 			result = pstm.executeUpdate();
 			
@@ -165,11 +166,11 @@ public class userDaoImpl implements userDao {
 			pstm = con.prepareStatement(levelUpdateQuery);
 			pstm.setInt(1, levelNo);
 			pstm.setString(2, email);
-			System.out.println("여기는 넘어가는데");
 			result = pstm.executeUpdate();
-			System.out.println("왜 안넘어올까");
+			if(result>0) {
+				commit(con);
+			}
 		} catch (SQLException e) {
-			System.out.println("에러");
 			e.printStackTrace();
 		}finally {
 			close(pstm);
@@ -179,6 +180,98 @@ public class userDaoImpl implements userDao {
 		return result;
 	}
 
+	//마이페이지 - 회원정보 조회
+	@Override
+	public userDto mypageInfo(String email) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		userDto userdto = new userDto();
+		
+		try {
+			pstm = con.prepareStatement(selectOneUser);
+			pstm.setString(1, email);
+			rs = pstm.executeQuery();
+			
+			if(rs.next()) {
+				userdto.setEmail(rs.getString(1));
+				userdto.setNickName(rs.getString(2));
+				userdto.setLevelNo(rs.getInt(3));
+				userdto.setPassword(rs.getString(4));
+				userdto.setName(rs.getString(5));
+				userdto.setBirth(rs.getString(6));
+				userdto.setGender(rs.getString(7));
+				userdto.setAddress(rs.getString(8));
+				userdto.setAddress_detail(rs.getString(9));
+				userdto.setCreatedAt(rs.getDate(10));
+				userdto.setUpdatedAt(rs.getDate(11));
+				userdto.setStatusNo(rs.getInt(12));		
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+			close(con);
+		}
+		
+		return userdto;
+	}
+
+	//마이페이지 - 회원 정보 수정
+	@Override
+	public int mypageInfoUpdate(userDto userUpdate) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		int result = 0;
+		
+		try {
+			pstm = con.prepareStatement(updateUserQuery);
+			pstm.setString(1, userUpdate.getPassword());
+			pstm.setString(2, userUpdate.getAddress());
+			pstm.setString(3, userUpdate.getAddress_detail());
+			pstm.setString(4, userUpdate.getEmail());
+			
+			result = pstm.executeUpdate();
+			
+		} catch (SQLException e) {	
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+			close(con);
+		}
+		return result;
+	}
+	
+	
+	//마이페이지 - 회원 탈퇴
+	@Override
+	public int mypageLeave(String email, String password) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		int result = 0;
+		
+		try {
+			pstm = con.prepareStatement(leaveUserQuery);
+			pstm.setString(1, email);
+			pstm.setString(2, password);
+			
+			result = pstm.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+			close(con);
+		}
+		
+		return result;
+	}
+
+	
+	
 	
 	
 	

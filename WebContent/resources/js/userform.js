@@ -83,3 +83,24 @@ function joinCheck(){
 	form.submit();
 	
 }
+
+function updateCheck(){
+	console.log(password);
+	var form = document.mypage_form;
+	
+	//비밀번호 체크
+	var password = form.new_password.value;
+	
+	//8자리 이상, 숫자 포함, 영대 문자 포함, 영소 문자 포함, 특수문자 포함
+	var reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+	if(password != ""){
+		if(reg.test(password) == false){
+			alert("비밀번호는 8자리 이상, 숫자/대문자/특수 문자를 포함해야 합니다");
+			form.password.focus();
+			return false;
+		}
+	}
+	return false;
+	form.submit();
+	
+}
