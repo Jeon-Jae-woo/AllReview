@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class ShopDto {
 	private int shopno;
-	private String email;
+	private String nickname;
 	private int cate_no;
 	private int group_no;
 	private String title;
@@ -25,12 +25,12 @@ public class ShopDto {
 		super();
 	}
 
-	public ShopDto(int shopno, String email, int cate_no, int group_no, String title, String content, double service,
+	public ShopDto(int shopno, String nickname, int cate_no, int group_no, String title, String content, double service,
 			double clean, double traffic, String revisit, int hit, int reco, int recipt, int status, Date createat,
 			Date updateat, int delete) {
 		super();
 		this.shopno = shopno;
-		this.email = email;
+		this.nickname = nickname;
 		this.cate_no = cate_no;
 		this.group_no = group_no;
 		this.title = title;
@@ -64,10 +64,10 @@ public class ShopDto {
 		this.revisit = revisit;
 	}
 
-	public ShopDto(String email, int cate_no, int group_no, String title, String content, double service, double clean,
+	public ShopDto(String nickname, int cate_no, int group_no, String title, String content, double service, double clean,
 			double traffic, String revisit) {
 		super();
-		this.email = email;
+		this.nickname = nickname;
 		this.cate_no = cate_no;
 		this.group_no = group_no;
 		this.title = title;
@@ -86,12 +86,12 @@ public class ShopDto {
 		this.shopno = shopno;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getnickname() {
+		return nickname;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setnickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public int getCate_no() {
