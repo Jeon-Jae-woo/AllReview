@@ -28,6 +28,31 @@
 	
 	
 	
+	<div align="center">
+	<table>
+		<tr>
+		<th width="15%">
+			<a href="shop.do?command=shoplistcate&cate=1">식품</a>
+		</th>
+		<th width="15%">
+			<a href="shop.do?command=shoplistcate&cate=2">운동</a>
+		</th>
+		<th width="15%">
+			<a href="shop.do?command=shoplistcate&cate=3">의류</a>
+		</th>
+		<th width="15%">
+			<a href="shop.do?command=shoplistcate&cate=4">여행</a>
+		</th>
+		<th width="15%">
+			<a href="shop.do?command=shoplistcate&cate=5">의료</a>
+		</th>
+		<th width="15%">
+			<a href="shop.do?command=shoplistcate&cate=6">기타</a>
+		</th>
+		</tr>
+	</table>
+	</div>
+	
 	
 	<div align="center">
 	<input class="btn btn-default" type="submit" value="Submit">
@@ -57,8 +82,8 @@
 						<img src="img/J.png" class="img-responsive" alt="Responsive image" onclick="location.href='shop.do?command=shopdetail&shopno=${dto.shopno }'">
 						<a href="shop.do?command=shopdetail&shopno=${dto.shopno }">${dto.shopno } ${dto.title }</a><br>
 						<label>평점 ★:  </label>${Math.round((((dto.service)+(dto.clean)+(dto.traffic))/3)*100)/100.0 }<br>
-						<label>조회수: </label>
-						<label>추천수: </label>
+						<label>조회수:${dto.hit } </label>
+						<label>추천수:${dto.reco } </label>
 						
 						<div></div>
 					</td>
