@@ -191,7 +191,7 @@ text-align: center;
 				            </tr>
 				            <tr>
 				                <th>기본정보 : </th>
-				                <td><%-- ${dto.movie_type_name} --%></td>
+				                <td>${dto.movie_type_name}</td>
 				            </tr>
 				             <tr>
 				                <th>감독 : </th>
@@ -201,10 +201,7 @@ text-align: center;
 				                <th>출연 : </th>
 				                <td>${dto.actor }</td>
 				            </tr>
-				             <tr>
-				                <th>영화 평점 : </th>
-				                <td><%-- ${dto.movie_grade } --%></td>
-				            </tr>
+				           
 		     	
 
 	        </table>	
@@ -213,7 +210,7 @@ text-align: center;
 		<!-- 리뷰리스트  -->
 		<div>
 			<div class="listtitle">
-				<h4>어벤져스 엔드게임 Review List</h4>
+				<h4>${dto.movie_title }  Review List</h4>
 			</div>
 			<div class="select">
 				<select style="width:100px; height: 25px;" onchange=>
@@ -234,66 +231,66 @@ text-align: center;
 					</tr>
 				</thead>
 				<tbody >
-					<tr>
-						<td style="height:45px"><a href="">리뷰 제목입니다</a></td>
-						<td>닉네임</td>
-						<td>21.06.10</td>
-						<td>4.95</td>
-						<td>10</td>
-						<td>10</td>
-					</tr>
-					<tr>
-						<td style="height:45px"><a href="">리뷰 제목입니다</a></td>
-						<td>닉네임</td>
-						<td>21.06.10</td>
-						<td>4.95</td>
-						<td>10</td>
-						<td>10</td>
-					</tr>
-					<tr>
-						<td style="height:45px"><a href="">리뷰 제목입니다</a></td>
-						<td>닉네임</td>
-						<td>21.06.10</td>
-						<td>4.95</td>
-						<td>10</td>
-						<td>10</td>
-					</tr>
-					<tr>
-						<td style="height:45px"><a href="">리뷰 제목입니다</a></td>
-						<td>닉네임</td>
-						<td>21.06.10</td>
-						<td>4.95</td>
-						<td>10</td>
-						<td>10</td>
-					</tr>
-					<tr>
-						<td style="height:45px"><a href="">리뷰 제목입니다</a></td>
-						<td>닉네임</td>
-						<td>21.06.10</td>
-						<td>4.95</td>
-						<td>10</td>
-						<td>10</td>
-					</tr>
+					<c:choose>
+						<c:when test="${empty totalList }">
+							<tr>
+								<td colspan="4">작성된 글이 존재하지 않습니다</td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="list" items="${totalList}">
+								<tr>
+									<td><a href="movieController?command=reviewDetail&review_id=${list.review_id}">${list.review_title}</a></td>
+									<td>${list.nickname }</td>
+									<td>${list.creatat}</td>
+									<td>${list.movie_grade}</td>
+									<td>${list.review_r_num }</td>
+									<td>${list.review_v_num }</td>
+								</tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 				</tbody>
 			</table>
-			
+		
 			<!-- 게시글 작성 버튼  -->
 			<div class="bottombutton">
-				<input id="writebutton" type="button" value="리뷰 등록하기" onclick="location='MovieWrite.jsp'">
+				<!-- <input id="writebutton" type="button" value="리뷰 등록하기" onclick="location='MovieWrite.jsp'">-->
+				<input id="writebutton" type="button" value="리뷰 등록하기" onclick="location='movieController?command=reviewWriteForm&movie_id=${movie_id}'">
 			</div>
 			
 			<!-- 페이징처리 -->
 			<div class="page_wrap">
 			   <div class="page_nation">
-			      <a class="arrow pprev" href="#"></a>
-			      <a class="arrow prev" href="#"></a>
-			      <a href="#" class="active">1</a>
-			      <a href="#">2</a>
-			      <a href="#">3</a>
-			      <a href="#">4</a>
-			      <a href="#">5</a>
-			      <a class="arrow next" href="#"></a>
-			      <a class="arrow nnext" href="#"></a>
+			     			<!-- 페이징처리 -->
+			<nav class="pull-bottom">
+			<c:set var="pageNum" value="${paging.pageNum }"/>
+			<c:set var="startPage" value="${paging.startPage}"/>
+			<c:set var="endPage" value="${paging.endPage}"/>
+			<c:set var="totalPage" value="${paging.totalPage}"/>
+			<c:set var="itemCount" value="${paging.itemCount}"/>
+				<ul class="pagination">
+					<li>
+			      		<a href="movieController?command=detail&movie_id=${movie_id}&pageNum=1" aria-label="Previous">
+			        	<span aria-hidden="true">&laquo;</span>
+			      		</a>
+			    	</li>
+					<c:forEach var="item" varStatus="status" begin="${ startPage }" end="${ endPage }" step="1">
+                		<c:if test="${ pageNum == item }">
+                    		<li><a href="movieController?command=detail&movie_id=${movie_id}&pageNum=1">${ item }</a></li>
+                		</c:if>
+                		<c:if test="${ pageNum != item }">
+		 					<li><a href="movieController?command=detail&pageNum=${ item }&movie_id=${movie_id}">${ item }</a></li>
+                		</c:if>
+            		</c:forEach>
+            		<li>
+			      		<a href="movieController?command=detail&pageNum=${totalPage}&movie_id=${movie_id}" aria-label="Next">
+			        	<span aria-hidden="true">&raquo;</span>
+			      		</a>
+			    	</li>
+				</ul>
+			
+			</nav>
 			   </div>
 			</div>
 			

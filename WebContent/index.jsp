@@ -27,7 +27,7 @@
 	</form>
 	
 <<<<<<< HEAD
-	<a href="MovieController?command=moiveListCate">영화</a>	
+	<a href="movieController?command=moiveListCate">영화</a>	
 	
 =======
 	<h1><%= session.getAttribute("level")  %></h1>

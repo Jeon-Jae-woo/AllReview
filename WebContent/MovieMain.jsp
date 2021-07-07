@@ -221,8 +221,8 @@ clear: both;
 </head>
 <body>
 
-<%-- 	<!-- header -->
-	<%@ include file="../Fix/header.jsp" %> --%>
+ 	<!-- header -->
+	<%@ include file="../Fix/header.jsp" %>
 	
 	<br><br><br><br><br><br><br><br><br>
 
@@ -230,7 +230,7 @@ clear: both;
 		<div id="nav">
 			<ul>
             	<li><a id="online" href="">온라인 쇼핑</a></li>
-            	<li><a id="moive" href="MovieController?command=moiveListCate&movie_type=${dto.movie_type }">영화</a></li>
+            	<li><a id="moive" href="movieController?command=moiveListCate&movie_type=${dto.movie_type }">영화</a></li>
             	<li><a id="shop" href="">매장</a></li>
             	<li><a id="book" href="">도서</a></li>
             </ul>
@@ -254,7 +254,7 @@ clear: both;
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="cate" items="${moiveListCate }">
-	       					<li><a href="MovieController?command=moiveListCate=${cate.movie_type }">${cate.movie_type_name }</a></li>
+	       					<li><a href="movieController?command=moiveListCate&category=${cate.movie_type}&pageNum=1">${cate.movie_type_name }</a></li>
 	       					</c:forEach>
 						</c:otherwise>
 					</c:choose>
@@ -286,7 +286,7 @@ clear: both;
 			<form id="movieform" name="movieform" action="movieController" method="post">
 				<!--  목록 페이지 상단 (카테고리명, 정렬, 검색) -->
 				<div class="top">
-						<h1>액션</h1>
+						<h1>${category_name}</h1>
 						<select id="select" onchange=>
 							<option value="">제목순</option>
 							<option value="">조회순</option>
@@ -310,7 +310,10 @@ clear: both;
 								<c:otherwise>
 									<c:forEach var="dto" items="${list }">
 									<div>
-									<a href="MovieController?command=detail&movie_id=${dto.movie_id}">${dto.movie_img }</a>
+									<!-- 값 수정 -->
+									<img src="${dto.movie_img}">
+									<a href="movieController?command=detail&movie_id=${dto.movie_id}">${dto.movie_img }</a>
+									<p>${dto.movie_id}</p>
 									</div>
 									
 									</c:forEach>
@@ -319,10 +322,37 @@ clear: both;
 
 					</div>
 				</div>
-				
+			<nav class="pull-bottom">
+			<c:set var="pageNum" value="${paging.pageNum }"/>
+			<c:set var="startPage" value="${paging.startPage}"/>
+			<c:set var="endPage" value="${paging.endPage}"/>
+			<c:set var="totalPage" value="${paging.totalPage}"/>
+			<c:set var="itemCount" value="${paging.itemCount}"/>
+				<ul class="pagination">
+					<li>
+			      		<a href="movieController?command=moiveListCate&category=${category}&pageNum=1" aria-label="Previous">
+			        	<span aria-hidden="true">&laquo;</span>
+			      		</a>
+			    	</li>
+					<c:forEach var="item" varStatus="status" begin="${ startPage }" end="${ endPage }" step="1">
+                		<c:if test="${ pageNum == item }">
+                    		<li><a href="movieController?command=moiveListCate&category=${category}&pageNum=1">${ item }</a></li>
+                		</c:if>
+                		<c:if test="${ pageNum != item }">
+		 					<li><a href="movieController?command=moiveListCate&pageNum=${ item }&category=${category}">${ item }</a></li>
+                		</c:if>
+            		</c:forEach>
+            		<li>
+			      		<a href="movieController?command=moiveListCate&pageNum=${totalPage}&category=${category}" aria-label="Next">
+			        	<span aria-hidden="true">&raquo;</span>
+			      		</a>
+			    	</li>
+				</ul>
+			
+			</nav>
 				<!-- 영화등록버튼 -->
 				<div class="moviecreate">
-					<input type="button" id="moviecreatebtn" value="영화등록" onclick="location.href='MovieController?command=moviecreate'">
+					<input type="button" id="moviecreatebtn" value="영화등록" onclick="location.href='movieController?command=moviecreate'">
 				</div>
 			
 		</div><!--container 끝 div  -->

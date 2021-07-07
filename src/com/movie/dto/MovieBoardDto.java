@@ -14,16 +14,17 @@ public class MovieBoardDto {
 	private String movie_img;
 	private Date createat;
 	private Date updateat;
-	
+	private String movie_type_name;
 	
 	//기본 생성자
 	public MovieBoardDto() {
 		super();
 	}
-	
+
+
 	//매개변수 생성자
 	public MovieBoardDto(int movie_id, int movie_type, String movie_title, String director, String actor,
-			int participant, String movie_img, Date createat, Date updateat) {
+			int participant, String movie_img, Date createat, Date updateat, String movie_type_name) {
 		super();
 		this.movie_id = movie_id;
 		this.movie_type = movie_type;
@@ -34,6 +35,7 @@ public class MovieBoardDto {
 		this.movie_img = movie_img;
 		this.createat = createat;
 		this.updateat = updateat;
+		this.movie_type_name = movie_type_name;
 		
 	}
 
@@ -112,6 +114,13 @@ public class MovieBoardDto {
 
 	
 	
+	public String getMovie_type_name() {
+		return movie_type_name;
+	}
+
+	public void setMovie_type_name(String movie_type_name) {
+		this.movie_type_name = movie_type_name;
+	}
 
 	
 	

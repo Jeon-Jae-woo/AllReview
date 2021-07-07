@@ -249,31 +249,29 @@
 			<!-- 상단 제목 박스 -->
 			<div class="titlebox">
 				<div id="title">
-					<div>리뷰 제목</div>
+					<div>${dto.review_title }</div>
 				</div>
 				<div id="nickname">
-					<div>닉네임 임시닉네임</div>
+					<div>닉네임 ${dto.nickname }</div>
 				</div>
 				<div id="moviegrade">
-					<div>영화평점 ★★★★★ 10</div>
+					<div>영화평점 ${dto.movie_grade }</div>
 				</div>
 				<div id="recommand">
-					<div>추천 7</div>
+					<div>추천 ${dto.review_r_num }</div>
 				</div>
 				<div id="view">
-					<div>조회 8</div>
+					<div>조회 ${dto.review_v_num }</div>
 				</div>
-				<div id="report">
-					<div>신고 0</div>
-				</div>
+				
 			</div>
 			<!-- 내용박스 -->
 			<div class="contentbox">
 				<div id="date">
-					<div>작성일 2021.06.30</div>
+					<div>작성일 ${dto.creatat }</div>
 				</div>
 				<div id="content">
-					<textarea rows="23" cols="118" readonly="readonly"></textarea>
+					<textarea rows="23" cols="118" readonly="readonly">${dto.review_content}</textarea>
 				</div>
 			</div>
 			<div class="bottombox">
@@ -281,9 +279,9 @@
 				<input id="repo_button" type="submit" value="신고">
 			</div>
 			<div class="lastbutton">
-				<input id="list" type="button" value="수정" onclick="location='MovieUpdate.jsp'">
+				<input id="list" type="button" value="수정" onclick="location='movieController?command=reviewUpdateForm&review_id=${dto.review_id}'">
 				<input id="update" type="button" value="목록" onclick="location='MovieList.jsp'">
-				<input id="delete" type="button" value="삭제" onclick="location.href=''">
+				<input id="delete" type="button" value="삭제" onclick="location.href='movieController?command=reviewDelete&movie_id=${dto.movie_id}&review_id=${dto.review_id}'">
 			</div>
 		</div>
 	</div>

@@ -109,14 +109,14 @@
 	<!-- 리뷰(게시글) 작성 -->
 	<div>
 		<div class="totalbox">
-			<form action="" method="post">
-				<input type="hidden" name="command" value="">
-				
+			<form action="movieController" method="post">
+				<input type="hidden" name="command" value="reviewWrite">
+				<input type="hidden" name="movie_id" value="${movie_id }">
 				<div class="titlebox">
 					<input type="text" name="reviewtitle" id="reviewtitle" placeholder="리뷰 제복을 입력하세요">
 				</div>
 				<div class="contentbox">
-					<textarea rows="25" cols="104" id="content" placeholder="내용을 작성 하세요"></textarea>
+					<textarea rows="25" cols="104" id="content" placeholder="내용을 작성 하세요" name="content"></textarea>
 				</div>
 				<div class="bottombox">
 					<div class="imgupload">
@@ -134,7 +134,7 @@
 					</div>
 				</div>
 				<div class="bottombutton">
-					<input class="reviewwrite" type="button" value="등록" onclick="location='MovieList.jsp'">
+					<input class="reviewwrite" type="submit" value="등록">
 					<input class="reviewcancel" type="button" value="취소" onclick="location='MovieList.jsp'">
 				</div>
 					

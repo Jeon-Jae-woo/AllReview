@@ -9,26 +9,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.movie.dto.MovieBoardDto;
+import com.movie.dto.MovieReviewDto;
+
 import static common.JDBCTemplate.*;
 
 public class MovieBoardDaoImpl implements MovieBoardDao{
 
+	//카테고리별 영화 목록 조회
 	@Override
-	public List<MovieBoardDto> movieselectAll(Connection con) {
+	public List<MovieBoardDto> movieselectAll(Connection con, int category, int pageNum) {
 		
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		List<MovieBoardDto> res = new ArrayList<MovieBoardDto>();
 		
+		int startRow = (pageNum-1)*8+1;
+		int endRow = pageNum*8+1;
+		
 		try {	
 			pstm = con.prepareStatement(movieselectAllSql);
+			pstm.setInt(1, category);
+			pstm.setInt(2, endRow);
+			pstm.setInt(3, startRow);
 			System.out.println("03.query 준비: " + movieselectAllSql);
 			
 			rs = pstm.executeQuery();
 			System.out.println("04.query 실행 및 리턴");
 			
 			while(rs.next()) {
-				MovieBoardDto mbd = new MovieBoardDto(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getInt(6),rs.getString(7),rs.getDate(8), rs.getDate(9));
+				MovieBoardDto mbd = new MovieBoardDto();
+
+				mbd.setMovie_id(rs.getInt(2));
+				mbd.setMovie_type(rs.getInt(3));
+				mbd.setMovie_title(rs.getString(4));
+				mbd.setDirector(rs.getString(5));
+				mbd.setActor(rs.getString(6));
+				mbd.setMovie_img(rs.getString(7));
+				mbd.setMovie_type_name(rs.getString(8));
 				
 				res.add(mbd);
 			}
@@ -43,6 +60,7 @@ public class MovieBoardDaoImpl implements MovieBoardDao{
 		return res;
 	}
 
+	//영화 리뷰 리스트 영화 조회
 	@Override
 	public MovieBoardDto movieselectOne(Connection con, int movie_id) {
 		
@@ -59,7 +77,15 @@ public class MovieBoardDaoImpl implements MovieBoardDao{
 			System.out.println("04.query 실행 및 리턴");
 			
 			if(rs.next()) {
-				res = new MovieBoardDto(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7),rs.getDate(8),rs.getDate(9));
+				res = new MovieBoardDto();	
+				res.setMovie_id(rs.getInt(1));
+				res.setMovie_type(rs.getInt(2));
+				res.setMovie_title(rs.getString(3));
+				res.setDirector(rs.getString(4));
+				res.setActor(rs.getString(5));
+				res.setMovie_img(rs.getString(6));
+				res.setMovie_type_name(rs.getString(7));
+				
 			}
 					
 		} catch (SQLException e) {
@@ -154,4 +180,240 @@ public class MovieBoardDaoImpl implements MovieBoardDao{
 		return (res>0)?true:false;
 	}
 
+	//카테고리별 row 반환
+	@Override
+	public int MovieRowCount(int category) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		
+		int count = 0;
+		try {
+			pstm = con.prepareStatement(movieRow);
+			pstm.setInt(1, category);
+			
+			rs = pstm.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+			close(con);
+		}
+
+		return count;
+	}
+
+	//리뷰 리스트
+	@Override
+	public List<MovieReviewDto> reviewList(Connection con, int movie_id, int pageNum) {
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		List<MovieReviewDto> list = new ArrayList<MovieReviewDto>();
+		MovieReviewDto dto = null;
+		
+		int startRow = (pageNum-1)*5+1;
+		int endRow = pageNum*5+1;
+		
+		try {
+			pstm = con.prepareStatement(movieReviewList);
+			pstm.setInt(1, movie_id);
+			pstm.setInt(2, endRow);
+			pstm.setInt(3, startRow);
+			
+			rs = pstm.executeQuery();
+			
+			while(rs.next()) {
+				dto = new MovieReviewDto();
+				
+				dto.setReview_id(rs.getInt(2));
+				dto.setNickname(rs.getString(3));
+				dto.setMovie_id(rs.getInt(4));
+				dto.setReview_title(rs.getString(5));
+				dto.setMovie_grade(rs.getInt(6));
+				dto.setReview_r_num(rs.getInt(7));
+				dto.setReview_v_num(rs.getInt(8));
+				dto.setCreatat(rs.getDate(9));
+				list.add(dto);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+		}
+				
+	
+		return list;
+	}
+
+	//row 리스트
+	@Override
+	public int MovieReviewCount(Connection con, int movie_id) {
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		
+		int count = 0;
+		try {
+			pstm = con.prepareStatement(movieReviewRow);
+			pstm.setInt(1, movie_id);
+			
+			rs = pstm.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+			close(con);
+		}
+
+		return count;
+	}
+
+	//리뷰 등록
+	@Override
+	public int reviewInsert(Connection con, MovieReviewDto dto) {
+		PreparedStatement pstm = null;
+		int result = 0;
+		//--닉네임, MOVIE_ID, 제목, 내용, MOVIE_GRADE
+		try {
+			pstm = con.prepareStatement(reviewInsert);
+			pstm.setString(1, dto.getNickname());
+			pstm.setInt(2, dto.getMovie_id());
+			pstm.setString(3, dto.getReview_title());
+			pstm.setString(4, dto.getReview_content());
+			pstm.setInt(5, dto.getMovie_grade());
+			
+			result = pstm.executeUpdate();
+			
+			if(result>0) {
+				commit(con);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+		}
+		
+		
+		return result;
+	}
+
+	//단일 글 조회
+	@Override
+	public MovieReviewDto reviewSelect(Connection con, int review_id) {
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		MovieReviewDto dto = null;
+		
+		try {
+			pstm = con.prepareStatement(reviewSelectOne);
+			pstm.setInt(1, review_id);
+			
+			rs = pstm.executeQuery();
+			
+			while(rs.next()) {
+				dto = new MovieReviewDto();
+				
+				dto.setReview_id(rs.getInt(1));
+				dto.setNickname(rs.getString(2));
+				dto.setMovie_id(rs.getInt(3));
+				dto.setReview_title(rs.getString(4));
+				dto.setReview_content(rs.getString(5));
+				dto.setMovie_grade(rs.getInt(6));
+				dto.setReview_r_num(rs.getInt(7));
+				dto.setReview_v_num(rs.getInt(8));
+				dto.setReview_img(rs.getString(9));
+				dto.setStatus_no(rs.getInt(10));
+				dto.setCreatat(rs.getDate(11));
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+		}
+		
+		
+		return dto;
+	}
+
+	//리뷰 글 수정
+	@Override
+	public int reviewUpdate(Connection con, MovieReviewDto dto) {
+		PreparedStatement pstm = null;
+		int result = 0;
+		//타이틀, 내용, 아이디, 닉네임
+		try {
+			pstm = con.prepareStatement(reviewUpdate);
+			
+			System.out.println(dto.getReview_title());
+			System.out.println(dto.getReview_content());
+			System.out.println(dto.getReview_id());
+			System.out.println(dto.getNickname());
+			
+			pstm.setString(1, dto.getReview_title());
+			pstm.setString(2, dto.getReview_content());
+			pstm.setInt(3, dto.getReview_id());
+			pstm.setString(4, dto.getNickname());
+			
+			result = pstm.executeUpdate();
+			
+			if(result>0) {
+				commit(con);
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+		}
+		return result;
+	}
+
+	@Override
+	public int reviewDelete(Connection con, String nickname, int review_id) {
+		PreparedStatement pstm = null;
+		int result = 0;
+		
+		try {
+			pstm = con.prepareStatement(reviewDelete);
+			pstm.setString(1, nickname);
+			pstm.setInt(2, review_id);
+			
+			result = pstm.executeUpdate();
+			
+			if(result>0) {
+				commit(con);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+		}
+		
+		
+		return result;
+	}
+
+	
 }

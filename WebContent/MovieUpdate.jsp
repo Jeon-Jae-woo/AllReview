@@ -230,15 +230,15 @@
 	<!-- 리뷰(게시글) 수정 -->
 	<div>
 		<div class="totalbox">
-			<form action="" method="post">
-				<input type="hidden" name="command" value="">
-				<input type="hidden" name="seq" value="">
+			<form action="movieController" method="post">
+				<input type="hidden" name="command" value="reviewUpdate">
+				<input type="hidden" name="review_id" value="${dto.review_id }">
 				
 				<div class="titlebox">
-					<input type="text" name="reviewtitle" id="reviewtitle" placeholder="리뷰 제복을 입력하세요">
+					<input type="text" name="reviewtitle" id="reviewtitle" value="${dto.review_title }">
 				</div>
 				<div class="contentbox">
-					<textarea rows="25" cols="104" id="content" placeholder="내용을 작성 하세요"></textarea>
+					<textarea rows="25" cols="104" id="content" name="content" >${dto.review_content }</textarea>
 				</div>
 				<div class="bottombox">
 					<div class="imgupload">
@@ -256,7 +256,7 @@
 					</div>
 				</div>
 				<div class="bottombutton">
-					<input class="reviewwrite" type="button" value="수정">
+					<input class="reviewwrite" type="submit" value="수정">
 					<input class="reviewcancel" type="button" value="취소" onclick="location='MovieList.jsp'">
 				</div>
 					
