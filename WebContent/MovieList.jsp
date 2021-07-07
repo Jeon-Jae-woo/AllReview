@@ -182,16 +182,16 @@ text-align: center;
 		<!-- 영화 기본 정보 -->
 		<div id="box">
 			<div id="wrap">
-				<div class="poster">영화포스터</div>
+				<div class="poster">${dto.movie_img}</div>
 			</div>
 		     <table class="list"  style="text-align: left">
 							<tr>
 					        	<th style="width:100px" >영화제목 : </th>
-					            <td style="width:250px"></td>
+					            <td style="width:250px">${dto.movie_title }</td>
 				            </tr>
 				            <tr>
 				                <th>기본정보 : </th>
-				                <td>${dto.movie_title}</td>
+				                <td><%-- ${dto.movie_type_name} --%></td>
 				            </tr>
 				             <tr>
 				                <th>감독 : </th>
@@ -203,7 +203,7 @@ text-align: center;
 				            </tr>
 				             <tr>
 				                <th>영화 평점 : </th>
-				                <td></td>
+				                <td><%-- ${dto.movie_grade } --%></td>
 				            </tr>
 		     	
 
@@ -217,7 +217,6 @@ text-align: center;
 			</div>
 			<div class="select">
 				<select style="width:100px; height: 25px;" onchange=>
-				<!-- "selectOpt(this.options[this.selectedIndex].value);" -->
 					<option value="">제목순</option>
 					<option value="">조회순</option>
 					<option value="">추천순</option>					

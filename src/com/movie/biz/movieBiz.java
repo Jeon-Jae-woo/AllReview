@@ -1,18 +1,22 @@
 package com.movie.biz;
 
+import java.sql.Connection;
 import java.util.List;
 
 import com.movie.dto.MovieBoardDto;
+import com.movie.dto.MovieCategoryDto;
 
 public interface MovieBiz {
 	
 	// ------------------1페이지 영화메인--------------
+	//카테고리 연결
+	public List<MovieCategoryDto> categoryselectAll();
 	
 	//영화목록 조회
 	public List<MovieBoardDto> movieselectAll();
 	
 	//영화등록 버튼 및 작성
-	
+	public boolean movieinsert(MovieBoardDto dto);
 	
 	//영화등록한거 삭제
 	

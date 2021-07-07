@@ -20,30 +20,7 @@ public class MovieBoardDaoImpl implements MovieBoardDao{
 		ResultSet rs = null;
 		List<MovieBoardDto> res = new ArrayList<MovieBoardDto>();
 		
-		try {
-			
-//			if(제목순) {
-//				pstm = con.prepareStatement(selectAllSql1);
-//				System.out.println("03.query 준비: " + selectAllSql);
-//				
-//				rs = pstm.executeQuery();
-//				System.out.println("04.query 실행 및 리턴");
-//			}
-//			else if(추천순) {
-//				pstm = con.prepareStatement(selectAllSql2);
-//				System.out.println("03.query 준비: " + selectAllSql);
-//				
-//				rs = pstm.executeQuery();
-//				System.out.println("04.query 실행 및 리턴");
-//			}
-//			else if(조회순) {
-//				pstm = con.prepareStatement(selectAllSql3);
-//				System.out.println("03.query 준비: " + selectAllSql);
-//				
-//				rs = pstm.executeQuery();
-//				System.out.println("04.query 실행 및 리턴");
-//			}
-			
+		try {	
 			pstm = con.prepareStatement(movieselectAllSql);
 			System.out.println("03.query 준비: " + movieselectAllSql);
 			

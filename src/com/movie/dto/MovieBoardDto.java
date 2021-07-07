@@ -15,6 +15,7 @@ public class MovieBoardDto {
 	private Date createat;
 	private Date updateat;
 	
+	
 	//기본 생성자
 	public MovieBoardDto() {
 		super();
@@ -33,6 +34,7 @@ public class MovieBoardDto {
 		this.movie_img = movie_img;
 		this.createat = createat;
 		this.updateat = updateat;
+		
 	}
 
 	//getter&setter
@@ -107,7 +109,7 @@ public class MovieBoardDto {
 	public void setUpdateat(Date updateat) {
 		this.updateat = updateat;
 	}
-	
+
 	
 	
 

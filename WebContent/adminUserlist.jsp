@@ -49,7 +49,7 @@
     			<br>
     			<h4>회원 관리</h4>
       				<ul class="nav">
-				        <li class="side"><a href="adminUserlist.jsp">회원 목록</a></li>
+				        <li class="side"><a href="adminController?command=userList">회원 목록</a></li>
 				        <li class="side"><a href="adminList.jsp">관리자 목록</a></li>
       				</ul>
       		
@@ -92,78 +92,53 @@
 				</thead>
 				<tbody>
 				<!-- 기능 구현에서 바뀜  -->
-					<tr>
-						<td>jaewoo@google.com</td>
-						<td><a href="adminUserdetail.jsp">별명</a></td>
-						<td>2021-5-12</td>
-					</tr>
-					<tr>
-						<td>example@naver.com</td>
-						<td><a>별명</a></td>
-						<td>2021-2-12</td>
-					</tr>
-					<tr>
-						<td>example@naver.com</td>
-						<td><a>별명</a></td>
-						<td>2021-2-12</td>
-					</tr>
-					<tr>
-						<td>example@naver.com</td>
-						<td><a>별명</a></td>
-						<td>2021-2-12</td>
-					</tr>
-					<tr>
-						<td>example@naver.com</td>
-						<td><a>별명</a></td>
-						<td>2021-2-12</td>
-					</tr>
-					<tr>
-						<td>example@naver.com</td>
-						<td><a>별명</a></td>
-						<td>2021-2-12</td>
-					</tr>
-					<tr>
-						<td>example@naver.com</td>
-						<td><a>별명</a></td>
-						<td>2021-2-12</td>
-					</tr>
-					<tr>
-						<td>example@naver.com</td>
-						<td><a>별명</a></td>
-						<td>2021-2-12</td>
-					</tr>
-					<tr>
-						<td>example@naver.com</td>
-						<td><a>별명</a></td>
-						<td>2021-2-12</td>
-					</tr>
-					<tr>
-						<td>example@naver.com</td>
-						<td><a>별명</a></td>
-						<td>2021-2-12</td>
-					</tr>
+					<c:choose>
+						<c:when test="${empty userlist }">
+							<tr>
+								<td colspan="4">가입한 회원이 존재하지 않습니다</td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="list" items="${userlist}">
+								<tr>
+									<td><a>${list.email }</a></td>
+									<td>${list.nickName }</td>
+									<td>${list.createdAt }</td>
+								</tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 				</tbody>
 			</table>
 			<hr>
 			<!-- pagination 필요, 기능구현에서 바뀜 -->
 			<nav class="pull-bottom">
-			  <ul class="pagination">
-			    <li>
-			      <a href="#" aria-label="Previous">
-			        <span aria-hidden="true">&laquo;</span>
-			      </a>
-			    </li>
-			    <li><a href="#">1</a></li>
-			    <li><a href="#">2</a></li>
-			    <li><a href="#">3</a></li>
-			    <li><a href="#">4</a></li>
-			    <li><a href="#">5</a></li>
-			    <li>
-			      <a href="#" aria-label="Next">
-			        <span aria-hidden="true">&raquo;</span>
-			      </a>
-			    </li>
-			  </ul>
+			<c:set var="pageNum" value="${paging.pageNum }"/>
+			<c:set var="startPage" value="${paging.startPage}"/>
+			<c:set var="endPage" value="${paging.endPage}"/>
+			<c:set var="totalPage" value="${paging.totalPage}"/>
+			<c:set var="itemCount" value="${paging.itemCount}"/>
+				<ul class="pagination">
+					<li>
+			      		<a href="adminController?command=userList&pageNum=1" aria-label="Previous">
+			        	<span aria-hidden="true">&laquo;</span>
+			      		</a>
+			    	</li>
+					<c:forEach var="item" varStatus="status" begin="${ startPage }" end="${ endPage }" step="1">
+                		<c:if test="${ pageNum == item }">
+                    		<li><a href="adminController?command=userList&pageNum=1">${ item }</a></li>
+                		</c:if>
+                		<c:if test="${ pageNum != item }">
+		 					<li><a href="adminController?command=userList&pageNum=${ item }">${ item }</a></li>
+                		</c:if>
+            		</c:forEach>
+            		<li>
+			      		<a href="adminController?command=userList&pageNum=${totalPage}" aria-label="Next">
+			        	<span aria-hidden="true">&raquo;</span>
+			      		</a>
+			    	</li>
+				</ul>
+			
 			</nav>
 		</div>
 		</div>

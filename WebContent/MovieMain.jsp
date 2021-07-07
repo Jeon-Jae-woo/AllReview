@@ -13,10 +13,6 @@
 <meta charset="UTF-8">
 <title>영화 메인페이지</title>
 
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
@@ -43,30 +39,6 @@ $(function(){
 </script>
 
 <style type="text/css">
-
-/* 	#header{
-	    border:1px dashed red;
-		vertical-align: middle;
-		left: 0px;
-		right:0px;
-		top: 0px;
-		hegiht: 100px;
-		padding: 1;
-		margin:1;
-		}
-	.mainlogo{
-		display: block;
-		margin: auto;
-	}
-	#top{
-		float: right;
-		padding:1px;
-		padding-right: 10px;
-		margin: 1px;
-	}
-	#top input{
-		font-size: 18px;
-	}*/
 	
 .categorybox{
 	border: 1px solid gray;
@@ -117,7 +89,7 @@ $(function(){
 	display: none;
 }
 #movie_sub{
-	display: none;
+	/* display: none; */
 }
 #shop_sub{
 	display: none;
@@ -228,9 +200,7 @@ h1{
 
 #wrap > div:nth-child(5){
 clear: both;
-
 }
-
 .moviecreate{
 	position: relative;
 	border: 1px dashed red;
@@ -246,60 +216,6 @@ clear: both;
 	font-size: 18px;
 }
 
-/* .page_wrap {
-	text-align:center;
-	font-size:0;
-
- }
-.page_nation {
-	border: 1px dashed red;
-	display:inline-block;
-	position: relative;
-	margin: auto;
-	bottom: 30px;
-	
-}
-.page_nation .none {
-	display:none;
-}
-.page_nation a {
-	display:block;
-	margin:0 3px;
-	float:left;
-	border:1px solid #e6e6e6;
-	width:28px;
-	height:28px;
-	line-height:28px;
-	text-align:center;
-	background-color:#fff;
-	font-size:13px;
-	color:#999999;
-	text-decoration:none;
-}
-.page_nation .arrow {
-	border:1px solid #ccc;
-}
-.page_nation .pprev {
-	background:#f8f8f8 url('resources/Image/page_pprev.png') no-repeat center center;
-	margin-left:0;
-}
-.page_nation .prev {
-	background:#f8f8f8 url('resources/Image/page_prev.png') no-repeat center center;
-	margin-right:7px;
-}
-.page_nation .next {
-	background:#f8f8f8 url('resources/Image/page_next.png') no-repeat center center;
-	margin-left:7px;
-}
-.page_nation .nnext {
-	background:#f8f8f8 url('resources/Image/page_nnext.png') no-repeat center center;
-	margin-right:0;
-}
-.page_nation a.active {
-	background-color:#42454c;
-	color:#fff;
-	border:1px solid #42454c;
-} */
 
 </style>
 </head>
@@ -314,7 +230,7 @@ clear: both;
 		<div id="nav">
 			<ul>
             	<li><a id="online" href="">온라인 쇼핑</a></li>
-            	<li><a id="moive" href="">영화</a></li>
+            	<li><a id="moive" href="MovieController?command=moiveListCate&movie_type=${dto.movie_type }">영화</a></li>
             	<li><a id="shop" href="">매장</a></li>
             	<li><a id="book" href="">도서</a></li>
             </ul>
@@ -330,12 +246,19 @@ clear: both;
 	       			<li><a href="">세부 카테고리6</a></li>
 	       		</ul>
 	       		<ul id="movie_sub">
-	       			<li><a href="">액션</a></li>
-	       			<li><a href="">공포/스릴러</a></li>
-	       			<li><a href="">SF/판타지</a></li>
-	       			<li><a href="">드라마/로맨스</a></li>
-	       			<li><a href="">다큐멘터리</a></li>
-	       			<li><a href="">애니메이션</a></li>
+	       			<c:choose>
+						<c:when test="${empty moiveListCate }">
+							<tr>
+								<td colspan ="4">----작성된 글이 존재하지 않습니다----</td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="cate" items="${moiveListCate }">
+	       					<li><a href="MovieController?command=moiveListCate=${cate.movie_type }">${cate.movie_type_name }</a></li>
+	       					</c:forEach>
+						</c:otherwise>
+					</c:choose>
+	       			
 	       		</ul>
 	       		<ul id="shop_sub">
 	       			<li><a href="">세부 카테고리1</a></li>
@@ -363,7 +286,6 @@ clear: both;
 			<form id="movieform" name="movieform" action="movieController" method="post">
 				<!--  목록 페이지 상단 (카테고리명, 정렬, 검색) -->
 				<div class="top">
-					<!-- <form class="top_1"> -->
 						<h1>액션</h1>
 						<select id="select" onchange=>
 							<option value="">제목순</option>
@@ -374,13 +296,11 @@ clear: both;
 							<input type="text" class="" placeholder="제목을 입력하세요">
 							<button type="submit" class="">검색</button>
 						</div>
-					<!-- </form> -->
 				</div>
 			</form>
 				<!--  목록 페이지 중간 (영화포스터 바둑판 배열) -->
 				<div id="box">
 					<div id="wrap">
-						
 							<c:choose>
 								<c:when test="${empty list }">
 									<tr>
@@ -402,33 +322,19 @@ clear: both;
 				
 				<!-- 영화등록버튼 -->
 				<div class="moviecreate">
-					<input type="button" id="moviecreatebtn" value="영화등록" onclick="location='MovieCreate.jsp'">
+					<input type="button" id="moviecreatebtn" value="영화등록" onclick="location.href='MovieController?command=moviecreate'">
 				</div>
 			
 		</div><!--container 끝 div  -->
 	</section>
 	
 
-	
-<!-- <div class="page_wrap">
-			   <div class="page_nation">
-			      <a class="arrow pprev" href="#"></a>
-			      <a class="arrow prev" href="#"></a>
-			      <a href="#" class="active">1</a>
-			      <a href="#">2</a>
-			      <a href="#">3</a>
-			      <a href="#">4</a>
-			      <a href="#">5</a>
-			      <a class="arrow next" href="#"></a>
-			      <a class="arrow nnext" href="#"></a>
-			   </div>
-			</div> -->
-			
+
 			
 	<%@ include file="MovieTop5.jsp" %>
 	<br><br><br><br><br><br><br>
 	
-	<%-- 	<!-- footer  -->
+<%-- 	<!-- footer  -->
 	<%@ include file="../Fix/footer.jsp" %> --%>
 
 </body>

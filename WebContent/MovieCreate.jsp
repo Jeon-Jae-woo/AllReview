@@ -111,6 +111,8 @@ text-align: center;
 			</div>
 		
 			<!-- 영화 기본 정보 -->
+			<form action="MovieController" method="post">
+			<input type="hidden" name="command" value="moviecreate">
 			<div id="box">
 				<div id="wrap">
 					<div class="poster">영화포스터</div>
@@ -138,6 +140,7 @@ text-align: center;
 		                <td><input type="text" name="movie_grade"></td>
 		            </tr>
 		        </table>	
+		        
 			</div>
 			
 			
@@ -150,6 +153,7 @@ text-align: center;
 				<input class="create" type="submit" value="등록" onclick="location='MovieMain.jsp'" >
 				<input class="cancel" type="button" value="취소" onclick="location='MovieMain.jsp'" >
 			</div>
+			</form>
 			
 			
 		</div>

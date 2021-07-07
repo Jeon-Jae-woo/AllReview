@@ -5,6 +5,7 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,40 +31,51 @@
 	<th width="10%" align="center">
 		제목
 	</th>
-	<th>
-		제목칸
+	<th width="65%">
+		[${catedto.cateName }] ${dto.title }
 	</th>
+	<th width="10%">
+		작성일/수정일
+	</th>
+	<th width="15%">
+		${dto.createat }/${dto.updateat }
+	</th>
+	</tr>
 	<tr>
-		<td colspan="2">
+		<td colspan="4">
 			<img src="img/J.png">
 		</td>
 	</tr>
 	<tr>
-		<td colspan="2">
-			<textarea rows="10" cols="30" readonly="readonly"></textarea>
+		<td colspan="4">
+			<textarea rows="10" cols="80" readonly="readonly">${dto.content }</textarea>
 		</td>
 	</tr>
 	<tr>
-		<td colspan="2">
-			별점칸
+		<td colspan="4">
+			서비스 : ${dto.service }<br>
+			청결 : ${dto.clean }<br>
+			교통 : ${dto.traffic }
 		</td>
 	</tr>
 		
 	<tr>
 		<td colspan="2">
-			재방문/추천 그룹칸
+			재방문 : ${(dto.revisit == 'Y')?"O":"X"}<br>
+			추천그룹 : ${groupdto.groupName }
+			
 		</td>
 	</tr>
 	<tr>
-		<td colspan="2">지도
+		<td colspan="4">지도
 		<img src="img/J.png">
 		</td>
 	</tr>
 	<tr>
-		<td colspan="2">
-		<input type="button" value="수정">
-		<input type="button" value="삭제">
-		<input type="button" value="목록">
+		<td colspan="4">
+		<input type="button" value="삭제" onclick="location.href='shop.do?command=shopdelete&shopno=${dto.shopno}'">
+		<input type="button" value="수정" onclick="location.href='shop.do?command=shopupdateform&shopno=${dto.shopno}'">
+		<input type="button" value="목록" onclick="location.href='shop.do?command=shoplist'">
 		</td>
 	</tr>
 	

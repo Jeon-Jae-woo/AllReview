@@ -37,6 +37,9 @@
 	</div>
 	<br>
 	<div class="catetb">
+	<c:set var="i" value="0" />
+	<c:set var="j" value="4" />
+	
 	<table class="table">
 		<c:choose>
 			<c:when test="${empty list }">
@@ -45,33 +48,24 @@
 				</tr>
 			</c:when>
 			<c:otherwise>
-			<c:forEach begin="1" end="4">
-				<tr>
-				<c:forEach var="dto" items="${list }" begin="1" end="4">
-			
-					<td>
-						<img src="img/J.png" class="img-responsive" alt="Responsive image" onclick="location.href='shop.do?command=detail'">
-						<a href="shop.do?command=detail">dto.current.title</a>
-						<div></div>
-					</td>
-					<td>
-						<img src="img/J.png" class="img-responsive" alt="Responsive image" onclick="location.href='shop.do?command=detail'">
-						<a href="shop.do?command=detail">dto.current.title</a>
-						<div></div>
-					</td>
-					<td>
-						<img src="img/J.png" class="img-responsive" alt="Responsive image" onclick="location.href='shop.do?command=detail'">
-						<a href="shop.do?command=detail">dto.current.title</a>
-						<div></div>
-					</td>
-					<td>
-						<img src="img/J.png" class="img-responsive" alt="Responsive image" onclick="location.href='shop.do?command=detail'">
-						<a href="shop.do?command=detail">dto.current.title</a>
-						<div></div>
-					</td>
 
-				</c:forEach>
+				<c:forEach var="dto" items="${list }" end="15">
+				<c:if test="${i%j ==0 }">
+				<tr>
+				</c:if>
+					<td>
+						<img src="img/J.png" class="img-responsive" alt="Responsive image" onclick="location.href='shop.do?command=shopdetail&shopno=${dto.shopno }'">
+						<a href="shop.do?command=shopdetail&shopno=${dto.shopno }">${dto.shopno } ${dto.title }</a><br>
+						<label>평점 ★:  </label>${Math.round((((dto.service)+(dto.clean)+(dto.traffic))/3)*100)/100.0 }<br>
+						<label>조회수: </label>
+						<label>추천수: </label>
+						
+						<div></div>
+					</td>
+				<c:if test="${i%j == j-1 }">
 				</tr>
+				</c:if>
+				<c:set var="i" value="${i+1 }"/>
 			</c:forEach>
 			</c:otherwise>
 		
@@ -88,6 +82,7 @@
 	<input type="button" value="prev">
 	<a>현재페이지</a>
 	<input type="button" value="next">
+	<input type="button" value="글쓰기" onclick="location.href='shop.do?command=shopwriteform'">
 	
 	</div>
 	
