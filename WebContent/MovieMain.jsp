@@ -312,7 +312,7 @@ clear: both;
 									<div>
 									<!-- 값 수정 -->
 									<img src="${dto.movie_img}">
-									<a href="movieController?command=detail&movie_id=${dto.movie_id}">${dto.movie_img }</a>
+									<a href="movieController?command=detail&movie_id=${dto.movie_id}&category_name=${category_name}">${dto.movie_img }</a>
 									<p>${dto.movie_id}</p>
 									</div>
 									
