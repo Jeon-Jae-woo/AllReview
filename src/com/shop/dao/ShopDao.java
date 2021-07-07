@@ -20,8 +20,8 @@ public class ShopDao {
 		ResultSet rs = null;
 		List<ShopDto> res = new ArrayList<ShopDto>();
 
-		String sql = " SELECT * FROM SHOP_TB ORDER BY SHOP_NO DESC ";
-
+		String sql = " SELECT * FROM SHOP_TB WHERE STATUS=1 AND DELETES=0 ORDER BY SHOP_NO DESC ";
+		// AND RECIPT=1 넣기
 		try {
 			pstm = con.prepareStatement(sql);
 			System.out.println("03. query 준비: " + sql);
@@ -30,10 +30,10 @@ public class ShopDao {
 			System.out.println("04. query 실행 및 리턴");
 
 			while (rs.next()) {
-				ShopDto tmp = new ShopDto(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),
-										  rs.getString(5),rs.getString(6),rs.getDouble(7),rs.getDouble(8),
-										  rs.getDouble(9),rs.getString(10),rs.getInt(11),rs.getInt(12),
-										  rs.getInt(13),rs.getInt(14),rs.getDate(15),rs.getDate(16),rs.getInt(17));
+				ShopDto tmp = new ShopDto(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5),
+						rs.getString(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getString(10),
+						rs.getInt(11), rs.getInt(12), rs.getInt(13), rs.getInt(14), rs.getDate(15), rs.getDate(16),
+						rs.getInt(17));
 
 				res.add(tmp);
 			}
@@ -49,15 +49,49 @@ public class ShopDao {
 
 		return res;
 	}
-	
+
+	public List<ShopDto> selectAllCate(Connection con, int cate) {
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		List<ShopDto> res = new ArrayList<ShopDto>();
+
+		String sql = " SELECT * FROM SHOP_TB WHERE STATUS=1 AND DELETES=0 AND CATEGORY_NO=? ORDER BY SHOP_NO DESC ";
+		// AND RECIPT=1 넣기
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setInt(1, cate);
+			System.out.println("03. query 준비: " + sql);
+
+			rs = pstm.executeQuery();
+			System.out.println("04. query 실행 및 리턴");
+
+			while (rs.next()) {
+				ShopDto tmp = new ShopDto(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5),
+						rs.getString(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getString(10),
+						rs.getInt(11), rs.getInt(12), rs.getInt(13), rs.getInt(14), rs.getDate(15), rs.getDate(16),
+						rs.getInt(17));
+
+				res.add(tmp);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 에러");
+			e.printStackTrace();
+			close(rs);
+			close(pstm);
+			System.out.println("05. db 종료\n");
+		}
+
+		return res;
+	}
 
 	public ShopDto selectOne(Connection con, int shopno) {
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		ShopDto res = null;
 
-		String sql = " SELECT * FROM SHOP_TB WHERE SHOP_NO=? AND STATUS=1 AND DELETES=0";
-
+		String sql = " SELECT * FROM SHOP_TB WHERE SHOP_NO=? AND STATUS=1 AND DELETES=0 ";
+		// AND RECIPT=1 넣기
 		try {
 			pstm = con.prepareStatement(sql);
 			pstm.setInt(1, shopno);
@@ -67,10 +101,10 @@ public class ShopDao {
 			System.out.println("04. query 실행 및 리턴");
 
 			if (rs.next()) {
-				res = new ShopDto(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),
-						  rs.getString(5),rs.getString(6),rs.getDouble(7),rs.getDouble(8),
-						  rs.getDouble(9),rs.getString(10),rs.getInt(11),rs.getInt(12),
-						  rs.getInt(13),rs.getInt(14),rs.getDate(15),rs.getDate(16),rs.getInt(17));
+				res = new ShopDto(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5),
+						rs.getString(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getString(10),
+						rs.getInt(11), rs.getInt(12), rs.getInt(13), rs.getInt(14), rs.getDate(15), rs.getDate(16),
+						rs.getInt(17));
 
 			}
 
@@ -103,7 +137,7 @@ public class ShopDao {
 			pstm.setDouble(7, dto.getClean());
 			pstm.setDouble(8, dto.getTraffic());
 			pstm.setString(9, dto.getRevisit());
-			
+
 			System.out.println("03. query 준비:" + sql);
 
 			res = pstm.executeUpdate();
@@ -124,7 +158,7 @@ public class ShopDao {
 		PreparedStatement pstm = null;
 		int res = 0;
 
-		String sql = " DELETE FROM SHOP_TB WHERE SHOPNO=? ";
+		String sql = " UPDATE SHOP_TB SET DELETES=1 WHERE SHOP_NO=?";
 
 		try {
 			pstm = con.prepareStatement(sql);
@@ -145,80 +179,77 @@ public class ShopDao {
 		return res;
 	}
 
-	
-	  public ShopCateDto selectCate(Connection con, int cate_no) {
-		  PreparedStatement pstm = null;
-		  ResultSet rs = null;
-		  ShopCateDto res = null;
-		  
-		  String sql = " SELECT * FROM SHOP_CATE WHERE CATEGORY_ID=? ";
-		  
-		  try {
+	public ShopCateDto selectCate(Connection con, int cate_no) {
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		ShopCateDto res = null;
+
+		String sql = " SELECT * FROM SHOP_CATE WHERE CATEGORY_ID=? ";
+
+		try {
 			pstm = con.prepareStatement(sql);
 			pstm.setInt(1, cate_no);
 			System.out.println("03. query 준비: " + sql);
-			
+
 			rs = pstm.executeQuery();
 			System.out.println("04. query 실행 및 리턴");
-			
-			if(rs.next()) {
-				res = new ShopCateDto(rs.getInt(1),rs.getString(2));
-				
+
+			if (rs.next()) {
+				res = new ShopCateDto(rs.getInt(1), rs.getString(2));
+
 			}
-			
-			
+
 		} catch (SQLException e) {
 			System.out.println("3/4 단계 오류");
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rs);
 			close(pstm);
 			System.out.println("05. db 종료\n");
 		}
-		  
-		  return res;
-	  }
-	  
-	  public ShopGroupDto selectGroup(Connection con, int group_no) {
-		  PreparedStatement pstm = null;
-		  ResultSet rs = null;
-		  ShopGroupDto res = null;
-		  
-		  String sql = " SELECT * FROM SHOP_GROUP WHERE GROUP_ID=? ";
-		  
-		  try {
+
+		return res;
+	}
+
+	public ShopGroupDto selectGroup(Connection con, int group_no) {
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		ShopGroupDto res = null;
+
+		String sql = " SELECT * FROM SHOP_GROUP WHERE GROUP_ID=? ";
+
+		try {
 			pstm = con.prepareStatement(sql);
 			pstm.setInt(1, group_no);
 			System.out.println("03. query 준비: " + sql);
-			
+
 			rs = pstm.executeQuery();
 			System.out.println("04. query 실행 및 리턴");
-			
-			if(rs.next()) {
-				res = new ShopGroupDto(rs.getInt(1),rs.getString(2));
-				
+
+			if (rs.next()) {
+				res = new ShopGroupDto(rs.getInt(1), rs.getString(2));
+
 			}
-			
-			
+
 		} catch (SQLException e) {
 			System.out.println("3/4 단계 오류");
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rs);
 			close(pstm);
 			System.out.println("05. db 종료\n");
 		}
-		  
-		  return res;
-	  }
-	 
-	  public int update(Connection con, ShopDto dto) {
-		  PreparedStatement pstm = null;
-		  int res = 0;
-		  
-		  String sql = " UPDATE SHOP_TB SET UPDATEAT=SYSDATE, CONTENT=?, SERVICE=?, CLEAN=?, TRAFFIC=?, GROUP_NO=?, REVISIT=? WHERE SHOP_NO=?";
-		  
-		  try {
+
+		return res;
+	}
+
+	public int update(Connection con, ShopDto dto) {
+		PreparedStatement pstm = null;
+		int res = 0;
+
+		String sql = " UPDATE SHOP_TB SET UPDATEAT=SYSDATE, CONTENT=?, SERVICE=?, CLEAN=?, TRAFFIC=?, GROUP_NO=?, REVISIT=? WHERE SHOP_NO=?";
+
+		try {
 			pstm = con.prepareStatement(sql);
 			pstm.setString(1, dto.getContent());
 			pstm.setDouble(2, dto.getService());
@@ -228,38 +259,133 @@ public class ShopDao {
 			pstm.setString(6, dto.getRevisit());
 			pstm.setInt(7, dto.getShopno());
 			System.out.println("03. query 준비: " + sql);
+
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 오류");
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+			System.out.println("05. db 종료 \n");
+		}
+
+		return res;
+	}
+
+	public int inserthit(Connection con, int shopno, String nickname) {
+		PreparedStatement pstm = null;
+		int res = 0;
+
+		String sql = " INSERT INTO SHOP_HIT VALUES(HITSQ.NEXTVAL,?,?) ";
+
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, nickname);
+			pstm.setInt(2, shopno);
+			System.out.println("03. query 준비: " + sql);
+
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 에러");
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+			System.out.println("05. db 종료\n");
+		}
+
+		return res;
+	}
+
+	public int updatehit(Connection con, int shopno) {
+		PreparedStatement pstm = null;
+		int res = 0;
+
+		String sql = " UPDATE SHOP_TB SET HIT=HIT+1 WHERE SHOP_NO=? ";
+
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setInt(1, shopno);
+			System.out.println("03. query 준비: " + sql);
+
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 에러");
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+			System.out.println("05. db 종료\n");
+		}
+
+		return res;
+	}
+
+	public int insertreco(Connection con, int shopno, String nickname) {
+		PreparedStatement pstm = null;
+		int res = 0;
+
+		String sql = " INSERT INTO SHOP_RECO VALUES(RECOSQ.NEXTVAL,?,?) ";
+
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, nickname);
+			pstm.setInt(2, shopno);
+			System.out.println("03. query 준비 : " + sql);
+
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 에러");
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+			System.out.println("05. db 종료\n");
+		}
+
+		return res;
+	}
+	
+	
+	public int updatereco(Connection con, int shopno) {
+		PreparedStatement pstm = null;
+		int res = 0;
+		
+		String sql = " UPDATE SHOP_TB SET RECO=RECO+1 WHERE SHOP_NO=? ";
+		
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setInt(1, shopno);
+			System.out.println("03. query 준비: " + sql);
 			
 			res = pstm.executeUpdate();
 			System.out.println("04. query 실행 및 리턴");
 			
 			
-			
-			
 		} catch (SQLException e) {
-			System.out.println("3/4 단계 오류");
+			System.out.println("3/4 단계 에러");
 			e.printStackTrace();
 		}finally {
 			close(pstm);
-			System.out.println("05. db 종료 \n");
+			System.out.println("05. db 종료\n");
 		}
-		  
-		  
-		  
-		  
-		  
-		  
-		  return res;
-	  }
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
-	  
+		
+		
+		return res;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

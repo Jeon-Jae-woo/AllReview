@@ -29,6 +29,17 @@ public class ShopBiz {
 		return list;
 	}
 	
+	public List<ShopDto> selectAllCate(int cate){
+		Connection con = getConnection();
+		
+		List<ShopDto> list = dao.selectAllCate(con, cate);
+		
+		close(con);
+		
+		
+		return list;
+	}
+	
 	
 	
 	public ShopDto selectOne(int shopno) {
@@ -124,8 +135,70 @@ public class ShopBiz {
 		return res;
 	}
 	
+	public int inserthit(int shopno, String nickname) {
+		Connection con = getConnection();
+		
+		int res = dao.inserthit(con,shopno,nickname);
+		
+		if(res>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return res;
+	}
+	
+	public void updatehit(int shopno) {
+		Connection con = getConnection();
+		
+		int res = dao.updatehit(con, shopno);
+		
+		if(res>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		
+	}
+	
+	public int insertreco(int shopno, String nickname) {
+		Connection con = getConnection();
+		
+		int res = dao.insertreco(con,shopno,nickname);
+		
+		if(res>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return res;
+	}
 	
 	
+	public void updatereco(int shopno) {
+		Connection con = getConnection();
+		
+		int res = dao.updatereco(con,shopno);
+		
+		if(res>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		
+	}
 	
 	
 	
