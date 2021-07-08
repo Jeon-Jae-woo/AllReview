@@ -199,7 +199,9 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 	<!-- Section -->
 	<section>
 		<div id="secmain">
-			<form class="writer">
+			<form class="writer" action="onlineController">
+			<input type="hidden" name="command" value="update">
+			<input type="hidden" name="board_id" value="${dto.online_board_id}">
 			<h2>글 쓰기</h2> 
 				<select id="cate_de">
 					<optgroup label="카테고리 선택"> 
@@ -227,8 +229,35 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 		
 		
 		<!-- 제목-->
-		<input type="text" placeholder="제목을 입력하세요">
-
+		
+		<div id="secmain">
+		
+		<!-- 데이터가져와서 출력해야하는 부분 -->
+		<!-- 제목출력-->
+		<h1><input type="text" value="${dto.online_title }" name="title"></h1>
+		<!-- 카테고리 출력 -->
+		<input type="text" value="${dto.category_name }">
+		<!-- 세부카테고리 출력 -->
+		<input type="text" value="${dto.nickname }">
+		<input type="text" value="1" name="add_product">
+		<!-- 만족도 출력 -->
+		가격만족도<input type="text" value="${dto.price_sat }" name="price_sat">
+		상품만족도<input type="text" value="${dto.product_sat }" name="product_sat" >
+		평점<input type="text" value="${dto.satavg }">
+		<!-- 조회수,추천수 출력 -->
+		
+		조회<strong>${dto.hits }</strong>
+		추천<strong>${dto.recomd }</strong>
+		
+	
+		<!-- 내용 출력-->
+		<textarea rows="30" cols="200" name="content">${dto.online_content } </textarea>
+	
+		<input type="submit" class="btn" value="수정하기">
+		
+		</div>
+		</form>
+		
 		<!-- 평가 항목 선택 / 3개 가격만족도, 상품만족도, 기타만족도  / 체크박스사용-->
 		<input type="button" value="상품만족도 선택">
 		<input type="checkbox" value="가격만족도"> 가격만족도
@@ -270,7 +299,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 		<p>상품사진 첨부
 		<!--  상품사진 올리기  + 버튼 / 삭제버튼 ajax?-->
 		<input multiple="multiple" type="file" name="productupload" accept ="image/*" />
-			</form>
+			
 			
 		<!-- 작성취소 -->
 		<button class="csbt" onclick="">수정 취소</button>

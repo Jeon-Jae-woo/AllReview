@@ -3,26 +3,26 @@ package com.online.biz;
 import java.util.List;
 
 import com.online.dto.onlineDto;
+import com.user.dto.pagingDto;
 
 
 public interface onlineBiz {
-	public List<onlineDto> selectAll();
-	public onlineDto selectOne(int online_board_id);
-	public boolean insert(onlineDto dto);
-	public boolean update(onlineDto dto);
-	public boolean delete(int online_board_id);
 	
-	//각 카테고리 게시판 select
-	public List<onlineDto> selectFashion();
-	public List<onlineDto> selectBeauty();
-	public List<onlineDto> selectFood();
-	public List<onlineDto> selectHome();
-	public List<onlineDto> selectDigital();
-	public List<onlineDto> selectAppliances();
-	public List<onlineDto> selectChildcare();
-	public List<onlineDto> selectMedical();
-	public List<onlineDto> selectHobby();
-	public List<onlineDto> selectSports();
-	public List<onlineDto> selectPet();
-	public List<onlineDto> selectCar();
+
+	//카테고리별 리스트 
+	public List<onlineDto> selectListCateService(int category_id, int pageNum);
+	public pagingDto OnlineListPaging(int pageNum, int category);
+
+	//단일 게시글 조회
+	public onlineDto selectOnlineService(int board_id);
+	
+	//게시글 수정
+	public int updateOnlineService(onlineDto dto);
+	
+	//게시글 사제
+	public int deleteOnlineService(int board_id, String nickname);
+	
+	//글 쓰기
+	public int insertOnlineService(onlineDto dto);
+	
 }

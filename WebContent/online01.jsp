@@ -156,24 +156,22 @@ display: inline-block;
 		<div id="secmain">
 			<form>
 				<a href="./board_main.jsp" class="catemain" style="text-decoration:none" >전체</a> 
-				<select id="cate_de" onchange="if(this.value) location.href=(this.value);">
+			<select id="cate_de" onchange="if(this.value) location.href=(this.value);" >
 					<optgroup label="카테고리 선택"> 
-					<option value="controller.do?command=list">전체</option>
-					<option value="controller.do?command=calist">패션</option>
-					<option value="controller.do?command=calist">뷰티</option>
-					<option value="controller.do?command=calist">식품</option>
-					<option value="controller.do?command=calist">홈/생활용품</option>
-					<option value="controller.do?command=calist">PC/디지털</option>
-					<option value="controller.do?command=calist">가전</option>
-					<option value="controller.do?command=calist">출산/육아</option>
-					<option value="controller.do?command=calist">의료/건강</option>
-					<option value="controller.do?command=calist">문구/취미</option>
-					<option value="controller.do?command=calist">스포츠/레저</option>
-					<option value="controller.do?command=calist">반려동물용품</option>
-					<option value="controller.do?command=calist">자동차</option>
+					<option value="onlineController?command=list&category=1">패션</option>
+					<option value="onlineController?command=list&category=2">뷰티</option>
+					<option value="onlineController?command=list&category=3">식품</option>
+					<option value="onlineController?command=list&category=4">홈/생활용품</option>
+					<option value="onlineController?command=list&category=5">PC/디지털</option>
+					<option value="onlineController">가전</option>
+					<option value="onlineController">출산/육아</option>
+					<option value="onlineController">의료/건강</option>
+					<option value="onlineController">문구/취미</option>
+					<option value="onlineController">스포츠/레저</option>
+					<option value="onlineController">반려동물용품</option>
+					<option value="onlineController">자동차</option>
 					</optgroup>
 				</select>
-			
 				<!-- 전체검색 -->
 				<input type="text" value="게시글 검색" id="search_all" onFocus="this.value=''; return true;">
 				<input type="button" value="검색" id="search_bt" onclick=""> 
@@ -187,6 +185,72 @@ display: inline-block;
 					</ul>
 				</div>
 			</form>
+	
+	
+			<table border="1" summary="게시판 목록">
+
+           <caption>전체 글 목록</caption>
+
+           <colgroup>
+               <col width="80" />
+               <col width="150" />
+               <col width="500" />
+               <col width="130" />
+               <col width="130" />
+               <col width="80" />
+               <col width="80" />
+               <col width="80" />
+           </colgroup>  
+
+           <thead>
+               <tr>
+                    
+                    <th>카테고리</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>추천</th>
+                    <th>조회</th>
+                    <th>평점</th>
+               </tr>
+           </thead>
+
+           <tbody>
+              <tr class="tbody">
+              <c:choose>
+              	<c:when test="${empty list }">
+              		<tr>
+              			<td colspan="8">----------------작성된 글이 존재하지 않습니다----------------</td>
+              		</tr>              
+              	</c:when>
+              	<c:otherwise>
+              		<c:forEach var="dto" items="${list }">
+              			<tr>
+              				
+              				<td>${dto.category_name }</td>
+              				<td><a href="onlineController?command=detail&board_id=${dto.online_board_id }">${dto.online_title }</a></td>
+              				<td>${dto.nickname}</td>
+              				<td>${dto.recomd }</td>
+              				<td>${dto.hits }</td>
+              				<td>${dto.satavg }</td>
+              			</tr>
+              		</c:forEach>
+              	</c:otherwise>
+              	
+              </c:choose>
+              </tr>
+           </tbody>
+
+           <tfoot>
+               <tr>
+                    <td align="center" colspan="8">1</td>
+               </tr>
+
+           </tfoot>
+
+       </table>
+	
+	
+	
 	
 			<div> <!-- 10개 항목 노출 (사진+글제목) div추가 , size 정하기, 위아래 5개씩, wrapping 해야함  -->
 				<div class="container">
@@ -206,9 +270,38 @@ display: inline-block;
 	</section>
 	
 	<!-- 1,2,3,4,5 페이지 이동 기능 jsp 코드 들어가야함 -->
-	
+				<nav class="pull-bottom">
+			<c:set var="pageNum" value="${paging.pageNum }"/>
+			<c:set var="startPage" value="${paging.startPage}"/>
+			<c:set var="endPage" value="${paging.endPage}"/>
+			<c:set var="totalPage" value="${paging.totalPage}"/>
+			<c:set var="itemCount" value="${paging.itemCount}"/>
+				<ul class="pagination">
+					<li>
+			      		<a href="onlineController?command=list&category=${category_id}&pageNum=1" aria-label="Previous">
+			        	<span aria-hidden="true">&laquo;</span>
+			      		</a>
+			    	</li>
+					<c:forEach var="item" varStatus="status" begin="${ startPage }" end="${ endPage }" step="1">
+                		<c:if test="${ pageNum == item }">
+                    		<li><a href="onlineController?command=list&category=${category_id}&pageNum=1">${ item }</a></li>
+                		</c:if>
+                		<c:if test="${ pageNum != item }">
+		 					<li><a href="onlineController?command=list&pageNum=${ item }&category=${category_id}">${ item }</a></li>
+                		</c:if>
+            		</c:forEach>
+            		<li>
+			      		<a href="onlineController?command=list&pageNum=${totalPage}&category=${category_id}" aria-label="Next">
+			        	<span aria-hidden="true">&raquo;</span>
+			      		</a>
+			    	</li>
+				</ul>
+			
+			</nav>
 	
 	<hr>
+	
+	<input type="button" class="btn" value="글쓰기" onclick="location.href='onlineController?command=writeForm&category_id=${category_id}&category_name=${category_name }'">
 	<!-- Footer -->
 		<%@ include file="Fix/footer.jsp" %>
 </body>

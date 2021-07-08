@@ -1,6 +1,6 @@
 package com.online.dao;
 
-import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,470 +14,229 @@ import com.online.dto.onlineDto;
 
 public class onlineDaoImpl implements onlineDao {
 
+	
+	//카테고리별 게시판 리스트
 	@Override
-	public List<onlineDto> selectAll(Connection con) {
-		
+	public List<onlineDto> selectListCate(Connection con, int category_id, int pageNum) {
 		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		List<onlineDto> res = new ArrayList<onlineDto>();
+		ResultSet res = null;
+		List<onlineDto> list = new ArrayList<onlineDto>();
+		onlineDto dto = null;
+		
+		System.out.println("page : " + pageNum);
+		int startRow = (pageNum-1)*10+1;
+		int endRow = pageNum*10+1;
+		
+		System.out.println("startRow : " + startRow);
+		System.out.println("end : " + endRow);
 		
 		try {
-			pstm = con.prepareStatement(selectAllSql);
-			System.out.println("03.query 준비: " + selectAllSql);
+			pstm = con.prepareStatement(selectAllCate);
+			pstm.setInt(1, category_id);
+			pstm.setInt(2, endRow);
+			pstm.setInt(3, startRow);
 			
-			rs = pstm.executeQuery();
-			System.out.println("04. query 실행 및 리턴");
+			res = pstm.executeQuery();
 			
-			while(rs.next()) {
-				onlineDto tmp = new onlineDto(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getDouble(7),rs.getDouble(8),
-												rs.getInt(9),rs.getInt(10),rs.getDate(11),rs.getDate(12),rs.getInt(13),rs.getInt(14),rs.getInt(15),rs.getInt(16));
-				res.add(tmp);
+			if(res.next()) {
+			while(res.next()) {
+				dto = new onlineDto();
+				dto.setOnline_board_id(res.getInt(2));
+				dto.setNickname(res.getString(3));
+				dto.setCategory_id(res.getInt(4));
+				dto.setOnline_title(res.getString(5));
+				dto.setPrice_sat(res.getDouble(6));
+				dto.setProduct_sat(res.getDouble(7));
+				dto.setSatavg();
+				dto.setRecomd(res.getInt(8));
+				dto.setHits(res.getInt(9));
+				dto.setCategory_name(res.getString(10));
+				
+				list.add(dto);
 			}
+			}
+			
 		} catch (SQLException e) {
-			System.out.println("3/4단계 에러");
+			
 			e.printStackTrace();
-		} finally {
-			close(rs);
+		}finally {
+			close(res);
 			close(pstm);
-			System.out.println("05. db 종료\n");
 		}
 		
-		return res;
+
+		return list;
 	}
+
 	@Override
-	public onlineDto selectOne(Connection con, int online_board_id) {
+	public int OnlineRowCount(int category) {
+		Connection con = getConnection();
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
-		onlineDto res = null;
 		
+		int count = 0;
 		try {
-			pstm = con.prepareStatement(selectOneSql);
-			pstm.setInt(1, online_board_id);
-			System.out.println("03. query 준비: " + selectOneSql);
+			pstm = con.prepareStatement(onlineRowQuery);
+			pstm.setInt(1, category);
 			
 			rs = pstm.executeQuery();
-			System.out.println("04. query 실행 및 리턴");
 			
 			if(rs.next()) {
-				res = new onlineDto(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5),
-						rs.getString(6),rs.getDouble(7),rs.getDouble(8),rs.getInt(9),rs.getInt(10),
-						rs.getDate(11),rs.getDate(12),rs.getInt(13),rs.getInt(14),rs.getInt(15),rs.getInt(16));
+				count = rs.getInt(1);
 			}
 			
-			
-			
 		} catch (SQLException e) {
-			System.out.println("3/4 단계 에러");
 			e.printStackTrace();
-		} finally {
+		}finally {
 			close(rs);
 			close(pstm);
-			System.out.println("05. db 종료\n");
+			close(con);
 		}
-		
-		return res;
+
+		return count;
 	}
 
+	//단일 게시글 조회
 	@Override
-	public boolean insert(Connection con, onlineDto dto) {
-		return false;
+	public onlineDto selectOneBoard(Connection con, int board_id) {
+		PreparedStatement pstm = null;
+		onlineDto dto = null;
+		ResultSet res = null;
+		
+		try {
+			pstm = con.prepareStatement(onlineSelectQuery);
+			pstm.setInt(1, board_id);
+			
+			res = pstm.executeQuery();
+			
+			//SELECT ONLINE_BOARD_ID, NICKNAME, OB.CATEGORY_ID, ONLINE_TITLE, ONLINE_CONTENT, 
+			//PRICE_SAT,PRODUCT_SAT, ADD_RECEIPT, CREATEAT, STATUS, RECOMD,HITS ,CATEGORY_NAME
+					
+			while(res.next()) {
+				dto = new onlineDto();
+				dto.setOnline_board_id(res.getInt(1));
+				dto.setNickname(res.getString(2));
+				dto.setCategory_id(res.getInt(3));
+				dto.setOnline_title(res.getString(4));
+				dto.setOnline_content(res.getString(5));
+				dto.setPrice_sat(res.getDouble(6));
+				dto.setProduct_sat(res.getDouble(7));
+				dto.setAdd_receipt(res.getInt(8)); //영수증
+				dto.setCreateat(res.getDate(9));
+				dto.setStatus(res.getInt(10));
+				dto.setRecomd(res.getInt(11));
+				dto.setHits(res.getInt(12));
+				dto.setCategory_name(res.getString(13));
+				dto.setAdd_product(res.getInt(14)); // 상품사진
+				dto.setSatavg();
+			}
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}finally {
+			close(res);
+			close(pstm);
+		}
+		
+		return dto;
 	}
 
+	//게시글 수정
 	@Override
-	public boolean update(Connection con, onlineDto dto) {
-		return false;
+	public int updateOnlineBoard(Connection con, onlineDto dto) {
+		PreparedStatement pstm = null;
+		int result = 0;
+		
+		try {
+			pstm = con.prepareStatement(onlineUpdateQuery);
+			
+			//ONLINE_TITLE=?, ONLINE_CONTENT=?, PRICE_SAT=?, PRODUCT_SAT=?, 
+			//		ADD_PRODUCT=?, UPDATEAT=SYSDATE WHERE ONLINE_BOARD_ID=? AND NICKNAME=?";
+			pstm.setString(1, dto.getOnline_title());
+			pstm.setString(2, dto.getOnline_content());
+			pstm.setDouble(3, dto.getPrice_sat());
+			pstm.setDouble(4, dto.getProduct_sat());
+			pstm.setInt(5, dto.getAdd_product()); //첨부 사진
+			pstm.setInt(6, dto.getOnline_board_id());
+			pstm.setString(7, dto.getNickname());
+			
+			result = pstm.executeUpdate();
+			
+			if(result>0) {
+				commit(con);
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+		}
+		
+		return result;
 	}
 
+	//게시글 삭제
 	@Override
-	public boolean delete(Connection con, int online_board_id) {
-		PreparedStatement pstm = null;
-		int res = 0;
+	public int deleteOnlineBoard(Connection con, int board_id, String nickname) {
+		PreparedStatement pstm= null;
+		int result = 0;
 		
 		try {
-			pstm = con.prepareStatement(deleteSql);
-			pstm.setInt(1, online_board_id);
-			System.out.println("03.query 준비: " + deleteSql);
+			pstm = con.prepareStatement(onlineDeleteQuery);
+			pstm.setInt(1, board_id);
+			pstm.setString(2, nickname);
 			
-			res = pstm.executeUpdate();
-			System.out.println("04. query 실행 및 리턴");
+			result = pstm.executeUpdate();
 			
-		} catch (SQLException e) {
-			System.out.println("3/4 단계 에러");
-			e.printStackTrace();
-		} finally {
-			close(pstm);
-			System.out.println("05. db 종료\n");
-		}
-		
-		return (res>0)?true:false;
-	}
-	
-	
-	
-	////////////////////////여기부터 쭉 카테고리
-	
-	
-	
-	@Override
-	public List<onlineDto> selectFashion(Connection con) {
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		List<onlineDto> res = new ArrayList<onlineDto>();
-		
-		try {
-			pstm = con.prepareStatement(selectfashionSql);
-			System.out.println("03.query 준비: " + selectfashionSql);
-			
-			rs = pstm.executeQuery();
-			System.out.println("04. query 실행 및 리턴");
-			
-			while(rs.next()) {
-				onlineDto tmp = new onlineDto(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getDouble(7),rs.getDouble(8),
-						rs.getInt(9),rs.getInt(10),rs.getDate(11),rs.getDate(12),rs.getInt(13),rs.getInt(14),rs.getInt(15),rs.getInt(16));
-				res.add(tmp);
+			if(result>0) {
+				commit(con);
 			}
 			
 		} catch (SQLException e) {
-			System.out.println("3/4단계 에러");
+			
 			e.printStackTrace();
-		} finally {
-			close(rs);
+		}finally {
 			close(pstm);
-			System.out.println("05. db 종료\n");
 		}
 		
-		return res;
+		return result;
 	}
+
+	//글 등록
 	@Override
-	public List<onlineDto> selectBeauty(Connection con) {
+	public int insertOnlineBoard(Connection con, onlineDto dto) {
 		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		List<onlineDto> res = new ArrayList<onlineDto>();
+		int result = 0;
 		
 		try {
-			pstm = con.prepareStatement(selectbeautySql);
-			System.out.println("03.query 준비: " + selectbeautySql);
+			pstm = con.prepareStatement(onlineWriteQuery);
+			//"INSERT INTO ONLINE_BOARD VALUES(ONLINE_BOARD_ID.NEXTVAL, ?,?,?,?,?,?,?,?,SYSDATE,SYSDATE,0,0,0,0)";
+			//--닉네임, 카테고리 번호, 제목, 내용, price, product, receipt, product add, 
+			pstm.setString(1, dto.getNickname());
+			pstm.setInt(2, dto.getCategory_id());
+			pstm.setString(3, dto.getOnline_title());
+			pstm.setString(4, dto.getOnline_content());
+			pstm.setDouble(5, dto.getPrice_sat());
+			pstm.setDouble(6, dto.getProduct_sat());
+			pstm.setInt(7, dto.getAdd_receipt());
+			pstm.setInt(8, dto.getAdd_product());
 			
-			rs = pstm.executeQuery();
-			System.out.println("04. query 실행 및 리턴");
+			result = pstm.executeUpdate();
 			
-			while(rs.next()) {
-				onlineDto tmp = new onlineDto(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getDouble(7),rs.getDouble(8),
-						rs.getInt(9),rs.getInt(10),rs.getDate(11),rs.getDate(12),rs.getInt(13),rs.getInt(14),rs.getInt(15),rs.getInt(16));
-				res.add(tmp);
+			if(result>0) {
+				commit(con);
 			}
 			
 		} catch (SQLException e) {
-			System.out.println("3/4단계 에러");
+			
 			e.printStackTrace();
-		} finally {
-			close(rs);
+		}finally {
 			close(pstm);
-			System.out.println("05. db 종료\n");
 		}
 		
-		return res;
-	}
-	
-	@Override
-	public List<onlineDto> selectFood(Connection con) {
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		List<onlineDto> res = new ArrayList<onlineDto>();
-		
-		try {
-			pstm = con.prepareStatement(selectfoodSql);
-			System.out.println("03.query 준비: " + selectfoodSql);
-			
-			rs = pstm.executeQuery();
-			System.out.println("04. query 실행 및 리턴");
-			
-			while(rs.next()) {
-				onlineDto tmp = new onlineDto(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getDouble(7),rs.getDouble(8),
-						rs.getInt(9),rs.getInt(10),rs.getDate(11),rs.getDate(12),rs.getInt(13),rs.getInt(14),rs.getInt(15),rs.getInt(16));
-				res.add(tmp);
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("3/4단계 에러");
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstm);
-			System.out.println("05. db 종료\n");
-		}
-		
-		return res;
-	}
-	@Override
-	public List<onlineDto> selectHome(Connection con) {
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		List<onlineDto> res = new ArrayList<onlineDto>();
-		
-		try {
-			pstm = con.prepareStatement(selecthomeSql);
-			System.out.println("03.query 준비: " + selecthomeSql);
-			
-			rs = pstm.executeQuery();
-			System.out.println("04. query 실행 및 리턴");
-			
-			while(rs.next()) {
-				onlineDto tmp = new onlineDto(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getDouble(7),rs.getDouble(8),
-						rs.getInt(9),rs.getInt(10),rs.getDate(11),rs.getDate(12),rs.getInt(13),rs.getInt(14),rs.getInt(15),rs.getInt(16));
-				res.add(tmp);
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("3/4단계 에러");
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstm);
-			System.out.println("05. db 종료\n");
-		}
-		
-		return res;
-	}
-	@Override
-	public List<onlineDto> selectDigital(Connection con) {
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		List<onlineDto> res = new ArrayList<onlineDto>();
-		
-		try {
-			pstm = con.prepareStatement(selectdigitalSql);
-			System.out.println("03.query 준비: " + selectdigitalSql);
-			
-			rs = pstm.executeQuery();
-			System.out.println("04. query 실행 및 리턴");
-			
-			while(rs.next()) {
-				onlineDto tmp = new onlineDto(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getDouble(7),rs.getDouble(8),
-						rs.getInt(9),rs.getInt(10),rs.getDate(11),rs.getDate(12),rs.getInt(13),rs.getInt(14),rs.getInt(15),rs.getInt(16));
-				res.add(tmp);
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("3/4단계 에러");
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstm);
-			System.out.println("05. db 종료\n");
-		}
-		
-		return res;
-	}
-	@Override
-	public List<onlineDto> selectAppliances(Connection con) {
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		List<onlineDto> res = new ArrayList<onlineDto>();
-		
-		try {
-			pstm = con.prepareStatement(selectappliancesSql);
-			System.out.println("03.query 준비: " + selectappliancesSql);
-			
-			rs = pstm.executeQuery();
-			System.out.println("04. query 실행 및 리턴");
-			
-			while(rs.next()) {
-				onlineDto tmp = new onlineDto(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getDouble(7),rs.getDouble(8),
-						rs.getInt(9),rs.getInt(10),rs.getDate(11),rs.getDate(12),rs.getInt(13),rs.getInt(14),rs.getInt(15),rs.getInt(16));
-				res.add(tmp);
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("3/4단계 에러");
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstm);
-			System.out.println("05. db 종료\n");
-		}
-		
-		return res;
-	}
-	@Override
-	public List<onlineDto> selectChildcare(Connection con) {
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		List<onlineDto> res = new ArrayList<onlineDto>();
-		
-		try {
-			pstm = con.prepareStatement(selectchildcareSql);
-			System.out.println("03.query 준비: " + selectchildcareSql);
-			
-			rs = pstm.executeQuery();
-			System.out.println("04. query 실행 및 리턴");
-			
-			while(rs.next()) {
-				onlineDto tmp = new onlineDto(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getDouble(7),rs.getDouble(8),
-						rs.getInt(9),rs.getInt(10),rs.getDate(11),rs.getDate(12),rs.getInt(13),rs.getInt(14),rs.getInt(15),rs.getInt(16));
-				res.add(tmp);
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("3/4단계 에러");
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstm);
-			System.out.println("05. db 종료\n");
-		}
-		
-		return res;
-	}
-	@Override
-	public List<onlineDto> selectMedical(Connection con) {
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		List<onlineDto> res = new ArrayList<onlineDto>();
-		
-		try {
-			pstm = con.prepareStatement(selectmedicalSql);
-			System.out.println("03.query 준비: " + selectmedicalSql);
-			
-			rs = pstm.executeQuery();
-			System.out.println("04. query 실행 및 리턴");
-			
-			while(rs.next()) {
-				onlineDto tmp = new onlineDto(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getDouble(7),rs.getDouble(8),
-						rs.getInt(9),rs.getInt(10),rs.getDate(11),rs.getDate(12),rs.getInt(13),rs.getInt(14),rs.getInt(15),rs.getInt(16));
-				res.add(tmp);
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("3/4단계 에러");
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstm);
-			System.out.println("05. db 종료\n");
-		}
-		
-		return res;
-	}
-	@Override
-	public List<onlineDto> selectHobby(Connection con) {
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		List<onlineDto> res = new ArrayList<onlineDto>();
-		
-		try {
-			pstm = con.prepareStatement(selecthobbySql);
-			System.out.println("03.query 준비: " + selecthobbySql);
-			
-			rs = pstm.executeQuery();
-			System.out.println("04. query 실행 및 리턴");
-			
-			while(rs.next()) {
-				onlineDto tmp = new onlineDto(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getDouble(7),rs.getDouble(8),
-						rs.getInt(9),rs.getInt(10),rs.getDate(11),rs.getDate(12),rs.getInt(13),rs.getInt(14),rs.getInt(15),rs.getInt(16));
-				res.add(tmp);
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("3/4단계 에러");
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstm);
-			System.out.println("05. db 종료\n");
-		}
-		
-		return res;
-	}
-	@Override
-	public List<onlineDto> selectSports(Connection con) {
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		List<onlineDto> res = new ArrayList<onlineDto>();
-		
-		try {
-			pstm = con.prepareStatement(selectsportsSql);
-			System.out.println("03.query 준비: " + selectsportsSql);
-			
-			rs = pstm.executeQuery();
-			System.out.println("04. query 실행 및 리턴");
-			
-			while(rs.next()) {
-				onlineDto tmp = new onlineDto(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getDouble(7),rs.getDouble(8),
-						rs.getInt(9),rs.getInt(10),rs.getDate(11),rs.getDate(12),rs.getInt(13),rs.getInt(14),rs.getInt(15),rs.getInt(16));
-				res.add(tmp);
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("3/4단계 에러");
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstm);
-			System.out.println("05. db 종료\n");
-		}
-		
-		return res;
-	}
-	@Override
-	public List<onlineDto> selectPet(Connection con) {
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		List<onlineDto> res = new ArrayList<onlineDto>();
-		
-		try {
-			pstm = con.prepareStatement(selectpetSql);
-			System.out.println("03.query 준비: " + selectpetSql);
-			
-			rs = pstm.executeQuery();
-			System.out.println("04. query 실행 및 리턴");
-			
-			while(rs.next()) {
-				onlineDto tmp = new onlineDto(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getDouble(7),rs.getDouble(8),
-						rs.getInt(9),rs.getInt(10),rs.getDate(11),rs.getDate(12),rs.getInt(13),rs.getInt(14),rs.getInt(15),rs.getInt(16));
-				res.add(tmp);
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("3/4단계 에러");
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstm);
-			System.out.println("05. db 종료\n");
-		}
-		
-		return res;
-	}
-	@Override
-	public List<onlineDto> selectCar(Connection con) {
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		List<onlineDto> res = new ArrayList<onlineDto>();
-		
-		try {
-			pstm = con.prepareStatement(selectcarSql);
-			System.out.println("03.query 준비: " + selectcarSql);
-			
-			rs = pstm.executeQuery();
-			System.out.println("04. query 실행 및 리턴");
-			
-			while(rs.next()) {
-				onlineDto tmp = new onlineDto(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getDouble(7),rs.getDouble(8),
-						rs.getInt(9),rs.getInt(10),rs.getDate(11),rs.getDate(12),rs.getInt(13),rs.getInt(14),rs.getInt(15),rs.getInt(16));
-				res.add(tmp);
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("3/4단계 에러");
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstm);
-			System.out.println("05. db 종료\n");
-		}
-		
-		return res;
+		return result;
 	}
 	
 

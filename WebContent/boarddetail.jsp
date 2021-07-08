@@ -171,9 +171,9 @@ transform: translateX(-78%);
 		<!-- 제목출력-->
 		<h1><input type="text" value="${dto.online_title }" readonly="readonly"></h1>
 		<!-- 카테고리 출력 -->
-		<input type="text" value=${dto.category_id } readonly="readonly">
+		<input type="text" value=${dto.category_name } readonly="readonly">
 		<!-- 세부카테고리 출력 -->
-		<input type="text" value=${dto.category_detail_id } readonly="readonly">
+		<input type="text" value="${dto.nickname }" readonly="readonly">
 		
 		<!-- 만족도 출력 -->
 		가격만족도<input type="text" value="${dto.price_sat }" readonly="readonly">
@@ -188,16 +188,17 @@ transform: translateX(-78%);
 		<!-- 내용 출력-->
 		<textarea rows="30" cols="200" readonly="readonly">${dto.online_content } </textarea>
 	
+		<button class="btn" onclick="location.href='onlineController?command=updateForm&board_id=${dto.online_board_id}'">수정</button>
 	
 		<!-- 추천 -->
 		<button class="csbt" onclick="">추천</button>
 		<!-- 신고 -->
 		<button class="wrtbt" onclick="">신고</button>
 		<!-- 목록으로 돌아가기  -->
-		<button class="listbt" onclick="">목록</button>
+		<button class="listbt" onclick="history.back();">목록</button>
 		<!-- 게시글 삭제버튼 , 게시글작성자한테만 노출 -->
 		<input type="button" value="삭제"
-				onclick="location.href='controller.do?command=delete&online_board_id=${dto.online_board_id}'" >
+				onclick="location.href='onlineController?command=delete&board_id=${dto.online_board_id}&category_id=${dto.category_id }'" >
 		</div>
 	</section>
 	

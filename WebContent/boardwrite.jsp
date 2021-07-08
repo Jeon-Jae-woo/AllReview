@@ -200,42 +200,26 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 	<!-- Section -->
 	<section>
 		<div id="secmain">
-			<form class="writer" action="controller.do" method="post">
-			<input type="hidden" name="command" value="boardwrite">
+			<form class="writer" action="onlineController" method="post">
+			<input type="hidden" name="command" value="write">
+			<input type="hidden" name="category_id" value="${category_id}">
 			<h2>글 쓰기</h2> 
-				<select id="cate_de">
-					<optgroup label="카테고리 선택"> 
-					<option>카테고리 선택</option>
-					<option>패션</option>
-					<option>뷰티</option>
-					<option>식품</option>
-					<option>홈/생활용품</option>
-					<option>PC/디지털</option>
-					<option>가전</option>
-					<option>출산/육아</option>
-					<option>의료/건강</option>
-					<option>문구/취미</option>
-					<option>스포츠/레저</option>
-					<option>반려동물용품</option>
-					<option>자동차</option>
-					</optgroup>
-				</select>
-				<select id="subcate_de">
-					<optgroup label="세부 카테고리 선택">
-					<option>세부 카테고리 선택</option>
-					<!-- 메인카테고리에 따른 각 카테고리 출력 어떻게 이어줘야 하는가?  -->
-					</optgroup>
-				</select>
-		
+			<input type="text" readonly="readonly" value="${category_name}">
+			
 		
 		<!-- 제목-->
-		<input type="text" name="online_title" placeholder="제목을 입력하세요">
+		<input type="text" name="title" placeholder="제목을 입력하세요">
 
 		<!-- 평가 항목 -->
 		<input type="button" value="상품만족도 선택">
-		<input type="checkbox" value="가격만족도" name="price_sat"> 가격만족도
+		<input type="text" value="가격만족도" name="price_sat" value="1"> 가격만족도
 		
-		<input type="checkbox" value="상품만족도" name="product_sat"> 상품만족도
+		<input type="text" value="상품만족도" name="product_sat" value="1"> 상품만족도
+
+		<input type="text" name="product_add">
+		<input type="text" name="receipt">
+		
+
 
 		<!-- 별점기능 -->
 		<span class="star-input">
@@ -265,7 +249,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 		</span>
 		<!-- 별점기능 -->
 		<!-- 내용 -->
-		<textarea rows="30" cols="200" name="online_content">내용을 입력하세요.</textarea>
+		<textarea rows="30" cols="200" name="content">내용을 입력하세요.</textarea>
 		
 		
 		
@@ -276,12 +260,13 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 		<p>상품사진 첨부
 		<!--  상품사진 올리기  + 버튼 / 삭제버튼 ajax?-->
 		<input multiple="multiple" type="file" name="productupload" accept ="image/*" />
-			</form>
+			
 			
 		<!-- 작성취소 -->
 		<button class="csbt" onclick="">작성 취소</button>
 		<!-- 작성 완료 -->
-		<button class="wrtbt" onclick="">작성 완료</button>
+		<input type="submit" value="작성" class="btn">
+		</form>
 		
 		</div>
 		
