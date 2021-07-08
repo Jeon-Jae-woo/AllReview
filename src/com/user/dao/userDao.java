@@ -23,9 +23,6 @@ public interface userDao{
 	String leaveUserQuery = "UPDATE MEMBER SET STATUS_NO=3 WHERE EMAIL=? AND PASSWORD=?";
 	
 	
-	//권한 부여
-	String levelUpdateQuery = "UPDATE MEMBER SET LEVEL_NO=? WHERE EMAIL=?";
-	
 	
 	
 	/*
@@ -42,8 +39,6 @@ public interface userDao{
 	//회원탈퇴
 	public int mypageLeave(String email, String password);
 	
-	
-	public int adminLevelupdate(String email, int levelNo);
 	
 	
 	

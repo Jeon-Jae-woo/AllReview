@@ -154,31 +154,6 @@ public class userDaoImpl implements userDao {
 		return user;
 	}
 
-	//관리자 권한 부여 임시
-	@Override
-	public int adminLevelupdate(String email, int levelNo) {
-		Connection con = getConnection();
-		PreparedStatement pstm = null;
-		int result = 0;
-		System.out.println("email:"+email);
-		System.out.println("level_no:"+levelNo);
-		try {
-			pstm = con.prepareStatement(levelUpdateQuery);
-			pstm.setInt(1, levelNo);
-			pstm.setString(2, email);
-			result = pstm.executeUpdate();
-			if(result>0) {
-				commit(con);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstm);
-			close(con);
-		}
-		
-		return result;
-	}
 
 	//마이페이지 - 회원정보 조회
 	@Override

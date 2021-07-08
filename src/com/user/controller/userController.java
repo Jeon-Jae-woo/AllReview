@@ -254,26 +254,10 @@ public class userController extends HttpServlet {
 			request.setAttribute("paging", paging);
 			request.setAttribute("category", category);
 			dispatch("mypageBoardlist.jsp", request, response);
-			
-			
+				
 		}
-		
-	
 
-		//admin
-		if(command.equals("adminLevelUpdate")) {
-			System.out.println("admin level 서블릿 실행");
-			String email = request.getParameter("email");
-			int levelNo = Integer.parseInt(request.getParameter("levelNo"));
-			int result = userbiz.adminLevelUpdateService(email, levelNo);
-			
-			//테스트용으로 만듦
-			if(result>0) {
-				jsResponse("레벨 변환 성공","index.jsp",response);
-			}else {
-				jsResponse("레벨 변환 실패","index.jsp",response);
-			}
-		}
+
 		}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

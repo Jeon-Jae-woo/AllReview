@@ -50,13 +50,13 @@
     			<h4>회원 관리</h4>
       				<ul class="nav">
 				        <li class="side"><a href="adminController?command=userList">회원 목록</a></li>
-				        <li class="side"><a href="adminList.jsp">관리자 목록</a></li>
+				        <li class="side"><a href="adminController?command=userList&adminCheck=true">관리자 목록</a></li>
       				</ul>
       		
       			<h4>게시판 글 처리</h4>
       			     <ul class="nav">
-				        <li class="side"><a href="adminWaitboard.jsp">승인 대기중인 글</a></li>
-				        <li class="side"><a href="adminRefusalboard.jsp">승인 거절된 글</a></li>
+				        <li class="side"><a href="adminController?command=waitList&status=0">승인 대기중인 글</a></li>
+				        <li class="side"><a href="adminController?command=waitList&status=2">승인 거절된 글</a></li>
       				</ul>
       			
       			<h4>공지사항</h4>
@@ -101,7 +101,7 @@
 						<c:otherwise>
 							<c:forEach var="list" items="${userlist}">
 								<tr>
-									<td><a>${list.email }</a></td>
+									<td><a href="adminController?command=userdetail&email=${list.email}">${list.email }</a></td>
 									<td>${list.nickName }</td>
 									<td>${list.createdAt }</td>
 								</tr>

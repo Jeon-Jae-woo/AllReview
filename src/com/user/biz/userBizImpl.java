@@ -45,13 +45,6 @@ public class userBizImpl implements userBiz {
 		return user;
 	}
 
-	//권한부여
-	@Override
-	public int adminLevelUpdateService(String email, int levelNo) {
-		System.out.println("imple실행");
-		int result = userdao.adminLevelupdate(email, levelNo);
-		return result;
-	}
 
 	//마이페이지 - 회원 정보 조회
 	@Override

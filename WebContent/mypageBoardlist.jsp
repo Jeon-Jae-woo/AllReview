@@ -48,7 +48,6 @@
 				selectBox[i].selected=true;
 			}
 		}
-		
 	}
 </script>
 
@@ -114,6 +113,7 @@
 									<td>${list.title }</td>
 									<td>${list.createAt }</td>
 								</tr>
+								
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
