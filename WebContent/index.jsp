@@ -26,14 +26,10 @@
 		<input type="submit">
 	</form>
 	
-<<<<<<< HEAD
 	<a href="movieController?command=moiveListCate">영화</a>	
 	
-=======
-	<h1><%= session.getAttribute("level")  %></h1>
-		
-		
->>>>>>> d51ff8e518357cae67ee3b49f2a4df6a0669870d
+	<a href="onlineController?command=list">온라인</a>
+
 	<%@ include file="Fix/footer.jsp" %>
 </body>
 </html>

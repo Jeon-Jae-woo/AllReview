@@ -6,7 +6,6 @@ public class onlineDto {
 	private int online_board_id;    //글번호
 	private String nickname;
 	private int category_id;
-	private int category_detail_id;
 	private String online_title;
 	private String online_content;
 	private double price_sat;
@@ -19,7 +18,20 @@ public class onlineDto {
 	private int delete_n;
 	private int recomd;
 	private int hits;
+	private String category_name;
 	
+	public String getCategory_name() {
+		return category_name;
+	}
+
+
+
+	public void setCategory_name(String category_name) {
+		this.category_name = category_name;
+	}
+
+
+
 	//평점평균
 	private double satavg = (price_sat+product_sat)/2;
 	
@@ -32,14 +44,14 @@ public class onlineDto {
 	
 	
 	//전체생성자
-	public onlineDto(int online_board_id, String nickname, int category_id, int category_detail_id, String online_title,
+	public onlineDto(int online_board_id, String nickname, int category_id, String online_title,
 			String online_content, double price_sat, double product_sat, int add_receipt, int add_product,
 			Date createat, Date pudateat, int status, int delete_n, int recomd, int hits) {
 		super();
 		this.online_board_id = online_board_id;
 		this.nickname = nickname;
 		this.category_id = category_id;
-		this.category_detail_id = category_detail_id;
+		
 		this.online_title = online_title;
 		this.online_content = online_content;
 		this.price_sat = price_sat;
@@ -85,14 +97,6 @@ public class onlineDto {
 	}
 
 
-	public int getCategory_detail_id() {
-		return category_detail_id;
-	}
-
-
-	public void setCategory_detail_id(int category_detail_id) {
-		this.category_detail_id = category_detail_id;
-	}
 
 
 	public String getOnline_title() {
@@ -217,13 +221,13 @@ public class onlineDto {
 
 
 	public double getSatavg() {
-		return (price_sat+product_sat)/2;
+		return this.satavg;
 	}
 
 
 
-	public void setSatavg(double satavg) {
-		this.satavg = satavg;
+	public void setSatavg() {
+		this.satavg = (this.price_sat+ this.product_sat)/2;
 	}
 	
 }
