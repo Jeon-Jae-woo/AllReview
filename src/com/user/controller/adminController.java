@@ -14,7 +14,11 @@ import javax.servlet.http.HttpSession;
 
 import com.user.biz.adminBiz;
 import com.user.biz.adminBizImpl;
+import com.user.biz.userBiz;
+import com.user.biz.userBizImpl;
+import com.user.dto.adminUserDto;
 import com.user.dto.pagingDto;
+import com.user.dto.totalBoardDto;
 import com.user.dto.userDto;
 
 @WebServlet("/adminController")
@@ -22,6 +26,7 @@ public class adminController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
       
 	private adminBiz adminbiz = new adminBizImpl();
+	private userBiz userbiz = new userBizImpl();
 	
     public adminController() {
         super();
@@ -39,9 +44,14 @@ public class adminController extends HttpServlet {
 		String command = request.getParameter("command");
 		System.out.println("command : " + command);
 		
+		//회원 및 관리자 목록 조회
 		if(command.equals("userList")) {
 			
 			String pageNumParam = request.getParameter("pageNum");
+			String adminCheck = request.getParameter("adminCheck");
+			
+			System.out.println("adminCheck : " + adminCheck);
+			
 			int pageNum = 0;
 			if(pageNumParam == null) {
 				pageNum = 1;
@@ -49,31 +59,122 @@ public class adminController extends HttpServlet {
 				pageNum = Integer.parseInt(pageNumParam);
 			}
 			
-			List<userDto> userlist = adminbiz.allUserListService(pageNum); 
-			pagingDto paging = adminbiz.userListPaging(pageNum);
-			
-			System.out.println();
-			for(userDto dto : userlist) {
-				System.out.println("---------------------------");
-				System.out.println("이메일 : " + dto.getEmail());
-				System.out.println("닉네임 : " + dto.getNickName());
-				System.out.println("가입일: " + dto.getCreatedAt());
-				System.out.println("----------------------------");
-
+			List<userDto> userlist = null;
+			pagingDto paging = null;
+			if(adminCheck==null) {
+				userlist = adminbiz.allUserListService(pageNum); 
+				paging = adminbiz.userListPaging(pageNum);
+			}
+			else if(adminCheck.equals("true")) {
+				userlist = adminbiz.adminUserListService(pageNum);
+				paging = adminbiz.adminListPaging(pageNum);
 			}
 			
-			System.out.println("----페이징----");
-			System.out.println(paging.toString());
-			System.out.println("-----------");
-			System.out.println();
+			for(userDto dto : userlist) {
+				System.out.println("----");
+				System.out.println(dto.getEmail());
+				System.out.println("----");
+			}
 			
+			System.out.println("끝");
 			request.setAttribute("userlist", userlist);
 			request.setAttribute("paging", paging);
 			
 			dispatch("adminUserlist.jsp", request, response);
 		}
+		//유저 상세 정보
+		else if(command.equals("userdetail")) {
+			String user = request.getParameter("email");
+			
+			String category = request.getParameter("category");
+			String pageNumParam = request.getParameter("pageNum");
+			
+			int pageNum = 0;
+			if(pageNumParam == null) {
+				pageNum = 1;
+			}else {
+				pageNum = Integer.parseInt(pageNumParam);
+			}
+			if(category==null) {
+				category="매장";
+			}
+			
+			adminUserDto userdetail = adminbiz.userdetailService(user);
+			
+			List<totalBoardDto> totalList = userbiz.userWriteListService(userdetail.getNickname(), pageNum, category);
+			
+			request.setAttribute("userdetail", userdetail);
+			
+			pagingDto paging = userbiz.writeListPaging(userdetail.getNickname(), pageNum, category);
+			request.setAttribute("totalList", totalList);
+			request.setAttribute("paging", paging);
+			request.setAttribute("category", category);
+			request.setAttribute("email", email);
+			dispatch("adminUserdetail.jsp", request, response);
+						
+
+		}
+		//유저 정보 업데이트
+		else if(command.equals("userUpdate")) {
+			System.out.println("admin 유저 업데이트 서블릿 실행");
+			
+			String userEmail = request.getParameter("email");
+			int statusNo = Integer.parseInt(request.getParameter("statusSelect"));
+			int levelNo = Integer.parseInt(request.getParameter("levelSelect"));
+			
+			int result = adminbiz.userUpdateService(userEmail, statusNo, levelNo);
+	
+			if(result>0) {
+				jsResponse("회원 정보 수정 성공", "adminController?command=userdetail&email="+userEmail, response);
+			}else {
+				jsResponse("회원 정보 수정 실패", "adminController?command=userdetail&email="+userEmail, response);
+			}		
+		}
+		//승인 대기중인 글 -> status = 0 , 승인 거절된 글 -> status = 2
+		else if(command.equals("waitList")) {
+			System.out.println("wait list 서블릿 실행 ! ");
+			String category = request.getParameter("category");
+			String pageNumParam = request.getParameter("pageNum");
+			String statusParam = request.getParameter("status");
+			
+			
+			System.out.println("카테고리 값 : " + category);
+			System.out.println("page 값 : " + pageNumParam);
+			System.out.println("status 값 : " + statusParam);
+			
+			int status = 0;
+			if(statusParam == null) {
+				status = 1;
+			}else {
+				status = Integer.parseInt(statusParam);
+			}
+			System.out.println("status 값 : " + status);
+			int pageNum = 0;
+			if(pageNumParam == null) {
+				pageNum = 1;
+			}else {
+				pageNum = Integer.parseInt(pageNumParam);
+			}
+			if(category==null) {
+				category="매장";
+			}
+			
+			//status를 보내야함
+			List<totalBoardDto> totalList = adminbiz.waitListService(pageNum, category, status);
+			pagingDto paging = adminbiz.waitListPaging(pageNum, category, status);
+			
+			request.setAttribute("totalList", totalList);
+			request.setAttribute("paging", paging);
+			request.setAttribute("category", category);
+			request.setAttribute("status", status);
+			dispatch("adminWaitboard.jsp", request, response);
+			
+			
+		}
+	
 		
 	}
+				
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

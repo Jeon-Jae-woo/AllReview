@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
@@ -34,6 +35,19 @@
 	}
 	
 </style>
+<script type="text/javascript">
+	window.onload = function(){
+		var selectedData = '<c:out value="${category}"/>';
+		console.log(selectedData);
+		var selectBox = document.getElementById("category");
+		for(var i=0; i<selectBox.length;i++){
+			if(selectBox[i].value==selectedData){
+				selectBox[i].selected=true;
+			}
+		}
+	}
+</script>
+
 </head>
 <body>
 	<%@ include file="../Fix/header.jsp" %>
@@ -49,14 +63,14 @@
     			<br>
     			<h4>회원 관리</h4>
       				<ul class="nav">
-				        <li class="side"><a href="adminUserlist.jsp">회원 목록</a></li>
-				        <li class="side"><a href="adminList.jsp">관리자 목록</a></li>
+				        <li class="side"><a href="adminController?command=userList">회원 목록</a></li>
+				        <li class="side"><a href="adminController?command=userList&adminCheck=true">관리자 목록</a></li>
       				</ul>
       		
       			<h4>게시판 글 처리</h4>
       			     <ul class="nav">
-				        <li class="side"><a href="adminWaitboard.jsp">승인 대기중인 글</a></li>
-				        <li class="side"><a href="adminRefusalboard.jsp">승인 거절된 글</a></li>
+				        <li class="side"><a href="adminController?command=waitList&status=0">승인 대기중인 글</a></li>
+				        <li class="side"><a href="adminController?command=waitList&status=2">승인 거절된 글</a></li>
       				</ul>
       			
       			<h4>공지사항</h4>
@@ -75,8 +89,15 @@
 		<div class="container col-sm-6 text-center" id="adminpage_div2">
 			<!-- 제목으로 글 검색  -->
 			<form class="navbar-form text-center" role="search">
+				<input type="hidden" name="command" value="waitList">
+				<input type="hidden" name="status" value="${status}">
         		<div class="form-group">
-          			<input type="text" class="form-control" placeholder="제목">
+          			<select class="form-control" name="category" id="category">
+    					<option value="매장">매장</option>
+    					<option value="온라인">온라인 쇼핑</option>
+    					<option value="영화">영화</option>
+    					<option value="책">책</option>
+  					</select>
         		</div>
         		<button type="submit" class="btn btn-default">검색</button>
       		</form>
@@ -90,44 +111,54 @@
 					</tr>
 				</thead>
 				<tbody>
-				<!-- 기능 구현시에 변경 -->
-					<tr>
-						<td>온라인 쇼핑</td>
-						<td><a>무언가를샀습니다</a></td>
-						<td>2021-5-12</td>
-					</tr>
-					<tr>
-						<td>온라인 쇼핑</td>
-						<td><a>무언가를샀습니다</a></td>
-						<td>2021-5-12</td>
-					</tr>
-					<tr>
-						<td>온라인 쇼핑</td>
-						<td><a>무언가를샀습니다</a></td>
-						<td>2021-5-12</td>
-					</tr>
+					<c:choose>
+						<c:when test="${empty totalList }">
+							<tr>
+								<td colspan="4">작성된 글이 존재하지 않습니다</td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="list" items="${totalList}">
+								<tr>
+									<td>${list.categoryName }</td>
+									<td>${list.title }</td>
+									<td>${list.createAt }</td>
+								</tr>
+								
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 				</tbody>
 			</table>
 			<hr>
 			<!-- pagination 처리 필요  -->
 			<nav class="pull-bottom">
-			  <ul class="pagination">
-			    <li>
-			      <a href="#" aria-label="Previous">
-			        <span aria-hidden="true">&laquo;</span>
-			      </a>
-			    </li>
-			    <li><a href="#">1</a></li>
-			    <li><a href="#">2</a></li>
-			    <li><a href="#">3</a></li>
-			    <li><a href="#">4</a></li>
-			    <li><a href="#">5</a></li>
-			    <li>
-			      <a href="#" aria-label="Next">
-			        <span aria-hidden="true">&raquo;</span>
-			      </a>
-			    </li>
-			  </ul>
+			<c:set var="pageNum" value="${paging.pageNum }"/>
+			<c:set var="startPage" value="${paging.startPage}"/>
+			<c:set var="endPage" value="${paging.endPage}"/>
+			<c:set var="totalPage" value="${paging.totalPage}"/>
+			<c:set var="itemCount" value="${paging.itemCount}"/>
+			<c:set var="newStatus" value="${status}"/>
+				<ul class="pagination">
+					<li>
+			      		<a href="adminController?command=waitList&pageNum=1&category=${category}&status=${newStatus}" aria-label="Previous">
+			        	<span aria-hidden="true">&laquo;</span>
+			      		</a>
+			    	</li>
+					<c:forEach var="item" varStatus="status" begin="${ startPage }" end="${ endPage }" step="1">
+                		<c:if test="${ pageNum == item }">
+                    		<li><a href="adminController?command=waitList&pageNum=1&category=${category}&status=${newStatus}">${ item }</a></li>
+                		</c:if>
+                		<c:if test="${ pageNum != item }">
+		 					<li><a href="adminController?command=waitList&pageNum=${ item }&category=${category}&status=${newStatus}">${ item }</a></li>
+                		</c:if>
+            		</c:forEach>
+            		<li>
+			      		<a href="adminController?command=waitList&pageNum=${totalPage}&category=${category}&status=${newStatus}" aria-label="Next">
+			        	<span aria-hidden="true">&raquo;</span>
+			      		</a>
+			    	</li>
+				</ul>
 			</nav>
 		</div>
 		</div>

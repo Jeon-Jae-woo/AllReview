@@ -34,8 +34,6 @@ public interface userBiz {
 	public pagingDto writeListPaging(String nickname, int pageNum, String category);
 
 	
-	//admin 권한 부여
-	public int adminLevelUpdateService(String email, int levelNo);
 	
 	
 }
