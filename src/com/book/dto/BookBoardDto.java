@@ -12,10 +12,13 @@ public class BookBoardDto {
 	private Date creatat;
 	private Date updateat;
 	private int bdelete;
+	private String book_type_name;
+	
 	public BookBoardDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	//쓰지마셈
 	public BookBoardDto(int book_id, int book_type, String book_title, String writer, String publisher, String book_img,
 			Date creatat, Date updateat, int bdelete) {
 		super();
@@ -84,7 +87,12 @@ public class BookBoardDto {
 		this.bdelete = bdelete;
 	}
 	
-	
+	public String getBook_type_name() {
+		return book_type_name;
+	}
+	public void setBook_type_name(String book_type_name) {
+		this.book_type_name = book_type_name;
+	}
 	
 	
 	

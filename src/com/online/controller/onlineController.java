@@ -58,10 +58,10 @@ public class onlineController extends HttpServlet {
 			}
 			
 			List<onlineDto> list = biz.selectListCateService(category_id, pageNum);
-			
+			System.out.println("list size : " + list.size());
 			pagingDto paging = biz.OnlineListPaging(pageNum, category_id);
-			String category_name = list.get(0).getCategory_name();
 			
+			String category_name = biz.categoryNameService(category_id);
 			
 			request.setAttribute("paging", paging);
 			request.setAttribute("list", list);
@@ -153,6 +153,7 @@ public class onlineController extends HttpServlet {
 			if(session.getAttribute("email") == null) {
 				jsResponse("로그인이 되어있지 않습니다", "index.jsp", response);
 			}
+			
 			int category_id = Integer.parseInt(request.getParameter("category_id"));
 			String category_name = request.getParameter("category_name");
 			

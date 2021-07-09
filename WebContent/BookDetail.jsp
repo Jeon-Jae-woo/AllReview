@@ -52,9 +52,28 @@
 	<textarea name="detail" cols="40" rows="20"></textarea><br>
 	</div>
 	<button>목록보기</button>
-	
+
+	</div>
+	<div class="container"style="border:1px solid black">
+	${dto.review_id }
+	<br>
+	${dto.review_title }
+	<br>
+	${dto.review_content }
+	<br>
+	${dto.nickname }
+	<br>
+	${dto.book_id }
+	<br>
+	${dto.review_r_num }
+	<br>
+	${dto.review_v_num }
+	<br>
+	${dto.rcreateat }
 	</div>
 	
+	<input type="button" class="btn" value="삭제" onclick="location.href='bookController?command=reviewDelete&book_id=${dto.book_id}&review_id=${dto.review_id}'">
+	<input id="list" type="button" value="수정" onclick="location='bookController?command=reviewUpdateForm&review_id=${dto.review_id}'">
 	<%@ include file="Fix/footer.jsp" %>
 	
 

@@ -30,6 +30,9 @@ public interface onlineDao {
 	//글 쓰기
 	String onlineWriteQuery ="INSERT INTO ONLINE_BOARD VALUES(ONLINE_BOARD_ID.NEXTVAL, ?,?,?,?,?,?,?,?,SYSDATE,SYSDATE,0,0,0,0)";
 	
+	//카테고리 이름 조회
+	String cateogryNameQuery = "SELECT CATEGORY_NAME FROM ONLINE_CATEGORY WHERE CATEGORY_ID=?";
+	
 	//카테고리별 리스트 조회
 	public List<onlineDto> selectListCate(Connection con, int category_id, int pageNum);
 	public int OnlineRowCount(int category);
@@ -46,6 +49,8 @@ public interface onlineDao {
 	//글 쓰기
 	public int insertOnlineBoard(Connection con, onlineDto dto);
 	
-	/*카테고리 select*/
+	
+	//카테고리 이름 조회 
+	public String findCategoryName(int category_id);
 
 }

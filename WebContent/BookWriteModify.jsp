@@ -38,32 +38,30 @@
 	
 	</section>
 	
+		<div class="container"style="border:1px solid black">
+	</div>
+	
 	<br>
-	<h2>리뷰등록</h2>
+	<h2>리뷰수정</h2>
 	<form action="bookController" method="post">
- 		<input type="hidden" name="command" value="reviewWrite">
- 		<input type="hidden" name="book_id" value="${book_id }">
+ 		<input type="hidden" name="command" value="reviewUpdate">
+ 		<input type="hidden" name="review_id" value="${dto.review_id }">
 		<table border="1">
 		<tr>
 			<th>작성자</th>
-			<td><input type="text" name="writer" value="${nickname }"></td>
+			<td><input type="text" name="nickname" value="${dto.nickname}"></td>
 		</tr>
 		<tr>
-			<th>제목</th>
-			<td><input type="text" name="title"></td>
+			<th>리뷰 제목</th>
+			<td><input type="text" name="title" value="${dto.review_title }" ></td>
 		</tr>
-		
+		<tr>
+			<th>작성일</th>
+			<td><input type="text" name="date" value=${dto.rcreateat }></td>
+		</tr>
 		<tr>
 			<th>내용</th>
-			<td><textarea rows="10" cols="60" name="content"></textarea></td>
-		</tr>
-		<tr>
-		<th>이미지</th>
-		<td><input type="text" name="review_img"><td>
-		</tr>
-		<tr>
-		<th>평점</th>
-		<td><input type="text" name="book_grade"><td>
+			<td><textarea rows="10" cols="60" name="content">${dto.review_content }</textarea></td>
 		</tr>
 		
 			
@@ -72,8 +70,8 @@
 		
 		
 			<td colspan="2">
-				<input type="submit" value="등록">
-				<input type="button" value="목록" onclick="location.href='BookImfo.jsp'">
+				<input type="submit" value="수정">
+				<input type="button" value="취소" onclick="location.href='BookImfo.jsp'">
 				
 			</td>
 		</tr>
