@@ -74,4 +74,10 @@ public class onlineBizImpl implements onlineBiz {
 		int result = dao.insertOnlineBoard(con, dto);
 		return result;
 	}
+
+	@Override
+	public String categoryNameService(int category_id) {
+		String category_name = dao.findCategoryName(category_id);
+		return category_name;
+	}
 }

@@ -25,4 +25,7 @@ public interface onlineBiz {
 	//글 쓰기
 	public int insertOnlineService(onlineDto dto);
 	
+	//카테고리 이름 조회
+	public String categoryNameService(int category_id);
+	
 }

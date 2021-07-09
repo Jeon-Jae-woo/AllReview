@@ -238,6 +238,36 @@ public class onlineDaoImpl implements onlineDao {
 		
 		return result;
 	}
+
+	//카테고리 이름 조회
+	@Override
+	public String findCategoryName(int category_id) {
+		Connection con =getConnection();
+		PreparedStatement pstm = null;
+		String category_name = "";
+		ResultSet rs = null;
+		
+		try {
+			pstm = con.prepareStatement(cateogryNameQuery);
+			pstm.setInt(1, category_id);
+			
+			rs = pstm.executeQuery();
+			
+			while(rs.next()) {
+				category_name = rs.getString(1);
+			}
+
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstm);
+			close(con);
+		}
+		
+		return category_name;
+	}
 	
 
 }
