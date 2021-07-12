@@ -133,6 +133,7 @@ public class movieController extends HttpServlet {
 				jsResponse("로그인이 되어있지 않습니다", "index.jsp", response);
 			}
 			
+			//파일 처리
 			String realFolder="";
 			String saveFolder = "resources/uploadImage";		//사진을 저장할 경로
 			String encType = "utf-8";				//변환형식
@@ -151,7 +152,7 @@ public class movieController extends HttpServlet {
 			
 			System.out.println("file1 + " + receipt);
 			System.out.println("file2 + " + review_img);
-			
+			//파일 처리 끝
 			
 			String nickname = (String)session.getAttribute("nickname");
 			System.out.println("닉네임  : " + nickname);
@@ -169,8 +170,8 @@ public class movieController extends HttpServlet {
 			dto.setReview_title(title);
 			dto.setReview_content(content);
 			dto.setMovie_grade(moviegrade);
-			dto.setReceipt(receipt);
-			dto.setReview_img(review_img);
+			dto.setReceipt(receipt); // 이미지 세팅
+			dto.setReview_img(review_img); // 이미지 세팅
 			
 			int result = biz.ReviewInsertService(dto);
 			
