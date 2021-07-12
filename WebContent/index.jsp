@@ -26,6 +26,9 @@
 	
 	<a href="bookController?command=bookList">책</a>
 
+	
+
+
 	<%@ include file="Fix/footer.jsp" %>
 </body>
 </html>

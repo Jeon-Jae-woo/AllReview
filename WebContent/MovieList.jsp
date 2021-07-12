@@ -270,6 +270,7 @@ text-align: center;
 			<c:set var="totalPage" value="${paging.totalPage}"/>
 			<c:set var="itemCount" value="${paging.itemCount}"/>
 				<ul class="pagination">
+					
 					<li>
 			      		<a href="movieController?command=detail&movie_id=${movie_id}&pageNum=1" aria-label="Previous">
 			        	<span aria-hidden="true">&laquo;</span>
@@ -289,6 +290,7 @@ text-align: center;
 			      		</a>
 			    	</li>
 				</ul>
+				
 			
 			</nav>
 			   </div>
