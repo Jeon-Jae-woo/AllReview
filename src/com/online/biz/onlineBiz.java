@@ -19,7 +19,7 @@ public interface onlineBiz {
 	//게시글 수정
 	public int updateOnlineService(onlineDto dto);
 	
-	//게시글 사제
+	//게시글 삭제
 	public int deleteOnlineService(int board_id, String nickname);
 	
 	//글 쓰기
@@ -27,5 +27,6 @@ public interface onlineBiz {
 	
 	//카테고리 이름 조회
 	public String categoryNameService(int category_id);
+	
 	
 }

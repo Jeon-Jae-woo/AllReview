@@ -16,12 +16,13 @@ height: 300px;
 
 }
 
-#secmain{
+/* #secmain{
 border: 1px red dotted;
 padding-top:20px;
 height: 900px;
 
-}
+
+} */
 
 .catemain{
 margin-left: 30px;
@@ -92,14 +93,188 @@ font-size: 20px;
 font-size: 30px;
 }
 
+
+.categorybox{
+	border: 1px solid gray;
+	height: 260px;
+	background-image: url("./resources/Image/background02.jpg");
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: cover;
+}
+#nav{
+
+   left: 0px;
+   right:0px;
+   height: 100px;
+
+   }
+#nav ul li{
+	list-style: none;
+	display: inline;
+	position: relative;
+	padding: 0;
+	line-height:40px;
+	text-align:center;
+	float: left;
+	left: 9%;
+	top: 25px;
+	width: 20%;
+	color: white;
+	font-weight: bold;
+	font-size: 15px;
+   }
+
+#nav ul li:hover{
+	color:gray;
+   }
+#subcategorybox{
+   /*border:1px dashed red;*/
+ height: 100px;
+	position: relative;
+	top: 20px;
+}
+#online_sub{
+   display: none;
+}
+#movie_sub{
+   display: none;
+}
+#shop_sub{
+   display: none;
+}
+#book_sub{
+   display: none;
+}
+
+#subcategory1 ul li{
+border-inline: 1px solid lightgray;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.4 );
+	list-style: none;
+	position: relative;
+	padding: 0;
+	line-height:40px;
+	text-align:center;
+	font-weight: bold;
+	color: black;
+	float: left;
+	top: 10px;
+	left: 4%;
+	width: 15%;
+}
+
+#subcategory1 ul li:hover{
+  color:gray;
+}
+
+/* .containe{
+	position: relative;
+	left: 5%;
+	top: 60px;
+	padding: 5px;
+	width: 67%;
+	height: 720px;
+	
+} */
+
+
 .mainbox{
-width: 200px;
-height: 250px;
-border: 1px red dotted;
-display: inline-block;
+	width: 220px;
+	height: 380px;
+	border: 1px gray groove;
+	display: inline-block;
+	margin: 20px;
+	padding: 20px;
+}
+
+.section{
+	border:none;
+	/* display : inline-block; */
+	width: 70%;
+	height: 60%;
+	position: relative;
+	left:5%;
+	top: 100px;
+}
+
+/* .container{
+border:1px dashed red;
+width: 70%;
+padding:5px;
+position: relative;
+
+} */
+
+.consub{
+border:none;
+margin : 1px;
+padding : 1px;
+width: 100%;
+text-align: center;
+}
+
+.imgbox{
+height: 160px;
+overflow:hidden;
+margin:0 auto;
+}
+
+.img{
+  width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.wrtbtn{
+	width:120px;
+	height: 35px;
+	position: absolute;
+	right: 25%;
+	transform: translateX(-25%);
+	font-size: 18px;
+	margin-top: 37px;
+   border: 1px solid skyblue;
+    background-color: rgba(0,0,0,0);
+    color: skyblue;
+    padding: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.wrtbtn:hover{
+   color:white;
+    background-color:skyblue;
+}
+
+.contentbox{
+padding: 2em 2em; margin: 2em 10px; font-weight: 
+bold; color: #565656; background: #E4FCFF; 
+box-shadow: 0px 0px 0px 10px #E4FCFF; border: solid 2px skyblue; border-radius: 8px;
 
 }
 
+.titlebox{
+padding: .43em 0em .35em .7em; margin: 2em 0; font-weight: bold; 
+color: #232323; background: #E4FCFF; border-left: solid 10px #1DC1D6; border: skyblue;
+}
+
+.autobox{
+padding: .43em 0em .35em .7em; margin: 2em 0; 
+font-weight: bold; color: #232323; 
+background: #F8E8FF; border-left: solid 10px #8A66AE;
+}
+
+#navv{
+position: absolute;
+right: 51.5%;
+transform: translateX(-51.5%);
+}
+
+.alink{
+text-decoration: none; text-shadow: 0 0 24px; 
+}
 
 </style>
 <!-- ------------------------------------------------------------------------------ -->
@@ -108,7 +283,27 @@ display: inline-block;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-
+$(function(){
+	   $("#online").click(function(){
+	      $("#online_sub1").toggle();
+	      $("#online_sub2").toggle();
+	   });
+	   
+	   $("#moive").click(function(){
+	      $("#movie_sub").toggle();
+	      
+	   });
+	   
+	   $("#shop").click(function(){
+	      $("#shop_sub").toggle();
+	      
+	   });
+	   
+	   $("#book").click(function(){
+	      $("#book_sub").toggle();
+	      
+	   });
+	}); 
 
 
 </script>
@@ -116,161 +311,116 @@ display: inline-block;
 </head>
 <body>
 	<!-- Navigation -->
-		<!-- 임시 index -->
 	<%@ include file="Fix/header.jsp" %>
 	
 	<!-- Header -->
 	<header>
-		<div class="nmdiv"> <!-- 최상단 카테고리4개, 온라인쇼핑카테고리12개 --> <!-- li안에 div 불가 -->
-			<div>
-				<ul id="mainca">
-					<li id="online">
-					<!-- 클릭시 현재탭에서 해당 하위카테고리의 10개이미지 노출 -->
-						<strong>온라인쇼핑</strong>
-						<ul id="subca1">
-							<li>패션</li>
-							<li>뷰티</li>
-							<li>식품</li>
-							<li>홈/생활용품</li>
-							<li>PC/디지털</li>
-							<li>가전</li>
-						</ul><br><br>
-						<ul id="subca2">
-							<li>출산/육아</li>
-							<li>의료/건강</li>
-							<li>문구/취미</li>
-							<li>스포츠/레저</li>
-							<li>반려동물용품</li>
-							<li>자동차</li>
-						</ul>
-					</li>
-					<li id="movie"><strong>영화</strong></li>
-					<li id="shop"><strong>매장</strong></li>
-					<li id="book"><strong>도서</strong></li>
-				</ul>
-			</div>
-		</div>
+	 <!-- 카테고리 박스  -->
+   <div class="categorybox">
+      <div id="nav">
+         <ul>
+               <li id="online">온라인 쇼핑</li>
+               <li id="moive" onclick="location.href='movieController?command=moiveListCate&movie_type=${dto.movie_type }'">영화</li>
+               <li id="shop">매장</li>
+               <li id="book">도서</li>
+            </ul>
+      </div>
+      <div id="subcategorybox">
+             <div id="subcategory1">
+                <ul id="online_sub1">  
+                   <li onclick="location.href='onlineController?command=list&category=1'">패션</li>
+                   <li onclick="location.href='onlineController?command=list&category=2'">뷰티</li>
+                   <li onclick="location.href='onlineController?command=list&category=3'">식품</li>
+                   <li onclick="location.href='onlineController?command=list&category=4'">홈/생활용품</li>
+                   <li onclick="location.href='onlineController?command=list&category=5'">PC/디지털</li>
+                   <li onclick="location.href='onlineController?command=list&category=6'">가전</li>
+                </ul>
+                <ul id="online_sub2">
+                   <li onclick="location.href='onlineController?command=list&category=7'">출산/육아</li>
+                   <li onclick="location.href='onlineController?command=list&category=8'">의료/건강</li>
+                   <li onclick="location.href='onlineController?command=list&category=9'">문구/취미</li>
+                   <li onclick="location.href='onlineController?command=list&category=10'">스포츠/레저</li>
+                   <li onclick="location.href='onlineController?command=list&category=11'">반려동물</li>
+                   <li onclick="location.href='onlineController?command=list&category=12'">자동차</li>
+                </ul>
+                <ul id="movie_sub">
+                   <c:choose>
+                  <c:when test="${empty moiveListCate }">
+                     <tr>
+                        <td colspan ="4">----작성된 글이 존재하지 않습니다----</td>
+                     </tr>
+                  </c:when>
+                  <c:otherwise>
+                     <c:forEach var="cate" items="${moiveListCate }">
+                         <li onclick="location.href='movieController?command=moiveListCate&category=${cate.movie_type}&pageNum=1'">${cate.movie_type_name }</li>
+                         </c:forEach>
+                  </c:otherwise>
+               </c:choose>
+                   
+                </ul>
+                <ul id="shop_sub">
+                <li onclick="">세부 카테고리1</li>
+                   <li onclick="">세부 카테고리2</li>
+                   <li onclick="">세부 카테고리3</li>
+                   <li onclick="">세부 카테고리4</li>
+                   <li onclick="">세부 카테고리5</li>
+                   <li onclick="">세부 카테고리6</li>
+                </ul>
+                <ul id="book_sub">
+                <li onclick="">세부 카테고리1</li>
+                   <li onclick="">세부 카테고리2</li>
+                   <li onclick="">세부 카테고리3</li>
+                   <li onclick="">세부 카테고리4</li>
+                   <li onclick="">세부 카테고리5</li>
+                   <li onclick="">세부 카테고리6</li>
+                </ul>
+             </div>
+       </div>
+    </div>
 	</header>
-	<!-- Section -->
-	<section>
-		<div id="secmain">
-			<form>
-				<a href="./board_main.jsp" class="catemain" style="text-decoration:none" >전체</a> 
-			<select id="cate_de" onchange="if(this.value) location.href=(this.value);" >
-					<optgroup label="카테고리 선택"> 
-					<option value="onlineController?command=list&category=1">패션</option>
-					<option value="onlineController?command=list&category=2">뷰티</option>
-					<option value="onlineController?command=list&category=3">식품</option>
-					<option value="onlineController?command=list&category=4">홈/생활용품</option>
-					<option value="onlineController?command=list&category=5">PC/디지털</option>
-					<option value="onlineController">가전</option>
-					<option value="onlineController">출산/육아</option>
-					<option value="onlineController">의료/건강</option>
-					<option value="onlineController">문구/취미</option>
-					<option value="onlineController">스포츠/레저</option>
-					<option value="onlineController">반려동물용품</option>
-					<option value="onlineController">자동차</option>
-					</optgroup>
-				</select>
-				<!-- 전체검색 -->
-				<input type="text" value="게시글 검색" id="search_all" onFocus="this.value=''; return true;">
-				<input type="button" value="검색" id="search_bt" onclick=""> 
-				
-				<!-- 추천,조회,최신순 버튼-->
-				<div id="lineup">
-					<ul>
-						<li id="recentli"><button id="recentbt" type="button" onclick="">최신순</button></li>
-						<li id="hitsli"><button id="hitsbt" type="button" onclick="">조회순</button></li>
-						<li id="recomdli"><button id="recomdbt" type="button" onclick="">추천순</button></li>
-					</ul>
+		<section class="section">
+			
+			<!-- <div class="container"> --> <!-- 10개 항목 노출 (사진+글제목) div추가 , size 정하기, 위아래 5개씩, wrapping 해야함 , div하나에 div를 3개넣어서 이미지, 제목등 , 추천조회 -->
+				<div class="consub">
+					<c:choose>
+						<c:when test="${empty list }">
+							<tr>
+								<td colspan ="5"><h2>-------------------작성된 글이 존재하지 않습니다-------------------</h2></td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="dto" items="${list }">
+								<div class="mainbox">
+								
+								<div class="imgbox">
+								<!--  <img class="img" src="${dto.add_product }"> -->
+								<img class="img" src="./resources/Image/icon01.jpg">
+								
+								</div>
+								<br>
+								<div class="sub2box">
+								<p>글 제목:  <a class="alink" href="onlineController?command=detail&board_id=${dto.online_board_id }">${dto.online_title }</a></p>
+								<p>작성자 : ${dto.nickname }</p>
+								<p>카테고리: ${dto.category_name }</p>
+								</div>
+								
+								<div class="sub3box">
+								조회:${dto.hits } &nbsp;
+								추천:${dto.recomd }
+								<p>평점:${dto.satavg }</p> 
+								</div>
+								
+							</div>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 				</div>
-			</form>
-	
-	
-			<table border="1" summary="게시판 목록">
-
-           <caption>전체 글 목록</caption>
-
-           <colgroup>
-               <col width="80" />
-               <col width="150" />
-               <col width="500" />
-               <col width="130" />
-               <col width="130" />
-               <col width="80" />
-               <col width="80" />
-               <col width="80" />
-           </colgroup>  
-
-           <thead>
-               <tr>
-                    
-                    <th>카테고리</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>추천</th>
-                    <th>조회</th>
-                    <th>평점</th>
-               </tr>
-           </thead>
-
-           <tbody>
-              <tr class="tbody">
-              <c:choose>
-              	<c:when test="${empty list }">
-              		<tr>
-              			<td colspan="8">----------------작성된 글이 존재하지 않습니다----------------</td>
-              		</tr>              
-              	</c:when>
-              	<c:otherwise>
-              		<c:forEach var="dto" items="${list }">
-              			<tr>
-              				
-              				<td>${dto.category_name }</td>
-              				<td><a href="onlineController?command=detail&board_id=${dto.online_board_id }">${dto.online_title }</a></td>
-              				<td>${dto.nickname}</td>
-              				<td>${dto.recomd }</td>
-              				<td>${dto.hits }</td>
-              				<td>${dto.satavg }</td>
-              			</tr>
-              		</c:forEach>
-              	</c:otherwise>
-              	
-              </c:choose>
-              </tr>
-           </tbody>
-
-           <tfoot>
-               <tr>
-                    <td align="center" colspan="8">1</td>
-               </tr>
-
-           </tfoot>
-
-       </table>
-	
-	
-	
-	
-			<div> <!-- 10개 항목 노출 (사진+글제목) div추가 , size 정하기, 위아래 5개씩, wrapping 해야함  -->
-				<div class="container">
-					<div class="mainbox"></div>
-					<div class="mainbox"></div>
-					<div class="mainbox"></div>
-					<div class="mainbox"></div>
-					<div class="mainbox"></div>
-					<div class="mainbox"></div>
-					<div class="mainbox"></div>
-					<div class="mainbox"></div>
-					<div class="mainbox"></div>
-					<div class="mainbox"></div>
-				</div>
-			</div>
-		</div>
+			<!-- </div> -->
 	</section>
-	
-	<!-- 1,2,3,4,5 페이지 이동 기능 jsp 코드 들어가야함 -->
-				<nav class="pull-bottom">
+	<br><br><br>
+	<input type="button" class="wrtbtn" value="글 작성하기" onclick="location.href='onlineController?command=writeForm&category_id=${category_id}&category_name=${category_name }'"><br>
+	<!-- 페이징기능 -->
+				<nav class="pull-bottom" id="navv">
 			<c:set var="pageNum" value="${paging.pageNum }"/>
 			<c:set var="startPage" value="${paging.startPage}"/>
 			<c:set var="endPage" value="${paging.endPage}"/>
@@ -299,9 +449,11 @@ display: inline-block;
 			
 			</nav>
 	
-	<hr>
+	<br><br><br><br>
 	
-	<input type="button" class="btn" value="글쓰기" onclick="location.href='onlineController?command=writeForm&category_id=${category_id}&category_name=${category_name }'">
+	<%@ include file="OnlineTop5.jsp" %>
+	
+
 	<!-- Footer -->
 		<%@ include file="Fix/footer.jsp" %>
 </body>

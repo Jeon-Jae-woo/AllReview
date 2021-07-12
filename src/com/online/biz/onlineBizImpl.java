@@ -1,9 +1,7 @@
 package com.online.biz;
 
-import static common.JDBCTemplate.close;
-import static common.JDBCTemplate.commit;
-import static common.JDBCTemplate.getConnection;
-import static common.JDBCTemplate.rollback;
+import static common.JDBCTemplate.*;
+
 
 import java.sql.Connection;
 import java.util.List;
@@ -77,7 +75,7 @@ public class onlineBizImpl implements onlineBiz {
 
 	@Override
 	public String categoryNameService(int category_id) {
-		String category_name = dao.findCategoryName(category_id);
-		return category_name;
-	}
+		  String category_name = dao.findCategoryName(category_id);
+	      return category_name;
+	   }
 }
