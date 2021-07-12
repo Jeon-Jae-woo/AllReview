@@ -80,9 +80,10 @@ public class MovieBizImple implements movieBiz{
 	public pagingDto movieListPaging(int pageNum, int category) {
 		pagingDto paging = new pagingDto();
 		paging.setPageNum(pageNum);
+		paging.setItemCount(8);
 		int size = 0;
 		size = movievBoardDao.MovieRowCount(category);
-
+		
 		paging.setTotalCount(size);
 		paging.pagination();
 		
@@ -103,6 +104,7 @@ public class MovieBizImple implements movieBiz{
 	public pagingDto movieReviewPaging(int pageNum, int movie_id) {
 		pagingDto paging = new pagingDto();
 		paging.setPageNum(pageNum);
+		paging.setItemCount(5);
 		int size = 0;
 		size = movievBoardDao.MovieRowCount(movie_id);
 
@@ -149,7 +151,4 @@ public class MovieBizImple implements movieBiz{
 		return result;
 	}
 
-
-
-	
 }

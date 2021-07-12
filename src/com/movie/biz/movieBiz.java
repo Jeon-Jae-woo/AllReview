@@ -16,6 +16,8 @@ public interface movieBiz {
 	
 	//영화목록 조회
 	public List<MovieBoardDto> movieselectAll(int category, int pageNum);
+	
+	//페이징
 	public pagingDto movieListPaging(int pageNum, int category);
 	
 	//영화 리뷰 리스트
@@ -24,8 +26,8 @@ public interface movieBiz {
 	
 	//영화등록 버튼 및 작성
 	public boolean movieinsert(MovieBoardDto dto);
-	
 	//영화등록한거 삭제
+	
 	
 	
 	//-----------------2페이지 영화 기본정보및 리뷰리스트----------

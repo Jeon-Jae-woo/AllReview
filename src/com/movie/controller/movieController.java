@@ -76,12 +76,13 @@ public class movieController extends HttpServlet {
 			request.setAttribute("category", category);
 			request.setAttribute("category_name", category_name);
 			 
-			 dispatch("MovieMain.jsp", request, response);
-			 
+			dispatch("MovieMain.jsp", request, response);
 		}
+		
+		//리뷰 리스트 조회
 		else if(command.equals("detail")){
 			int movie_id = Integer.parseInt(request.getParameter("movie_id"));
-			
+			String category_name = request.getParameter("category_name");
 			String pageNumParam = request.getParameter("pageNum");
 
 			int pageNum = 0;
@@ -94,28 +95,34 @@ public class movieController extends HttpServlet {
 			MovieBoardDto dto = biz.movieselectOne(movie_id);
 			
 			List<MovieReviewDto> list = biz.reviewListService(movie_id, pageNum);
+			
+			List<MovieCategoryDto> moiveListCate = biz.categoryselectAll();
+			
 			pagingDto paging = biz.movieReviewPaging(pageNum, movie_id);
 			
 			request.setAttribute("paging", paging);
 			request.setAttribute("totalList", list);	
 			request.setAttribute("dto", dto);
+			request.setAttribute("category_name", category_name);
 			request.setAttribute("movie_id", movie_id);
-			
+			request.setAttribute("moiveListCate", moiveListCate);
 			dispatch("MovieList.jsp", request, response);
-			
-		}else if(command.equals("reviewWriteForm")) {
+		}
+		//리뷰 글작성
+		else if(command.equals("reviewWriteForm")) {
 			int movie_id = Integer.parseInt(request.getParameter("movie_id"));
 			HttpSession session = request.getSession();
 			if(session.getAttribute("email") == null) {
 				jsResponse("로그인이 되어있지 않습니다", "index.jsp", response);
 			}
+			List<MovieCategoryDto> moiveListCate = biz.categoryselectAll();
 			
+			request.setAttribute("moiveListCate", moiveListCate);
 			request.setAttribute("movie_id", movie_id);
+			System.out.println("reviewWriteForm"+movie_id);
 			dispatch("MovieWrite.jsp", request, response);
-			
-			
 		}
-		//리뷰 글 작성
+		//리뷰 글 작성 세션
 		else if(command.equals("reviewWrite")) {
 			HttpSession session = request.getSession();
 			if(session.getAttribute("email") == null) {
@@ -156,16 +163,28 @@ public class movieController extends HttpServlet {
 		else if(command.equals("reviewDetail")) {
 			int review_id = Integer.parseInt(request.getParameter("review_id"));
 			
+			List<MovieCategoryDto> moiveListCate = biz.categoryselectAll();
+			
 			MovieReviewDto dto = biz.reviewSelectService(review_id);
 			
+			request.setAttribute("moiveListCate", moiveListCate);
+			
 			request.setAttribute("dto", dto);
-			dispatch("MovieDetail.jsp", request, response);
-		}else if(command.equals("reviewUpdateForm")) {
+			dispatch("MovieDetail.jsp", request, response);	
+		}
+		//리뷰 수정
+		else if(command.equals("reviewUpdateForm")) {
 			int review_id = Integer.parseInt(request.getParameter("review_id"));
+			
 			MovieReviewDto dto = biz.reviewSelectService(review_id);
+			List<MovieCategoryDto> moiveListCate = biz.categoryselectAll();
+			
+			request.setAttribute("moiveListCate", moiveListCate);
 			request.setAttribute("dto", dto);
+			
 			dispatch("MovieUpdate.jsp", request, response);
 		}
+		//리뷰 수정 로그인 세션 
 		else if(command.equals("reviewUpdate")) {
 			
 			HttpSession session = request.getSession();
@@ -217,9 +236,14 @@ public class movieController extends HttpServlet {
 			
 		}
 
-		
+		//영화 등록
 		else if(command.equals("moviecreate")) {
-			response.sendRedirect("MovieCreate.jsp");
+			 
+			List<MovieCategoryDto> moiveListCate = biz.categoryselectAll();
+
+			request.setAttribute("moiveListCate", moiveListCate);
+			
+			dispatch("MovieCreate.jsp", request, response);
 			
 		
 		}
