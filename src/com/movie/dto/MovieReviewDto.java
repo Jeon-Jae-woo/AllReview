@@ -18,7 +18,9 @@ public class MovieReviewDto {
 	private int delete_n;
 	private Date creatat;
 	private Date updateat;
+	private String receipt;
 	
+
 	//기본생성자
 	public MovieReviewDto() {
 		super();
@@ -27,7 +29,7 @@ public class MovieReviewDto {
 	//매개변수 생성자
 	public MovieReviewDto(int review_id, String nickname, int movie_id, String review_title, String review_content,
 			int movie_grade, int review_r_num, int review_v_num, String review_img,int status_no, int delete_n, 
-			Date creatat, Date updateat) {
+			Date creatat, Date updateat, String receipt) {
 		super();
 		this.review_id = review_id;
 		this.nickname = nickname;
@@ -42,6 +44,7 @@ public class MovieReviewDto {
 		this.delete_n = delete_n;
 		this.creatat = creatat;
 		this.updateat = updateat;
+		this.receipt = receipt;
 	}
 
 	//getter&setter
@@ -149,7 +152,13 @@ public class MovieReviewDto {
 		this.updateat = updateat;
 	}
 
-	
+	public String getReceipt() {
+		return receipt;
+	}
+
+	public void setReceipt(String receipt) {
+		this.receipt = receipt;
+	}
 	
 	
 	

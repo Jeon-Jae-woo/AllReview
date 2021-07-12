@@ -81,6 +81,10 @@
 	
 }
 #wrap{
+<<<<<<< HEAD
+=======
+	border: 1px dashed red;
+>>>>>>> e9bb12645997fe9b2620c90eabbe1aa0f0f62add
 	position: relative;
 	width: 95%;
 	height: 660px;
@@ -205,9 +209,9 @@ body{
 	<div class="categorybox">
 		<div id="nav">
 				<ul>
-	            	<li id="online">온라인 쇼핑</li>
+	            	<li id="online" onclick="location.href='onlineController?command=list'">온라인 쇼핑</li>
 	            	<li id="moive" onclick="location.href='movieController?command=moiveListCate'">영화 </li>
-	            	<li id="shop" onclick="location.href='indexshoptest.jsp'">매장</li>
+	            	<li id="shop" onclick="location.href='shop.do?command=shoplist'">매장</li>
 	            	<li id="book">도서</li>
 	            </ul>
 	    </div>
@@ -281,8 +285,7 @@ body{
 	
 	<%-- <h1><%= session.getAttribute("level")  %></h1> --%>
 
-	<!-- footer -->
+	<a href='noticeTest.jsp'>공지테스트</a>
 	<%@ include file="Fix/footer.jsp" %>
-	
 </body>
 </html>

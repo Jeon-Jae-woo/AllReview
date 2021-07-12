@@ -8,5 +8,8 @@
 </head>
 <body>
 
+	<h1>${dto.title }</h1>
+	<img src="resources/uploadImage/${dto.imgName }" width="300" height="300">
+	<img src="resources/uploadImage/${dto.imgName2 }" width="300" height="300">
 </body>
 </html>

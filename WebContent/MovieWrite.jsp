@@ -307,8 +307,8 @@ body{
 	<!-- 리뷰(게시글) 작성 -->
 	<div>
 		<div class="totalbox">
-			<form action="movieController" method="post">
-				<input type="hidden" name="command" value="reviewWrite">
+			<form action="movieController?command=reviewWrite" method="post" enctype="multipart/form-data">
+				<!-- <input type="hidden" name="command" value="reviewWrite">-->
 				<input type="hidden" name="movie_id" value="${movie_id }">
 				<div class="titlebox">
 					<input type="text" name="reviewtitle" id="reviewtitle" placeholder="리뷰 제복을 입력하세요">
@@ -318,10 +318,10 @@ body{
 				</div>
 				<div class="bottombox">
 					<div class="imgupload">
-						이미지 첨부 : <input type="file" id="ex_file"> 
+						이미지 첨부 : <input type="file" id="ex_file" name="uploadImg"> 
 					</div>
 					<div class="reciptupload">
-						관람인증 첨부: <input type="file" id="ex_file"> 
+						관람인증 첨부: <input type="file" id="ex_file" name="receipt"> 
 					</div>
 					<div class="moviegrade">
 						영화평점 : <input type="radio" name="moviegrade" value="1">

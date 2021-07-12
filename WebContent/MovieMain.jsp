@@ -252,13 +252,13 @@ body{
 	<!-- 카테고리 박스  -->
 	<div class="categorybox">
 		<div id="nav">
-			<ul>
-            	<li id="online">온라인 쇼핑</li>
-            	<li id="moive" <%-- onclick="location.href='movieController?command=moiveListCate&movie_type=${dto.movie_type }'" --%>>영화</li>
-            	<li id="shop">매장</li>
-            	<li id="book">도서</li>
-            </ul>
-		</div>
+				<ul>
+	            	<li id="online">온라인 쇼핑</li>
+	            	<li id="moive" onclick="location.href='movieController?command=moiveListCate'">영화 </li>
+	            	<li id="shop" onclick="location.href='shop.do?command=shoplist'">매장</li>
+	            	<li id="book">도서</li>
+	            </ul>
+	    </div>
 		<div id="subcategorybox">
 	       	<div id="subcategory1">
 	       		<ul id="online_sub">

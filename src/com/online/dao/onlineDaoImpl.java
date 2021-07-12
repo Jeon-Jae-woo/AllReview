@@ -33,7 +33,7 @@ public class onlineDaoImpl implements onlineDao {
 		try {
 			pstm = con.prepareStatement(selectAllCate);
 			pstm.setInt(1, category_id);
-			pstm.setInt(2, endRow);
+			pstm.setInt(2, endRow+1);
 			pstm.setInt(3, startRow);
 			
 			res = pstm.executeQuery();
@@ -121,13 +121,13 @@ public class onlineDaoImpl implements onlineDao {
 				dto.setOnline_content(res.getString(5));
 				dto.setPrice_sat(res.getDouble(6));
 				dto.setProduct_sat(res.getDouble(7));
-				dto.setAdd_receipt(res.getInt(8)); //영수증
+				dto.setAdd_receipt(res.getString(8)); //영수증
 				dto.setCreateat(res.getDate(9));
 				dto.setStatus(res.getInt(10));
 				dto.setRecomd(res.getInt(11));
 				dto.setHits(res.getInt(12));
 				dto.setCategory_name(res.getString(13));
-				dto.setAdd_product(res.getInt(14)); // 상품사진
+				dto.setAdd_product(res.getString(14)); // 상품사진
 				dto.setSatavg();
 			}
 			
@@ -157,7 +157,7 @@ public class onlineDaoImpl implements onlineDao {
 			pstm.setString(2, dto.getOnline_content());
 			pstm.setDouble(3, dto.getPrice_sat());
 			pstm.setDouble(4, dto.getProduct_sat());
-			pstm.setInt(5, dto.getAdd_product()); //첨부 사진
+			pstm.setString(5, dto.getAdd_product()); //첨부 사진
 			pstm.setInt(6, dto.getOnline_board_id());
 			pstm.setString(7, dto.getNickname());
 			
@@ -220,8 +220,8 @@ public class onlineDaoImpl implements onlineDao {
 			pstm.setString(4, dto.getOnline_content());
 			pstm.setDouble(5, dto.getPrice_sat());
 			pstm.setDouble(6, dto.getProduct_sat());
-			pstm.setInt(7, dto.getAdd_receipt());
-			pstm.setInt(8, dto.getAdd_product());
+			pstm.setString(7, dto.getAdd_receipt());
+			pstm.setString(8, dto.getAdd_product());
 			
 			result = pstm.executeUpdate();
 			
@@ -239,35 +239,34 @@ public class onlineDaoImpl implements onlineDao {
 		return result;
 	}
 
-	//카테고리 이름 조회
 	@Override
 	public String findCategoryName(int category_id) {
-		Connection con =getConnection();
-		PreparedStatement pstm = null;
-		String category_name = "";
-		ResultSet rs = null;
-		
-		try {
-			pstm = con.prepareStatement(cateogryNameQuery);
-			pstm.setInt(1, category_id);
-			
-			rs = pstm.executeQuery();
-			
-			while(rs.next()) {
-				category_name = rs.getString(1);
-			}
+		   Connection con =getConnection();
+		      PreparedStatement pstm = null;
+		      String category_name = "";
+		      ResultSet rs = null;
+		      
+		      try {
+		         pstm = con.prepareStatement(cateogryNameQuery);
+		         pstm.setInt(1, category_id);
+		         
+		         rs = pstm.executeQuery();
+		         
+		         while(rs.next()) {
+		            category_name = rs.getString(1);
+		         }
 
-		} catch (SQLException e) {
-		
-			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstm);
-			close(con);
-		}
-		
-		return category_name;
-	}
-	
+		      } catch (SQLException e) {
+		      
+		         e.printStackTrace();
+		      } finally {
+		         close(rs);
+		         close(pstm);
+		         close(con);
+		      }
+		      
+		      return category_name;
+		   }
+
 
 }
