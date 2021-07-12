@@ -68,13 +68,16 @@
 		제목
 	</th>
 	<th width="65%">
-		[${catedto.cateName }] ${dto.title }
+		[${catedto.cateName }] ${dto.title }<br>
+		[작성자:${dto.nickname }]
 	</th>
 	<th width="10%">
-		작성일/수정일
+		작성일<br>
+		수정일
 	</th>
 	<th width="15%">
-		${dto.createat }/${dto.updateat }
+		${dto.createat }<br>
+		${dto.updateat }
 	</th>
 	</tr>
 	<tr>
