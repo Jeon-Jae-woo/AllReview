@@ -80,7 +80,7 @@
 	top: 90px;
 }
 #wrap{
-	
+	border: 1px dashed red;
 	position: relative;
 	width: 95%;
 	height: 660px;
@@ -179,7 +179,7 @@ top: 95%;
 	<div class="categorybox">
 		<div id="nav">
 				<ul>
-	            	<li id="online">온라인 쇼핑</li>
+	            	<li id="online" onclick="location.href='onlineController?command=list'">온라인 쇼핑</li>
 	            	<li id="moive" onclick="location.href='movieController?command=moiveListCate'">영화 </li>
 	            	<li id="shop" onclick="location.href='shop.do?command=shoplist'">매장</li>
 	            	<li id="book">도서</li>
@@ -257,6 +257,5 @@ top: 95%;
 
 	<!-- footer -->
 	<%@ include file="Fix/footer.jsp" %>
-	
 </body>
 </html>

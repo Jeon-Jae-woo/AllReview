@@ -58,9 +58,10 @@ public class onlineController extends HttpServlet {
 			}
 			
 			List<onlineDto> list = biz.selectListCateService(category_id, pageNum);
-			System.out.println("list size : " + list.size());
-			pagingDto paging = biz.OnlineListPaging(pageNum, category_id);
+			System.out.println("size:" + list.size());
 			
+			pagingDto paging = biz.OnlineListPaging(pageNum, category_id);
+			//String category_name = list.get(0).getCategory_name();
 			String category_name = biz.categoryNameService(category_id);
 			
 			request.setAttribute("paging", paging);
@@ -103,7 +104,7 @@ public class onlineController extends HttpServlet {
 			String content = request.getParameter("content");
 			double price_sat = Double.parseDouble(request.getParameter("price_sat"));
 			double product_sat = Double.parseDouble(request.getParameter("product_sat"));
-			int add_product = Integer.parseInt(request.getParameter("add_product"));
+			String add_product = request.getParameter("add_product");
 			
 			onlineDto dto = new onlineDto();
 			dto.setOnline_board_id(board_id);
@@ -153,7 +154,6 @@ public class onlineController extends HttpServlet {
 			if(session.getAttribute("email") == null) {
 				jsResponse("로그인이 되어있지 않습니다", "index.jsp", response);
 			}
-			
 			int category_id = Integer.parseInt(request.getParameter("category_id"));
 			String category_name = request.getParameter("category_name");
 			
@@ -176,12 +176,13 @@ public class onlineController extends HttpServlet {
 			//제목, 내용, 카테고리, 가격만족도, 상품만족도, 사진, 영수증, 닉네임
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
+			System.out.println("여기는 넘어간다.");
 			double price_sat = Double.parseDouble(request.getParameter("price_sat"));
 			double product_sat = Double.parseDouble(request.getParameter("product_sat"));
 			//상품 , 영수증 사진
-			int product_add = Integer.parseInt(request.getParameter("product_add"));
-			int receipt = Integer.parseInt(request.getParameter("receipt"));
-			
+			String product_add =request.getParameter("product_add");
+			String receipt = request.getParameter("receipt");
+		
 			onlineDto dto = new onlineDto();
 			
 			dto.setNickname(nickname);
