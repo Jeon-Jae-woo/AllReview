@@ -353,35 +353,40 @@ text-align: center;
 			</div>
 			
 			<!-- 페이징처리 -->
-			<div>
-				<nav class="pull-bottom">
-					<c:set var="pageNum" value="${paging.pageNum }"/>
-					<c:set var="startPage" value="${paging.startPage}"/>
-					<c:set var="endPage" value="${paging.endPage}"/>
-					<c:set var="totalPage" value="${paging.totalPage}"/>
-					<c:set var="itemCount" value="${paging.itemCount}"/>
-					<ul class="pagination">
-						<li>
-				      		<a href="movieController?command=detail&movie_id=${movie_id}&pageNum=1" aria-label="Previous">
-				        	<span aria-hidden="true">&laquo;</span>
-				      		</a>
-				    	</li>
-						<c:forEach var="item" varStatus="status" begin="${ startPage }" end="${ endPage }" step="1">
-	                		<c:if test="${ pageNum == item }">
-	                    		<li><a href="movieController?command=detail&movie_id=${movie_id}&pageNum=1">${ item }</a></li>
-	                		</c:if>
-	                		<c:if test="${ pageNum != item }">
-			 					<li><a href="movieController?command=detail&pageNum=${ item }&movie_id=${movie_id}">${ item }</a></li>
-	                		</c:if>
-	            		</c:forEach>
-	            		<li>
-				      		<a href="movieController?command=detail&pageNum=${totalPage}&movie_id=${movie_id}" aria-label="Next">
-				        	<span aria-hidden="true">&raquo;</span>
-				      		</a>
-				    	</li>
-					</ul>
+			<div class="page_wrap">
+			   <div class="page_nation">
+			     			<!-- 페이징처리 -->
+			<nav class="pull-bottom">
+			<c:set var="pageNum" value="${paging.pageNum }"/>
+			<c:set var="startPage" value="${paging.startPage}"/>
+			<c:set var="endPage" value="${paging.endPage}"/>
+			<c:set var="totalPage" value="${paging.totalPage}"/>
+			<c:set var="itemCount" value="${paging.itemCount}"/>
+				<ul class="pagination">
+					
+					<li>
+			      		<a href="movieController?command=detail&movie_id=${movie_id}&pageNum=1" aria-label="Previous">
+			        	<span aria-hidden="true">&laquo;</span>
+			      		</a>
+			    	</li>
+					<c:forEach var="item" varStatus="status" begin="${ startPage }" end="${ endPage }" step="1">
+                		<c:if test="${ pageNum == item }">
+                    		<li><a href="movieController?command=detail&movie_id=${movie_id}&pageNum=1">${ item }</a></li>
+                		</c:if>
+                		<c:if test="${ pageNum != item }">
+		 					<li><a href="movieController?command=detail&pageNum=${ item }&movie_id=${movie_id}">${ item }</a></li>
+                		</c:if>
+            		</c:forEach>
+            		<li>
+			      		<a href="movieController?command=detail&pageNum=${totalPage}&movie_id=${movie_id}" aria-label="Next">
+			        	<span aria-hidden="true">&raquo;</span>
+			      		</a>
+			    	</li>
+				</ul>
 				
-				</nav>
+			
+			</nav>
+			   </div>
 			</div>
 			
 		</div>

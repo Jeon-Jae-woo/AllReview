@@ -255,7 +255,7 @@ top: 95%;
 	
 	<%-- <h1><%= session.getAttribute("level")  %></h1> --%>
 
-	<!-- footer -->
+	<a href='noticeTest.jsp'>공지테스트</a>
 	<%@ include file="Fix/footer.jsp" %>
 </body>
 </html>

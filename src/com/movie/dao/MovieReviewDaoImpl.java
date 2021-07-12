@@ -26,7 +26,7 @@ public class MovieReviewDaoImpl implements MovieReviewDao{
 			System.out.println("04.query 실행 및 리턴");
 			
 			while(rs.next()) {
-				MovieReviewDto mrd = new MovieReviewDto(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getString(9), rs.getInt(10), rs.getInt(11),rs.getDate(12),rs.getDate(13));
+				MovieReviewDto mrd = new MovieReviewDto(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getString(9), rs.getInt(10), rs.getInt(11),rs.getDate(12),rs.getDate(13), rs.getString(14));
 				
 				res.add(mrd);
 			}
@@ -56,7 +56,7 @@ public class MovieReviewDaoImpl implements MovieReviewDao{
 			System.out.println("04.query 실행 및 리턴");
 			
 			if(rs.next()) {
-				res = new MovieReviewDto(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getString(9), rs.getInt(10), rs.getInt(11),rs.getDate(12),rs.getDate(13));
+				res = new MovieReviewDto(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getString(9), rs.getInt(10), rs.getInt(11),rs.getDate(12),rs.getDate(13), rs.getString(14));
 			}
 			
 		} catch (SQLException e) {
