@@ -27,11 +27,10 @@ public interface MovieBoardDao {
 	String reviewSelectOne = "SELECT review_id, nickname, movie_id, review_title, review_content, moive_grade, review_r_num, review_v_num, review_img, status_no, createat FROM MOVIE_REVIEW WHERE REVIEW_ID=?";
 	
 	//영화 리뷰 글 수정
-	String reviewUpdate = "UPDATE MOVIE_REVIEW SET REVIEW_TITLE=?, REVIEW_CONTENT=?, UPDATEAT=SYSDATE WHERE REVIEW_ID=? AND NICKNAME=? AND DELETE_N=0";
+	String reviewUpdate = "UPDATE MOVIE_REVIEW SET REVIEW_TITLE=?, REVIEW_CONTENT=?, MOIVE_GRADE=?, UPDATEAT=SYSDATE WHERE REVIEW_ID=? AND NICKNAME=? AND DELETE_N=0";
 	
 	//영화 리뷰 글 삭제
 	String reviewDelete = "UPDATE MOVIE_REVIEW SET DELETE_N=1 WHERE NICKNAME=? AND REVIEW_ID=?";
-	
 	
 	//영화등록
 	String movieinsertSql = "INSERT INTO MOVIE_BOARD VALUES(MOVIE_BOARDMOVIE_ID.NEXTVAL,?,?,?,?,?,?,SYSDATE,SYSDATE)";
@@ -39,15 +38,6 @@ public interface MovieBoardDao {
 	String movieupdateSql = "UPDATE MOVIE_BOARD SET MOVIE_TITLE=?, MOVIE_TYPE=?, DIRECTOR=?, ACTOR=?, MOVIE_IMG=? WHERE MOVIE_ID=?";
 	//영화 등록한거 삭제
 	String moviedeleteSql = "DELETE FROM MOVIE_BOARD WHERE MOVIE_ID=?";
-	
-
-	
-	public List<MovieBoardDto> movieselectAll(Connection con, int category, int pageNum);
-	public MovieBoardDto movieselectOne(Connection con, int movie_id);
-	public boolean movieinsert(Connection con, MovieBoardDto dto);
-	public boolean movieupdate(Connection con, MovieBoardDto dto);
-	public boolean moviedelete(Connection con, int movie_id);
-	public int MovieRowCount(int category);
 	
 	//리뷰 리스트
 	public List<MovieReviewDto> reviewList(Connection con, int movie_id, int pageNum);
@@ -62,4 +52,11 @@ public interface MovieBoardDao {
 	//리뷰 글 삭제
 	public int reviewDelete(Connection con, String nickname, int review_id);
 	
+	
+	public List<MovieBoardDto> movieselectAll(Connection con, int category, int pageNum);
+	public MovieBoardDto movieselectOne(Connection con, int movie_id);
+	public boolean movieinsert(Connection con, MovieBoardDto dto);
+	public boolean movieupdate(Connection con, MovieBoardDto dto);
+	public boolean moviedelete(Connection con, int movie_id);
+	public int MovieRowCount(int category);
 }

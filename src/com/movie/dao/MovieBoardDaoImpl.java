@@ -370,8 +370,9 @@ public class MovieBoardDaoImpl implements MovieBoardDao{
 			
 			pstm.setString(1, dto.getReview_title());
 			pstm.setString(2, dto.getReview_content());
-			pstm.setInt(3, dto.getReview_id());
-			pstm.setString(4, dto.getNickname());
+			pstm.setInt(3, dto.getMovie_grade());
+			pstm.setInt(4, dto.getReview_id());
+			pstm.setString(5, dto.getNickname());
 			
 			result = pstm.executeUpdate();
 			
@@ -387,7 +388,7 @@ public class MovieBoardDaoImpl implements MovieBoardDao{
 		}
 		return result;
 	}
-
+	//리뷰삭제
 	@Override
 	public int reviewDelete(Connection con, String nickname, int review_id) {
 		PreparedStatement pstm = null;
@@ -414,6 +415,7 @@ public class MovieBoardDaoImpl implements MovieBoardDao{
 		
 		return result;
 	}
-
+	
+	
 	
 }

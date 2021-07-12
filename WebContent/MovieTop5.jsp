@@ -13,20 +13,13 @@
 <style type="text/css">
 
 .side_table{
-	border: 1px dashed red;
+	/* border: 1px dashed red; */
 	float: right;
 	position: absolute;
 	right: 30px;
 	height: 600px;
-	top: 650px;
+	top: 550px;
 }
-
-/* .side_table01{
-	position: relative;
-}
-.side_table02{
-	position: relative;
-} */
 
 #reco_tb{
 	width: 300px;
@@ -147,7 +140,6 @@
 		</div>
 		
 	</div>
-	
 	
 	
 	<!-- footer -->

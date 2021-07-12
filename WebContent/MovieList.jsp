@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>영화 리스트 조회</title>
+<title>영화 기본정보 및 리뷰 리스트 조회</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -19,7 +19,103 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#online").click(function(){
+		$("#online_sub").toggle();
+	});
+	
+	$("#moive").click(function(){
+		$("#movie_sub").toggle();
+		
+	});
+	
+	$("#shop").click(function(){
+		$("#shop_sub").toggle();
+		
+	});
+	
+	$("#book").click(function(){
+		$("#book_sub").toggle();
+		
+	});
+}); 
+
+</script>
+
+
 <style type="text/css">
+	
+.categorybox{
+	border: 1px solid gray;
+	height: 260px;
+	background-image: url("./resources/Image/background02.jpg");
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: cover;
+}
+#nav{
+	left: 0px;
+	right:0px;
+	height: 100px;
+	
+	}
+#nav ul li{
+	list-style: none;
+	display: inline;
+	position: relative;
+	padding: 0;
+	line-height:40px;
+	text-align:center;
+	float: left;
+	left: 9%;
+	top: 25px;
+	width: 20%;
+	color: white;
+	font-weight: bold;
+	font-size: 15px;
+	}
+#nav ul li:hover{
+	color:gray;
+	}
+#subcategorybox{
+	height: 100px;
+	position: relative;
+	top: 20px;
+}
+#online_sub{
+	display: none;
+}
+#movie_sub{
+	/* display: none; */
+}
+#shop_sub{
+	display: none;
+}
+#book_sub{
+	display: none;
+}
+#subcategory1 ul li{
+	border-inline: 1px solid lightgray;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.4 );
+	list-style: none;
+	position: relative;
+	padding: 0;
+	line-height:40px;
+	text-align:center;
+	font-weight: bold;
+	color: black;
+	float: left;
+	top: 10px;
+	left: 4%;
+	width: 15%;
+}
+#subcategory1 ul li:hover{
+	color:gray;
+}
 
 .category{
 	position: absolute;
@@ -27,16 +123,14 @@
 	top: 500px;
 	left: 9%;
 }
-
 #box{
 	width: 60%;
 	height: 350px;
 	border: 1px solid black;
-	top: 480px;
+	top: 140px;
 	left: 9%;
 	position: relative;
 }
-
 #wrap{
 	border: 1px solid black;
 	width: 280px;
@@ -63,7 +157,6 @@
 	bottom: 315px;
 	font-size: 18px;
 	width: 800px;
-	/* border: 1px solid; */
 }
 
 .list tr th{
@@ -77,23 +170,14 @@ text-align: center;
 	top: 1020px;
 } 
 
-.select{
-	float: right;
-	right: 31%;
-	top: 1030px;
-	position: absolute;
-	font-size: 15px;
-}
-
 #mypage_board{
-	/* border: 1px dashed red; */
 	width:60%;
 	margin-top:20px;
 	margin-left:auto;
 	margin-bottom:20px;
 	margin-right:auto;
 	position: relative;
-	top: 600px;
+	top: 240px;
 	float: left;
 	left: 9%;
 }
@@ -102,67 +186,27 @@ text-align: center;
 	float: right;
 	position: absolute;
 	right: 31%;
-	top: 1350px;
+	top: 1320px;
 }
 
 #writebutton{
+	position: relative;
 	font-size: 15px;
 	height: 30px;
 }
+.pull-bottom{
+	position: relative;
+	width: 400px;
+	height: 40px;
+	top: 550px;
+	float: right;
+	right: 50%;
 
-.page_wrap {
-	text-align:center;
-	font-size:0;
-
- }
-.page_nation {
-	/* border: 1px dashed red; */
-	position: absolute;
-	float: left;
-	left: 30%;
-	top: 1400px;
-	
 }
-.page_nation .none {
-	display:none;
-}
-.page_nation a {
-	display:block;
-	margin:0 3px;
-	float:left;
-	border:1px solid #e6e6e6;
-	width:28px;
-	height:28px;
-	line-height:28px;
-	text-align:center;
-	background-color:#fff;
-	font-size:13px;
-	color:#999999;
-	text-decoration:none;
-}
-.page_nation .arrow {
-	border:1px solid #ccc;
-}
-.page_nation .pprev {
-/* 	background:#f8f8f8 url('Image/page_pprev.png') no-repeat center center;
- */	margin-left:0;
-}
-.page_nation .prev {
-	/* background:#f8f8f8 url('Image/page_prev.png') no-repeat center center;
-	 */margin-right:7px;
-}
-.page_nation .next {
-/* 	background:#f8f8f8 url('Image/page_next.png') no-repeat center center;
- */	margin-left:7px;
-}
-.page_nation .nnext {
-/* 	background:#f8f8f8 url('Image/page_nnext.png') no-repeat center center;
- */	margin-right:0;
-}
-.page_nation a.active {
-	background-color:#42454c;
-	color:#fff;
-	border:1px solid #42454c;
+.pagination{
+	position: relative;
+	left: 40%;
+	bottom: 19px;
 }
 
 
@@ -173,52 +217,102 @@ text-align: center;
 
 	<!-- header -->
 	<%@ include file="../Fix/header.jsp" %>
+	<br>
 	
+	<!-- 카테고리 박스  -->
+	<div class="categorybox">
+		<div id="nav">
+			<ul>
+            	<li id="online">온라인 쇼핑</li>
+            	<li id="moive" <%-- onclick="location.href='movieController?command=moiveListCate&movie_type=${dto.movie_type }'" --%>>영화</li>
+            	<li id="shop">매장</li>
+            	<li id="book">도서</li>
+            </ul>
+		</div>
+		<div id="subcategorybox">
+	       	<div id="subcategory1">
+	       		<ul id="online_sub">
+	       			<li onclick="">세부 카테고리1</li>
+	       			<li onclick="">세부 카테고리2</li>
+	       			<li onclick="">세부 카테고리3</li>
+	       			<li onclick="">세부 카테고리4</li>
+	       			<li onclick="">세부 카테고리5</li>
+	       			<li onclick="">세부 카테고리6</li>
+	       		</ul>
+	       		<ul id="movie_sub">
+	       			<c:choose>
+						<c:when test="${empty moiveListCate }">
+							<tr>
+								<td colspan ="4">----작성된 글이 존재하지 않습니다----</td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="cate" items="${moiveListCate }">
+	       					<li onclick="location.href='movieController?command=moiveListCate&category=${cate.movie_type}&pageNum=1'">${cate.movie_type_name }</li>
+	       					</c:forEach>
+						</c:otherwise>
+					</c:choose>
+	       			
+	       		</ul>
+	       		<ul id="shop_sub">
+	    			<li onclick="">세부 카테고리1</li>
+	       			<li onclick="">세부 카테고리2</li>
+	       			<li onclick="">세부 카테고리3</li>
+	       			<li onclick="">세부 카테고리4</li>
+	       			<li onclick="">세부 카테고리5</li>
+	       			<li onclick="">세부 카테고리6</li>
+	       		</ul>
+	       		<ul id="book_sub">
+	    			<li onclick="">세부 카테고리1</li>
+	       			<li onclick="">세부 카테고리2</li>
+	       			<li onclick="">세부 카테고리3</li>
+	       			<li onclick="">세부 카테고리4</li>
+	       			<li onclick="">세부 카테고리5</li>
+	       			<li onclick="">세부 카테고리6</li>
+	       		</ul>
+	       	</div>
+	    </div>
+    </div>
+	<br>
+
+	
+	<!-- 영화기본정보 + 리뷰리스트 조회 -->
 	<div>
 		<div class="category">
-			<h2>액션</h2>
+			<h2>${category_name}</h2>
 		</div>
 	
 		<!-- 영화 기본 정보 -->
-		<div id="box">
-			<div id="wrap">
-				<div class="poster">${dto.movie_img}</div>
+		<div id="box" style="border-radius: 5px 5px 5px 5px;">
+			<div id="wrap" style="border-radius: 5px 5px 5px 5px;">
+				<div class="poster" style="border-radius: 5px 5px 5px 5px;">${dto.movie_img}</div>
 			</div>
 		     <table class="list"  style="text-align: left">
-							<tr>
-					        	<th style="width:100px" >영화제목 : </th>
-					            <td style="width:250px">${dto.movie_title }</td>
-				            </tr>
-				            <tr>
-				                <th>기본정보 : </th>
-				                <td>${dto.movie_type_name}</td>
-				            </tr>
-				             <tr>
-				                <th>감독 : </th>
-				                <td>${dto.director}</td>
-				            </tr>
-				             <tr>
-				                <th>출연 : </th>
-				                <td>${dto.actor }</td>
-				            </tr>
-				           
-		     	
-
+				<tr>
+		        	<th style="width:100px" >영화제목 : </th>
+		            <td style="width:250px">${dto.movie_title }</td>
+	            </tr>
+	            <tr>
+	                <th>기본정보 : </th>
+	                <td>${dto.movie_type_name}</td>
+	            </tr>
+	             <tr>
+	                <th>감독 : </th>
+	                <td>${dto.director}</td>
+	            </tr>
+	             <tr>
+	                <th>출연 : </th>
+	                <td>${dto.actor }</td>
+	            </tr>
 	        </table>	
 		</div>
 	
-		<!-- 리뷰리스트  -->
+		<!-- 영화 리뷰리스트  -->
 		<div>
 			<div class="listtitle">
 				<h4>${dto.movie_title }  Review List</h4>
 			</div>
-			<div class="select">
-				<select style="width:100px; height: 25px;" onchange=>
-					<option value="">제목순</option>
-					<option value="">조회순</option>
-					<option value="">추천순</option>					
-				</select>
-			</div>
+	
 			<table class="table text-center table-hover" id="mypage_board">
 				<thead>
 					<tr>
@@ -255,7 +349,6 @@ text-align: center;
 		
 			<!-- 게시글 작성 버튼  -->
 			<div class="bottombutton">
-				<!-- <input id="writebutton" type="button" value="리뷰 등록하기" onclick="location='MovieWrite.jsp'">-->
 				<input id="writebutton" type="button" value="리뷰 등록하기" onclick="location='movieController?command=reviewWriteForm&movie_id=${movie_id}'">
 			</div>
 			
@@ -296,7 +389,6 @@ text-align: center;
 			   </div>
 			</div>
 			
-			
 		</div>
 	
 	
@@ -304,10 +396,10 @@ text-align: center;
 
 	<%@ include file="MovieTop5.jsp" %>
 	
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br>
-	
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br>
+			
 	<!-- footer  -->
 	<%@ include file="../Fix/footer.jsp" %>
 

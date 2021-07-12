@@ -11,29 +11,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>영화 메인페이지</title>
-
+<title>영화 목록 메인 페이지</title>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	$("#online").click(function(){
-		$("#online_sub").toggle();
-	});
+ 		$("#online_sub").toggle()
+
+ 	});
 	
 	$("#moive").click(function(){
 		$("#movie_sub").toggle();
+		
 	});
 	
 	$("#shop").click(function(){
 		$("#shop_sub").toggle();
+		
 	});
 	
 	$("#book").click(function(){
 		$("#book_sub").toggle();
+		
 	});
-	
-	
 }); 
 
 </script>
@@ -43,17 +44,19 @@ $(function(){
 .categorybox{
 	border: 1px solid gray;
 	height: 260px;
-}
-#nav{
-	border: 1px dashed red;
-	/* position: fixed; */
-	left: 0px;
-	right:0px;
-	height: 100px;
-	background-image: url('');
+	background-image: url("./resources/Image/background02.jpg");
 	background-repeat: no-repeat;
 	background-position: left top;
 	background-size: cover;
+}
+#nav{
+	left: 0px;
+	right:0px;
+	height: 100px;
+/* 	background-image: url('');
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: cover; */
 	}
 #nav ul li{
 	list-style: none;
@@ -64,23 +67,18 @@ $(function(){
 	text-align:center;
 	float: left;
 	left: 9%;
+	top: 25px;
 	width: 20%;
-	}
-#nav ul li a{
-	border:1px dashed red;
-	text-decoration: none;
-	text-align: center;
-	display: block;
+	color: white;
 	font-weight: bold;
 	font-size: 15px;
-	padding: 5px 10px;
-	color: black;
 	}
-#nav ul li a:hover{
-	color:blue;
+
+#nav ul li:hover{
+	color:gray;
 	}
 #subcategorybox{
-	border:1px dashed red;
+/* 	border:1px dashed red; */
 	height: 100px;
 	position: relative;
 	top: 20px;
@@ -99,39 +97,39 @@ $(function(){
 }
 
 #subcategory1 ul li{
-	/* border: 1px dashed red; */
+	border-inline: 1px solid lightgray;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.4 );
 	list-style: none;
 	position: relative;
 	padding: 0;
 	line-height:40px;
 	text-align:center;
-	float: left;
-	left: 4%;
-	width: 15%;
-}
-
-#subcategory1 ul li a{
-	text-decoration: none;
 	font-weight: bold;
 	color: black;
-	text-align: center;
+	float: left;
+	top: 10px;
+	left: 4%;
+	width: 15%;
+
 }
-#subcategory1 ul li a:hover{
-	color:blue;
-	}
+
+#subcategory1 ul li:hover{
+	color:gray;
+}
 	
-.container{
-	border: 1px dashed red;
+#container{
+	/* border: 1px solid red; */
 	position: relative;
 	left: 5%;
 	top: 60px;
 	padding: 5px;
-	width: 70%;
-	height: 900px;
+	width: 67%;
+	height: 720px;
 }
 
 .top{
-	border: 1px dashed red;
+	/* border: 1px dashed red; */
 	padding: 0px;
 	margin: 0px;
 	width: 100%;
@@ -139,13 +137,12 @@ $(function(){
 	left: 100px;
 	height: 80px;
 }
-
 h1{
 	display: inline;
 	position: relative;
+	left: 5%;
 	top: 25px;
 }
-
 #select{
 	display:inline;
 	position: relative;
@@ -162,58 +159,73 @@ h1{
 	right: 50px;
 	top: 35px;
 }
-
 .search > input, button{
 	font-size: 20px;
 }
 
 #box{
 	width: 100%;
-	height: 800px;
+	height: 600px;
 	border: 1px solid gray;
+	border-radius: 5px 5px 5px 5px;
 	position: relative;
 	top: 100px;
 
 }
 #wrap{
-	border: 1px dotted red;
+	/* border: 1px dotted red; */
 	position: relative;
-	width: 90%;
-	height: 660px;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
+	width: 98%;
+	height: 500px;
+	top: 26%;
+	left: 30%;
+	transform: translate(-30%,-30%);
 }
 
 #wrap > div {
-	width: 200px;
-	height: 250px;
+	width: 130px;
+	height: 170px;
 	border: 1px solid gray;
 	position: relative;
 	bottom: 90px;
-	left: 100px;
+	left: 5%;
 	float: left;
 	margin: 45px;
 	box-sizing: border-box;
-	
 }
 
 #wrap > div:nth-child(5){
 clear: both;
 }
+#movietitle{
+/* border: 1px dashed red; */
+position: absolute;
+width: 130px;
+text-align: center;
+top: 175px;
+}
 .moviecreate{
+	/* border: 1px dashed red; */
 	position: relative;
-	border: 1px dashed red;
+	width:100%;
 	height: 30px;
-	top: 50px;
+	top: 30px;
 }
 #moviecreatebtn{
 	position: relative;
 	float: right;
 	right: 6%;
-	width: 110px;
-	height: 30px;
-	font-size: 18px;
+	width: 80px;
+	height: 28px;
+	font-size: 15px;
+}
+.pull-bottom{
+ /* 	border: 1px dashed red; */
+	position: relative;
+	text-align: center;
+	width: 50%;
+	left: 27%;
+	top: 5px;
 }
 
 
@@ -223,27 +235,27 @@ clear: both;
 
  	<!-- header -->
 	<%@ include file="../Fix/header.jsp" %>
+	<br>
 	
-	<br><br><br><br><br><br><br><br><br>
-
+	<!-- 카테고리 박스  -->
 	<div class="categorybox">
 		<div id="nav">
 			<ul>
-            	<li><a id="online" href="">온라인 쇼핑</a></li>
-            	<li><a id="moive" href="movieController?command=moiveListCate&movie_type=${dto.movie_type }">영화</a></li>
-            	<li><a id="shop" href="">매장</a></li>
-            	<li><a id="book" href="">도서</a></li>
+            	<li id="online">온라인 쇼핑</li>
+            	<li id="moive" <%-- onclick="location.href='movieController?command=moiveListCate&movie_type=${dto.movie_type }'" --%>>영화</li>
+            	<li id="shop">매장</li>
+            	<li id="book">도서</li>
             </ul>
 		</div>
 		<div id="subcategorybox">
 	       	<div id="subcategory1">
 	       		<ul id="online_sub">
-	       			<li><a href="">세부 카테고리1</a></li>
-	       			<li><a href="">세부 카테고리2</a></li>
-	       			<li><a href="">세부 카테고리3</a></li>
-	       			<li><a href="">세부 카테고리4</a></li>
-	       			<li><a href="">세부 카테고리5</a></li>
-	       			<li><a href="">세부 카테고리6</a></li>
+	       			<li onclick="">세부 카테고리1</li>
+	       			<li onclick="">세부 카테고리2</li>
+	       			<li onclick="">세부 카테고리3</li>
+	       			<li onclick="">세부 카테고리4</li>
+	       			<li onclick="">세부 카테고리5</li>
+	       			<li onclick="">세부 카테고리6</li>
 	       		</ul>
 	       		<ul id="movie_sub">
 	       			<c:choose>
@@ -254,27 +266,27 @@ clear: both;
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="cate" items="${moiveListCate }">
-	       					<li><a href="movieController?command=moiveListCate&category=${cate.movie_type}&pageNum=1">${cate.movie_type_name }</a></li>
+	       					<li onclick="location.href='movieController?command=moiveListCate&category=${cate.movie_type}&pageNum=1'">${cate.movie_type_name }</li>
 	       					</c:forEach>
 						</c:otherwise>
 					</c:choose>
 	       			
 	       		</ul>
 	       		<ul id="shop_sub">
-	       			<li><a href="">세부 카테고리1</a></li>
-	       			<li><a href="">세부 카테고리2</a></li>
-	       			<li><a href="">세부 카테고리3</a></li>
-	       			<li><a href="">세부 카테고리4</a></li>
-	       			<li><a href="">세부 카테고리5</a></li>
-	       			<li><a href="">세부 카테고리6</a></li>
+	    			<li onclick="">세부 카테고리1</li>
+	       			<li onclick="">세부 카테고리2</li>
+	       			<li onclick="">세부 카테고리3</li>
+	       			<li onclick="">세부 카테고리4</li>
+	       			<li onclick="">세부 카테고리5</li>
+	       			<li onclick="">세부 카테고리6</li>
 	       		</ul>
 	       		<ul id="book_sub">
-	       			<li><a href="">세부 카테고리1</a></li>
-	       			<li><a href="">세부 카테고리2</a></li>
-	       			<li><a href="">세부 카테고리3</a></li>
-	       			<li><a href="">세부 카테고리4</a></li>
-	       			<li><a href="">세부 카테고리5</a></li>
-	       			<li><a href="">세부 카테고리6</a></li>
+	    			<li onclick="">세부 카테고리1</li>
+	       			<li onclick="">세부 카테고리2</li>
+	       			<li onclick="">세부 카테고리3</li>
+	       			<li onclick="">세부 카테고리4</li>
+	       			<li onclick="">세부 카테고리5</li>
+	       			<li onclick="">세부 카테고리6</li>
 	       		</ul>
 	       	</div>
 	    </div>
@@ -282,12 +294,12 @@ clear: both;
 	<br>
 	
 	<section>
-		<div class="container">
-			<form id="movieform" name="movieform" action="movieController" method="post">
+		<div id="container">
+		<form id="movieform" name="movieform" action="movieController" method="post">
 				<!--  목록 페이지 상단 (카테고리명, 정렬, 검색) -->
 				<div class="top">
 						<h1>${category_name}</h1>
-						<select id="select" onchange=>
+					   <!-- <select id="select" onchange=>
 							<option value="">제목순</option>
 							<option value="">조회순</option>
 							<option value="">추천순</option>					
@@ -295,10 +307,11 @@ clear: both;
 						<div class="search">
 							<input type="text" class="" placeholder="제목을 입력하세요">
 							<button type="submit" class="">검색</button>
-						</div>
+						</div> -->
 				</div>
 			</form>
-				<!--  목록 페이지 중간 (영화포스터 바둑판 배열) -->
+			
+				<!--  영화 목록 페이지 (영화포스터 바둑판 배열) -->
 				<div id="box">
 					<div id="wrap">
 							<c:choose>
@@ -309,63 +322,62 @@ clear: both;
 								</c:when>
 								<c:otherwise>
 									<c:forEach var="dto" items="${list }">
-									<div>
+									<div style="border-radius: 5px 5px 5px 5px;">
 									<!-- 값 수정 -->
 									<img src="${dto.movie_img}">
 									<a href="movieController?command=detail&movie_id=${dto.movie_id}&category_name=${category_name}">${dto.movie_img }</a>
-									<p>${dto.movie_id}</p>
+									<div id="movietitle">${dto.movie_title}</div>
 									</div>
 									
 									</c:forEach>
 								</c:otherwise>
 							</c:choose>
-
 					</div>
 				</div>
-			<nav class="pull-bottom">
-			<c:set var="pageNum" value="${paging.pageNum }"/>
-			<c:set var="startPage" value="${paging.startPage}"/>
-			<c:set var="endPage" value="${paging.endPage}"/>
-			<c:set var="totalPage" value="${paging.totalPage}"/>
-			<c:set var="itemCount" value="${paging.itemCount}"/>
-				<ul class="pagination">
-					<li>
-			      		<a href="movieController?command=moiveListCate&category=${category}&pageNum=1" aria-label="Previous">
-			        	<span aria-hidden="true">&laquo;</span>
-			      		</a>
-			    	</li>
-					<c:forEach var="item" varStatus="status" begin="${ startPage }" end="${ endPage }" step="1">
-                		<c:if test="${ pageNum == item }">
-                    		<li><a href="movieController?command=moiveListCate&category=${category}&pageNum=1">${ item }</a></li>
-                		</c:if>
-                		<c:if test="${ pageNum != item }">
-		 					<li><a href="movieController?command=moiveListCate&pageNum=${ item }&category=${category}">${ item }</a></li>
-                		</c:if>
-            		</c:forEach>
-            		<li>
-			      		<a href="movieController?command=moiveListCate&pageNum=${totalPage}&category=${category}" aria-label="Next">
-			        	<span aria-hidden="true">&raquo;</span>
-			      		</a>
-			    	</li>
-				</ul>
-			
-			</nav>
+				
 				<!-- 영화등록버튼 -->
 				<div class="moviecreate">
 					<input type="button" id="moviecreatebtn" value="영화등록" onclick="location.href='movieController?command=moviecreate'">
 				</div>
-			
+				
+				<!-- 페이징처리 -->
+				<nav class="pull-bottom">
+					<c:set var="pageNum" value="${paging.pageNum }"/>
+					<c:set var="startPage" value="${paging.startPage}"/>
+					<c:set var="endPage" value="${paging.endPage}"/>
+					<c:set var="totalPage" value="${paging.totalPage}"/>
+					<c:set var="itemCount" value="${paging.itemCount}"/>
+					<ul class="pagination">
+						<li>
+				      		<a href="movieController?command=moiveListCate&category=${category}&pageNum=1" aria-label="Previous">
+				        	<span aria-hidden="true">&laquo;</span>
+				      		</a>
+				    	</li>
+						<c:forEach var="item" varStatus="status" begin="${ startPage }" end="${ endPage }" step="1">
+	                		<c:if test="${ pageNum == item }">
+	                    		<li><a href="movieController?command=moiveListCate&category=${category}&pageNum=1">${ item }</a></li>
+	                		</c:if>
+	                		<c:if test="${ pageNum != item }">
+			 					<li><a href="movieController?command=moiveListCate&pageNum=${ item }&category=${category}">${ item }</a></li>
+	                		</c:if>
+	            		</c:forEach>
+	            		<li>
+				      		<a href="movieController?command=moiveListCate&pageNum=${totalPage}&category=${category}" aria-label="Next">
+				        	<span aria-hidden="true">&raquo;</span>
+				      		</a>
+			    		</li>
+					</ul>
+				</nav>
+				
 		</div><!--container 끝 div  -->
 	</section>
 	
-
-
-			
+	<!-- 오른쪽 사이드 Top5 테아블 -->		
 	<%@ include file="MovieTop5.jsp" %>
 	<br><br><br><br><br><br><br>
 	
-<%-- 	<!-- footer  -->
-	<%@ include file="../Fix/footer.jsp" %> --%>
+	<!-- footer  -->
+	<%@ include file="../Fix/footer.jsp" %>
 
 </body>
 </html>
