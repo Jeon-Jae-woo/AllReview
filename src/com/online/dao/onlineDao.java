@@ -16,6 +16,7 @@ public interface onlineDao {
 			+ "SELECT ONLINE_BOARD_ID, NICKNAME, OB.CATEGORY_ID, ONLINE_TITLE, PRICE_SAT, PRODUCT_SAT, RECOMD, HITS, "
 			+ "CATEGORY_NAME FROM ONLINE_BOARD OB JOIN ONLINE_CATEGORY OC ON(OB.CATEGORY_ID=OC.CATEGORY_ID) "
 			+ "WHERE OB.CATEGORY_ID=? AND DELETE_N=0 AND STATUS=1)WHERE ROWNUM<?) WHERE RNUM>=?";
+	
 	String onlineRowQuery = "SELECT COUNT(*) FROM ONLINE_BOARD WHERE CATEGORY_ID=?";
 	
 	//단일 게시글 조회
@@ -30,7 +31,7 @@ public interface onlineDao {
 	//글 쓰기
 	String onlineWriteQuery ="INSERT INTO ONLINE_BOARD VALUES(ONLINE_BOARD_ID.NEXTVAL, ?,?,?,?,?,?,?,?,SYSDATE,SYSDATE,0,0,0,0)";
 	
-	//카테고리 이름 조회
+	//카테고리 이름조회
 	String cateogryNameQuery = "SELECT CATEGORY_NAME FROM ONLINE_CATEGORY WHERE CATEGORY_ID=?";
 	
 	//카테고리별 리스트 조회
@@ -49,8 +50,7 @@ public interface onlineDao {
 	//글 쓰기
 	public int insertOnlineBoard(Connection con, onlineDto dto);
 	
-	
-	//카테고리 이름 조회 
+	//카테고리 이름조회
 	public String findCategoryName(int category_id);
-
+	
 }

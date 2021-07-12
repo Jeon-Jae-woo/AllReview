@@ -10,8 +10,8 @@ public class onlineDto {
 	private String online_content;
 	private double price_sat;
 	private double product_sat;
-	private int add_receipt;
-	private int add_product;
+	private String add_receipt;
+	private String add_product;
 	private Date createat;
 	private Date pudateat;
 	private int status;
@@ -24,13 +24,9 @@ public class onlineDto {
 		return category_name;
 	}
 
-
-
 	public void setCategory_name(String category_name) {
 		this.category_name = category_name;
 	}
-
-
 
 	//평점평균
 	private double satavg = (price_sat+product_sat)/2;
@@ -45,13 +41,12 @@ public class onlineDto {
 	
 	//전체생성자
 	public onlineDto(int online_board_id, String nickname, int category_id, String online_title,
-			String online_content, double price_sat, double product_sat, int add_receipt, int add_product,
+			String online_content, double price_sat, double product_sat, String add_receipt, String add_product,
 			Date createat, Date pudateat, int status, int delete_n, int recomd, int hits) {
 		super();
 		this.online_board_id = online_board_id;
 		this.nickname = nickname;
 		this.category_id = category_id;
-		
 		this.online_title = online_title;
 		this.online_content = online_content;
 		this.price_sat = price_sat;
@@ -139,22 +134,22 @@ public class onlineDto {
 	}
 
 
-	public int getAdd_receipt() {
+	public String getAdd_receipt() {
 		return add_receipt;
 	}
 
 
-	public void setAdd_receipt(int add_receipt) {
+	public void setAdd_receipt(String add_receipt) {
 		this.add_receipt = add_receipt;
 	}
 
 
-	public int getAdd_product() {
+	public String getAdd_product() {
 		return add_product;
 	}
 
 
-	public void setAdd_product(int add_product) {
+	public void setAdd_product(String add_product) {
 		this.add_product = add_product;
 	}
 
