@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
 <!DOCTYPE html>
@@ -16,9 +17,10 @@ height: 300px;
 }
 
 #secmain{
-border: 1px red dotted;
+border: none;
 padding-top:20px;
 height: 900px;
+padding-left: 40px;
 
 }
 
@@ -91,71 +93,190 @@ font-size: 20px;
 font-size: 30px;
 }
 
-.writer{
-margin-left: 80px;
+
+
+.categorybox{
+	border: 1px solid gray;
+	height: 260px;
+	background-image: url("./resources/Image/background02.jpg");
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: cover;
+}
+#nav{
+
+   left: 0px;
+   right:0px;
+   height: 100px;
+
+   }
+#nav ul li{
+	list-style: none;
+	display: inline;
+	position: relative;
+	padding: 0;
+	line-height:40px;
+	text-align:center;
+	float: left;
+	left: 9%;
+	top: 25px;
+	width: 20%;
+	color: white;
+	font-weight: bold;
+	font-size: 15px;
+   }
+
+#nav ul li:hover{
+	color:gray;
+   }
+#subcategorybox{
+   /*border:1px dashed red;*/
+ height: 100px;
+	position: relative;
+	top: 20px;
+}
+#online_sub{
+   display: none;
+}
+#movie_sub{
+   display: none;
+}
+#shop_sub{
+   display: none;
+}
+#book_sub{
+   display: none;
 }
 
-.csbt{
+#subcategory1 ul li{
+border-inline: 1px solid lightgray;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.4 );
+	list-style: none;
+	position: relative;
+	padding: 0;
+	line-height:40px;
+	text-align:center;
+	font-weight: bold;
+	color: black;
+	float: left;
+	top: 10px;
+	left: 4%;
+	width: 15%;
+}
+
+#subcategory1 ul li:hover{
+  color:gray;
+}
+
+.containe{
+	border: 1px dotted red;
+	postion: absolute;
+	width: 98%;
+	height: 500px;
+	top: 26%;
+	transform: translate(-30%, -30%)
+	
+}
+
+.consub{
+margin: 0 auto;
+
+}
+
+.mainbox{
+width: 200px;
+height: 350px;
+border: 1px gray groove;
+display: inline-block;
+}
+
+.btn1{
+width:80px;
 position: absolute;
-left: 73%;
-transform: translateX(-73%);
-
+right: 30%;
+transform: translateX(-30%)
 }
-
-.wrtbt{
+.btn2{
+width:80px;
 position: absolute;
-left: 78%;
-transform: translateX(-78%);
-
+right: 24%;
+transform: translateX(-24%)
 }
 
-/* 별점 */
-.star-input>.input,
-.star-input>.input>label:hover,
-.star-input>.input>input:focus+label,
-.star-input>.input>input:checked+label{display: inline-block;vertical-align:middle;background:url('image/star.png')no-repeat;}
-.star-input{display:inline-block; white-space:nowrap;width:225px;height:40px;padding:25px;line-height:30px;}
-.star-input>.input{display:inline-block;width:150px;background-size:150px;height:28px;white-space:nowrap;overflow:hidden;position: relative;}
-.star-input>.input>input{position:absolute;width:1px;height:1px;opacity:0;}
-star-input>.input.focus{outline:1px dotted #ddd;}
-.star-input>.input>label{width:30px;height:0;padding:28px 0 0 0;overflow: hidden;float:left;cursor: pointer;position: absolute;top: 0;left: 0;}
-.star-input>.input>label:hover,
-.star-input>.input>input:focus+label,
-.star-input>.input>input:checked+label{background-size: 150px;background-position: 0 bottom;}
-.star-input>.input>label:hover~label{background-image: none;}
-.star-input>.input>label[for="p0_5"]{width:15px;z-index:5.5;}
-.star-input>.input>label[for="p1"]{width:30px;z-index:5;}
-.star-input>.input>label[for="p1_5"]{width:45px;z-index:4.5;}
-.star-input>.input>label[for="p2"]{width:60px;z-index:4;}
-.star-input>.input>label[for="p2_5"]{width:75px;z-index:3.5;}
-.star-input>.input>label[for="p3"]{width:90px;z-index:3;}
-.star-input>.input>label[for="p3_5"]{width:105px;z-index:2.5;}
-.star-input>.input>label[for="p4"]{width:120px;z-index:2;}
-.star-input>.input>label[for="p4_5"]{width:135px;z-index:1.5;}
-.star-input>.input>label[for="p5"]{width:150px;z-index:1;}
-.star-input>output{display:inline-block;width:60px; font-size:18px;text-align:right; vertical-align:middle;}
-
-.starR1{
-
+#titleop{
+width:700px;
 }
-.starR2{
-   
+
+.contentbox{
+padding: 2em 2em; margin: 0em 10px; font-weight: 
+bold; color: #565656; background: #E4FCFF; 
+box-shadow: 0px 0px 0px 10px #E4FCFF; border: solid 2px skyblue; 
+border-radius: 8px;
 }
-.starR1.on{}
-.starR2.on{}
 
-/* 별점기능 */
+.titlebox{
+padding: .43em 0em .35em .7em; margin: 0em 0; font-weight: bold; 
+color: #232323; background: #E4FCFF; border-left: solid 10px #1DC1D6; border: skyblue;
+}
 
+.autobox{
+padding: .43em 0em .35em .7em; margin: 0em 0; 
+font-weight: bold; color: #232323; 
+background: #F8E8FF; border-left: solid 10px #8A66AE;
+}
+
+#btncss{
+ border: 1px solid skyblue;
+    background-color: rgba(0,0,0,0);
+    color: skyblue;
+    padding: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#btncss:hover{
+    color:white;
+    background-color:skyblue;
+}
 
 </style>
 <!-- ------------------------------------------------------------------------------ -->
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="js/star.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+$(function(){
+	   $("#online").click(function(){
+	      $("#online_sub1").toggle();
+	      $("#online_sub2").toggle();
+	   });
+	   
+	   $("#moive").click(function(){
+	      $("#movie_sub").toggle();
+	      
+	   });
+	   
+	   $("#shop").click(function(){
+	      $("#shop_sub").toggle();
+	      
+	   });
+	   
+	   $("#book").click(function(){
+	      $("#book_sub").toggle();
+	      
+	   });
+	}); 
 
 
 </script>
+
+
+
+
 
 
 <!-- ------------------------------------------------------------------------------- -->
@@ -167,153 +288,147 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 	
 	<!-- Header -->
 	<header>
-		<div class="nmdiv"> <!-- 최상단 카테고리4개, 온라인쇼핑카테고리12개 --> <!-- li안에 div 불가 -->
-			<div>
-				<ul id="mainca">
-					<li id="online">
-						<strong>온라인쇼핑</strong>
-						<ul id="subca1">
-							<li>패션</li>
-							<li>뷰티</li>
-							<li>식품</li>
-							<li>홈/생활용품</li>
-							<li>PC/디지털</li>
-							<li>가전</li>
-						</ul><br><br>
-						<ul id="subca2">
-							<li>출산/육아</li>
-							<li>의료/건강</li>
-							<li>문구/취미</li>
-							<li>스포츠/레저</li>
-							<li>반려동물용품</li>
-							<li>자동차</li>
-						</ul>
-					</li>
-					<li id="movie"><strong>영화</strong></li>
-					<li id="shop"><strong>매장</strong></li>
-					<li id="book"><strong>도서</strong></li>
-				</ul>
-			</div>
-		</div>
+		   <div class="categorybox">
+      <div id="nav">
+         <ul>
+               <li id="online">온라인 쇼핑</li>
+               <li id="moive">영화</li>
+               <li id="shop">매장</li>
+               <li id="book">도서</li>
+            </ul>
+      </div>
+      <div id="subcategorybox">
+             <div id="subcategory1">
+                <ul id="online_sub1">  
+                   <li onclick="location.href='onlineController?command=list&category=1'">패션</li>
+                   <li onclick="location.href='onlineController?command=list&category=2'">뷰티</li>
+                   <li onclick="location.href='onlineController?command=list&category=3'">식품</li>
+                   <li onclick="location.href='onlineController?command=list&category=4'">홈/생활용품</li>
+                   <li onclick="location.href='onlineController?command=list&category=5'">PC/디지털</li>
+                   <li onclick="location.href='onlineController?command=list&category=6'">가전</li>
+                </ul>
+                <ul id="online_sub2">
+                   <li onclick="location.href='onlineController?command=list&category=7'">출산/육아</li>
+                   <li onclick="location.href='onlineController?command=list&category=8'">의료/건강</li>
+                   <li onclick="location.href='onlineController?command=list&category=9'">문구/취미</li>
+                   <li onclick="location.href='onlineController?command=list&category=10'">스포츠/레저</li>
+                   <li onclick="location.href='onlineController?command=list&category=11'">반려동물</li>
+                   <li onclick="location.href='onlineController?command=list&category=12'">자동차</li>
+                </ul>
+                <ul id="movie_sub">
+                   <c:choose>
+                  <c:when test="${empty moiveListCate }">
+                     <tr>
+                        <td colspan ="4">----작성된 글이 존재하지 않습니다----</td>
+                     </tr>
+                  </c:when>
+                  <c:otherwise>
+                     <c:forEach var="cate" items="${moiveListCate }">
+                         <li onclick="location.href='movieController?command=moiveListCate&category=${cate.movie_type}&pageNum=1'">${cate.movie_type_name }</li>
+                         </c:forEach>
+                  </c:otherwise>
+               </c:choose>
+                   
+                </ul>
+                <ul id="shop_sub">
+                <li onclick="">세부 카테고리1</li>
+                   <li onclick="">세부 카테고리2</li>
+                   <li onclick="">세부 카테고리3</li>
+                   <li onclick="">세부 카테고리4</li>
+                   <li onclick="">세부 카테고리5</li>
+                   <li onclick="">세부 카테고리6</li>
+                </ul>
+                <ul id="book_sub">
+                <li onclick="">세부 카테고리1</li>
+                   <li onclick="">세부 카테고리2</li>
+                   <li onclick="">세부 카테고리3</li>
+                   <li onclick="">세부 카테고리4</li>
+                   <li onclick="">세부 카테고리5</li>
+                   <li onclick="">세부 카테고리6</li>
+                </ul>
+             </div>
+       </div>
+    </div>
 	</header>
+	<!-- --------------------------------------------------------------------------------------------------------------------------------------------------- -->
 	<!-- Section -->
 	<section>
 		<div id="secmain">
 			<form class="writer" action="onlineController">
 			<input type="hidden" name="command" value="update">
 			<input type="hidden" name="board_id" value="${dto.online_board_id}">
-			<h2>글 쓰기</h2> 
-				<select id="cate_de">
-					<optgroup label="카테고리 선택"> 
-					<option>카테고리 선택</option>
-					<option>패션</option>
-					<option>뷰티</option>
-					<option>식품</option>
-					<option>홈/생활용품</option>
-					<option>PC/디지털</option>
-					<option>가전</option>
-					<option>출산/육아</option>
-					<option>의료/건강</option>
-					<option>문구/취미</option>
-					<option>스포츠/레저</option>
-					<option>반려동물용품</option>
-					<option>자동차</option>
-					</optgroup>
-				</select>
-				<select id="subcate_de">
-					<optgroup label="세부 카테고리 선택">
-					<option>세부 카테고리 선택</option>
-					<!-- 메인카테고리에 따른 각 카테고리 출력 어떻게 이어줘야 하는가?  -->
-					</optgroup>
-				</select>
+			<h3>글 수정</h3> 
+			<input type="text" value="작성자: ${dto.nickname }" readonly="readonly" class="autobox"> &nbsp;&nbsp;
+			<!-- 카테고리 출력 -->
+			<input type="text" value="카테고리 : ${dto.category_name }" readonly="readonly" class="autobox">  &nbsp;&nbsp;
+			<!-- 조회수,추천수 출력 -->
+			조회  <strong>${dto.hits }</strong>&nbsp;
+			추천  <strong>${dto.recomd }</strong>
+			
+			<br><br>
+			<!-- 제목출력-->
+			<input type="text" value=" ${dto.online_title }" name="title" id="titleop" class="titlebox"> &nbsp;&nbsp;
+	
+			<!-- 만족도 출력 -->
+			
+			<!-- 수정전  가격만족도<input type="text" value="${dto.price_sat }" name="price_sat">
+			상품만족도<input type="text" value="${dto.product_sat }" name="product_sat" >
+			평점<input type="text" value="${dto.satavg }">
+			-->
+			
+			가격만족도 : <input type="hidden" name="price_sat" id="price_sat" value="">
+			<select onchange="document.getElementById('price_sat').value = this.options[this.selectedIndex].value">
+			<option value='0.5' >0.5</option>
+			<option value='1'>1</option>
+			<option value='1.5'>1.5</option>
+			<option value='2'>2</option>
+			<option value='2.5'>2.5</option>
+			<option value='3'>3</option>
+			<option value='3.5'>3.5</option>
+			<option value='4'>4</option>
+			<option value='4.5'>4.5</option>
+			<option value='5'>5</option>
+			</select>
+			
+			상품만족도 : <input type="hidden" name="product_sat" id="product_sat" value="">
+			<select onchange="document.getElementById('product_sat').value = this.options[this.selectedIndex].value">
+			<option value='0.5'>0.5</option>
+			<option value='1'>1</option>
+			<option value='1.5'>1.5</option>
+			<option value='2'>2</option>
+			<option value='2.5'>2.5</option>
+			<option value='3'>3</option>
+			<option value='3.5'>3.5</option>
+			<option value='4'>4</option>
+			<option value='4.5'>4.5</option>
+			<option value='5'>5</option>
+			</select>
+			
+			상품 사진:<input type="text" value="1" name="add_product">
+			<br><br>
 		
 		
-		<!-- 제목-->
 		
-		<div id="secmain">
-		
-		<!-- 데이터가져와서 출력해야하는 부분 -->
-		<!-- 제목출력-->
-		<h1><input type="text" value="${dto.online_title }" name="title"></h1>
-		<!-- 카테고리 출력 -->
-		<input type="text" value="${dto.category_name }">
-		<!-- 세부카테고리 출력 -->
-		<input type="text" value="${dto.nickname }">
-		<input type="text" value="1" name="add_product">
-		<!-- 만족도 출력 -->
-		가격만족도<input type="text" value="${dto.price_sat }" name="price_sat">
-		상품만족도<input type="text" value="${dto.product_sat }" name="product_sat" >
-		평점<input type="text" value="${dto.satavg }">
-		<!-- 조회수,추천수 출력 -->
-		
-		조회<strong>${dto.hits }</strong>
-		추천<strong>${dto.recomd }</strong>
 		
 	
 		<!-- 내용 출력-->
-		<textarea rows="30" cols="200" name="content">${dto.online_content } </textarea>
-	
-		<input type="submit" class="btn" value="수정하기">
+		<textarea rows="30" cols="170" class="contentbox" name="content">${dto.online_content } </textarea>
+		<br><br>
+		<input type="button" value="수정 취소" class="btn1" onclick="history.go(-1)" id="btncss">
+		<input type="submit" class="btn2" value="수정 완료" id="btncss">
 		
-		</div>
+		
 		</form>
 		
-		<!-- 평가 항목 선택 / 3개 가격만족도, 상품만족도, 기타만족도  / 체크박스사용-->
-		<input type="button" value="상품만족도 선택">
-		<input type="checkbox" value="가격만족도"> 가격만족도
-		
-		<input type="checkbox" value="상품만족도"> 상품만족도
-		<input type="checkbox" value="기타만족도"> 기타만족도
-		<!-- 별점기능 -->
-		<span class="star-input">
-			<span class="input">
-				<input type="radio" name="star-input" value="0.5" id="p0_5" class="starR1 on">
-			    <label for="p0_5">0.5</label>
-		    	<input type="radio" name="star-input" value="1" id="p1" class="starR2 on">
-		    	<label for="p1">1</label>
-		    	<input type="radio" name="star-input" value="1.5" id="p1_5" class="starR1">
-		    	<label for="p1_5">1.5</label>
-		    	<input type="radio" name="star-input" value="2" id="p2" class="starR2">
-		    	<label for="p2">2</label>
-		    	<input type="radio" name="star-input" value="2.5" id="p2_5" class="starR1">
-		    	<label for="p2_5">2.5</label>
-		    	<input type="radio" name="star-input" value="3" id="p3" class="starR2">
-		    	<label for="p3">3</label>
-		    	<input type="radio" name="star-input" value="3.5" id="p3_5" class="starR1">
-		    	<label for="p3_5">3.5</label>
-		    	<input type="radio" name="star-input" value="4" id="p4" class="starR2">
-		    	<label for="p4">4</label>
-		    	<input type="radio" name="star-input" value="4.5" id="p4_5" class="starR1">
-		    	<label for="p4_5">4.5</label>
-		    	<input type="radio" name="star-input" value="5" id="p5" class="starR2">
-		    	<label for="p5">5</label>
-		  	</span>
-	  	<!-- <output for="star-input"><b>0</b>점</output> -->				
-</span>
-		<!-- 별점기능 -->
-		<!-- 내용 -->
-		<textarea rows="30" cols="200">내용을 입력하세요.</textarea>
-		
-		
-		
-		<p>상품사진 첨부
-		<!--  상품사진 올리기  + 버튼 / 삭제버튼 ajax?-->
-		<input multiple="multiple" type="file" name="productupload" accept ="image/*" />
-			
-			
-		<!-- 작성취소 -->
-		<button class="csbt" onclick="">수정 취소</button>
-		<!-- 작성 완료 -->
-		<button class="wrtbt" onclick="">수정 완료</button>
 		
 		</div>
 		
 	</section>
 	
-	<!-- 1,2,3,4,5 페이지 이동 기능 jsp 코드 들어가야함 -->
-	
-	
 	<hr>
+	
+		<%@ include file="OnlineTop5.jsp" %>
+	
 	<!-- Footer -->
 		<%@ include file="Fix/footer.jsp" %>
 </body>
