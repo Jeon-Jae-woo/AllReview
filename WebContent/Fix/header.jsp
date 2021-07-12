@@ -19,10 +19,12 @@
 
 <style type="text/css">
 .mainlogo{
-position: absolute;
-top: 15px;
-left: 41%;
+	position: absolute;
+	top: 15px;
+	left: 41%;
 }
+
+
 </style>
 
 </head>
@@ -37,7 +39,7 @@ left: 41%;
 		%>
 	
 	<% } %>
-<nav class="navbar navbar-default" style="height:130px; background-color:white;">
+<nav class="navbar navbar-default" style="height:130px;">
 	
   <div class="container-fluid">
   <img class="mainlogo" src="resources/Image/mainlogo3.png"  height="130px;">

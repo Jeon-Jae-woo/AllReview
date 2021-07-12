@@ -49,17 +49,15 @@ $(function(){
 <style type="text/css">
 	
 .categorybox{
-	border: 1px solid gray;
+	/* border: 1px solid gray; */
 	height: 260px;
-	background-image: url("./resources/Image/background02.jpg");
-	background-repeat: no-repeat;
-	background-position: left top;
-	background-size: cover;
 }
 #nav{
 	left: 0px;
 	right:0px;
 	height: 100px;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );
 	
 	}
 #nav ul li{
@@ -73,9 +71,10 @@ $(function(){
 	left: 9%;
 	top: 25px;
 	width: 20%;
-	color: white;
+	color: black;
 	font-weight: bold;
 	font-size: 15px;
+	text-shadow: 1px 1px 1px gray;
 	}
 #nav ul li:hover{
 	color:gray;
@@ -100,7 +99,7 @@ $(function(){
 #subcategory1 ul li{
 	border-inline: 1px solid lightgray;
 	background-color: white;
-	background-color: rgba( 255, 255, 255, 0.4 );
+	background-color: rgba( 255, 255, 255, 0.8 );
 	list-style: none;
 	position: relative;
 	padding: 0;
@@ -112,6 +111,7 @@ $(function(){
 	top: 10px;
 	left: 4%;
 	width: 15%;
+	text-shadow: 1px 1px 1px gray;
 }
 #subcategory1 ul li:hover{
 	color:gray;
@@ -122,6 +122,9 @@ $(function(){
 	float: left;
 	top: 500px;
 	left: 9%;
+	color: white;
+	font-weight: bold;
+	text-shadow: 1px 1px 1px gray;
 }
 #box{
 	width: 60%;
@@ -130,6 +133,10 @@ $(function(){
 	top: 140px;
 	left: 9%;
 	position: relative;
+	color: black;
+	font-weight: bold;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );
 }
 #wrap{
 	border: 1px solid black;
@@ -147,7 +154,7 @@ $(function(){
 	height: 320px;
 	text-align: center;
 	margin: auto;
-	background: gray;
+	/* background: gray; */
 }
 
 .list{
@@ -160,7 +167,8 @@ $(function(){
 }
 
 .list tr th{
-text-align: center;
+	text-align: center;
+	
 }
 
 .listtitle{
@@ -168,6 +176,9 @@ text-align: center;
 	left: 9%;
 	position: absolute;
 	top: 1020px;
+	color: white;
+	font-weight: bold;
+	
 } 
 
 #mypage_board{
@@ -180,6 +191,10 @@ text-align: center;
 	top: 240px;
 	float: left;
 	left: 9%;
+	color: black;
+	font-weight: bold;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );
 }
 
 .bottombutton{
@@ -208,7 +223,13 @@ text-align: center;
 	left: 40%;
 	bottom: 19px;
 }
+body{
+	background-image: url("./resources/Image/forest1.jpg");
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: cover;
 
+}
 
 </style>
 
@@ -388,7 +409,7 @@ text-align: center;
 	
 	
 	</div>
-
+	<!-- 추천수 조회수 top5 -->
 	<%@ include file="MovieTop5.jsp" %>
 	
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
