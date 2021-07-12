@@ -55,10 +55,14 @@ public class ShopController extends HttpServlet {
 			
 			List<ShopDto> list = biz.selectAll(pageNum, category_no);
 			pagingDto paging = biz.ShopPaging(pageNum, category_no);
+			List<ShopDto> list2 = biz.recoTop();
+			List<ShopDto> list3 = biz.hitTop();
 			
 			
 			request.setAttribute("paging", paging);
 			request.setAttribute("list", list);
+			request.setAttribute("list2", list2);
+			request.setAttribute("list3", list3);
 			request.setAttribute("category_no", category_no);
 			dispatch("shopcate.jsp",request, response);
 			

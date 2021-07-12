@@ -57,6 +57,74 @@ public class ShopDao {
 		return res;
 	}
 	
+	public List<ShopDto> hitTop(Connection con){
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		List<ShopDto> res = new ArrayList<ShopDto>();
+		
+		String sql = " SELECT * FROM SHOP_TB ORDER BY HIT DESC ";
+		
+		try {
+			pstm = con.prepareStatement(sql);
+			System.out.println("03. query 준비: " + sql);
+			
+			rs = pstm.executeQuery();
+			System.out.println("04. query 실행 및 리턴");
+			
+			while(rs.next()) {
+				ShopDto tmp = new ShopDto(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5),
+						rs.getString(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getString(10),
+						rs.getInt(11), rs.getInt(12), rs.getInt(13), rs.getInt(14), rs.getDate(15), rs.getDate(16),
+						rs.getInt(17));
+				
+				res.add(tmp);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+		}
+		
+		return res;
+	}
+	
+	public List<ShopDto> recoTop(Connection con){
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		List<ShopDto> res = new ArrayList<ShopDto>();
+		
+		String sql = " SELECT * FROM SHOP_TB ORDER BY RECO DESC ";
+		
+		try {
+			pstm = con.prepareStatement(sql);
+			System.out.println("03. query 준비: " + sql);
+			
+			rs = pstm.executeQuery();
+			System.out.println("04. query 실행 및 리턴");
+			
+			while(rs.next()) {
+				ShopDto tmp = new ShopDto(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5),
+						rs.getString(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getString(10),
+						rs.getInt(11), rs.getInt(12), rs.getInt(13), rs.getInt(14), rs.getDate(15), rs.getDate(16),
+						rs.getInt(17));
+				
+				res.add(tmp);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+		}
+		
+		return res;
+	}
+	
 	public List<ShopDto> ShopSearch(Connection con, int pageNum, int category_no, String search) {
 		PreparedStatement pstm = null;
 		ResultSet rs = null;

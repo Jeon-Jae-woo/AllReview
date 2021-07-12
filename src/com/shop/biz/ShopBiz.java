@@ -30,6 +30,26 @@ public class ShopBiz {
 		return list;
 	}
 	
+	public List<ShopDto> hitTop(){
+		Connection con = getConnection();
+		
+		List<ShopDto> list = dao.hitTop(con);
+		
+		close(con);
+		
+		return list;
+	}
+	public List<ShopDto> recoTop(){
+		Connection con = getConnection();
+		
+		List<ShopDto> list = dao.recoTop(con);
+		
+		close(con);
+		
+		return list;
+	}
+	
+	
 	public List<ShopDto> ShopSearch(int pageNum, int category_no, String search){
 		Connection con = getConnection();
 		
