@@ -14,8 +14,8 @@
 		left:0;
 		right:0;
 		height: 150px;
-		background-color: WhiteSmoke ;
-		
+		background-color: White;
+		background-color: rgba( 255, 255, 255, 0.5 );		
 		
 	}
 	.footerlogo{
@@ -24,26 +24,39 @@
 		float: left;
 		top: 12px;
 		right: 150px;
+		text-shadow: 2px 2px 2px gray;
 	}
 	#p1{
 		position: relative;
-		right: 100px;
+		right: 9%;
 		bottom: 0px;
+		color: black;
+		font-weight: bold;
+		text-shadow: 2px 2px 2px gray;
 	}
 	#p2{
 		position: relative;
 		top: 10px;
-		right: 205px;
+		right: 18%;
+		color: black;
+		font-weight: bold;
+		text-shadow: 2px 2px 2px gray;
 	}
 	#p3{
 		position: relative;
-		top: 10px;
-		right: 660px;
+		top: 15px;
+		right: 60.5%;
+		color: black;
+		font-weight: bold;
+		text-shadow: 2px 2px 2px gray;
 	}
 	#p4{
 		position: relative;
 		top: 10px;
-		right: 100px;
+		right: 8.8%;
+		color: black;
+		font-weight: bold;
+		text-shadow: 2px 2px 2px gray;
 	}
 	#p5{
 		position: relative;
@@ -52,14 +65,21 @@
 		float: left;
 		left: 350px;
 		bottom: 60px;
+		color: Darkorange;
+		font-weight: bold;
+		text-shadow: 2px 2px 2px gray;
 	}
 	#p6{
 		position: relative;
 		width: 300px;
 		font-size: 25px;
 		float: left;
-		left: 50px;
-		bottom: 30px;
+		left: 80%;
+		bottom: 70px;
+		color: Darkorange;
+		font-weight: bold;
+		text-shadow: 2px 2px 2px gray;
+		
 	}
 </style>
 
@@ -70,7 +90,7 @@
      <footer id="foot">
      	<hr>
            <div class="container">
-         	  <img class="footerlogo" src="resources/Image/footerlogo.png">
+         	  <img class="footerlogo" src="resources/Image/footerlogo3.png">
          	  <p class="text-center text-white" id="p1" style="float:left;">(주)급하게지었조</p>
          	  <br>
          	  <p class="text-center text-white" id="p2" style="float:left">HeadOffice : 6, Teheran-ro 14-gil, Gangnam-gu, Seoul, Republic of Korea</p>
