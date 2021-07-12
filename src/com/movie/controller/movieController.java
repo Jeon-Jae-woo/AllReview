@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,8 +16,11 @@ import javax.servlet.http.HttpSession;
 import com.movie.dto.MovieBoardDto;
 import com.movie.dto.MovieCategoryDto;
 import com.movie.dto.MovieReviewDto;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.user.dto.pagingDto;
 import com.movie.biz.movieBiz;
+import com.file.fileDto;
 import com.movie.biz.MovieBizImple;
 
 
@@ -129,19 +133,35 @@ public class movieController extends HttpServlet {
 				jsResponse("로그인이 되어있지 않습니다", "index.jsp", response);
 			}
 			
+			String realFolder="";
+			String saveFolder = "resources/uploadImage";		//사진을 저장할 경로
+			String encType = "utf-8";				//변환형식
+			int maxSize=5*1024*1024;				//사진의 size
+				
+			ServletContext context = this.getServletContext();		//절대경로를 얻는다
+			realFolder = context.getRealPath(saveFolder);
+			
+			System.out.println(realFolder);
+			MultipartRequest multi = new MultipartRequest(request, realFolder, maxSize, encType,
+	                   new DefaultFileRenamePolicy());
+			
+			String receipt = multi.getFilesystemName("receipt");
+			
+			String review_img = multi.getFilesystemName("uploadImg");
+			
+			System.out.println("file1 + " + receipt);
+			System.out.println("file2 + " + review_img);
+			
+			
 			String nickname = (String)session.getAttribute("nickname");
 			System.out.println("닉네임  : " + nickname);
-			System.out.println(request.getParameter("movie_id"));
-			System.out.println(request.getParameter("reviewtitle"));
-			System.out.println(request.getParameter("content"));
-			System.out.println(request.getParameter("moviegrade"));
 			
 			//닉네임, MOVIE_ID, 제목, 내용, MOVIE_GRADE
-			int movie_id = Integer.parseInt(request.getParameter("movie_id"));
+			int movie_id = Integer.parseInt(multi.getParameter("movie_id"));
 			
-			String title = request.getParameter("reviewtitle");
-			String content = request.getParameter("content");
-			int moviegrade = Integer.parseInt(request.getParameter("moviegrade"));
+			String title = multi.getParameter("reviewtitle");
+			String content = multi.getParameter("content");
+			int moviegrade = Integer.parseInt(multi.getParameter("moviegrade"));
 
 			MovieReviewDto dto = new MovieReviewDto();
 			dto.setMovie_id(movie_id);
@@ -149,6 +169,8 @@ public class movieController extends HttpServlet {
 			dto.setReview_title(title);
 			dto.setReview_content(content);
 			dto.setMovie_grade(moviegrade);
+			dto.setReceipt(receipt);
+			dto.setReview_img(review_img);
 			
 			int result = biz.ReviewInsertService(dto);
 			

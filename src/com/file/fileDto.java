@@ -4,7 +4,14 @@ public class fileDto {
 	private int imgNo;
 	private String title;
 	private String imgName;
+	private String imgName2;
 	
+	public String getImgName2() {
+		return imgName2;
+	}
+	public void setImgName2(String imgName2) {
+		this.imgName2 = imgName2;
+	}
 	public int getImgNo() {
 		return imgNo;
 	}

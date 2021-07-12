@@ -295,6 +295,8 @@ public class MovieBoardDaoImpl implements MovieBoardDao{
 			pstm.setString(3, dto.getReview_title());
 			pstm.setString(4, dto.getReview_content());
 			pstm.setInt(5, dto.getMovie_grade());
+			pstm.setString(6, dto.getReview_img());
+			pstm.setString(7, dto.getReceipt());
 			
 			result = pstm.executeUpdate();
 			
@@ -340,6 +342,7 @@ public class MovieBoardDaoImpl implements MovieBoardDao{
 				dto.setReview_img(rs.getString(9));
 				dto.setStatus_no(rs.getInt(10));
 				dto.setCreatat(rs.getDate(11));
+				dto.setReceipt(rs.getString(12));
 			}
 			
 		} catch (SQLException e) {

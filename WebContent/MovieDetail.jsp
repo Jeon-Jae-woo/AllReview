@@ -313,6 +313,8 @@ $(function(){
 				</div>
 				<div id="content">
 					<textarea rows="23" cols="118" readonly="readonly">${dto.review_content}</textarea>
+					<img alt="" src="resources/uploadImage/${dto.receipt}" width="200" height="200">
+					<img alt="" src="resources/uploadImage/${dto.review_img}" width="200" height="200">
 				</div>
 			</div>
 			<div class="bottombox">
