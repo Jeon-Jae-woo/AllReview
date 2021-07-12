@@ -12,6 +12,7 @@ import com.shop.dao.ShopDao;
 import com.shop.dto.ShopCateDto;
 import com.shop.dto.ShopDto;
 import com.shop.dto.ShopGroupDto;
+import com.user.dto.pagingDto;
 
 public class ShopBiz {
 	
@@ -19,26 +20,44 @@ public class ShopBiz {
 	
 	
 	
-	public List<ShopDto> selectAll(){
+	public List<ShopDto> selectAll(int pageNum, int category_no){
 		Connection con = getConnection();
 		
-		List<ShopDto> list = dao.selectAll(con);
+		List<ShopDto> list = dao.selectAll(con, pageNum, category_no);
 		
 		close(con);
 		
 		return list;
 	}
 	
-	public List<ShopDto> selectAllCate(int cate){
+	public List<ShopDto> ShopSearch(int pageNum, int category_no, String search){
 		Connection con = getConnection();
 		
-		List<ShopDto> list = dao.selectAllCate(con, cate);
+		List<ShopDto> list = dao.ShopSearch(con, pageNum, category_no, search);
 		
 		close(con);
 		
 		
 		return list;
 	}
+	
+	
+	public pagingDto ShopPaging(int pageNum, int category_no) {
+		Connection con = getConnection();
+		int size = dao.ShopTotalCount(con, category_no);
+		pagingDto paging = new pagingDto();
+		paging.setPageNum(pageNum);
+		paging.setItemCount(16);
+		paging.setTotalCount(size);
+		paging.pagination();
+		
+		close(con);
+		
+		return paging;
+	}
+	
+	
+
 	
 	
 	

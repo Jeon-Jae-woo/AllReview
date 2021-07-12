@@ -16,6 +16,7 @@ import com.shop.biz.ShopBiz;
 import com.shop.dto.ShopCateDto;
 import com.shop.dto.ShopDto;
 import com.shop.dto.ShopGroupDto;
+import com.user.dto.pagingDto;
 
 @WebServlet("/shop.do")
 public class ShopController extends HttpServlet {
@@ -35,21 +36,69 @@ public class ShopController extends HttpServlet {
 		ShopBiz biz = new ShopBiz();
 		
 		if(command.equals("shoplist")) {
-			List<ShopDto> list = biz.selectAll();
+			String pageNumParam = request.getParameter("pageNum");
+			String categoryParam = request.getParameter("category_no");
 			
+			int pageNum = 0;
+			if(pageNumParam == null) {
+				pageNum = 1;
+			}else {
+				pageNum = Integer.parseInt(pageNumParam);
+			}
+			int category_no = 0;
+			
+			if(categoryParam == null) {
+				category_no = 1;
+			}else {
+				category_no = Integer.parseInt(categoryParam);
+			}
+			
+			List<ShopDto> list = biz.selectAll(pageNum, category_no);
+			pagingDto paging = biz.ShopPaging(pageNum, category_no);
+			
+			
+			request.setAttribute("paging", paging);
 			request.setAttribute("list", list);
+			request.setAttribute("category_no", category_no);
 			dispatch("shopcate.jsp",request, response);
 			
 			
-		}else if(command.equals("shoplistcate")) {
+		}else if(command.equals("shopsearch")) {
+			String pageNumParam = request.getParameter("pageNum");
+			String categoryParam = request.getParameter("category_no");
+			String searchParam = request.getParameter("search");
 			
-			int cate = Integer.parseInt(request.getParameter("cate"));
-			List<ShopDto> list = biz.selectAllCate(cate);
 			
+			int pageNum = 0;
+			if(pageNumParam == null) {
+				pageNum = 1;
+			}else {
+				pageNum = Integer.parseInt(pageNumParam);
+			}
+			int category_no = 0;
+			
+			if(categoryParam == null) {
+				category_no = 1;
+			}else {
+				category_no = Integer.parseInt(categoryParam);
+			}
+			
+			String search = "%"+searchParam+"%";
+			
+			System.out.println(search+"/"+categoryParam+"/"+pageNum);
+			
+			List<ShopDto> list = biz.ShopSearch(pageNum, category_no, search);
+			pagingDto paging = biz.ShopPaging(pageNum, category_no);
+			
+			
+			request.setAttribute("paging", paging);
 			request.setAttribute("list", list);
-			dispatch("shopcate.jsp", request, response);
+			request.setAttribute("category_no", category_no);
+			dispatch("shopcate.jsp",request, response);
 			
-		}else if(command.equals("shopinsert")){
+			
+		
+	}else if(command.equals("shopinsert")){
 			HttpSession session = request.getSession();
 			
 			String nickname = (String)session.getAttribute("nickname");

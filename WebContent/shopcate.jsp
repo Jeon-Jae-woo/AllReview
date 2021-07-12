@@ -32,32 +32,34 @@
 	<table>
 		<tr>
 		<th width="15%">
-			<a href="shop.do?command=shoplistcate&cate=1">식품</a>
+			<a href="shop.do?command=shoplist&category_no=1">식품</a>
 		</th>
 		<th width="15%">
-			<a href="shop.do?command=shoplistcate&cate=2">운동</a>
+			<a href="shop.do?command=shoplist&category_no=2">운동</a>
 		</th>
 		<th width="15%">
-			<a href="shop.do?command=shoplistcate&cate=3">의류</a>
+			<a href="shop.do?command=shoplist&category_no=3">의류</a>
 		</th>
 		<th width="15%">
-			<a href="shop.do?command=shoplistcate&cate=4">여행</a>
+			<a href="shop.do?command=shoplist&category_no=4">여행</a>
 		</th>
 		<th width="15%">
-			<a href="shop.do?command=shoplistcate&cate=5">의료</a>
+			<a href="shop.do?command=shoplist&category_no=5">의료</a>
 		</th>
 		<th width="15%">
-			<a href="shop.do?command=shoplistcate&cate=6">기타</a>
+			<a href="shop.do?command=shoplist&category_no=6">기타</a>
 		</th>
 		</tr>
 	</table>
 	</div>
-	
-	
+
+
 	<div align="center">
-	<input class="btn btn-default" type="submit" value="Submit">
-	<form action="" method="post">
-	<input type="search" class="form-inline" placeholder="검색">
+	<form action="shop.do" method="post">
+	<input type="hidden" name="command" value="shopsearch">
+	<input type="hidden" name="category_no" value="${category_no }">
+	<input type="text" class="form-inline" placeholder="검색" name="search">
+	<input class="btn btn-default" type="submit" value="검색">
 	</form>
 	</div>
 	<br>
@@ -74,7 +76,7 @@
 			</c:when>
 			<c:otherwise>
 
-				<c:forEach var="dto" items="${list }" end="15">
+				<c:forEach var="dto" items="${list }" >
 				<c:if test="${i%j ==0 }">
 				<tr>
 				</c:if>
@@ -104,11 +106,35 @@
 	
 	
 	<div align="center">
-	<input type="button" value="prev">
-	<a>현재페이지</a>
-	<input type="button" value="next">
-	<input type="button" value="글쓰기" onclick="location.href='shop.do?command=shopwriteform'">
-	
+			<nav class="pull-bottom">
+					<c:set var="pageNum" value="${paging.pageNum }"/>
+					<c:set var="startPage" value="${paging.startPage}"/>
+					<c:set var="endPage" value="${paging.endPage}"/>
+					<c:set var="totalPage" value="${paging.totalPage}"/>
+					<c:set var="itemCount" value="${paging.itemCount}"/>
+					<ul class="pagination">
+						<li>
+				      		<a href="shop.do?command=shoplist&pageNum=1&category_no=${category_no }" aria-label="Previous">
+				        	<span aria-hidden="true">&laquo;</span>
+				      		</a>
+				    	</li>
+						<c:forEach var="item" varStatus="status" begin="${ startPage }" end="${ endPage }" step="1">
+	                		<c:if test="${ pageNum == item }">
+	                    		<li><a href="shop.do?command=shoplist&pageNum=1&category_no=${category_no }">${ item }</a></li>
+	                		</c:if>
+	                		<c:if test="${ pageNum != item }">
+			 					<li><a href="shop.do?command=shoplist&pageNum=${ item }&category_no=${category_no }">${ item }</a></li>
+	                		</c:if>
+	            		</c:forEach>
+	            		<li>
+				      		<a href="shop.do?command=shoplist&pageNum=${totalPage}&category_no=${category_no }" aria-label="Next">
+				        	<span aria-hidden="true">&raquo;</span>
+				      		</a>
+				    	</li>
+					</ul>
+				
+				</nav>
+		<a href="shop.do?command=shopwriteform">글쓰기</a>
 	</div>
 	
 	

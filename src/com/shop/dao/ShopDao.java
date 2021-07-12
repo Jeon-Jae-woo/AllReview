@@ -15,25 +15,32 @@ import com.shop.dto.ShopGroupDto;
 
 public class ShopDao {
 
-	public List<ShopDto> selectAll(Connection con) {
+	public List<ShopDto> selectAll(Connection con, int pageNum, int category_no) {
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		List<ShopDto> res = new ArrayList<ShopDto>();
 
-		String sql = " SELECT * FROM SHOP_TB WHERE STATUS=1 AND DELETES=0 ORDER BY SHOP_NO DESC ";
+		String sql = "SELECT RNUM, STT.* FROM( SELECT ROWNUM AS RNUM, ST.* FROM( SELECT * FROM SHOP_TB WHERE STATUS=1 AND DELETES=0 AND CATEGORY_NO=? ORDER BY SHOP_NO DESC) ST WHERE ROWNUM<?) STT WHERE RNUM>=?"; 
+		
+		int startRow = (pageNum-1)*16+1;
+		int endRow = pageNum*16+1;
+		
 		// AND RECIPT=1 넣기
 		try {
 			pstm = con.prepareStatement(sql);
+			pstm.setInt(1, category_no);
+			pstm.setInt(2, endRow);
+			pstm.setInt(3, startRow);
 			System.out.println("03. query 준비: " + sql);
 
 			rs = pstm.executeQuery();
 			System.out.println("04. query 실행 및 리턴");
 
 			while (rs.next()) {
-				ShopDto tmp = new ShopDto(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5),
-						rs.getString(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getString(10),
-						rs.getInt(11), rs.getInt(12), rs.getInt(13), rs.getInt(14), rs.getDate(15), rs.getDate(16),
-						rs.getInt(17));
+				ShopDto tmp = new ShopDto(rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getString(7),
+						rs.getString(8), rs.getDouble(9), rs.getDouble(10), rs.getDouble(11), rs.getString(12),
+						rs.getInt(13), rs.getInt(14), rs.getInt(15), rs.getInt(16), rs.getDate(17), rs.getDate(18),
+						rs.getInt(19));
 
 				res.add(tmp);
 			}
@@ -49,27 +56,34 @@ public class ShopDao {
 
 		return res;
 	}
-
-	public List<ShopDto> selectAllCate(Connection con, int cate) {
+	
+	public List<ShopDto> ShopSearch(Connection con, int pageNum, int category_no, String search) {
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		List<ShopDto> res = new ArrayList<ShopDto>();
 
-		String sql = " SELECT * FROM SHOP_TB WHERE STATUS=1 AND DELETES=0 AND CATEGORY_NO=? ORDER BY SHOP_NO DESC ";
+		String sql = "SELECT RNUM, STT.* FROM( SELECT ROWNUM AS RNUM, ST.* FROM( SELECT * FROM SHOP_TB WHERE STATUS=1 AND DELETES=0 AND TITLE LIKE ? AND CATEGORY_NO=? ORDER BY SHOP_NO DESC) ST WHERE ROWNUM<?) STT WHERE RNUM>=?"; 
+		
+		int startRow = (pageNum-1)*16+1;
+		int endRow = pageNum*16+1;
+		
 		// AND RECIPT=1 넣기
 		try {
 			pstm = con.prepareStatement(sql);
-			pstm.setInt(1, cate);
+			pstm.setString(1, search);
+			pstm.setInt(2, category_no);
+			pstm.setInt(3, endRow);
+			pstm.setInt(4, startRow);
 			System.out.println("03. query 준비: " + sql);
 
 			rs = pstm.executeQuery();
 			System.out.println("04. query 실행 및 리턴");
 
 			while (rs.next()) {
-				ShopDto tmp = new ShopDto(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5),
-						rs.getString(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getString(10),
-						rs.getInt(11), rs.getInt(12), rs.getInt(13), rs.getInt(14), rs.getDate(15), rs.getDate(16),
-						rs.getInt(17));
+				ShopDto tmp = new ShopDto(rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getString(7),
+						rs.getString(8), rs.getDouble(9), rs.getDouble(10), rs.getDouble(11), rs.getString(12),
+						rs.getInt(13), rs.getInt(14), rs.getInt(15), rs.getInt(16), rs.getDate(17), rs.getDate(18),
+						rs.getInt(19));
 
 				res.add(tmp);
 			}
@@ -77,6 +91,7 @@ public class ShopDao {
 		} catch (SQLException e) {
 			System.out.println("3/4 단계 에러");
 			e.printStackTrace();
+		} finally {
 			close(rs);
 			close(pstm);
 			System.out.println("05. db 종료\n");
@@ -84,6 +99,34 @@ public class ShopDao {
 
 		return res;
 	}
+	
+	public int ShopTotalCount(Connection con, int category_no) {
+		int count = 0;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT COUNT(*) FROM SHOP_TB WHERE STATUS=1 AND DELETES=0 AND CATEGORY_NO=?";
+		
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setInt(1, category_no);
+			rs = pstm.executeQuery();
+			
+			while(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+		}
+		
+		return count;
+	}
+
 
 	public ShopDto selectOne(Connection con, int shopno) {
 		PreparedStatement pstm = null;
