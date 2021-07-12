@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 
 <% request.setCharacterEncoding("UTF-8"); %>
-<% response.setContentType("text/html; UTF-8"); %>       
+<% response.setContentType("text/html; UTF-8"); %>  
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
     
 <!DOCTYPE html>
 <html>
@@ -11,24 +13,114 @@
 <title>영화 리뷰(게시글) 작성</title>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <script type="text/javascript">
-
+$(function(){
+	$("#online").click(function(){
+		$("#online_sub").toggle();
+	});
+	
+	$("#moive").click(function(){
+		$("#movie_sub").toggle();
+		
+	});
+	
+	$("#shop").click(function(){
+		$("#shop_sub").toggle();
+		
+	});
+	
+	$("#book").click(function(){
+		$("#book_sub").toggle();
+		
+	});
+}); 
 </script>
 
 <style type="text/css">
+	
+.categorybox{
+	border: 1px solid gray;
+	height: 260px;
+	background-image: url("./resources/Image/background02.jpg");
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: cover;
+}
+#nav{
+	left: 0px;
+	right:0px;
+	height: 100px;
+
+	}
+#nav ul li{
+	list-style: none;
+	display: inline;
+	position: relative;
+	padding: 0;
+	line-height:40px;
+	text-align:center;
+	float: left;
+	left: 9%;
+	top: 25px;
+	width: 20%;
+	color: white;
+	font-weight: bold;
+	font-size: 15px;
+	}
+
+#nav ul li:hover{
+	color:gray;
+	}
+#subcategorybox{
+	height: 100px;
+	position: relative;
+	top: 20px;
+}
+#online_sub{
+	display: none;
+}
+#movie_sub{
+	/* display: none; */
+}
+#shop_sub{
+	display: none;
+}
+#book_sub{
+	display: none;
+}
+
+#subcategory1 ul li{
+	border-inline: 1px solid lightgray;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.4 );
+	list-style: none;
+	position: relative;
+	padding: 0;
+	line-height:40px;
+	text-align:center;
+	font-weight: bold;
+	color: black;
+	float: left;
+	top: 10px;
+	left: 4%;
+	width: 15%;
+}
+
+#subcategory1 ul li:hover{
+	color:gray;
+}
 
 .title{
 	position: absolute;
 	float: left;
 	left: 9%;
-	top: 520px;
+	top: 500px;
 }
  .totalbox{
 	height: 800px;
 	left: 9%;
 	width: 60%;
-	top: 480px;
+	top: 140px;
 	position: relative;
 }
 .titlebox{
@@ -102,6 +194,62 @@
 	<!-- header -->
 	<%@ include file="../Fix/header.jsp" %>
 	
+	<!-- 카테고리 박스  -->
+	<div class="categorybox">
+		<div id="nav">
+			<ul>
+            	<li id="online">온라인 쇼핑</li>
+            	<li id="moive" <%-- onclick="location.href='movieController?command=moiveListCate&movie_type=${dto.movie_type }'" --%>>영화</li>
+            	<li id="shop">매장</li>
+            	<li id="book">도서</li>
+            </ul>
+		</div>
+		<div id="subcategorybox">
+	       	<div id="subcategory1">
+	       		<ul id="online_sub">
+	       			<li onclick="">세부 카테고리1</li>
+	       			<li onclick="">세부 카테고리2</li>
+	       			<li onclick="">세부 카테고리3</li>
+	       			<li onclick="">세부 카테고리4</li>
+	       			<li onclick="">세부 카테고리5</li>
+	       			<li onclick="">세부 카테고리6</li>
+	       		</ul>
+	       		<ul id="movie_sub">
+	       			<c:choose>
+						<c:when test="${empty moiveListCate }">
+							<tr>
+								<td colspan ="4">----작성된 글이 존재하지 않습니다----</td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="cate" items="${moiveListCate }">
+	       					<li onclick="location.href='movieController?command=moiveListCate&category=${cate.movie_type}&pageNum=1'">${cate.movie_type_name }</li>
+	       					</c:forEach>
+						</c:otherwise>
+					</c:choose>
+	       			
+	       		</ul>
+	       		<ul id="shop_sub">
+	    			<li onclick="">세부 카테고리1</li>
+	       			<li onclick="">세부 카테고리2</li>
+	       			<li onclick="">세부 카테고리3</li>
+	       			<li onclick="">세부 카테고리4</li>
+	       			<li onclick="">세부 카테고리5</li>
+	       			<li onclick="">세부 카테고리6</li>
+	       		</ul>
+	       		<ul id="book_sub">
+	    			<li onclick="">세부 카테고리1</li>
+	       			<li onclick="">세부 카테고리2</li>
+	       			<li onclick="">세부 카테고리3</li>
+	       			<li onclick="">세부 카테고리4</li>
+	       			<li onclick="">세부 카테고리5</li>
+	       			<li onclick="">세부 카테고리6</li>
+	       		</ul>
+	       	</div>
+	    </div>
+    </div>
+	<br>
+	
 	<div class="title">
 		<h3>영화 리뷰 작성</h3>
 	</div>
@@ -126,35 +274,26 @@
 						관람인증 첨부: <input type="file" id="ex_file"> 
 					</div>
 					<div class="moviegrade">
-						영화평점 : <input type="radio" name="moviegrade" value="5">
-						<input type="radio" name="moviegrade" value="4">
-						<input type="radio" name="moviegrade" value="3">
+						영화평점 : <input type="radio" name="moviegrade" value="1">
 						<input type="radio" name="moviegrade" value="2">
-						<input type="radio" name="moviegrade" value="1">
+						<input type="radio" name="moviegrade" value="3">
+						<input type="radio" name="moviegrade" value="4">
+						<input type="radio" name="moviegrade" value="5">
 					</div>
 				</div>
 				<div class="bottombutton">
-					<input class="reviewwrite" type="submit" value="등록">
-					<input class="reviewcancel" type="button" value="취소" onclick="location='MovieList.jsp'">
+					<input class="reviewwrite" type="submit" value="등록" >
+					<input class="reviewcancel" type="button" value="취소" onclick="javascript:history.back(-1)">
 				</div>
 					
 			</form>
 		</div>
 	</div>
-	
-		
-		<!-- 별점주기  -->
-		<!-- <div class="star">
-			<label>영화 평점: ★★★★★</label>
-		</div> -->
-					
-					
-				
+
 
 	<%@ include file="MovieTop5.jsp" %>
 	
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br>
 	
 	<!-- footer -->
 	<%@ include file="../Fix/footer.jsp" %>

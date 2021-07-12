@@ -17,6 +17,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
+<style type="text/css">
+.mainlogo{
+position: absolute;
+top: 15px;
+left: 41%;
+}
+</style>
+
 </head>
 <body>
 <!-- 임시 헤더  , 수정 필요 -->
@@ -29,8 +37,10 @@
 		%>
 	
 	<% } %>
-<nav class="navbar navbar-default" style="height:80px">
+<nav class="navbar navbar-default" style="height:130px; background-color:white;">
+	
   <div class="container-fluid">
+  <img class="mainlogo" src="resources/Image/mainlogo3.png"  height="130px;">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
