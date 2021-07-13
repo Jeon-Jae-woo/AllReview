@@ -338,7 +338,7 @@ body{
 									<c:forEach var="dto" items="${list }">
 									<div style="border-radius: 5px 5px 5px 5px;">
 									<!-- 값 수정 -->
-									<img src="${dto.movie_img}">
+									<img src="resources/uploadImage/${dto.movie_img}">
 									<a href="movieController?command=detail&movie_id=${dto.movie_id}&category_name=${category_name}">${dto.movie_img }</a>
 									<div id="movietitle">${dto.movie_title}</div>
 									</div>
@@ -351,7 +351,7 @@ body{
 				
 				<!-- 영화등록버튼 -->
 				<div class="moviecreate">
-					<input type="button" id="moviecreatebtn" value="영화등록" onclick="location.href='movieController?command=moviecreate'">
+					<input type="button" id="moviecreatebtn" value="영화등록" onclick="location.href='movieController?command=moviecreateForm&category=${category}&category_name=${category_name}'">
 				</div>
 				
 				<!-- 페이징처리 -->

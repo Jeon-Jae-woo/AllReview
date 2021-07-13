@@ -279,9 +279,14 @@ body{
 				<h1>${category_name} 장르</h1>
 			</div>
 		
+<<<<<<< HEAD
 			<form action="MovieController?command=moviecreate" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="command" value="moviecreate">
 			<input type="hidden" name="movie_id" value="${movie_id }">
+=======
+			<form action="movieController?command=moviecreate" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="category" value="${category }">
+>>>>>>> 86bc0fdac7d8165e7cd7af1cdb9d920114f3e7f4
 			<div id="box">
 				<div id="wrap">
 					<div class="poster">영화포스터</div>
@@ -294,7 +299,7 @@ body{
 		            </tr>
 		            <tr>
 		                <th>기본정보 : </th>
-		                <td><input type="text" name="movie_type_nm"></td>
+		                <td><input type="text" name="movie_type_nm" value="${category_name}" readonly="readonly"></td>
 		            </tr>
 		             <tr>
 		                <th>감독 : </th>
@@ -305,8 +310,8 @@ body{
 		                <td><input type="text" name="actor"></td>
 		            </tr>
 		             <tr>
-		                <th>영화 평점 : </th>
-		                <td><input type="text" name="movie_grade"></td>
+		                <th>participant : </th>
+		                <td><input type="text" name="participant"></td>
 		            </tr>
 		        </table>	
 		        

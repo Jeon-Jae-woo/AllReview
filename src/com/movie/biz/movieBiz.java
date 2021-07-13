@@ -25,7 +25,7 @@ public interface movieBiz {
 	public pagingDto movieReviewPaging(int pageNum, int movie_id);
 	
 	//영화등록 버튼 및 작성
-	public boolean movieinsert(MovieBoardDto dto);
+	public int movieinsert(MovieBoardDto dto);
 	//영화등록한거 삭제
 	
 	
