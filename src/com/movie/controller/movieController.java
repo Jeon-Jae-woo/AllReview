@@ -20,7 +20,6 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.user.dto.pagingDto;
 import com.movie.biz.movieBiz;
-import com.file.fileDto;
 import com.movie.biz.MovieBizImple;
 
 
@@ -191,9 +190,26 @@ public class movieController extends HttpServlet {
 			MovieReviewDto dto = biz.reviewSelectService(review_id);
 			
 			request.setAttribute("moiveListCate", moiveListCate);
-			
 			request.setAttribute("dto", dto);
-			dispatch("MovieDetail.jsp", request, response);	
+			
+			HttpSession session = request.getSession();
+			
+			System.out.println("session : " + session.getAttribute("level"));
+			//승인 및 거절된 글은 관리자만 열람 가능, 승인된 글은 일반 유저도 접근 가능
+			if(dto.getStatus_no()!=1) {
+				if(session.getAttribute("level")!=null) {
+					if(session.getAttribute("level").equals("2") || session.getAttribute("level").equals("1")) {
+						dispatch("MovieDetail.jsp", request, response);	
+					}
+				}else {
+					jsResponse("유효하지 않은 접근입니다", "index.jsp", response);
+				}
+			}else {
+				dispatch("MovieDetail.jsp", request, response);	
+			}
+			
+			
+			
 		}
 		//리뷰 수정
 		else if(command.equals("reviewUpdateForm")) {
