@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.shop.biz.ShopBiz;
 import com.shop.dto.ShopCateDto;
 import com.shop.dto.ShopDto;
@@ -105,20 +108,41 @@ public class ShopController extends HttpServlet {
 	}else if(command.equals("shopinsert")){
 			HttpSession session = request.getSession();
 			
+			//파일 처리
+			String realFolder="";
+			String saveFolder = "resources/uploadImage";		//사진을 저장할 경로
+			String encType = "utf-8";				//변환형식
+			int maxSize=5*1024*1024;				//사진의 size
+				
+			ServletContext context = this.getServletContext();		//절대경로를 얻는다
+			realFolder = context.getRealPath(saveFolder);
+			
+			System.out.println(realFolder);
+			MultipartRequest multi = new MultipartRequest(request, realFolder, maxSize, encType,
+	                   new DefaultFileRenamePolicy());
+			
+			String receipt = multi.getFilesystemName("receipt");
+			
+			String review_img = multi.getFilesystemName("uploadImg");
+			
+			System.out.println("file1 + " + receipt);
+			System.out.println("file2 + " + review_img);
+			//파일 처리 끝
+			
 			String nickname = (String)session.getAttribute("nickname");
-			int cate = Integer.parseInt(request.getParameter("category"));
-			int group = Integer.parseInt(request.getParameter("group"));
-			String title = request.getParameter("shoptitle");
-			String content = request.getParameter("shopcontent");
-			double service = Double.parseDouble(request.getParameter("service"));
-			double clean = Double.parseDouble(request.getParameter("clean"));
-			double traffic = Double.parseDouble(request.getParameter("traffic"));
-			String revisit = request.getParameter("revisit");
+			int cate = Integer.parseInt(multi.getParameter("category"));
+			int group = Integer.parseInt(multi.getParameter("group"));
+			String title = multi.getParameter("shoptitle");
+			String content = multi.getParameter("shopcontent");
+			double service = Double.parseDouble(multi.getParameter("service"));
+			double clean = Double.parseDouble(multi.getParameter("clean"));
+			double traffic = Double.parseDouble(multi.getParameter("traffic"));
+			String revisit = multi.getParameter("revisit");
 			
 			
 			
 			ShopDto dto = new ShopDto();
-			dto.setnickname(nickname);
+			dto.setNickname(nickname);
 			dto.setCate_no(cate);
 			dto.setGroup_no(group);
 			dto.setTitle(title);
@@ -127,6 +151,9 @@ public class ShopController extends HttpServlet {
 			dto.setClean(clean);
 			dto.setTraffic(traffic);
 			dto.setRevisit(revisit);
+			dto.setRecipt_img(receipt);
+			dto.setUpload_img(review_img);
+			
 			
 			int res = biz.insert(dto);
 			
@@ -195,7 +222,7 @@ public class ShopController extends HttpServlet {
 			ShopDto dto = biz.selectOne(shopno);
 			
 			
-			String dtonickname = dto.getnickname();
+			String dtonickname = dto.getNickname();
 			String nickname = (String)session.getAttribute("nickname");
 			System.out.println(dtonickname +"/"+session.getAttribute("nickname"));
 			

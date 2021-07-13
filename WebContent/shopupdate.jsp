@@ -35,7 +35,7 @@
 	</tr>
 	<tr>
 		<td colspan="4">
-			<img src="img/J.png">
+			<img src="resources/uploadImage/${dto.upload_img }">
 		</td>
 	</tr>
 	<tr>
@@ -97,11 +97,7 @@
   	<input type="radio" name="revisit" value="N" >N
   </td>
   </tr>
-	<tr>
-		<td colspan="4">지도
-		<img src="img/J.png">
-		</td>
-	</tr>
+
 	<tr>
 		<td colspan="4">
 		<input type="submit" value="수정">

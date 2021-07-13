@@ -82,7 +82,7 @@
 	</tr>
 	<tr>
 		<td colspan="4">
-			<img src="img/J.png">
+			<img src="resources/uploadImage/${dto.upload_img }" width="200" height="200">
 		</td>
 	</tr>
 	<tr>

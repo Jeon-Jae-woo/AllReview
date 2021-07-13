@@ -166,7 +166,7 @@
 				<tr>
 				</c:if>
 					<td>
-						<img src="img/J.png" class="img-responsive" alt="Responsive image" onclick="location.href='shop.do?command=shopdetail&shopno=${dto.shopno }'">
+						<img src="resources/uploadImage/${dto.upload_img }" class="img-responsive" alt="Responsive image" onclick="location.href='shop.do?command=shopdetail&shopno=${dto.shopno }'">
 						<a href="shop.do?command=shopdetail&shopno=${dto.shopno }">${dto.shopno } ${dto.title }</a><br>
 						<label>평점 ★:  </label>${Math.round((((dto.service)+(dto.clean)+(dto.traffic))/3)*100)/100.0 }<br>
 						<label>조회수:${dto.hit } </label>
