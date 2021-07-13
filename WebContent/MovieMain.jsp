@@ -42,21 +42,16 @@ $(function(){
 <style type="text/css">
 	
 .categorybox{
-	border: 1px solid gray;
+	/* border: 1px solid gray; */
 	height: 260px;
-	background-image: url("./resources/Image/background02.jpg");
-	background-repeat: no-repeat;
-	background-position: left top;
-	background-size: cover;
 }
 #nav{
 	left: 0px;
 	right:0px;
 	height: 100px;
-/* 	background-image: url('');
-	background-repeat: no-repeat;
-	background-position: left top;
-	background-size: cover; */
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );	
+
 	}
 #nav ul li{
 	list-style: none;
@@ -69,9 +64,10 @@ $(function(){
 	left: 9%;
 	top: 25px;
 	width: 20%;
-	color: white;
+	color: black;
 	font-weight: bold;
 	font-size: 15px;
+	text-shadow: 1px 1px 1px gray;
 	}
 
 #nav ul li:hover{
@@ -99,7 +95,7 @@ $(function(){
 #subcategory1 ul li{
 	border-inline: 1px solid lightgray;
 	background-color: white;
-	background-color: rgba( 255, 255, 255, 0.4 );
+	background-color: rgba( 255, 255, 255, 0.8 );
 	list-style: none;
 	position: relative;
 	padding: 0;
@@ -111,6 +107,7 @@ $(function(){
 	top: 10px;
 	left: 4%;
 	width: 15%;
+	text-shadow: 1px 1px 1px gray;
 
 }
 
@@ -136,12 +133,15 @@ $(function(){
 	float: left;
 	left: 100px;
 	height: 80px;
+	color: white;
+	text-shadow: 1px 1px 1px gray;
 }
 h1{
 	display: inline;
 	position: relative;
 	left: 5%;
-	top: 25px;
+	top: 5px;
+	
 }
 #select{
 	display:inline;
@@ -169,7 +169,9 @@ h1{
 	border: 1px solid gray;
 	border-radius: 5px 5px 5px 5px;
 	position: relative;
-	top: 100px;
+	top: 80px;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );
 
 }
 #wrap{
@@ -187,22 +189,26 @@ h1{
 	height: 170px;
 	border: 1px solid gray;
 	position: relative;
-	bottom: 90px;
+	bottom: 80px;
 	left: 5%;
 	float: left;
 	margin: 45px;
 	box-sizing: border-box;
+	/* background-color: gray; */
 }
 
 #wrap > div:nth-child(5){
-clear: both;
+	clear: both;
 }
 #movietitle{
-/* border: 1px dashed red; */
-position: absolute;
-width: 130px;
-text-align: center;
-top: 175px;
+	/* border: 1px dashed red; */
+	position: absolute;
+	width: 130px;
+	text-align: center;
+	top: 175px;
+	color: black;
+	font-weight: bold;
+	/* text-shadow: 1px 1px 1px gray; */
 }
 .moviecreate{
 	/* border: 1px dashed red; */
@@ -220,14 +226,20 @@ top: 175px;
 	font-size: 15px;
 }
 .pull-bottom{
- /* 	border: 1px dashed red; */
+ /* border: 1px dashed red; */
 	position: relative;
 	text-align: center;
 	width: 50%;
 	left: 27%;
-	top: 5px;
+	bottom: 10px;
 }
+body{
+	background-image: url("./resources/Image/forest1.jpg");
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: cover;
 
+}
 
 </style>
 </head>
@@ -240,13 +252,13 @@ top: 175px;
 	<!-- 카테고리 박스  -->
 	<div class="categorybox">
 		<div id="nav">
-			<ul>
-            	<li id="online">온라인 쇼핑</li>
-            	<li id="moive" <%-- onclick="location.href='movieController?command=moiveListCate&movie_type=${dto.movie_type }'" --%>>영화</li>
-            	<li id="shop">매장</li>
-            	<li id="book">도서</li>
-            </ul>
-		</div>
+				<ul>
+	            	<li id="online">온라인 쇼핑</li>
+	            	<li id="moive" onclick="location.href='movieController?command=moiveListCate'">영화 </li>
+	            	<li id="shop" onclick="location.href='shop.do?command=shoplist'">매장</li>
+	            	<li id="book">도서</li>
+	            </ul>
+	    </div>
 		<div id="subcategorybox">
 	       	<div id="subcategory1">
 	       		<ul id="online_sub">

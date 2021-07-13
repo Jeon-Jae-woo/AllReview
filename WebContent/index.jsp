@@ -20,22 +20,17 @@
 <style type="text/css">
 	
 .categorybox{
-	border: 1px solid gray;
+	/* border: 1px solid gray; */
 	height: 260px;
-	background-image: url("./resources/Image/background02.jpg");
-	background-repeat: no-repeat;
-	background-position: left top;
-	background-size: cover;
 }
 #nav{
-	/* border: 1px dashed red; */
+	/* border: 1px solid gray; */
 	left: 0px;
 	right:0px;
 	height: 100px;
-	/* background-image: url('');
-	background-repeat: no-repeat;
-	background-position: left top;
-	background-size: cover; */
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );	
+	
 	}
 #nav ul li{
 	/* border:1px dashed red; */
@@ -49,9 +44,10 @@
 	left: 9%;
 	top: 25px;
 	width: 20%;
-	color: white;
+	color: black;
 	font-weight: bold;
 	font-size: 18px;
+	text-shadow: 1px 1px 1px gray;
 	}
 
 #nav ul li:hover{
@@ -69,6 +65,8 @@
 	left: 6%;
 	top:80px;
 	width: 400px;
+	color: white;
+	text-shadow: 1px 1px 1px gray;
 }
 #box{
 	border: 1px solid gray;
@@ -78,9 +76,15 @@
 	left: 2.5%;
 	height: 750px;
 	top: 90px;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );	
+	
 }
 #wrap{
+<<<<<<< HEAD
+=======
 	border: 1px dashed red;
+>>>>>>> e9bb12645997fe9b2620c90eabbe1aa0f0f62add
 	position: relative;
 	width: 95%;
 	height: 660px;
@@ -99,73 +103,99 @@
 	margin: 45px;
 	box-sizing: border-box;
 	border-radius: 5px 5px 5px 5px;
+	/* background-color: gray; */
 }
 #wrap > div:nth-child(6){
-clear: both;
-
+	clear: both;
 }
 #mainlistreviewtitle1{
-
-text-align: center;
-position: relative;
-top: 95%;
+	text-align: center;
+	position: relative;
+	top: 95%;
+	color: black;
+	font-weight: bold;
+	/* text-shadow: 1px 1px 1px gray; */
 }
 #mainlistreviewtitle2{
-
-text-align: center;
-position: relative;
-top: 95%;
+	text-align: center;
+	position: relative;
+	top: 95%;
+	color: black;
+	font-weight: bold;
+	/* text-shadow: 1px 1px 1px gray; */
 }
 #mainlistreviewtitle3{
-
-text-align: center;
-position: relative;
-top: 95%;
+	text-align: center;
+	position: relative;
+	top: 95%;
+	color: black;
+	font-weight: bold;
+	/* text-shadow: 1px 1px 1px gray; */
 }
 #mainlistreviewtitle4{
-
-text-align: center;
-position: relative;
-top: 95%;
+	text-align: center;
+	position: relative;
+	top: 95%;
+	color: black;
+	font-weight: bold;
+	/* text-shadow: 1px 1px 1px gray; */
 }
 #mainlistreviewtitle5{
-
-text-align: center;
-position: relative;
-top: 95%;
+	text-align: center;
+	position: relative;
+	top: 95%;
+	color: black;
+	font-weight: bold;
+	/* text-shadow: 1px 1px 1px gray; */
 }
 #mainlistreviewtitle6{
-
-text-align: center;
-position: relative;
-top: 95%;
+	text-align: center;
+	position: relative;
+	top: 95%;
+	color: black;
+	font-weight: bold;
+	/* text-shadow: 1px 1px 1px gray; */
 }
 #mainlistreviewtitle7{
-
-text-align: center;
-position: relative;
-top: 95%;
+	text-align: center;
+	position: relative;
+	top: 95%;
+	color: black;
+	font-weight: bold;
+	/* text-shadow: 1px 1px 1px gray; */
 }
 #mainlistreviewtitle8{
-
-text-align: center;
-position: relative;
-top: 95%;
+	text-align: center;
+	position: relative;
+	top: 95%;
+	color: black;
+	font-weight: bold;
+	/* text-shadow: 1px 1px 1px gray; */
 }
 #mainlistreviewtitle9{
-
-text-align: center;
-position: relative;
-top: 95%;
+	text-align: center;
+	position: relative;
+	top: 95%;
+	color: black;
+	font-weight: bold;
+	/* text-shadow: 1px 1px 1px gray; */
 }
 #mainlistreviewtitle10{
-
-text-align: center;
-position: relative;
-top: 95%;
+	text-align: center;
+	position: relative;
+	top: 95%;
+	color: black;
+	font-weight: bold;
+	/* text-shadow: 1px 1px 1px gray; */
 }
 
+body{
+	background-image: url("./resources/Image/forest1.jpg");
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: cover;
 
+}
 </style>
 
 </head>
@@ -181,7 +211,7 @@ top: 95%;
 				<ul>
 	            	<li id="online" onclick="location.href='onlineController?command=list'">온라인 쇼핑</li>
 	            	<li id="moive" onclick="location.href='movieController?command=moiveListCate'">영화 </li>
-	            	<li id="shop" onclick="location.href='indexshoptest.jsp'">매장</li>
+	            	<li id="shop" onclick="location.href='shop.do?command=shoplist'">매장</li>
 	            	<li id="book">도서</li>
 	            </ul>
 	    </div>

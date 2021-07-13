@@ -42,17 +42,16 @@ $(function(){
 <style type="text/css">
 
 .categorybox{
-	border: 1px solid gray;
+	/* border: 1px solid gray; */
 	height: 260px;
-	background-image: url("./resources/Image/background02.jpg");
-	background-repeat: no-repeat;
-	background-position: left top;
-	background-size: cover;
+
 }
 #nav{
 	left: 0px;
 	right:0px;
 	height: 100px;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );
 	}
 #nav ul li{
 	list-style: none;
@@ -65,9 +64,10 @@ $(function(){
 	left: 9%;
 	top: 25px;
 	width: 20%;
-	color: white;
+	color: black;
 	font-weight: bold;
 	font-size: 15px;
+	text-shadow: 1px 1px 1px gray;
 	}
 
 #nav ul li:hover{
@@ -94,7 +94,7 @@ $(function(){
 #subcategory1 ul li{
 	border-inline: 1px solid lightgray;
 	background-color: white;
-	background-color: rgba( 255, 255, 255, 0.4 );
+	background-color: rgba( 255, 255, 255, 0.8 );
 	list-style: none;
 	position: relative;
 	padding: 0;
@@ -106,6 +106,7 @@ $(function(){
 	top: 10px;
 	left: 4%;
 	width: 15%;
+	text-shadow: 1px 1px 1px gray;
 }
 #subcategory1 ul li:hover{
 	color:gray;
@@ -115,6 +116,7 @@ $(function(){
 	float: left;
 	top: 500px;
 	left: 9%;
+	color: white;
 }
  .totalbox{
 	height: 800px;
@@ -122,6 +124,7 @@ $(function(){
 	width: 60%;
 	top: 140px;
 	position: relative;
+	
 }
 .titlebox{
 	border: 1px solid gray;
@@ -129,7 +132,9 @@ $(function(){
 	left: 1%;
 	width: 98%;
 	top: 10px;
-	position: relative
+	position: relative;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );
 }
 
 .contentbox{
@@ -138,7 +143,9 @@ $(function(){
 	left: 1%;
 	width: 98%;
 	top: 20px;
-	position: relative
+	position: relative;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );
 }
 
 #reviewtitle{
@@ -165,13 +172,15 @@ $(function(){
 	top:20px;
 	left: 25px;
 	width: 250px;
+	color: white;
 }
 
 .reciptupload{
 	position: relative;	
 	bottom: 24px;
 	left: 260px;
-	width: 250px; 
+	width: 250px;
+	color: white;
 }
 
 .moviegrade{
@@ -179,6 +188,7 @@ $(function(){
 	bottom: 50px;
 	left: 600px;
 	width: 250px; 
+	color: white;
 }
 
 .reviewwrite{
@@ -192,6 +202,13 @@ $(function(){
 	left: 370px;
 	top: 30px;
 	width: 80px;
+}
+body{
+	background-image: url("./resources/Image/forest1.jpg");
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: cover;
+
 }
 
 
