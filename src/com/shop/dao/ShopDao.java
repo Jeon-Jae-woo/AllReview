@@ -40,7 +40,7 @@ public class ShopDao {
 				ShopDto tmp = new ShopDto(rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getString(7),
 						rs.getString(8), rs.getDouble(9), rs.getDouble(10), rs.getDouble(11), rs.getString(12),
 						rs.getInt(13), rs.getInt(14), rs.getInt(15), rs.getInt(16), rs.getDate(17), rs.getDate(18),
-						rs.getInt(19));
+						rs.getInt(19), rs.getString(20), rs.getString(21));
 
 				res.add(tmp);
 			}
@@ -75,7 +75,7 @@ public class ShopDao {
 				ShopDto tmp = new ShopDto(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5),
 						rs.getString(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getString(10),
 						rs.getInt(11), rs.getInt(12), rs.getInt(13), rs.getInt(14), rs.getDate(15), rs.getDate(16),
-						rs.getInt(17));
+						rs.getInt(17), rs.getString(18), rs.getString(19));
 				
 				res.add(tmp);
 			}
@@ -109,7 +109,7 @@ public class ShopDao {
 				ShopDto tmp = new ShopDto(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5),
 						rs.getString(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getString(10),
 						rs.getInt(11), rs.getInt(12), rs.getInt(13), rs.getInt(14), rs.getDate(15), rs.getDate(16),
-						rs.getInt(17));
+						rs.getInt(17), rs.getString(18), rs.getString(19));
 				
 				res.add(tmp);
 			}
@@ -151,7 +151,7 @@ public class ShopDao {
 				ShopDto tmp = new ShopDto(rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getString(7),
 						rs.getString(8), rs.getDouble(9), rs.getDouble(10), rs.getDouble(11), rs.getString(12),
 						rs.getInt(13), rs.getInt(14), rs.getInt(15), rs.getInt(16), rs.getDate(17), rs.getDate(18),
-						rs.getInt(19));
+						rs.getInt(19), rs.getString(20), rs.getString(21));
 
 				res.add(tmp);
 			}
@@ -215,7 +215,7 @@ public class ShopDao {
 				res = new ShopDto(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5),
 						rs.getString(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getString(10),
 						rs.getInt(11), rs.getInt(12), rs.getInt(13), rs.getInt(14), rs.getDate(15), rs.getDate(16),
-						rs.getInt(17));
+						rs.getInt(17), rs.getString(18), rs.getString(19));
 
 			}
 
@@ -235,11 +235,11 @@ public class ShopDao {
 		PreparedStatement pstm = null;
 		int res = 0;
 
-		String sql = " INSERT INTO SHOP_TB VALUES(SHOPSQ.NEXTVAL,?,?,?,?,?,?,?,?,?,0,0,0,1,SYSDATE,SYSDATE,0) ";
+		String sql = " INSERT INTO SHOP_TB VALUES(SHOPSQ.NEXTVAL,?,?,?,?,?,?,?,?,?,0,0,0,1,SYSDATE,SYSDATE,0,?,?) ";
 
 		try {
 			pstm = con.prepareStatement(sql);
-			pstm.setString(1, dto.getnickname());
+			pstm.setString(1, dto.getNickname());
 			pstm.setInt(2, dto.getCate_no());
 			pstm.setInt(3, dto.getGroup_no());
 			pstm.setString(4, dto.getTitle());
@@ -248,6 +248,8 @@ public class ShopDao {
 			pstm.setDouble(7, dto.getClean());
 			pstm.setDouble(8, dto.getTraffic());
 			pstm.setString(9, dto.getRevisit());
+			pstm.setString(10, dto.getRecipt_img());
+			pstm.setString(11, dto.getUpload_img());
 
 			System.out.println("03. query 준비:" + sql);
 
