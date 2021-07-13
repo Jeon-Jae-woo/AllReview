@@ -20,14 +20,16 @@ public class ShopDto {
 	private Date createat;
 	private Date updateat;
 	private int delete;
-	
+	private String recipt_img;
+	private String upload_img;
+
 	public ShopDto() {
 		super();
 	}
 
 	public ShopDto(int shopno, String nickname, int cate_no, int group_no, String title, String content, double service,
 			double clean, double traffic, String revisit, int hit, int reco, int recipt, int status, Date createat,
-			Date updateat, int delete) {
+			Date updateat, int delete, String recipt_img, String upload_img) {
 		super();
 		this.shopno = shopno;
 		this.nickname = nickname;
@@ -46,11 +48,27 @@ public class ShopDto {
 		this.createat = createat;
 		this.updateat = updateat;
 		this.delete = delete;
+		this.recipt_img = recipt_img;
+		this.upload_img = upload_img;
 	}
 	
 	
-	
-	
+
+	public ShopDto(String nickname, int cate_no, int group_no, String title, String content, double service,
+			double clean, double traffic, String revisit, String recipt_img, String upload_img) {
+		super();
+		this.nickname = nickname;
+		this.cate_no = cate_no;
+		this.group_no = group_no;
+		this.title = title;
+		this.content = content;
+		this.service = service;
+		this.clean = clean;
+		this.traffic = traffic;
+		this.revisit = revisit;
+		this.recipt_img = recipt_img;
+		this.upload_img = upload_img;
+	}
 
 	public ShopDto(int shopno, int group_no, String content, double service, double clean, double traffic,
 			String revisit) {
@@ -64,8 +82,8 @@ public class ShopDto {
 		this.revisit = revisit;
 	}
 
-	public ShopDto(String nickname, int cate_no, int group_no, String title, String content, double service, double clean,
-			double traffic, String revisit) {
+	public ShopDto(String nickname, int cate_no, int group_no, String title, String content, double service,
+			double clean, double traffic, String revisit) {
 		super();
 		this.nickname = nickname;
 		this.cate_no = cate_no;
@@ -86,11 +104,11 @@ public class ShopDto {
 		this.shopno = shopno;
 	}
 
-	public String getnickname() {
+	public String getNickname() {
 		return nickname;
 	}
 
-	public void setnickname(String nickname) {
+	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
 
@@ -213,8 +231,21 @@ public class ShopDto {
 	public void setDelete(int delete) {
 		this.delete = delete;
 	}
-	
-	
-	
-	
+
+	public String getRecipt_img() {
+		return recipt_img;
+	}
+
+	public void setRecipt_img(String recipt_img) {
+		this.recipt_img = recipt_img;
+	}
+
+	public String getUpload_img() {
+		return upload_img;
+	}
+
+	public void setUpload_img(String upload_img) {
+		this.upload_img = upload_img;
+	}
+
 }
