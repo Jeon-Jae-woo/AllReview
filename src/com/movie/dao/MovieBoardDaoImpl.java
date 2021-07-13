@@ -99,9 +99,9 @@ public class MovieBoardDaoImpl implements MovieBoardDao{
 		return res;
 	}
 
+	//영화 등록
 	@Override
-	public boolean movieinsert(Connection con, MovieBoardDto dto) {
-		
+	public int movieinsert(Connection con, MovieBoardDto dto) {
 		PreparedStatement pstm = null;
 		int res = 0;
 		
@@ -111,14 +111,15 @@ public class MovieBoardDaoImpl implements MovieBoardDao{
 			pstm.setString(2, dto.getMovie_title());
 			pstm.setString(3, dto.getDirector());
 			pstm.setString(4, dto.getActor());
-			pstm.setInt(5, dto.getParticipant());
-			pstm.setString(6, dto.getMovie_img());
-			pstm.setDate(7, dto.getCreateat());
-			pstm.setDate(8, dto.getUpdateat());
+			pstm.setString(5, dto.getMovie_img());
 			System.out.println("03.query 준비: " + movieinsertSql);
 			
 			res = pstm.executeUpdate();
 			System.out.println("04.query 실행 및 리턴");
+			
+			if(res>0) {
+				commit(con);
+			}
 				
 		} catch (SQLException e) {
 			System.out.println("3/4단계 에러");
@@ -128,7 +129,7 @@ public class MovieBoardDaoImpl implements MovieBoardDao{
 			System.out.println("05.db종료\n");
 		}
 		
-		return (res>0)?true:false;
+		return res;
 	}
 
 	@Override

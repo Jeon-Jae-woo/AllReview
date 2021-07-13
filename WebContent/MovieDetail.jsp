@@ -331,7 +331,7 @@ body{
 				</div>
 				<div id="content">
 					<textarea rows="23" cols="118" readonly="readonly">${dto.review_content}</textarea>
-					<img alt="" src="resources/uploadImage/${dto.receipt}" width="200" height="200">
+					
 					<img alt="" src="resources/uploadImage/${dto.review_img}" width="200" height="200">
 				</div>
 			</div>
@@ -344,8 +344,34 @@ body{
 				<input id="update" type="button" value="목록" onclick="location='movieController?command=detail&movie_id=${dto.movie_id}&category_name=${category_name}'">
 				<input id="delete" type="button" value="삭제" onclick="location.href='movieController?command=reviewDelete&movie_id=${dto.movie_id}&review_id=${dto.review_id}'">
 			</div>
+		<c:set var="level" value="${level}"/>
+		<c:set var="status" value="${dto.status_no}"/>
+		<br><br>
+			<!-- 관리자만 보이도록 설정  -->
+			<c:choose>
+				<c:when test="${status eq '0'}">
+					<c:choose>
+						<c:when test="${level eq '1' || level eq '2'}">
+							<input id="list" type="button" value="승인" onclick="location='adminController?command=approval&review_id=${dto.review_id}&bigCate=${bigCate}&status=1'">
+							<input id="list" type="button" value="거절" onclick="location='adminController?command=approval&review_id=${dto.review_id}&bigCate=${bigCate}&status=2'">
+						</c:when>
+					</c:choose>
+				</c:when>
+			</c:choose>
+			
+				
+					<c:choose>
+						<c:when test="${level eq '1' || level eq '2'}">
+							<img alt="" src="resources/uploadImage/${dto.receipt}" width="200" height="200">
+						</c:when>
+					</c:choose>
+			
+		
 		</div>
 	</div>
+
+	
+	
 	
 	<!-- 조회순 추천순 top5 -->
 	<%@ include file="MovieTop5.jsp" %>

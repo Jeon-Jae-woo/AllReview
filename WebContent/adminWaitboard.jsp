@@ -88,7 +88,7 @@
 	
 		<div class="container col-sm-6 text-center" id="adminpage_div2">
 			<!-- 제목으로 글 검색  -->
-			<form class="navbar-form text-center" role="search">
+			<form class="navbar-form text-center" role="search" action="adminController" method="post">
 				<input type="hidden" name="command" value="waitList">
 				<input type="hidden" name="status" value="${status}">
         		<div class="form-group">
@@ -111,6 +111,7 @@
 					</tr>
 				</thead>
 				<tbody>
+					<c:set var="category_name" value="${category}"/>
 					<c:choose>
 						<c:when test="${empty totalList }">
 							<tr>
@@ -118,16 +119,49 @@
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach var="list" items="${totalList}">
-								<tr>
-									<td>${list.categoryName }</td>
-									<td>${list.title }</td>
-									<td>${list.createAt }</td>
-								</tr>
+							<c:choose>
+								<c:when test="${category_name eq '매장' }">
+									<c:forEach var="list" items="${totalList}">
+										<tr>
+											<td>${list.categoryName }</td>
+											<td><a href="shop.do?command=shopdetail&shopno=${list.boardNo}">${list.title }</a></td>
+											<td>${list.createAt }</td>
+										</tr>
+									</c:forEach>
+								</c:when>
+								<c:when test="${category_name eq '온라인' }">
+									<c:forEach var="list" items="${totalList}">
+										<tr>
+											<td>${list.categoryName }</td>
+											<td><a href="onlineController?command=detail&board_id=${list.boardNo}">${list.title }</a></td>
+											<td>${list.createAt }</td>
+										</tr>
+									</c:forEach>
+								</c:when>
+								<c:when test="${category_name eq '영화' }">
+									<c:forEach var="list" items="${totalList}">
+										<tr>
+											<td>${list.categoryName }</td>
+											<td><a href="movieController?command=reviewDetail&review_id=${list.boardNo}">${list.title }</a></td>
+											<td>${list.createAt }</td>
+										</tr>
+									</c:forEach>
+								</c:when>
+								<c:when test="${category_name eq '책' }">
+									<c:forEach var="list" items="${totalList}">
+										<tr>
+											<td>${list.categoryName }</td>
+											<td><a href="bookController?command=reviewDetail&review_id=${list.boardNo}">${list.title }</a></td>
+											<td>${list.createAt }</td>
+										</tr>
+									</c:forEach>
+								</c:when>
 								
-							</c:forEach>
+							
+							</c:choose>
 						</c:otherwise>
 					</c:choose>
+					
 				</tbody>
 			</table>
 			<hr>

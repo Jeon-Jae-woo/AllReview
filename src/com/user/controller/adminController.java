@@ -144,7 +144,7 @@ public class adminController extends HttpServlet {
 			
 			int status = 0;
 			if(statusParam == null) {
-				status = 1;
+				status = 0;
 			}else {
 				status = Integer.parseInt(statusParam);
 			}
@@ -169,6 +169,21 @@ public class adminController extends HttpServlet {
 			request.setAttribute("status", status);
 			dispatch("adminWaitboard.jsp", request, response);
 			
+			
+		}
+		//글 승인 및 거절
+		else if(command.equals("approval")) {
+			int status = Integer.parseInt(request.getParameter("status"));
+			String bigCate = request.getParameter("bigCate");
+			int review_id = Integer.parseInt(request.getParameter("review_id"));
+			
+			int result = adminbiz.approvalService(status, bigCate, review_id);
+			
+			if(result>0) {
+				jsResponse("정상적으로 처리되었습니다", "adminController?command=waitList", response);
+			}else {
+				jsResponse("실패했습니다", "adminController?command=waitList", response);
+			}
 			
 		}
 	

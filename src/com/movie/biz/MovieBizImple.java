@@ -45,12 +45,12 @@ public class MovieBizImple implements movieBiz{
 	}
 	
 	@Override
-	public boolean movieinsert(MovieBoardDto dto) {
+	public int movieinsert(MovieBoardDto dto) {
 		Connection con = getConnection();
 		
-		boolean res = movievBoardDao.movieinsert(con, dto);
+		int res = movievBoardDao.movieinsert(con, dto);
 		
-		if(res) {
+		if(res>0) {
 			commit(con);
 		}else {
 			rollback(con);
@@ -102,15 +102,18 @@ public class MovieBizImple implements movieBiz{
 	//리뷰 리스트 페이징
 	@Override
 	public pagingDto movieReviewPaging(int pageNum, int movie_id) {
+		Connection con = getConnection();
 		pagingDto paging = new pagingDto();
 		paging.setPageNum(pageNum);
 		paging.setItemCount(5);
 		int size = 0;
-		size = movievBoardDao.MovieRowCount(movie_id);
+		size = movievBoardDao.MovieReviewCount(con, movie_id);
 
 		paging.setTotalCount(size);
 		paging.pagination();
 		
+		System.out.println(size);
+		close(con);
 		return paging;
 		
 	}
