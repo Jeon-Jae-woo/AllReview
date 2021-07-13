@@ -17,30 +17,24 @@
 <style type="text/css">
 .catetb{
 	margin-right: 30%;
-	
-
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );
+	font-weight: bold;
 }
 
 .categorybox{
-	border: 1px solid gray;
+	/* border: 1px solid gray; */
 	height: 260px;
-	background-image: url("./resources/Image/background02.jpg");
-	background-repeat: no-repeat;
-	background-position: left top;
-	background-size: cover;
 }
 #nav{
-	/* border: 1px dashed red; */
 	left: 0px;
 	right:0px;
 	height: 100px;
-	/* background-image: url('');
-	background-repeat: no-repeat;
-	background-position: left top;
-	background-size: cover; */
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );	
+
 	}
 #nav ul li{
-	/* border:1px dashed red; */
 	list-style: none;
 	display: inline;
 	position: relative;
@@ -51,19 +45,43 @@
 	left: 9%;
 	top: 25px;
 	width: 20%;
-	color: white;
+	color: black;
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 15px;
+	text-shadow: 1px 1px 1px gray;
 	}
 
 #nav ul li:hover{
 	color:gray;
 	}
 #subcategorybox{
-	/* border:1px dashed red; */
+/* 	border:1px dashed red; */
 	height: 100px;
 	position: relative;
 	top: 20px;
+}
+
+#subcategory1 ul li{
+	border-inline: 1px solid lightgray;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );
+	list-style: none;
+	position: relative;
+	padding: 0;
+	line-height:40px;
+	text-align:center;
+	font-weight: bold;
+	color: black;
+	float: left;
+	top: 10px;
+	left: 4%;
+	width: 15%;
+	text-shadow: 1px 1px 1px gray;
+
+}
+
+#subcategory1 ul li:hover{
+	color:gray;
 }
 
 
@@ -81,14 +99,26 @@
 	width: 300px;
 	text-align: center;
 	height: 200px;
-	
-
+	background-color: white;
+	text-shadow: 1px 1px 1px gray;
+	background-color: rgba( 255, 255, 255, 0.8 );
 }
 #view_tb{
 	top:350px;
 	width: 300px;
 	text-align: center;
 	height: 200px;
+	background-color: white;
+	text-shadow: 1px 1px 1px gray;
+	background-color: rgba( 255, 255, 255, 0.8 );
+}
+
+body{
+	background-image: url("./resources/Image/forest1.jpg");
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: cover;
+
 }
 </style>
 </head>
@@ -106,12 +136,20 @@
 	    </div>
 	    <div id="subcategorybox">
 			<div id="subcategory1">
+				<ul id="online_sub">
+	       			<li onclick="location.href='shop.do?command=shoplist&category_no=1'">식품</li>
+	       			<li onclick="location.href='shop.do?command=shoplist&category_no=2'">운동</li>
+	       			<li onclick="location.href='shop.do?command=shoplist&category_no=3'">의류</li>
+	       			<li onclick="location.href='shop.do?command=shoplist&category_no=4'">여행</li>
+	       			<li onclick="location.href='shop.do?command=shoplist&category_no=5'">의료</li>
+	       			<li onclick="location.href='shop.do?command=shoplist&category_no=6'">기타</li>
+	       		</ul>
 			</div>
 		</div>
 	</div>
 	
 
-	<div align="center">
+	<!-- <div align="center">
 	<table>
 		<tr>
 		<th width="15%">
@@ -134,7 +172,7 @@
 		</th>
 		</tr>
 	</table>
-	</div>
+	</div> -->
 
 
 	<div align="center">
@@ -190,7 +228,7 @@
 	
 	<div class="side_table">
 		<div class="side_title01">
-			<h4> 영화 리뷰 추천수 상위 top5 </h4>
+			<h4 style="color:white; text-weight:bold;"> 영화 리뷰 추천수 상위 top5 </h4>
 		</div>
 			
 		<div>
@@ -227,7 +265,7 @@
 		
 		<br>
 		<div class="side_title02">
-			<h4> 영화 리뷰 조회수 상위 top5 </h4>
+			<h4 style="color:white; text-weight:bold;"> 영화 리뷰 조회수 상위 top5 </h4>
 		</div>
 		
 		<div>
@@ -293,9 +331,10 @@
 				      		</a>
 				    	</li>
 					</ul>
-				
+					<input type="button" onclick="location.href='shop.do?command=shopwriteform'" value="리뷰 작성">
 				</nav>
-		<a href="shop.do?command=shopwriteform">글쓰기</a>
+				
+		<!-- <a href="shop.do?command=shopwriteform">글쓰기</a> -->
 	</div>
 	
 	

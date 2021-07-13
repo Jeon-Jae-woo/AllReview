@@ -76,6 +76,7 @@ public class ShopController extends HttpServlet {
 			String searchParam = request.getParameter("search");
 			
 			
+			
 			int pageNum = 0;
 			if(pageNumParam == null) {
 				pageNum = 1;
