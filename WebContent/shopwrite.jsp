@@ -196,7 +196,7 @@ function setThumbnail(event) {
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-default">작성</button>
-      <button type="button" class="btn btn-default" onclick="location.href='shop.do?command=shopcate'">취소</button>
+      <button type="button" class="btn btn-default" onclick="location.href='shop.do?command=shoplist'">취소</button>
     </div>
   </div>
   </td>
