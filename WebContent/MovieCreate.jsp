@@ -265,9 +265,8 @@ text-align: center;
 				<h1>${category_name}</h1>
 			</div>
 		
-			<form action="MovieController" method="post">
-			<input type="hidden" name="command" value="moviecreate">
-			<input type="hidden" name="movie_id" value="${movie_id }">
+			<form action="movieController?command=moviecreate" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="category" value="${category }">
 			<div id="box">
 				<div id="wrap">
 					<div class="poster">영화포스터</div>
@@ -280,7 +279,7 @@ text-align: center;
 		            </tr>
 		            <tr>
 		                <th>기본정보 : </th>
-		                <td><input type="text" name="movie_type_nm"></td>
+		                <td><input type="text" name="movie_type_nm" value="${category_name}" readonly="readonly"></td>
 		            </tr>
 		             <tr>
 		                <th>감독 : </th>
@@ -291,8 +290,8 @@ text-align: center;
 		                <td><input type="text" name="actor"></td>
 		            </tr>
 		             <tr>
-		                <th>영화 평점 : </th>
-		                <td><input type="text" name="movie_grade"></td>
+		                <th>participant : </th>
+		                <td><input type="text" name="participant"></td>
 		            </tr>
 		        </table>	
 		        
@@ -301,7 +300,7 @@ text-align: center;
 			
 			<div class="comment">영화 포스터를 첨부하세요</div>
 			<div class="attached_poster">
-				<input type="file" id="ex_file">
+				<input type="file" id="ex_file" name="poster">
 			</div>
 			
 			<div>

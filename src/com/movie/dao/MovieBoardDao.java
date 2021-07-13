@@ -18,7 +18,7 @@ public interface MovieBoardDao {
 
 	//영화 리뷰 리스트(movie_id로 구분)
 	String movieReviewList = "SELECT RNUM, REVIEW_ID, NICKNAME, MOVIE_ID, REVIEW_TITLE, MOIVE_GRADE, REVIEW_R_NUM, REVIEW_V_NUM, CREATEAT FROM(SELECT ROWNUM AS RNUM, REVIEW_ID, NICKNAME, MOVIE_ID, REVIEW_TITLE, MOIVE_GRADE, REVIEW_R_NUM, REVIEW_V_NUM, CREATEAT FROM (SELECT REVIEW_ID, NICKNAME, MOVIE_ID, REVIEW_TITLE, MOIVE_GRADE, REVIEW_R_NUM, REVIEW_V_NUM, CREATEAT FROM MOVIE_REVIEW WHERE MOVIE_ID=? AND DELETE_N=0 AND STATUS_NO=1 )WHERE ROWNUM<?) WHERE RNUM >=?";
-	String movieReviewRow = "SELECT COUNT(*) FROM MOVIE_REVIEW WHERE MOVIE_ID=? AND DELETE_N=0";
+	String movieReviewRow = "SELECT COUNT(*) FROM MOVIE_REVIEW WHERE MOVIE_ID=? AND DELETE_N=0 AND STATUS_NO=1";
 	
 	//영회 리뷰 등록
 	String reviewInsert = "INSERT INTO MOVIE_REVIEW VALUES(MOVIE_REVIEWSEQ.NEXTVAL,?,?,?,?,?,0,0,?,0,0,SYSDATE,SYSDATE,?)";
@@ -33,7 +33,9 @@ public interface MovieBoardDao {
 	String reviewDelete = "UPDATE MOVIE_REVIEW SET DELETE_N=1 WHERE NICKNAME=? AND REVIEW_ID=?";
 	
 	//영화등록
-	String movieinsertSql = "INSERT INTO MOVIE_BOARD VALUES(MOVIE_BOARDMOVIE_ID.NEXTVAL,?,?,?,?,?,?,SYSDATE,SYSDATE)";
+	String movieinsertSql = "INSERT INTO MOVIE_BOARD VALUES(MOVIE_BOARDSEQ.NEXTVAL,?,?,?,?,0,?,SYSDATE,SYSDATE)";
+	
+	
 	//영화등록한거 수정
 	String movieupdateSql = "UPDATE MOVIE_BOARD SET MOVIE_TITLE=?, MOVIE_TYPE=?, DIRECTOR=?, ACTOR=?, MOVIE_IMG=? WHERE MOVIE_ID=?";
 	//영화 등록한거 삭제
@@ -55,7 +57,10 @@ public interface MovieBoardDao {
 	
 	public List<MovieBoardDto> movieselectAll(Connection con, int category, int pageNum);
 	public MovieBoardDto movieselectOne(Connection con, int movie_id);
-	public boolean movieinsert(Connection con, MovieBoardDto dto);
+	//영화 등록
+	public int movieinsert(Connection con, MovieBoardDto dto);
+	
+	
 	public boolean movieupdate(Connection con, MovieBoardDto dto);
 	public boolean moviedelete(Connection con, int movie_id);
 	public int MovieRowCount(int category);

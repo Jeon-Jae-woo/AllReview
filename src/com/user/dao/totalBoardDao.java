@@ -86,6 +86,17 @@ public interface totalBoardDao {
 			+ "FROM ONLINE_BOARD OB JOIN ONLINE_CATEGORY OC ON(OB.CATEGORY_ID = OC.CATEGORY_ID) "
 			+ "WHERE STATUS=? AND DELETE_N=0 ORDER BY OB.CREATEAT DESC) WHERE ROWNUM<?) WHERE RNUM >=?";
 	
+	//승인 및 거절 처리
+	//매장
+	String offlineStatusPc = "UPDATE SHOP_TB SET STATUS=? WHERE SHOP_NO=? AND DELETES=0";
+	//영화 
+	String movieStatusPc = "UPDATE MOVIE_REVIEW SET STATUS_NO=? WHERE REVIEW_ID=? AND DELETE_N=0";
+	//책
+	String bookStatusPc = "UPDATE REVIEW_BOARD SET STATUS=? WHERE REVIEW_ID=?";
+	//온라인
+	String onlineStatusPc = "UPDATE ONLINE_BOARD SET STATUS=? WHERE ONLINE_BOARD_ID=? AND DELETE_N=0";
+	
+	
 	
 	//DAO
 	public List<totalBoardDto> userShopBoardList(String nickname, int pageNum); 
@@ -110,5 +121,11 @@ public interface totalBoardDao {
 	public int totalBookWaitCount(int status);
 	public int totalOnlineWaitCount(int status);
 	
+	
+	//승인 및 거절 처리
+	public int OfflineStatusProcessing(int status, int review_id);
+	public int MovieStatusProcessing(int status, int review_id);
+	public int BookStatusProcessing(int status, int review_id);
+	public int OnlineStatusProcessing(int status, int review_id);
 	
 }
