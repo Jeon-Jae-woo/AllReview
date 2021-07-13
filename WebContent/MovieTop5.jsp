@@ -19,12 +19,18 @@
 	right: 30px;
 	height: 600px;
 	top: 550px;
+	
 }
 
 #reco_tb{
 	width: 300px;
 	text-align: center;
 	height: 200px;
+	color: black;
+	font-weight: bold;
+ 	/* text-shadow: 1px 1px 1px gray; */
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );
 	
 
 }
@@ -33,6 +39,11 @@
 	width: 300px;
 	text-align: center;
 	height: 200px;
+	color: black;
+	font-weight: bold;
+ 	/* text-shadow: 1px 1px 1px gray; */
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );
 }
 
 </style>
@@ -47,7 +58,7 @@
 	
 	<div class="side_table">
 		<div class="side_title01">
-			<h4> 영화 리뷰 추천수 상위 top5 </h4>
+			<h4 style="color:white;"> 영화 리뷰 추천수 상위 top5 </h4>
 		</div>
 			
 		<div>
@@ -94,7 +105,7 @@
 		
 		<br>
 		<div class="side_title02">
-			<h4> 영화 리뷰 조회수 상위 top5 </h4>
+			<h4 style="color:white;"> 영화 리뷰 조회수 상위 top5 </h4>
 		</div>
 		
 		<div>
