@@ -15,7 +15,7 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-$(function(){
+/* $(function(){
 	$("#online").click(function(){
  		$("#online_sub").toggle()
 
@@ -35,7 +35,7 @@ $(function(){
 		$("#book_sub").toggle();
 		
 	});
-}); 
+});  */
 
 </script>
 
@@ -221,9 +221,11 @@ h1{
 	position: relative;
 	float: right;
 	right: 6%;
-	width: 80px;
+	width: 90px;
 	height: 28px;
+	line-height:27px;
 	font-size: 15px;
+	font-weight: bold;
 }
 .pull-bottom{
  /* border: 1px dashed red; */

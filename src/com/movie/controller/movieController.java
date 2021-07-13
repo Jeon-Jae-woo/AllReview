@@ -262,9 +262,12 @@ public class movieController extends HttpServlet {
 		//영화 등록
 		else if(command.equals("moviecreate")) {
 			 
+			
 			List<MovieCategoryDto> moiveListCate = biz.categoryselectAll();
-
+			
 			request.setAttribute("moiveListCate", moiveListCate);
+		
+			
 			
 			dispatch("MovieCreate.jsp", request, response);
 			
