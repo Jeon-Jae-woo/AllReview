@@ -91,7 +91,9 @@ public class onlineController extends HttpServlet {
 				request.setAttribute("bigCate", "온라인");
 				request.setAttribute("level", level);
 			}
-
+			System.out.println("현재 유저 : " + level);
+			System.out.println("상태값 : " + dto.getStatus());
+			
 			if((dto.getStatus()==0 || dto.getStatus()==2) && (level==1 || level==2)) {
 				dispatch("boarddetail.jsp", request, response);	
 			}
@@ -100,9 +102,6 @@ public class onlineController extends HttpServlet {
 			}else {
 				jsResponse("유효하지 않은 접근입니다", "index.jsp", response);
 			}
-			
-			
-			dispatch("boarddetail.jsp", request, response);
 			
 		}
 		else if(command.equals("updateForm")) {
