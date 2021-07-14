@@ -33,7 +33,10 @@ public interface userBiz {
 	//페이징 처리 - 내가 쓴 글 조회
 	public pagingDto writeListPaging(String nickname, int pageNum, String category);
 
-	
+	//이메일 인증
+	public int emailAuthService(String email, String code);
+	//유저 상태 조회
+	public userDto userStatusService(String email);
 	
 	
 }
