@@ -373,7 +373,35 @@ function removeAllChildNods(el) {
 	
 	
 	</table>
+
+		<c:set var="level" value="${level}"/>
+		<c:set var="status" value="${dto.status}"/>
+		<br><br>
+			<!-- 관리자만 보이도록 설정  -->
+			<c:choose>
+				<c:when test="${status eq '0'}">
+					<c:choose>
+						<c:when test="${level eq '1' || level eq '2'}">
+							<input id="list" type="button" value="승인" onclick="location='adminController?command=approval&review_id=${dto.shopno}&bigCate=${bigCate}&status=1'">
+							<input id="list" type="button" value="거절" onclick="location='adminController?command=approval&review_id=${dto.shopno}&bigCate=${bigCate}&status=2'">
+						</c:when>
+					</c:choose>
+				</c:when>
+			</c:choose>
+			
+			<!-- 영수증 이미지 -->
+			<c:choose>
+				<c:when test="${level eq '1' || level eq '2'}">
+					<img alt="" src="resources/uploadImage/${dto.recipt_img}" width="200" height="200">
+				</c:when>
+			</c:choose>
+
+
+
 </div>
+
+
+
 
 
 <footer ><%@ include file="Fix/footer.jsp" %></footer>

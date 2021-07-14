@@ -35,7 +35,7 @@ public class onlineDaoImpl implements onlineDao {
 			pstm.setInt(1, category_id);
 			pstm.setInt(2, endRow+1);
 			pstm.setInt(3, startRow);
-			
+			System.out.println("카테고리 : " + category_id);
 			res = pstm.executeQuery();
 			
 			if(res.next()) {
