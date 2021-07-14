@@ -11,14 +11,7 @@
 
 <style type="text/css">
 .nmdiv{
-border: 1px red dotted;
-height: 300px;
-
-}
-
-#secmain{
-border: none;
-padding-top:20px;
+border: 1px red dotted;ㅆ
 height: 900px;
 padding-left: 40px;
 
@@ -222,9 +215,9 @@ background: #F8E8FF; border-left: solid 10px #8A66AE;
 }
 
 #btncss{
- border: 1px solid skyblue;
+ border: 1px solid #FE2EF7;
     background-color: rgba(0,0,0,0);
-    color: skyblue;
+    color: #FE2EF7;
     padding: 5px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -234,7 +227,7 @@ background: #F8E8FF; border-left: solid 10px #8A66AE;
 
 #btncss:hover{
     color:white;
-    background-color:skyblue;
+    background-color:#FE2EF7;
 }
 
 body{
@@ -244,6 +237,28 @@ body{
 	background-size: cover;
 }
 
+
+#topbox{
+
+position: relative;
+left: 0.5%;
+width: 70%;
+
+}
+#price{
+
+position: relative;
+width: 170px;
+left: 58%;
+bottom: 35px;
+}
+#good{
+
+position: relative;
+width: 170px;
+left: 70%;
+bottom: 57px;
+}
 
 </style>
 <!-- ------------------------------------------------------------------------------ -->
@@ -359,6 +374,7 @@ $(function(){
 		<div id="secmain">
 			<form action="onlineController?command=update" method="post" enctype="multipart/form-data" > 
 			<!-- <input type="hidden" name="command" value="update"> -->
+			<div id="topbox">
 			<input type="hidden" name="board_id" value="${dto.online_board_id}">
 			<h3 style="color: white; text-weight:bold;">글 수정</h3> 
 			<input type="text" value="작성자: ${dto.nickname }" readonly="readonly" class="autobox"> &nbsp;&nbsp;
@@ -374,7 +390,7 @@ $(function(){
 	
 			<!-- 만족도 출력 -->
 			
-			가격만족도 : <input type="hidden" name="price_sat" id="price_sat" value="">
+			<div id="price"><span style="color:white; text-weight:bold;">가격만족도 : </span> <input type="hidden" name="price_sat" id="price_sat" value="">
 			<select onchange="document.getElementById('price_sat').value = this.options[this.selectedIndex].value">
 			<option value='0.5' >0.5</option>
 			<option value='1'>1</option>
@@ -387,8 +403,9 @@ $(function(){
 			<option value='4.5'>4.5</option>
 			<option value='5'>5</option>
 			</select>
+			</div>
 			
-			상품만족도 : <input type="hidden" name="product_sat" id="product_sat" value="">
+			<div id="good"><span style="color:white; text-weight:bold;">상품만족도 :</span> <input type="hidden" name="product_sat" id="product_sat" value="">
 			<select onchange="document.getElementById('product_sat').value = this.options[this.selectedIndex].value">
 			<option value='0.5'>0.5</option>
 			<option value='1'>1</option>
@@ -401,7 +418,8 @@ $(function(){
 			<option value='4.5'>4.5</option>
 			<option value='5'>5</option>
 			</select>
-			
+			</div>
+			</div>
 			<br><br>
 		
 		
@@ -411,13 +429,14 @@ $(function(){
 		<!-- 내용 출력-->
 		<textarea rows="30" cols="170" class="contentbox" name="content">${dto.online_content } </textarea>
 		<br><br>
+		<div id="bottombutton">
 		<input type="button" value="수정 취소" class="btn1" onclick="history.go(-1)" id="btncss">
 		<input type="submit" class="btn2" value="수정 완료" id="btncss">
 		
 		<div id="uploadImg">
 		<span style="color:white; text-weight:bold;">상품사진 첨부: </span><input style="color:white" type="file" name="uploadImg" >
 		</div>
-		
+		</div>
 		
 		
 		</form>

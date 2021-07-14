@@ -16,12 +16,12 @@ height: 300px;
 
 }
 
-#secmain{
+/* #secmain{
 border: none;
 padding-top:20px;
 height: 900px;
 padding-left: 40px;
-}
+} */
 
 .catemain{
 margin-left: 30px;
@@ -227,9 +227,9 @@ background: #F8E8FF; border-left: solid 10px #8A66AE;
 }
 
 #btncss{
- border: 1px solid skyblue;
-    background-color: rgba(0,0,0,0);
-    color: skyblue;
+ border: 1px solid white;
+    background-color: #58FAF4;
+    color: #6E6E6E;
     padding: 5px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -479,11 +479,9 @@ bottom: 46px;;
 		</div>
 		
 	</section>
-	<br><br><br><br><br><br><br><br>
 
 	
 		<%@ include file="OnlineTop5.jsp" %>
-	<br>
 	<!-- Footer -->
 		<%@ include file="Fix/footer.jsp" %>
 </body>

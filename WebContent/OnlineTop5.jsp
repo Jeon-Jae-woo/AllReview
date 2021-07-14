@@ -58,7 +58,7 @@
 	
 	<div class="side_table">
 		<div class="side_title01">
-			<h4 style="color:white;"> 온라인쇼핑 리뷰 추천수 상위 top5 </h4>
+			<h4 style="color:blue;"> 온라인쇼핑 리뷰 추천수 상위 top5 </h4>
 		</div>
 			
 		<div>
@@ -105,7 +105,7 @@
 		
 		<br>
 		<div class="side_title02">
-			<h4 style="color:white;"> 온라인쇼핑 리뷰 조회수 상위 top5 </h4>
+			<h4 style="color:blue;"> 온라인쇼핑 리뷰 조회수 상위 top5 </h4>
 		</div>
 		
 		<div>

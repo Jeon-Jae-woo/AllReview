@@ -235,9 +235,9 @@ margin:0 auto;
 	transform: translateX(-25%);
 	font-size: 18px;
 	margin-top: 37px;
-   border: 1px solid skyblue;
-    background-color: rgba(0,0,0,0);
-    color: skyblue;
+   border: 1px solid #08088A;
+   background-color: skyblue;
+    color: #08088A;
     padding: 5px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -246,7 +246,7 @@ margin:0 auto;
 }
 .wrtbtn:hover{
    color:white;
-    background-color:skyblue;
+   background-color:#08088A;
 }
 
 .contentbox{
@@ -402,7 +402,7 @@ body{
 								
 								<div class="imgbox">
 								<!--  <img class="img" src="${dto.add_product }"> -->
-								<img class="img" src="./resources/Image/icon01.jpg"> <!-- 이부분 dto.add_product로 바뀌어야함. 아직 글등록시 확인불가. -->
+								<img class="img" src="resources/uploadImage/${dto.add_product }"> <!-- 이부분 dto.add_product로 바뀌어야함. 아직 글등록시 확인불가. -->
 								
 								</div>
 								<br>
@@ -425,7 +425,7 @@ body{
 				</div>
 			<!-- </div> -->
 	</section>
-	<br><br><br>
+	<br><br><br><br>
 	<input type="button" class="wrtbtn" value="글 작성하기" onclick="location.href='onlineController?command=writeForm&category_id=${category_id}&category_name=${category_name }'"><br>
 	<!-- 페이징기능 -->
 				<nav class="pull-bottom" id="navv">

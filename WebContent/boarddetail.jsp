@@ -268,8 +268,8 @@ background: #F8E8FF; border-left: solid 10px #8A66AE;
 
 #btngroup{
 	border: 1px solid red;
-    background-color: rgba(0,0,0,0);
-    color: red;
+    background-color: red;
+    color: white;
     padding: 5px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -278,14 +278,16 @@ background: #F8E8FF; border-left: solid 10px #8A66AE;
 }
 
 #btngroup:hover{
-  color:white;
-  background-color:red;
+  color:red;
+  background-color:white;
 }
 
 #updatebtn{
-	 border: 1px solid skyblue;
-    background-color: rgba(0,0,0,0);
-    color: skyblue;
+	 border: 1px solid #08088A;
+    /* background-color: rgba(0,0,0,0); */
+    background-color:#08088A;
+    /* color: #08088A; */
+    color:white;
     padding: 5px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -293,14 +295,17 @@ background: #F8E8FF; border-left: solid 10px #8A66AE;
     border-bottom-right-radius: 5px;
 }
 #updatebtn:hover{
-  color:white;
+  /* color:white; */
+  color: #08088A;
+  /*  background-color:#08088A; */
+   /* background-color: rgba(0,0,0,0); */
    background-color:skyblue;
 }
 
 #listbtn{
 	border: 1px solid green;
-    background-color: rgba(0,0,0,0);
-    color: green;
+    background-color: green;
+    color: white;
     padding: 5px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -309,14 +314,15 @@ background: #F8E8FF; border-left: solid 10px #8A66AE;
 }
 
 #listbtn:hover{
- 	color:white;
-  	background-color:green;
+ 	/* color:white; */
+ 	color: #08088A;
+  	background-color:yellowgreen;
 }
 
 #deletebtn{
-	border: 1px solid hotpink;
-    background-color: rgba(0,0,0,0);
-    color: hotpink;
+	border: 1px solid #FE2E64;
+    background-color: #FE2E64;
+    color: white;
     padding: 5px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -325,8 +331,8 @@ background: #F8E8FF; border-left: solid 10px #8A66AE;
 }
 
 #deletebtn:hover{
-	color:white;
-  	background-color:hotpink;
+	color:#08088A;
+  	background-color: #F6CEE3;
 }
 body{
 	background-image: url("./resources/Image/on2.png");
@@ -355,7 +361,7 @@ position:relative;
 position:relative;
 bottom: 200px;
 float: left;
-left: 5%;
+left: 3%;
 }
 #bottombutton{
 position: relative;
