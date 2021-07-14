@@ -21,8 +21,8 @@ border: none;
 padding-top:20px;
 height: 900px;
 padding-left: 40px;
-
-
+top: 70px;
+position: relative;
 }
 
 .catemain{
@@ -97,18 +97,16 @@ font-size: 30px;
 
 
 .categorybox{
-	border: 1px solid gray;
+	/* border: 1px solid gray; */
 	height: 260px;
-	background-image: url("./resources/Image/background02.jpg");
-	background-repeat: no-repeat;
-	background-position: left top;
-	background-size: cover;
 }
 #nav{
 
    left: 0px;
    right:0px;
    height: 100px;
+   	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );	
 
    }
 #nav ul li{
@@ -122,9 +120,10 @@ font-size: 30px;
 	left: 9%;
 	top: 25px;
 	width: 20%;
-	color: white;
+	color: black;
 	font-weight: bold;
 	font-size: 15px;
+	text-shadow: 1px 1px 1px gray;
    }
 
 #nav ul li:hover{
@@ -137,7 +136,7 @@ font-size: 30px;
 	top: 20px;
 }
 #online_sub{
-   display: none;
+  /*  display: none; */
 }
 #movie_sub{
    display: none;
@@ -152,7 +151,7 @@ font-size: 30px;
 #subcategory1 ul li{
 border-inline: 1px solid lightgray;
 	background-color: white;
-	background-color: rgba( 255, 255, 255, 0.4 );
+	background-color: rgba( 255, 255, 255, 0.8 );
 	list-style: none;
 	position: relative;
 	padding: 0;
@@ -164,6 +163,7 @@ border-inline: 1px solid lightgray;
 	top: 10px;
 	left: 4%;
 	width: 15%;
+	text-shadow: 1px 1px 1px gray;
 }
 
 #subcategory1 ul li:hover{
@@ -328,6 +328,40 @@ background: #F8E8FF; border-left: solid 10px #8A66AE;
 	color:white;
   	background-color:hotpink;
 }
+body{
+	background-image: url("./resources/Image/on2.png");
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: cover;
+
+}
+
+#titlebox{
+
+padding: 15px;
+width: 76%;
+height: 220px;
+/* position: relative; */
+background-color: white;
+background-color: rgba( 255, 255, 255, 0.8 );
+	
+}
+#content{
+top: 60px;
+position:relative;
+}
+
+#uploadImage{
+position:relative;
+bottom: 200px;
+float: left;
+left: 5%;
+}
+#bottombutton{
+position: relative;
+bottom: 110px;
+}
+
 </style>
 <!-- ------------------------------------------------------------------------------ -->
 
@@ -401,7 +435,7 @@ $(function(){
                    <c:choose>
                   <c:when test="${empty moiveListCate }">
                      <tr>
-                        <td colspan ="4">----작성된 글이 존재하지 않습니다----</td>
+                        <td colspan ="4"><!---작성된 글이 존재하지 않습니다----></td>
                      </tr>
                   </c:when>
                   <c:otherwise>
@@ -437,32 +471,36 @@ $(function(){
 	<section>
 	
 		<div id="secmain">
+			<div id="titlebox">
+				<!-- 제목출력-->
+				<h1><input type="text" value="제목 : ${dto.online_title }" readonly="readonly" class="titlebox" ></h1><br>
+				<input type="text" value="작성자: ${dto.nickname }" readonly="readonly" class="autobox"> &nbsp;&nbsp;
+				<!-- 카테고리 출력 -->
+				<input type="text" value="카테고리: ${dto.category_name }" readonly="readonly" class="autobox">&nbsp;&nbsp;
 		
-		<!-- 제목출력-->
-		<h1><input type="text" value="제목 : ${dto.online_title }" readonly="readonly" class="titlebox" ></h1><br>
-		<input type="text" value="작성자: ${dto.nickname }" readonly="readonly" class="autobox"> &nbsp;&nbsp;
-		<!-- 카테고리 출력 -->
-		<input type="text" value="카테고리: ${dto.category_name }" readonly="readonly" class="autobox">&nbsp;&nbsp;
-
+				
+				<!-- 만족도 출력 -->
+				가격만족도  <input type="text" value="${dto.price_sat }" readonly="readonly"> &nbsp;
+				상품만족도  <input type="text" value="${dto.product_sat }" readonly="readonly"> &nbsp;
+				평점  <input type="text" value="${dto.satavg }" readonly="readonly"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<!-- 조회수,추천수 출력 -->
+				
+				조회수  <strong>${dto.hits }</strong>&nbsp;&nbsp;&nbsp;
+				추천수 <strong>${dto.recomd }</strong><hr class="hr1"> <br>
+				
+				<!-- 추천 -->
+				<input type="button" value="추천" class="csbt" id="btngroup" onclick="">
+				<!-- 신고 -->
+				<input type="button" value="신고" class="wrtbt" id="btngroup" onclick=""><br><br><br>
+			</div>
 		
-		<!-- 만족도 출력 -->
-		가격만족도  <input type="text" value="${dto.price_sat }" readonly="readonly"> &nbsp;
-		상품만족도  <input type="text" value="${dto.product_sat }" readonly="readonly"> &nbsp;
-		평점  <input type="text" value="${dto.satavg }" readonly="readonly"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<!-- 조회수,추천수 출력 -->
-		
-		조회수  <strong>${dto.hits }</strong>&nbsp;&nbsp;&nbsp;
-		추천수 <strong>${dto.recomd }</strong><hr class="hr1"> <br>
-		
-		<!-- 추천 -->
-		<input type="button" value="추천" class="csbt" id="btngroup" onclick="">
-		<!-- 신고 -->
-		<input type="button" value="신고" class="wrtbt" id="btngroup" onclick=""><br><br><br>
 		<!-- 내용 출력-->
-		<textarea rows="27" cols="165" class="contentbox" readonly="readonly">${dto.online_content } </textarea> <br>
-		
+		<textarea id="content" rows="27" cols="165" class="contentbox" readonly="readonly">${dto.online_content } </textarea> <br>
+		<img alt="" src="resources/uploadImage/${dto.add_receipt}" width="200" height="200">
+		<img id="uploadImage" alt="" src="resources/uploadImage/${dto.add_product}" width="200" height="200">
 		<br>
 		<!-- 게시글 삭제버튼 , 게시글작성자한테만 노출 -->
+		<div id="bottombutton">
 		<input type="button" value="작성 글 삭제" class="deletebt" id="deletebtn"
 				onclick="location.href='onlineController?command=delete&board_id=${dto.online_board_id}&category_id=${dto.category_id }'" >
 				
@@ -472,10 +510,11 @@ $(function(){
 				
 		<input type="button" class="btn" id="updatebtn" value="글 수정하기" onclick="location.href='onlineController?command=updateForm&board_id=${dto.online_board_id}'">
 		</div>
+		</div>
 	</section>
 	
 	
-	<br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br>
 	
 		<%@ include file="OnlineTop5.jsp" %>
 	
