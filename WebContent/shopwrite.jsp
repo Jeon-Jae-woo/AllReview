@@ -179,18 +179,6 @@ function setThumbnail(event) {
   </tr>
  
   
-  <tr>
-	<td>
-  <div class="form-group">
-  	
-  	<div class="col-sm-offset-2 col-sm-10">
-  	<div><img src="img/J.png" class="img-responsive" alt="Responsive image"></div>
-  		
-  	</div>
-  </div>
-  </td>
-  </tr>
-  
     <tr>
 	<td>
   <div class="form-group">
