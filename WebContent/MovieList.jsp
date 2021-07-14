@@ -22,7 +22,7 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-$(function(){
+/* $(function(){
 	$("#online").click(function(){
 		$("#online_sub").toggle();
 	});
@@ -41,7 +41,7 @@ $(function(){
 		$("#book_sub").toggle();
 		
 	});
-}); 
+}); */ 
 
 </script>
 
