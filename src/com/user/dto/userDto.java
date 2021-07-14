@@ -16,11 +16,14 @@ public class userDto {
 	private Date createdAt;
 	private Date updatedAt;
 	private int statusNo;
+	private String emailHash;
+	
 	
 	public userDto() {
 		super();
 	}
 	
+
 
 	public String getAddress() {
 		return address;
@@ -101,7 +104,17 @@ public class userDto {
 		this.address_detail = address_detail;
 	}
 
+	public String getEmailHash() {
+		return emailHash;
+	}
 
+
+	public void setEmailHash(String emailHash) {
+		this.emailHash = emailHash;
+	}
+
+	
+	
 	@Override
 	public String toString() {
 		return "userDto [email=" + email + ", nickName=" + nickName + ", levelNo=" + levelNo + ", name=" + name
