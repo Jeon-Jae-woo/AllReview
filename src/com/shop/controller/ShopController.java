@@ -184,12 +184,27 @@ public class ShopController extends HttpServlet {
 			if(res>0) {
 				biz.updatehit(shopno);
 			}
-			
-			
 			request.setAttribute("dto", dto);
 			request.setAttribute("catedto", catedto);
 			request.setAttribute("groupdto", groupdto);
-			dispatch("shopdetail.jsp", request, response);
+			
+			//승인 및 거절된 글은 관리자만 열람 가능, 승인된 글은 일반 유저도 접근 가능
+			int level = 0;
+			if(session.getAttribute("level")!=null) {
+				level = (Integer)session.getAttribute("level");
+				request.setAttribute("bigCate", "매장");
+				request.setAttribute("level", level);
+			}
+
+			if((dto.getStatus()==0 || dto.getStatus()==2) && (level==1 || level==2)) {
+				dispatch("shopdetail.jsp", request, response);	
+			}
+			else if(dto.getStatus()==1){
+				dispatch("shopdetail.jsp", request, response);	
+			}else {
+				jsResponse("유효하지 않은 접근입니다", "index.jsp", response);
+			}
+
 			
 		}else if(command.equals("shopwriteform")) {
 			HttpSession session = request.getSession();

@@ -177,6 +177,11 @@ public class adminController extends HttpServlet {
 			String bigCate = request.getParameter("bigCate");
 			int review_id = Integer.parseInt(request.getParameter("review_id"));
 			
+			System.out.println("status = " + status);
+			System.out.println("bigCate = " + bigCate);
+			System.out.println("review_id = " + review_id);
+			
+			
 			int result = adminbiz.approvalService(status, bigCate, review_id);
 			
 			if(result>0) {
