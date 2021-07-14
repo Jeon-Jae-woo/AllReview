@@ -128,7 +128,7 @@
 }
 #box{
 	width: 60%;
-	height: 350px;
+	height: 383px;
 	border: 1px solid black;
 	top: 140px;
 	left: 9%;
@@ -141,7 +141,7 @@
 #wrap{
 	border: 1px solid black;
 	width: 280px;
-	height: 330px;
+	height: 364px;
 	padding-top: 3px;
 	position: relative;
   	top: 10px;
@@ -149,9 +149,9 @@
 }
 
 .poster{
-	border: 1px dashed red;
+	/* border: 1px dashed red; */
 	width: 270px;
-	height: 320px;
+	height: 357px;
 	text-align: center;
 	margin: auto;
 	/* background: gray; */
@@ -160,8 +160,8 @@
 .list{
 	position: relative;
 	height: 320px;
-	left: 28%;
-	bottom: 315px;
+	left: 33%;
+	bottom: 330px;
 	font-size: 18px;
 	width: 800px;
 }
@@ -228,6 +228,13 @@ body{
 	background-repeat: no-repeat;
 	background-position: left top;
 	background-size: cover;
+}
+#movieposter{
+	top: 1px;
+	width: 270px;
+	hegiht: 290px;
+	object-fit:cover;
+	border-radius: 5px 5px 5px 5px;
 
 }
 
@@ -306,7 +313,7 @@ body{
 		<!-- 영화 기본 정보 -->
 		<div id="box" style="border-radius: 5px 5px 5px 5px;">
 			<div id="wrap" style="border-radius: 5px 5px 5px 5px;">
-				<div class="poster" style="border-radius: 5px 5px 5px 5px;">${dto.movie_img}</div>
+				<div class="poster" style="border-radius: 5px 5px 5px 5px;"><img id="movieposter" src="resources/uploadImage/${dto.movie_img}"></div>
 			</div>
 		     <table class="list"  style="text-align: left">
 				<tr>
