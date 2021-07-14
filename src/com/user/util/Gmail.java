@@ -9,7 +9,7 @@ public class Gmail extends Authenticator {
 	//외부 라이브러리 2개를 사용
 	@Override
 	protected PasswordAuthentication getPasswordAuthentication() {
-		return new PasswordAuthentication("jaewoo68366@gmail.com", "rldjr2dkssk?");
+		return new PasswordAuthentication("?", "?");
 	}
 	
 }
