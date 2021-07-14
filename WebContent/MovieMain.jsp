@@ -242,6 +242,14 @@ body{
 	background-size: cover;
 
 }
+#movieposter{
+	top: 1px;
+	width: 127px;
+	hegiht: 167px;
+	object-fit:cover;
+	border-radius: 5px 5px 5px 5px;
+
+}
 
 </style>
 </head>
@@ -338,8 +346,8 @@ body{
 									<c:forEach var="dto" items="${list }">
 									<div style="border-radius: 5px 5px 5px 5px;">
 									<!-- 값 수정 -->
-									<img src="resources/uploadImage/${dto.movie_img}">
-									<a href="movieController?command=detail&movie_id=${dto.movie_id}&category_name=${category_name}">${dto.movie_img }</a>
+									
+									<a href="movieController?command=detail&movie_id=${dto.movie_id}&category_name=${category_name}"><img id="movieposter" src="resources/uploadImage/${dto.movie_img}"></a>
 									<div id="movietitle">${dto.movie_title}</div>
 									</div>
 									

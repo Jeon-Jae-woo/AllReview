@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +17,9 @@ import com.online.biz.onlineBiz;
 import com.online.biz.onlineBizImpl;
 import com.online.dto.onlineDto;
 import com.user.dto.pagingDto;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @WebServlet("/onlineController")
 public class onlineController extends HttpServlet {
@@ -109,31 +113,47 @@ public class onlineController extends HttpServlet {
 		}
 		//게시글 수정
 		else if(command.equals("update")) {
+			
 			int board_id = Integer.parseInt(request.getParameter("board_id"));
 			HttpSession session = request.getSession();
 			if(session.getAttribute("email") == null) {
 				jsResponse("로그인이 되어있지 않습니다", "index.jsp", response);
 			}
 			
+			//파일 처리
+			String realFolder="";
+			String saveFolder = "resources/uploadImage";		//사진을 저장할 경로
+			String encType = "utf-8";				//변환형식
+			int maxSize=5*1024*1024;				//사진의 size
+				
+			ServletContext context = this.getServletContext();		//절대경로를 얻는다
+			realFolder = context.getRealPath(saveFolder);
+			
+			System.out.println(realFolder);
+			MultipartRequest multi = new MultipartRequest(request, realFolder, maxSize, encType,
+	                   new DefaultFileRenamePolicy());
+			
+			
 			String nickname = (String)session.getAttribute("nickname");
 			
 			//ONLINE_TITLE=?, ONLINE_CONTENT=?, PRICE_SAT=?, PRODUCT_SAT=?, 
 			//		ADD_PRODUCT=?, UPDATEAT=SYSDATE WHERE ONLINE_BOARD_ID=? AND NICKNAME=?";
-			String title = request.getParameter("title");
-			String content = request.getParameter("content");
-			double price_sat = Double.parseDouble(request.getParameter("price_sat"));
-			double product_sat = Double.parseDouble(request.getParameter("product_sat"));
-			String add_product = request.getParameter("add_product");
+			String title = multi.getParameter("title");
+			String content = multi.getParameter("content");
+			double price_sat = Double.parseDouble(multi.getParameter("price_sat"));
+			double product_sat = Double.parseDouble(multi.getParameter("product_sat"));
+			String review_img = multi.getFilesystemName("uploadImg");
+			System.out.println("file2 + " + review_img); 
 			
 			onlineDto dto = new onlineDto();
 			dto.setOnline_board_id(board_id);
 			dto.setNickname(nickname);
-			
 			dto.setOnline_title(title);
 			dto.setOnline_content(content);
 			dto.setPrice_sat(price_sat);
 			dto.setProduct_sat(product_sat);
-			dto.setAdd_product(add_product);
+			dto.setAdd_product(review_img);
+			
 			
 			
 			int result = biz.updateOnlineService(dto);
@@ -189,19 +209,50 @@ public class onlineController extends HttpServlet {
 				jsResponse("로그인이 되어있지 않습니다", "index.jsp", response);
 			}
 			
+			//파일 처리
+			String realFolder="";
+			String saveFolder = "resources/uploadImage";		//사진을 저장할 경로
+			String encType = "utf-8";				//변환형식
+			int maxSize=5*1024*1024;				//사진의 size
+				
+			ServletContext context = this.getServletContext();		//절대경로를 얻는다
+			realFolder = context.getRealPath(saveFolder);
+			
+			System.out.println(realFolder);
+			MultipartRequest multi = new MultipartRequest(request, realFolder, maxSize, encType,
+	                   new DefaultFileRenamePolicy());
+			/*
+			String receipt = multi.getFilesystemName("receipt");
+			
+			String review_img = multi.getFilesystemName("uploadImg");
+			
+			System.out.println("file1 + " + receipt);
+			System.out.println("file2 + " + review_img); */
+			//파일 처리 끝
+			
+			
 			String nickname = (String)session.getAttribute("nickname");
-			int category_id = Integer.parseInt(request.getParameter("category_id"));
+			int category_id = Integer.parseInt(multi.getParameter("category_id"));
 			
 			//제목, 내용, 카테고리, 가격만족도, 상품만족도, 사진, 영수증, 닉네임
-			String title = request.getParameter("title");
-			String content = request.getParameter("content");
-			System.out.println("여기는 넘어간다.");
-			double price_sat = Double.parseDouble(request.getParameter("price_sat"));
-			double product_sat = Double.parseDouble(request.getParameter("product_sat"));
+			String title = multi.getParameter("title");
+			System.out.println("title: " + title);
+			String content = multi.getParameter("content");
+			System.out.println("content: " + content);
+			System.out.println(multi.getParameter("price_sat"));
+			double price_sat = Double.parseDouble(multi.getParameter("price_sat"));
+			System.out.println("price_sat: " + price_sat);
+			System.out.println("여기 넘어가나?");
+			double product_sat = Double.parseDouble(multi.getParameter("product_sat"));
 			//상품 , 영수증 사진
-			String product_add =request.getParameter("product_add");
-			String receipt = request.getParameter("receipt");
-		
+			//String product_add =request.getParameter("product_add");
+			//String receipt = request.getParameter("receipt");
+			String receipt = multi.getFilesystemName("receipt");
+			String review_img = multi.getFilesystemName("uploadImg");
+			
+			System.out.println("file1 + " + receipt);
+			System.out.println("file2 + " + review_img); 
+			
 			onlineDto dto = new onlineDto();
 			
 			dto.setNickname(nickname);
@@ -210,8 +261,8 @@ public class onlineController extends HttpServlet {
 			dto.setOnline_content(content);
 			dto.setPrice_sat(price_sat);
 			dto.setProduct_sat(product_sat);
-			dto.setAdd_product(product_add);
 			dto.setAdd_receipt(receipt);
+			dto.setAdd_product(review_img);
 			
 			int result = biz.insertOnlineService(dto);
 			

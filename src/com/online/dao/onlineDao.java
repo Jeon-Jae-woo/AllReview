@@ -30,7 +30,7 @@ public interface onlineDao {
 	
 	//글 쓰기
 	String onlineWriteQuery ="INSERT INTO ONLINE_BOARD VALUES(ONLINE_BOARD_ID.NEXTVAL, ?,?,?,?,?,?,?,?,SYSDATE,SYSDATE,0,0,0,0)";
-	
+																								//이미지 부분을 ??로 바꿔주면됨
 	//카테고리 이름조회
 	String cateogryNameQuery = "SELECT CATEGORY_NAME FROM ONLINE_CATEGORY WHERE CATEGORY_ID=?";
 	

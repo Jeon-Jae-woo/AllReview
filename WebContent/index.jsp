@@ -81,7 +81,6 @@
 	
 }
 #wrap{
-
 	position: relative;
 	width: 95%;
 	height: 660px;
