@@ -279,15 +279,8 @@ body{
 			<div class="category">
 				<h1>${category_name}</h1>
 			</div>
-		
-<%-- <<<<<<< HEAD
-			<form action="MovieController?command=moviecreate" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="command" value="moviecreate">
-			<input type="hidden" name="movie_id" value="${movie_id }">
-======= --%>
 			<form action="movieController?command=moviecreate" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="category" value="${category }">
-<!-- >>>>>>> 86bc0fdac7d8165e7cd7af1cdb9d920114f3e7f4 -->
 			<div id="box">
 				<div id="wrap">
 					<div class="poster">영화포스터</div>

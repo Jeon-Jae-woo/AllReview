@@ -111,6 +111,20 @@ public class userBizImpl implements userBiz {
 		return paging;
 	}
 
+	//이메일 인증
+	@Override
+	public int emailAuthService(String email, String code) {
+		int result = userdao.emailAuth(email, code);
+		return result;
+	}
+
+	//유저 상태 조회
+	@Override
+	public userDto userStatusService(String email) {
+		userDto dto = userdao.userStatus(email);
+		return dto;
+	}
+
 
 
 	

@@ -96,12 +96,7 @@ font-size: 30px;
 
 
 .categorybox{
-	border: 1px solid gray;
 	height: 260px;
-	background-image: url("./resources/Image/background02.jpg");
-	background-repeat: no-repeat;
-	background-position: left top;
-	background-size: cover;
 }
 #nav{
 
@@ -242,6 +237,14 @@ background: #F8E8FF; border-left: solid 10px #8A66AE;
     background-color:skyblue;
 }
 
+body{
+	background-image: url("./resources/Image/on2.png");
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: cover;
+}
+
+
 </style>
 <!-- ------------------------------------------------------------------------------ -->
 
@@ -319,7 +322,7 @@ $(function(){
                    <c:choose>
                   <c:when test="${empty moiveListCate }">
                      <tr>
-                        <td colspan ="4">----작성된 글이 존재하지 않습니다----</td>
+                        <td colspan ="4"><!----작성된 글이 존재하지 않습니다----></td>
                      </tr>
                   </c:when>
                   <c:otherwise>
@@ -354,10 +357,10 @@ $(function(){
 	<!-- Section -->
 	<section>
 		<div id="secmain">
-			<form class="writer" action="onlineController">
-			<input type="hidden" name="command" value="update">
+			<form action="onlineController?command=update" method="post" enctype="multipart/form-data" > 
+			<!-- <input type="hidden" name="command" value="update"> -->
 			<input type="hidden" name="board_id" value="${dto.online_board_id}">
-			<h3>글 수정</h3> 
+			<h3 style="color: white; text-weight:bold;">글 수정</h3> 
 			<input type="text" value="작성자: ${dto.nickname }" readonly="readonly" class="autobox"> &nbsp;&nbsp;
 			<!-- 카테고리 출력 -->
 			<input type="text" value="카테고리 : ${dto.category_name }" readonly="readonly" class="autobox">  &nbsp;&nbsp;
@@ -370,11 +373,6 @@ $(function(){
 			<input type="text" value=" ${dto.online_title }" name="title" id="titleop" class="titlebox"> &nbsp;&nbsp;
 	
 			<!-- 만족도 출력 -->
-			
-			<!-- 수정전  가격만족도<input type="text" value="${dto.price_sat }" name="price_sat">
-			상품만족도<input type="text" value="${dto.product_sat }" name="product_sat" >
-			평점<input type="text" value="${dto.satavg }">
-			-->
 			
 			가격만족도 : <input type="hidden" name="price_sat" id="price_sat" value="">
 			<select onchange="document.getElementById('price_sat').value = this.options[this.selectedIndex].value">
@@ -404,7 +402,6 @@ $(function(){
 			<option value='5'>5</option>
 			</select>
 			
-			상품 사진:<input type="text" value="1" name="add_product">
 			<br><br>
 		
 		
@@ -416,6 +413,11 @@ $(function(){
 		<br><br>
 		<input type="button" value="수정 취소" class="btn1" onclick="history.go(-1)" id="btncss">
 		<input type="submit" class="btn2" value="수정 완료" id="btncss">
+		
+		<div id="uploadImg">
+		<span style="color:white; text-weight:bold;">상품사진 첨부: </span><input style="color:white" type="file" name="uploadImg" >
+		</div>
+		
 		
 		
 		</form>

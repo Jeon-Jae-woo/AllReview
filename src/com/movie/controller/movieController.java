@@ -277,11 +277,6 @@ public class movieController extends HttpServlet {
 		}
 
 		//영화 등록
-/*<<<<<<< HEAD*/
-		/*else if(command.equals("moviecreate")) {
-			List<MovieCategoryDto> moiveListCate = biz.categoryselectAll();*/
-			
-/*=======*/
 		else if(command.equals("moviecreateForm")) {
 			int category = Integer.parseInt(request.getParameter("category"));
 			String category_name = request.getParameter("category_name");
@@ -290,11 +285,9 @@ public class movieController extends HttpServlet {
 
 			request.setAttribute("category_name", category_name);
 			request.setAttribute("category", category);
-/*>>>>>>> 86bc0fdac7d8165e7cd7af1cdb9d920114f3e7f4*/
+
 			request.setAttribute("moiveListCate", moiveListCate);
 		
-			
-			
 			dispatch("MovieCreate.jsp", request, response);
 		}
 		//영화 등록
