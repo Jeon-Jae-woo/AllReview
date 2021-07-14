@@ -95,19 +95,15 @@ font-size: 30px;
 
 
 .categorybox{
-	border: 1px solid gray;
+	/* border: 1px solid gray; */
 	height: 260px;
-	background-image: url("./resources/Image/background02.jpg");
-	background-repeat: no-repeat;
-	background-position: left top;
-	background-size: cover;
 }
 #nav{
-
    left: 0px;
    right:0px;
    height: 100px;
-
+   background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );	
    }
 #nav ul li{
 	list-style: none;
@@ -120,9 +116,10 @@ font-size: 30px;
 	left: 9%;
 	top: 25px;
 	width: 20%;
-	color: white;
+	color: black;
 	font-weight: bold;
 	font-size: 15px;
+	text-shadow: 1px 1px 1px gray;
    }
 
 #nav ul li:hover{
@@ -135,7 +132,7 @@ font-size: 30px;
 	top: 20px;
 }
 #online_sub{
-   display: none;
+   /* display: none; */
 }
 #movie_sub{
    display: none;
@@ -150,7 +147,7 @@ font-size: 30px;
 #subcategory1 ul li{
 border-inline: 1px solid lightgray;
 	background-color: white;
-	background-color: rgba( 255, 255, 255, 0.4 );
+	background-color: rgba( 255, 255, 255, 0.8 );
 	list-style: none;
 	position: relative;
 	padding: 0;
@@ -162,6 +159,8 @@ border-inline: 1px solid lightgray;
 	top: 10px;
 	left: 4%;
 	width: 15%;
+	text-shadow: 1px 1px 1px gray;
+	
 }
 
 #subcategory1 ul li:hover{
@@ -212,6 +211,8 @@ margin : 1px;
 padding : 1px;
 width: 100%;
 text-align: center;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );
 }
 
 .imgbox{
@@ -275,6 +276,13 @@ transform: translateX(-51.5%);
 .alink{
 text-decoration: none; text-shadow: 0 0 24px; 
 }
+body{
+	background-image: url("./resources/Image/on2.png");
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: cover;
+
+}
 
 </style>
 <!-- ------------------------------------------------------------------------------ -->
@@ -283,7 +291,7 @@ text-decoration: none; text-shadow: 0 0 24px;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-$(function(){
+/* $(function(){
 	   $("#online").click(function(){
 	      $("#online_sub1").toggle();
 	      $("#online_sub2").toggle();
@@ -303,7 +311,7 @@ $(function(){
 	      $("#book_sub").toggle();
 	      
 	   });
-	}); 
+	});  */
 
 
 </script>
@@ -319,7 +327,7 @@ $(function(){
    <div class="categorybox">
       <div id="nav">
          <ul>
-               <li id="online">온라인 쇼핑</li>
+               <li id="online" onclick="location.href='onlineController?command=list'">온라인 쇼핑</li>
                <li id="moive" onclick="location.href='movieController?command=moiveListCate&movie_type=${dto.movie_type }'">영화</li>
                <li id="shop">매장</li>
                <li id="book">도서</li>
@@ -347,7 +355,7 @@ $(function(){
                    <c:choose>
                   <c:when test="${empty moiveListCate }">
                      <tr>
-                        <td colspan ="4">----작성된 글이 존재하지 않습니다----</td>
+                        <td colspan ="4"><!----작성된 글이 존재하지 않습니다----></td>
                      </tr>
                   </c:when>
                   <c:otherwise>
@@ -394,7 +402,7 @@ $(function(){
 								
 								<div class="imgbox">
 								<!--  <img class="img" src="${dto.add_product }"> -->
-								<img class="img" src="./resources/Image/icon01.jpg">
+								<img class="img" src="./resources/Image/icon01.jpg"> <!-- 이부분 dto.add_product로 바뀌어야함. 아직 글등록시 확인불가. -->
 								
 								</div>
 								<br>
