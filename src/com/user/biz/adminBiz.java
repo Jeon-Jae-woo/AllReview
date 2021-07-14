@@ -30,6 +30,8 @@ public interface adminBiz {
 	public List<totalBoardDto> waitListService(int pageNum, String category, int status);
 	public pagingDto waitListPaging(int pageNum, String category, int status);
 	
+	//글 승인 및 거절 처리(카테고리 구분)
+	public int approvalService(int status, String bigCate, int review_id);
 	
 	
 }

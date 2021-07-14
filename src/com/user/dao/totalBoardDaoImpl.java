@@ -564,5 +564,124 @@ public class totalBoardDaoImpl implements totalBoardDao {
 	}
 
 
+	//승인 상태 처리
+	//매장
+	@Override
+	public int OfflineStatusProcessing(int status, int review_id) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		int result = 0;
+		
+		try {
+			pstm = con.prepareStatement(offlineStatusPc);
+			pstm.setInt(1, status);
+			pstm.setInt(2, review_id);
+			
+			result = pstm.executeUpdate();
+			
+			if(result > 0) {
+				commit(con);
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+			close(con);
+		}
+		
+		return result;
+	}
+
+	//영화 상태 처리
+	@Override
+	public int MovieStatusProcessing(int status, int review_id) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		int result = 0;
+		
+		try {
+			pstm = con.prepareStatement(movieStatusPc);
+			pstm.setInt(1, status);
+			pstm.setInt(2, review_id);
+			
+			result = pstm.executeUpdate();
+			
+			if(result > 0) {
+				commit(con);
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+			close(con);
+		}
+		
+		return result;
+	}
+
+
+	//책 상태 처리
+	@Override
+	public int BookStatusProcessing(int status, int review_id) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		int result = 0;
+		
+		try {
+			pstm = con.prepareStatement(bookStatusPc);
+			pstm.setInt(1, status);
+			pstm.setInt(2, review_id);
+			
+			result = pstm.executeUpdate();
+			
+			if(result > 0) {
+				commit(con);
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+			close(con);
+		}
+		
+		return result;
+	}
+
+	//온라인 상태 처리
+	@Override
+	public int OnlineStatusProcessing(int status, int review_id) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		int result = 0;
+		
+		try {
+			pstm = con.prepareStatement(onlineStatusPc);
+			pstm.setInt(1, status);
+			pstm.setInt(2, review_id);
+			
+			result = pstm.executeUpdate();
+			
+			if(result > 0) {
+				commit(con);
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+			close(con);
+		}
+		
+		return result;
+	}
+
+
 
 }

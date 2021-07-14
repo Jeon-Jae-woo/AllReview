@@ -13,8 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import com.file.fileDao;
-import com.file.fileDto;
+
 import com.oreilly.servlet.MultipartRequest;
 
 
@@ -27,7 +26,7 @@ public class noticeController extends HttpServlet {
         super();
     }
 
-	
+	/*
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -75,7 +74,7 @@ public class noticeController extends HttpServlet {
 			dto.setImgName2(fileRealName2);
 			
 			
-			fileDao filedao = new fileDao();
+			//fileDao filedao = new fileDao();
 			int result = filedao.fileInsert(dto);
 			
 			System.out.println(result);
@@ -122,4 +121,5 @@ public class noticeController extends HttpServlet {
 		RequestDispatcher dispatch = request.getRequestDispatcher(url);
 		dispatch.forward(request, response);
 	}
+	*/
 }

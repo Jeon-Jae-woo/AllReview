@@ -26,8 +26,8 @@ public class userDaoImpl implements userDao {
 		int result = 0;
 		
 		try {
-			//이메일, 닉네임, 레벨, 패스워드, 이름, 생일, 성별, 주소, 가입날짜, 수정날짜, 상태
-			//String joinQuery = "INSERT INTO MEMBER VALUES(?,?,3,?,?,?,?,?,SYSDATE,SYSDATE,1)";
+			//이메일, 닉네임, 레벨, 패스워드, 이름, 생일, 성별, 주소, 가입날짜, 수정날짜, 상태, 이메일 해시
+			//String joinQuery = "INSERT INTO MEMBER VALUES(?,?,3,?,?,?,?,?,SYSDATE,SYSDATE,4)";
 			pstm = con.prepareStatement(joinQuery);
 			pstm.setString(1, dto.getEmail());
 			pstm.setString(2, dto.getNickName());
@@ -37,6 +37,7 @@ public class userDaoImpl implements userDao {
 			pstm.setString(6, dto.getGender());
 			pstm.setString(7, dto.getAddress());
 			pstm.setString(8, dto.getAddress_detail());
+			pstm.setString(9, dto.getEmailHash());
 			
 			result = pstm.executeUpdate();
 			
@@ -141,6 +142,7 @@ public class userDaoImpl implements userDao {
 				user.setEmail(rs.getString(1));
 				user.setNickName(rs.getString(2));
 				user.setLevelNo(rs.getInt(3));
+				user.setStatusNo(rs.getInt(4));
 			}
 			
 		} catch (SQLException e) {		
@@ -243,6 +245,67 @@ public class userDaoImpl implements userDao {
 		}
 		
 		return result;
+	}
+
+	//이메일 인증
+	@Override
+	public int emailAuth(String email, String code) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		int result = 0;
+		
+		try {
+			pstm = con.prepareStatement(EmailAuthentication);
+			pstm.setString(1, email);
+			pstm.setString(2, code);
+			
+			result = pstm.executeUpdate();
+			
+			if(result>0) {
+				commit(con);
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+			close(con);
+		}
+		
+		return result;
+	}
+
+	//유저 상태 조회
+	@Override
+	public userDto userStatus(String email) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		userDto dto = null;
+		
+		try {
+			pstm = con.prepareStatement(userStatusQuery);
+			pstm.setString(1, email);
+			
+			rs = pstm.executeQuery();
+			
+			while(rs.next()) {
+				dto = new userDto();
+				dto.setEmail(rs.getString(1));
+				dto.setStatusNo(rs.getInt(2));	
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+			close(con);
+		}
+		
+		return dto;
 	}
 
 	

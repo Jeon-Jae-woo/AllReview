@@ -100,6 +100,7 @@
 				</thead>
 				<tbody>
 				<!-- 기능 구현 때 바뀜  -->
+					<c:set var="category_name" value="${category}"/>
 					<c:choose>
 						<c:when test="${empty totalList }">
 							<tr>
@@ -107,14 +108,46 @@
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach var="list" items="${totalList}">
-								<tr>
-									<td>${list.categoryName }</td>
-									<td>${list.title }</td>
-									<td>${list.createAt }</td>
-								</tr>
+							<c:choose>
+								<c:when test="${category_name eq '매장' }">
+									<c:forEach var="list" items="${totalList}">
+										<tr>
+											<td>${list.categoryName }</td>
+											<td><a href="shop.do?command=shopdetail&shopno=${list.boardNo}">${list.title }</a></td>
+											<td>${list.createAt }</td>
+										</tr>
+									</c:forEach>
+								</c:when>
+								<c:when test="${category_name eq '온라인' }">
+									<c:forEach var="list" items="${totalList}">
+										<tr>
+											<td>${list.categoryName }</td>
+											<td><a href="onlineController?command=detail&board_id=${list.boardNo}">${list.title }</a></td>
+											<td>${list.createAt }</td>
+										</tr>
+									</c:forEach>
+								</c:when>
+								<c:when test="${category_name eq '영화' }">
+									<c:forEach var="list" items="${totalList}">
+										<tr>
+											<td>${list.categoryName }</td>
+											<td><a href="movieController?command=reviewDetail&review_id=${list.boardNo}">${list.title }</a></td>
+											<td>${list.createAt }</td>
+										</tr>
+									</c:forEach>
+								</c:when>
+								<c:when test="${category_name eq '책' }">
+									<c:forEach var="list" items="${totalList}">
+										<tr>
+											<td>${list.categoryName }</td>
+											<td><a href="bookController?command=reviewDetail&review_id=${list.boardNo}">${list.title }</a></td>
+											<td>${list.createAt }</td>
+										</tr>
+									</c:forEach>
+								</c:when>
 								
-							</c:forEach>
+							
+							</c:choose>
 						</c:otherwise>
 					</c:choose>
 				</tbody>

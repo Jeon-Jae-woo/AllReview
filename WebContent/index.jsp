@@ -81,10 +81,6 @@
 	
 }
 #wrap{
-<<<<<<< HEAD
-=======
-	border: 1px dashed red;
->>>>>>> e9bb12645997fe9b2620c90eabbe1aa0f0f62add
 	position: relative;
 	width: 95%;
 	height: 660px;
