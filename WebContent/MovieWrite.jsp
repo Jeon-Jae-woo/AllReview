@@ -14,7 +14,7 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-$(function(){
+/* $(function(){
 	$("#online").click(function(){
 		$("#online_sub").toggle();
 	});
@@ -33,7 +33,7 @@ $(function(){
 		$("#book_sub").toggle();
 		
 	});
-}); 
+});  */
 </script>
 
 <style type="text/css">
@@ -249,8 +249,8 @@ body{
 		<div id="nav">
 			<ul>
             	<li id="online">온라인 쇼핑</li>
-            	<li id="moive" <%-- onclick="location.href='movieController?command=moiveListCate&movie_type=${dto.movie_type }'" --%>>영화</li>
-            	<li id="shop">매장</li>
+            	<li id="moive" onclick="location.href='movieController?command=moiveListCate'">영화</li>
+            	<li id="shop" onclick="location.href='shop.do?command=shoplist'">매장</li>
             	<li id="book">도서</li>
             </ul>
 		</div>

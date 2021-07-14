@@ -15,7 +15,7 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-$(function(){
+/* $(function(){
 	$("#online").click(function(){
  		$("#online_sub").toggle()
 
@@ -35,7 +35,7 @@ $(function(){
 		$("#book_sub").toggle();
 		
 	});
-}); 
+});  */
 
 </script>
 
@@ -221,9 +221,11 @@ h1{
 	position: relative;
 	float: right;
 	right: 6%;
-	width: 80px;
+	width: 90px;
 	height: 28px;
+	line-height:27px;
 	font-size: 15px;
+	font-weight: bold;
 }
 .pull-bottom{
  /* border: 1px dashed red; */
@@ -336,7 +338,7 @@ body{
 									<c:forEach var="dto" items="${list }">
 									<div style="border-radius: 5px 5px 5px 5px;">
 									<!-- 값 수정 -->
-									<img src="${dto.movie_img}">
+									<img src="resources/uploadImage/${dto.movie_img}">
 									<a href="movieController?command=detail&movie_id=${dto.movie_id}&category_name=${category_name}">${dto.movie_img }</a>
 									<div id="movietitle">${dto.movie_title}</div>
 									</div>
@@ -349,7 +351,7 @@ body{
 				
 				<!-- 영화등록버튼 -->
 				<div class="moviecreate">
-					<input type="button" id="moviecreatebtn" value="영화등록" onclick="location.href='movieController?command=moviecreate'">
+					<input type="button" id="moviecreatebtn" value="영화등록" onclick="location.href='movieController?command=moviecreateForm&category=${category}&category_name=${category_name}'">
 				</div>
 				
 				<!-- 페이징처리 -->

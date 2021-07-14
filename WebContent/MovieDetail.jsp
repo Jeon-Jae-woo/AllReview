@@ -14,7 +14,7 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-$(function(){
+/* $(function(){
 	$("#online").click(function(){
 		$("#online_sub").toggle();
 	});
@@ -33,7 +33,7 @@ $(function(){
 		$("#book_sub").toggle();
 		
 	});
-}); 
+});  */
 
 </script>
 
@@ -133,6 +133,7 @@ $(function(){
 	left: 1%;
 	width: 98%;
 	top: 10px;
+	font-weight: bold;
 	position: relative;
 	background-color: white;
 	background-color: rgba( 255, 255, 255, 0.8 );
@@ -172,6 +173,7 @@ $(function(){
 	float: right;
 	right: 20px;
 	top: 14px;
+	font-weight: bold;
 }
 .contentbox{
 	border: 1px solid gray;
@@ -187,11 +189,13 @@ $(function(){
 	position: relative;
 	left: 5px;
 	top: 30px;
+	font-weight: bold;
 }
 
 .bottombox{
 	position: relative;
 	bottom: 25px;
+	font-weight: bold;
 }
 #reco_button{
  	position: absolute;
@@ -208,6 +212,7 @@ $(function(){
 .lastbutton{
 	position: relative;
 	top: 40px;
+	font-weight: bold;
 }
 #list{
 	position: relative;
@@ -229,7 +234,11 @@ body{
 	background-repeat: no-repeat;
 	background-position: left top;
 	background-size: cover;
-
+}
+#reviewimg{
+	position:relative;
+	left: 20px;
+	bottom: 230px;
 }
  
 </style>
@@ -245,8 +254,8 @@ body{
 		<div id="nav">
 			<ul>
             	<li id="online">온라인 쇼핑</li>
-            	<li id="moive" <%-- onclick="location.href='movieController?command=moiveListCate&movie_type=${dto.movie_type } --%>'">영화</li>
-            	<li id="shop">매장</li>
+            	<li id="moive" onclick="location.href='movieController?command=moiveListCate'">영화</li>
+            	<li id="shop" onclick="location.href='shop.do?command=shoplist'">매장</li>
             	<li id="book">도서</li>
             </ul>
 		</div>
@@ -330,9 +339,15 @@ body{
 					<div>작성일 ${dto.creatat }</div>
 				</div>
 				<div id="content">
+<<<<<<< HEAD
+					<textarea rows="23" cols="107" readonly="readonly">${dto.review_content}</textarea>
+					<img style="display:none;" alt="" src="resources/uploadImage/${dto.receipt}" width="200" height="200">
+					<img id="reviewimg" alt="" src="resources/uploadImage/${dto.review_img}" width="200" height="200">
+=======
 					<textarea rows="23" cols="118" readonly="readonly">${dto.review_content}</textarea>
-					<img alt="" src="resources/uploadImage/${dto.receipt}" width="200" height="200">
+					
 					<img alt="" src="resources/uploadImage/${dto.review_img}" width="200" height="200">
+>>>>>>> 86bc0fdac7d8165e7cd7af1cdb9d920114f3e7f4
 				</div>
 			</div>
 			<div class="bottombox">
@@ -344,8 +359,34 @@ body{
 				<input id="update" type="button" value="목록" onclick="location='movieController?command=detail&movie_id=${dto.movie_id}&category_name=${category_name}'">
 				<input id="delete" type="button" value="삭제" onclick="location.href='movieController?command=reviewDelete&movie_id=${dto.movie_id}&review_id=${dto.review_id}'">
 			</div>
+		<c:set var="level" value="${level}"/>
+		<c:set var="status" value="${dto.status_no}"/>
+		<br><br>
+			<!-- 관리자만 보이도록 설정  -->
+			<c:choose>
+				<c:when test="${status eq '0'}">
+					<c:choose>
+						<c:when test="${level eq '1' || level eq '2'}">
+							<input id="list" type="button" value="승인" onclick="location='adminController?command=approval&review_id=${dto.review_id}&bigCate=${bigCate}&status=1'">
+							<input id="list" type="button" value="거절" onclick="location='adminController?command=approval&review_id=${dto.review_id}&bigCate=${bigCate}&status=2'">
+						</c:when>
+					</c:choose>
+				</c:when>
+			</c:choose>
+			
+				
+					<c:choose>
+						<c:when test="${level eq '1' || level eq '2'}">
+							<img alt="" src="resources/uploadImage/${dto.receipt}" width="200" height="200">
+						</c:when>
+					</c:choose>
+			
+		
 		</div>
 	</div>
+
+	
+	
 	
 	<!-- 조회순 추천순 top5 -->
 	<%@ include file="MovieTop5.jsp" %>

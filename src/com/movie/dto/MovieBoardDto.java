@@ -122,6 +122,15 @@ public class MovieBoardDto {
 		this.movie_type_name = movie_type_name;
 	}
 
+
+	@Override
+	public String toString() {
+		return "MovieBoardDto [movie_id=" + movie_id + ", movie_type=" + movie_type + ", movie_title=" + movie_title
+				+ ", director=" + director + ", actor=" + actor + ", participant=" + participant + ", movie_img="
+				+ movie_img + ", createat=" + createat + ", updateat=" + updateat + ", movie_type_name="
+				+ movie_type_name + "]";
+	}
+
 	
 	
 	

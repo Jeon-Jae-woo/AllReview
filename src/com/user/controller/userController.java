@@ -3,7 +3,15 @@ package com.user.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Properties;
 
+import javax.mail.Address;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +25,9 @@ import com.user.biz.userBizImpl;
 import com.user.dto.pagingDto;
 import com.user.dto.totalBoardDto;
 import com.user.dto.userDto;
+
+import com.user.util.Gmail;
+import com.user.util.SHA256Pc;
 
 @WebServlet("/userController")
 public class userController extends HttpServlet {
@@ -62,16 +73,61 @@ public class userController extends HttpServlet {
 			userdto.setNickName(nickname);
 			userdto.setAddress(address1);
 			userdto.setAddress_detail(address2);
+			//이메일 인증 추가 작업
+			userdto.setEmailHash(SHA256Pc.getSHA256(email));
 			
-			System.out.println(userdto.toString());
-			
+			//회원 가입
 			int result = userbiz.joinService(userdto);
-			
 			if(result>0) {
-				jsResponse("회원가입 성공!","index.jsp",response);
+				//이메일 send
+				//호스트 주소
+				String host = "http://localhost:8787/semi/";
+				//구글 계정(보내는 사람)
+				String from = "jaewoo68366@gmail.com";
+				//받는사람
+				String to = email;
+				//제목
+				String subject = "AllReview 이메일 인증 메일 입니다";
+				//내용
+				String content = "다음 링크를 클릭하여 이메일 인증 완료<br>" 
+						+ "<a href='"+host+"userController?command=emailCheck&code="+ new SHA256Pc().getSHA256(to) +"&email="+email+"'>이메일인증하기</a>";
+				
+				//smtp 접속
+				Properties p = new Properties();
+				p.put("mail.smtp.user", from );
+				p.put("mail.smtp.host", "smtp.googlemail.com" );
+				p.put("mail.smtp.port", "465");
+				p.put("mail.smtp.starttls.enable", "true" );
+				p.put("mail.smtp.auth", "true" );
+				p.put("mail.smtp.debug", "true" );
+				p.put("mail.smtp.socketFactory.port", "465");
+				p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+				p.put("mail.smtp.socketFactory.fallback", "false");
+				
+							
+				//이메일 전송
+				try {
+					Authenticator auth = new Gmail();
+					Session ses = Session.getInstance(p, auth);
+					ses.setDebug(true);
+					MimeMessage msg = new MimeMessage(ses);
+					msg.setSubject(subject);
+					Address fromAddr = new InternetAddress(from);
+					msg.setFrom(fromAddr);
+					Address toAddr = new InternetAddress(to);
+					msg.addRecipient(Message.RecipientType.TO, toAddr);
+					msg.setContent(content, "text/html;charset=UTF8");
+					Transport.send(msg);
+					
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+				
+				jsResponse("해당 이메일로 인증 링크를 보냈습니다","index.jsp",response);
 			}else {
-				jsResponse("회원가입 실패!","index.jsp",response);
+				jsResponse("메일 인증 불가능","index.jsp",response);
 			}
+			
 		}
 		//이메일 중복 체크
 		else if(command.equals("emailchk")) {
@@ -117,20 +173,43 @@ public class userController extends HttpServlet {
 			
 			user = userbiz.loginChkService(email, password);
 			
+			//결과 값
+			String result = "";
 			//로그인 성공시
 			if(user.getEmail() != null) {
-				//세션을 만들어서 반환(이메일, 별명, 유저 레벨 정보가 들어있음)
-				HttpSession session = request.getSession();
-				session.setAttribute("email", user.getEmail());
-				session.setAttribute("nickname", user.getNickName());
-				session.setAttribute("level", user.getLevelNo());
-				
-				jsResponse("로그인 성공","index.jsp",response);
+				//정상적인 상태
+				if(user.getStatusNo()==1) {
+					//세션을 만들어서 반환(이메일, 별명, 유저 레벨 정보가 들어있음)
+					HttpSession session = request.getSession();
+					session.setAttribute("email", user.getEmail());
+					session.setAttribute("nickname", user.getNickName());
+					session.setAttribute("level", user.getLevelNo());
+					result="성공";
+				}else if(user.getStatusNo()==2) {
+					result="정지";
+				}else if(user.getStatusNo()==3) {
+					result="탈퇴";
+				}else if(user.getStatusNo()==4) {
+					result="미인증";
+				}
 			}else {
 				jsResponse("아이디 혹은 비밀번호를 잘못 입력하였습니다","login.jsp",response);
 			}
 			
+			//반환
+			if(result.equals("성공")) {
+				jsResponse("로그인 성공","index.jsp",response);
+			}else if(result.equals("정지")) {
+				jsResponse("정지된 이메일 입니다","index.jsp",response);
+			}else if(result.equals("탈퇴")) {
+				jsResponse("탈퇴한 회원 입니다","index.jsp",response);
+			}else if(result.equals("미인증")) {
+				jsResponse("이메일 인증을 완료하고 로그인 해주세요","index.jsp",response);
+			}else {
+				jsResponse("로그인 불가능","index.jsp",response);
+			}
 
+			
 		} 
 		//로그아웃
 		else if(command.equals("logout")) {
@@ -146,6 +225,7 @@ public class userController extends HttpServlet {
 			System.out.println("마이페이지 회원 정보 서블릿 실행");
 			
 			if(session.getAttribute("email")==null) {
+				
 				jsResponse("로그인이 되어있지 않습니다", "./index.jsp", response);
 			}else {
 				String email = (String)session.getAttribute("email");
@@ -256,6 +336,35 @@ public class userController extends HttpServlet {
 			dispatch("mypageBoardlist.jsp", request, response);
 				
 		}
+		//이메일 인증 처리
+		else if(command.equals("emailCheck")) {
+			String code = request.getParameter("code");
+			String email = request.getParameter("email");
+			
+			System.out.println("code : " + code);
+			System.out.println("userEmail + " + email);
+			
+			//현재 유저 상태
+			userDto dto = userbiz.userStatusService(email);
+			
+			int result = 0;
+			
+			if(dto.getStatusNo()==1) {
+				jsResponse("이미 이메일 인증 처리되었습니다", "./index.jsp", response);
+			}else if(dto.getStatusNo()==4) {
+				 result = userbiz.emailAuthService(email, code);
+			}
+			
+			if(result>0) {
+				jsResponse("이메일 인증에 성공했습니다", "./index.jsp", response);
+			}else {
+				jsResponse("이메일 인증에 실패했습니다", "./index.jsp", response);
+			}
+			
+		}
+		
+		
+		
 
 
 		}

@@ -66,8 +66,8 @@ function setThumbnail(event) {
 	<header ><%@ include file="Fix/header.jsp" %></header>
 	<%request.getSession(); %>
 	<div class="writetb">
-	<form class="form-horizontal" action="shop.do" method="post">
-	<input type="hidden" name="command" value="shopinsert">
+	<form class="form-horizontal" action="shop.do?command=shopinsert" method="post" enctype="multipart/form-data">
+	<!-- <input type="hidden" name="command" value="shopinsert"> -->
 	
 	<table class="table table-bordered">
 	<tr>
@@ -94,7 +94,8 @@ function setThumbnail(event) {
   
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-  		<input type="file" id="image" accept="image/*" onchange="setThumbnail(event);" multiple/> 
+  		<label>이미지 첨부</label><input type="file" id="image" accept="image/*" onchange="setThumbnail(event);" name="uploadImg">
+  		<label>영수증 첨부</label><input type="file" name="receipt"> 
   		<div id="image_container"></div>
 
   	</div>
@@ -195,7 +196,7 @@ function setThumbnail(event) {
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-default">작성</button>
-      <button type="button" class="btn btn-default" onclick="location.href='shop.do?command=shopcate'">취소</button>
+      <button type="button" class="btn btn-default" onclick="location.href='shop.do?command=shoplist'">취소</button>
     </div>
   </div>
   </td>

@@ -20,7 +20,6 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.user.dto.pagingDto;
 import com.movie.biz.movieBiz;
-import com.file.fileDto;
 import com.movie.biz.MovieBizImple;
 
 
@@ -191,9 +190,27 @@ public class movieController extends HttpServlet {
 			MovieReviewDto dto = biz.reviewSelectService(review_id);
 			
 			request.setAttribute("moiveListCate", moiveListCate);
-			
 			request.setAttribute("dto", dto);
-			dispatch("MovieDetail.jsp", request, response);	
+			
+			
+			//승인 및 거절된 글은 관리자만 열람 가능, 승인된 글은 일반 유저도 접근 가능
+			int level = 0;
+			HttpSession session = request.getSession();
+			if(session.getAttribute("level")!=null) {
+				level = (Integer)session.getAttribute("level");
+				request.setAttribute("bigCate", "영화");
+				request.setAttribute("level", level);
+			}
+
+			if((dto.getStatus_no()==0 || dto.getStatus_no()==2) && (level==1 || level==2)) {
+				dispatch("MovieDetail.jsp", request, response);	
+			}
+			else if(dto.getStatus_no()==1){
+				dispatch("MovieDetail.jsp", request, response);	
+			}else {
+				jsResponse("유효하지 않은 접근입니다", "index.jsp", response);
+			}
+			
 		}
 		//리뷰 수정
 		else if(command.equals("reviewUpdateForm")) {
@@ -260,15 +277,70 @@ public class movieController extends HttpServlet {
 		}
 
 		//영화 등록
-		else if(command.equals("moviecreate")) {
-			 
+
+		else if(command.equals("moviecreateForm")) {
+			int category = Integer.parseInt(request.getParameter("category"));
+			String category_name = request.getParameter("category_name");
+			
 			List<MovieCategoryDto> moiveListCate = biz.categoryselectAll();
 
+			request.setAttribute("category_name", category_name);
+			request.setAttribute("category", category);
+
 			request.setAttribute("moiveListCate", moiveListCate);
+		
+			
 			
 			dispatch("MovieCreate.jsp", request, response);
+		}
+		//영화 등록
+		else if(command.equals("moviecreate")) {
+			HttpSession session = request.getSession();
+			if(session.getAttribute("email") == null) {
+				jsResponse("로그인이 되어있지 않습니다", "index.jsp", response);
+			}
 			
-		
+			//파일 처리
+			String realFolder="";
+			String saveFolder = "resources/uploadImage";		//사진을 저장할 경로
+			String encType = "utf-8";				//변환형식
+			int maxSize=5*1024*1024;				//사진의 size
+				
+			ServletContext context = this.getServletContext();		//절대경로를 얻는다
+			realFolder = context.getRealPath(saveFolder);
+			
+			System.out.println(realFolder);
+			MultipartRequest multi = new MultipartRequest(request, realFolder, maxSize, encType,
+	                   new DefaultFileRenamePolicy());
+			
+			String poster = multi.getFilesystemName("poster");
+			
+			System.out.println("file + " + poster);
+			
+			//기본 정보 받기
+			int category = Integer.parseInt(multi.getParameter("category"));
+			String movie_title = multi.getParameter("movie_title");
+			String director = multi.getParameter("director");
+			String actor = multi.getParameter("actor");
+			//int participant = Integer.parseInt(multi.getParameter("participant"));
+			
+			MovieBoardDto dto = new MovieBoardDto();
+			dto.setMovie_type(category);
+			dto.setMovie_title(movie_title);
+			dto.setDirector(director);
+			dto.setActor(actor);
+			//dto.setParticipant(participant);
+			dto.setMovie_img(poster);
+			
+			int result = biz.movieinsert(dto);
+			
+			if(result>0) {
+				jsResponse("영화 등록 성공","movieController?command=moiveListCate&category="+category,response);
+			}else {
+				jsResponse("영화 등록 실패","movieController?command=moiveListCate&category="+category,response);	
+			}
+			
+			
 		}
 	}	 	
 

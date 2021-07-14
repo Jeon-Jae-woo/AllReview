@@ -119,4 +119,23 @@ public class adminBizImpl implements adminBiz {
 		return paging;
 	}
 
+	//글 승인 및 거절 처리
+	@Override
+	public int approvalService(int status, String bigCate, int review_id) {
+		int result = 0;
+		
+		//대분류에 따른 처리
+		if(bigCate.equals("매장")) {
+			result = boarddao.OfflineStatusProcessing(status, review_id);
+		}else if(bigCate.equals("온라인")) {
+			result = boarddao.OnlineStatusProcessing(status, review_id);
+		}else if(bigCate.equals("영화")) {
+			result = boarddao.MovieStatusProcessing(status, review_id);
+		}else if(bigCate.equals("도서")) {
+			result = boarddao.BookStatusProcessing(status, review_id);
+		}
+		
+		return result;
+	}
+
 }

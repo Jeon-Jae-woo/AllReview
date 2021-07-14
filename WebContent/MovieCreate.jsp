@@ -15,7 +15,7 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-$(function(){
+/* $(function(){
 	$("#online").click(function(){
 		$("#online_sub").toggle();
 	});
@@ -34,7 +34,7 @@ $(function(){
 		$("#book_sub").toggle();
 		
 	});
-}); 
+});  */
 
 </script>
 
@@ -43,17 +43,15 @@ $(function(){
 
 	
 .categorybox{
-	border: 1px solid gray;
+/* 	border: 1px solid gray; */
 	height: 260px;
-	background-image: url("./resources/Image/background02.jpg");
-	background-repeat: no-repeat;
-	background-position: left top;
-	background-size: cover;
 }
 #nav{
 	left: 0px;
 	right:0px;
 	height: 100px;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );
 	}
 #nav ul li{
 	list-style: none;
@@ -66,9 +64,10 @@ $(function(){
 	left: 9%;
 	top: 25px;
 	width: 20%;
-	color: white;
+	color: black;
 	font-weight: bold;
 	font-size: 15px;
+	text-shadow: 1px 1px 1px gray;
 	}
 
 #nav ul li:hover{
@@ -95,7 +94,7 @@ $(function(){
 #subcategory1 ul li{
 	border-inline: 1px solid lightgray;
 	background-color: white;
-	background-color: rgba( 255, 255, 255, 0.4 );
+	background-color: rgba( 255, 255, 255, 0.8 );
 	list-style: none;
 	position: relative;
 	padding: 0;
@@ -107,6 +106,7 @@ $(function(){
 	top: 10px;
 	left: 4%;
 	width: 15%;
+	text-shadow: 1px 1px 1px gray;
 }
 
 #subcategory1 ul li:hover{
@@ -118,6 +118,7 @@ $(function(){
 	float: left;
 	top: 450px;
 	left: 9%;
+	color: white;
 }
 
 #box{
@@ -127,6 +128,9 @@ $(function(){
 	top: 180px;
 	left: 9%;
 	position: relative;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );
+	border-radius: 5px 5px 5px 5px;
 }
 
 #wrap{
@@ -137,10 +141,11 @@ $(function(){
 	position: relative;
   	top: 10px;
 	left: 10px;
+	border-radius: 5px 5px 5px 5px;
 }
 
 .poster{
-	border: 1px dashed red;
+	border-radius: 5px 5px 5px 5px;
 	width: 270px;
 	height: 320px;
 	text-align: center;
@@ -155,6 +160,7 @@ $(function(){
 	bottom: 315px;
 	font-size: 18px;
 	width: 800px;
+	color: black;
 	/* border: 1px solid; */
 }
 
@@ -176,6 +182,7 @@ text-align: center;
 	top: 965px;
 	position: absolute;
 	font-size: 15px;
+	color: white;
 }
 
 .create{
@@ -194,6 +201,13 @@ text-align: center;
 	font-size: 15px;
 	width: 70px;
 }
+body{
+	background-image: url("./resources/Image/forest1.jpg");
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: cover;
+
+}
 
 </style>
 
@@ -208,8 +222,8 @@ text-align: center;
 		<div id="nav">
 			<ul>
             	<li id="online">온라인 쇼핑</li>
-            	<li id="moive" <%-- onclick="location.href='movieController?command=moiveListCate&movie_type=${dto.movie_type }'" --%>>영화</li>
-            	<li id="shop">매장</li>
+            	<li id="moive" onclick="location.href='movieController?command=moiveListCate'">영화</li>
+            	<li id="shop" onclick="location.href='shop.do?command=shoplist'">매장</li>
             	<li id="book">도서</li>
             </ul>
 		</div>
@@ -262,12 +276,17 @@ text-align: center;
 		<!-- 영화 기본 정보 -->
 		<div>
 			<div class="category">
-				<h1>${category_name}</h1>
+				<h1>${category_name} 장르</h1>
 			</div>
 		
-			<form action="MovieController" method="post">
+<<<<<<< HEAD
+			<form action="MovieController?command=moviecreate" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="command" value="moviecreate">
 			<input type="hidden" name="movie_id" value="${movie_id }">
+=======
+			<form action="movieController?command=moviecreate" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="category" value="${category }">
+>>>>>>> 86bc0fdac7d8165e7cd7af1cdb9d920114f3e7f4
 			<div id="box">
 				<div id="wrap">
 					<div class="poster">영화포스터</div>
@@ -280,7 +299,7 @@ text-align: center;
 		            </tr>
 		            <tr>
 		                <th>기본정보 : </th>
-		                <td><input type="text" name="movie_type_nm"></td>
+		                <td><input type="text" name="movie_type_nm" value="${category_name}" readonly="readonly"></td>
 		            </tr>
 		             <tr>
 		                <th>감독 : </th>
@@ -291,8 +310,8 @@ text-align: center;
 		                <td><input type="text" name="actor"></td>
 		            </tr>
 		             <tr>
-		                <th>영화 평점 : </th>
-		                <td><input type="text" name="movie_grade"></td>
+		                <th>participant : </th>
+		                <td><input type="text" name="participant"></td>
 		            </tr>
 		        </table>	
 		        
@@ -301,7 +320,7 @@ text-align: center;
 			
 			<div class="comment">영화 포스터를 첨부하세요</div>
 			<div class="attached_poster">
-				<input type="file" id="ex_file">
+				<input type="file" id="ex_file" name="poster">
 			</div>
 			
 			<div>
