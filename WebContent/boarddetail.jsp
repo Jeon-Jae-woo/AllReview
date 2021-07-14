@@ -475,7 +475,8 @@ $(function(){
 	<!-- Section -->
 	<!-- ----------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 	<section>
-	
+	<c:set var="level" value="${level}"/>
+	<c:set var="status" value="${dto.status}"/>
 		<div id="secmain">
 			<div id="titlebox">
 				<!-- 제목출력-->
@@ -502,7 +503,13 @@ $(function(){
 		
 		<!-- 내용 출력-->
 		<textarea id="content" rows="27" cols="165" class="contentbox" readonly="readonly">${dto.online_content } </textarea> <br>
-		<img alt="" src="resources/uploadImage/${dto.add_receipt}" width="200" height="200">
+		
+		
+		<c:choose>
+			<c:when test="${level eq '1' || level eq '2'}">
+				<img alt="" src="resources/uploadImage/${dto.add_receipt}" width="200" height="200">
+			</c:when>
+		</c:choose>
 		<img id="uploadImage" alt="" src="resources/uploadImage/${dto.add_product}" width="200" height="200">
 		<br>
 		<!-- 게시글 삭제버튼 , 게시글작성자한테만 노출 -->
@@ -515,6 +522,23 @@ $(function(){
 		<input type="button" class="listbt" id="listbtn" onclick="history.back();" value="이전 목록으로">
 				
 		<input type="button" class="btn" id="updatebtn" value="글 수정하기" onclick="location.href='onlineController?command=updateForm&board_id=${dto.online_board_id}'">
+		
+			<!-- 관리자만 보이도록 설정  -->
+			<c:choose>
+				<c:when test="${status eq '0'}">
+					<c:choose>
+						<c:when test="${level eq '1' || level eq '2'}">
+							<input id="list" type="button" value="승인" onclick="location='adminController?command=approval&review_id=${dto.online_board_id}&bigCate=${bigCate}&status=1'">
+							<input id="list" type="button" value="거절" onclick="location='adminController?command=approval&review_id=${dto.online_board_id}&bigCate=${bigCate}&status=2'">
+						</c:when>
+					</c:choose>
+				</c:when>
+			</c:choose>
+			
+				
+	
+		
+		
 		</div>
 		</div>
 	</section>
