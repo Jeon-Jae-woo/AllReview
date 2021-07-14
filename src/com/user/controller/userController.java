@@ -225,6 +225,7 @@ public class userController extends HttpServlet {
 			System.out.println("마이페이지 회원 정보 서블릿 실행");
 			
 			if(session.getAttribute("email")==null) {
+				
 				jsResponse("로그인이 되어있지 않습니다", "./index.jsp", response);
 			}else {
 				String email = (String)session.getAttribute("email");
