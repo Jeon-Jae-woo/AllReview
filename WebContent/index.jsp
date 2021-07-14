@@ -81,11 +81,7 @@
 	
 }
 #wrap{
-<<<<<<< HEAD
-	border: 1px dashed red;
-=======
-
->>>>>>> 86bc0fdac7d8165e7cd7af1cdb9d920114f3e7f4
+	/* border: 1px dashed red; */
 	position: relative;
 	width: 95%;
 	height: 660px;

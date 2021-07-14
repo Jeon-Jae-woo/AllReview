@@ -102,7 +102,7 @@ public class movieController extends HttpServlet {
 			List<MovieCategoryDto> moiveListCate = biz.categoryselectAll();
 			
 			pagingDto paging = biz.movieReviewPaging(pageNum, movie_id);
-			
+			System.out.println("이미지 : " + dto.getMovie_img());
 			request.setAttribute("paging", paging);
 			request.setAttribute("totalList", list);	
 			request.setAttribute("dto", dto);
@@ -277,13 +277,11 @@ public class movieController extends HttpServlet {
 		}
 
 		//영화 등록
-<<<<<<< HEAD
-		else if(command.equals("moviecreate")) {
-			 
+/*<<<<<<< HEAD*/
+		/*else if(command.equals("moviecreate")) {
+			List<MovieCategoryDto> moiveListCate = biz.categoryselectAll();*/
 			
-			List<MovieCategoryDto> moiveListCate = biz.categoryselectAll();
-			
-=======
+/*=======*/
 		else if(command.equals("moviecreateForm")) {
 			int category = Integer.parseInt(request.getParameter("category"));
 			String category_name = request.getParameter("category_name");
@@ -292,7 +290,7 @@ public class movieController extends HttpServlet {
 
 			request.setAttribute("category_name", category_name);
 			request.setAttribute("category", category);
->>>>>>> 86bc0fdac7d8165e7cd7af1cdb9d920114f3e7f4
+/*>>>>>>> 86bc0fdac7d8165e7cd7af1cdb9d920114f3e7f4*/
 			request.setAttribute("moiveListCate", moiveListCate);
 		
 			
