@@ -328,7 +328,7 @@ public class BookBoardDaoImpl implements BookBoardDao {
 			
 			rs = pstm.executeQuery();
 			//SELECT REVIEW_ID, REVIEW_TITLE, REVIEW_CONTENT, NICKNAME, BOOK_ID, 
-			//REVIEW_R_NUM, REVIEW_V_NUM, CREATEAT, REVIEW_IMG
+			//REVIEW_R_NUM, REVIEW_V_NUM, CREATEAT, REVIEW_IMG, STATUS
 			
 			while(rs.next()) {
 				dto = new BookReviewDto();
@@ -341,7 +341,7 @@ public class BookBoardDaoImpl implements BookBoardDao {
 				dto.setReview_v_num(rs.getInt(7));
 				dto.setRcreateat(rs.getDate(8));
 				dto.setReview_img(rs.getString(9));
-				
+				dto.setStatus(rs.getInt(10));
 			}
 			
 		} catch (SQLException e) {

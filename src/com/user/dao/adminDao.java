@@ -12,7 +12,6 @@ public interface adminDao {
 			+ "FROM( SELECT ROWNUM AS RNUM, EMAIL, NICKNAME, CREATE_AT "
 			+ "FROM (SELECT EMAIL, NICKNAME, CREATE_AT FROM MEMBER ORDER BY CREATE_AT DESC) WHERE ROWNUM<?) "
 			+ "WHERE RNUM>=?";
-	
 	String userAllCount = "SELECT COUNT(*) FROM MEMBER";
 	
 	//관리자 전체 조회
@@ -32,6 +31,18 @@ public interface adminDao {
 	//유저 업데이트
 	String userUpdateQuery = "UPDATE MEMBER SET LEVEL_NO=?, STATUS_NO=? WHERE EMAIL=?";
 
+	//유저 검색(이메일)
+	String searchUserEmail = "SELECT RNUM, EMAIL, NICKNAME, CREATE_AT FROM( SELECT ROWNUM AS RNUM, EMAIL, NICKNAME, CREATE_AT FROM( SELECT EMAIL, NICKNAME, CREATE_AT FROM MEMBER WHERE EMAIL LIKE '%'||?||'%') WHERE ROWNUM<? ) WHERE RNUM>=?"; 
+	String searchCountRow = "SELECT COUNT(*) FROM MEMBER WHERE EMAIL LIKE '%'||?||'%'";
+	
+	//관리자 검색(이메일)
+	String searchAdminEmail = "SELECT RNUM, EMAIL, NICKNAME, CREATE_AT "
+			+ "FROM( SELECT ROWNUM AS RNUM, EMAIL, NICKNAME, CREATE_AT "
+			+ "FROM (SELECT EMAIL, NICKNAME, CREATE_AT FROM MEMBER WHERE LEVEL_NO<3 AND (EMAIL LIKE '%'||?||'%') ORDER BY CREATE_AT DESC) WHERE ROWNUM<?) "
+			+ "WHERE RNUM>=?";
+	String searchAdminCount = "SELECT COUNT(*) FROM MEMBER WHERE LEVEL_NO>3 AND (EMAIL LIKE '%'||?||'%')";
+	
+	
 	//전체 유저 조회
 	public List<userDto> allUserList(int pageNum);
 	public int totaluserCount();
@@ -43,6 +54,13 @@ public interface adminDao {
 	public adminUserDto userdetail(String email);
 	public int userUpdate(adminUserDto updateUser);
 	
+	//유저 검색(이메일)
+	public List<userDto> searchUserList(String email, int pageNum);
+	public int searchCount(String email);
+	
+	//관리자 검색(관리자)
+	public List<userDto> searchAdminList(String email, int pageNum);
+	public int searchAdminCount(String email);
 	
 	
 }

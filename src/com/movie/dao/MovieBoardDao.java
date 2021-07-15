@@ -27,7 +27,7 @@ public interface MovieBoardDao {
 	String reviewSelectOne = "SELECT review_id, nickname, movie_id, review_title, review_content, moive_grade, review_r_num, review_v_num, review_img, status_no, createat, receipt FROM MOVIE_REVIEW WHERE REVIEW_ID=?";
 	
 	//영화 리뷰 글 수정
-	String reviewUpdate = "UPDATE MOVIE_REVIEW SET REVIEW_TITLE=?, REVIEW_CONTENT=?, MOIVE_GRADE=?, UPDATEAT=SYSDATE WHERE REVIEW_ID=? AND NICKNAME=? AND DELETE_N=0";
+	String reviewUpdate = "UPDATE MOVIE_REVIEW SET REVIEW_TITLE=?, REVIEW_CONTENT=?, MOIVE_GRADE=?, REVIEW_IMG=? , UPDATEAT=SYSDATE WHERE REVIEW_ID=? AND NICKNAME=? AND DELETE_N=0";
 	
 	//영화 리뷰 글 삭제
 	String reviewDelete = "UPDATE MOVIE_REVIEW SET DELETE_N=1 WHERE NICKNAME=? AND REVIEW_ID=?";

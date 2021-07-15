@@ -7,31 +7,65 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	#userdetail_div{
-		border: 1px black solid;
-		height:600px;
-		margin-left:100px;
-		margin-top:50px;
-	}
-	
-	#userdetail_div2{
-		border: 1px black solid;
-		height:900px;
-		margin-left:100px;
-		margin-top:50px;
-	}
-	
-	.side{
-		margin-top:10px;
-		margin-bottom:10px;
-	}
-	
-	
-	div[title="userdetail_div2"]{
-		border: 1px black solid;
-		height:300px;
-	}
-	
+#userdetail_div{
+	border: 1px black solid;
+	height:600px;
+	margin-left:100px;
+	margin-top:50px;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );
+	border-radius: 10px 10px 10px 10px;
+	font-weight: bold;
+	text-align:center;
+	position: relative;
+	top: 50px;
+}
+
+#userdetail_div2{
+	border: 1px black solid;
+	height:900px;
+	margin-left:100px;
+	margin-top:50px;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );
+	border-radius: 10px 10px 10px 10px;
+	font-weight: bold;
+	text-align:center;
+	position: relative;
+	top: 50px;
+}
+
+.side{
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+
+div[title="userdetail_div2"]{
+	border: 1px black solid;
+	height:300px;
+}
+body{
+	background-image: url("./resources/Image/forest1.jpg");
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: cover;
+}
+h1{
+	position: relative;
+	top: 50px;
+	left: 6%;
+	text-shadow: 1px 1px 1px gray;
+}
+h4{
+	position: relative;
+	top: 40px;
+}
+#sidenav{
+	position: relative;
+	top: 40px;
+}
+
 </style>
 <script type="text/javascript">
 	window.onload = function(){
@@ -65,7 +99,7 @@
 <body>
 	<%@ include file="../Fix/header.jsp" %>
 	
-	<div class="container" style="text-align:center;">
+	<div class="container" style="text-align:center; color:white;">
 		<h1>회원 조회</h1>
 	</div>
 	<div class="row">
@@ -74,25 +108,25 @@
 			<div class="row flex-nowrap">
     			<div class="col-3 bd-sidebar text-center">
     			<br>
-    			<h4>회원 관리</h4>
-      				<ul class="nav">
+    			<h4 id="h4">회원 관리</h4>
+      				<ul class="nav" id="sidenav">
 				        <li class="side"><a href="adminController?command=userList">회원 목록</a></li>
 				        <li class="side"><a href="adminController?command=userList&adminCheck=true">관리자 목록</a></li>
       				</ul>
       		
       			<h4>게시판 글 처리</h4>
-      			     <ul class="nav">
+      			     <ul class="nav" id="sidenav">
 				        <li class="side"><a href="adminController?command=waitList&status=0">승인 대기중인 글</a></li>
 				        <li class="side"><a href="adminController?command=waitList&status=2">승인 거절된 글</a></li>
       				</ul>
       			
       			<h4>공지사항</h4>
-      		      	<ul class="nav">
+      		      	<ul class="nav" id="sidenav">
 				        <li class="side"><a href="adminNotice.jsp">게시판 공지사항</a></li>
       				</ul>
     			
     			<h4>신고 관리</h4>
-    			    <ul class="nav">
+    			    <ul class="nav" id="sidenav">
 				        <li class="side"><a href="adminReportboard.jsp">신고 목록</a></li>
       				</ul>
       			</div>
@@ -235,6 +269,7 @@
 
 	</div>
 	
+	<br><br><br><br><br><br><br><br><br>
 	<%@ include file="../Fix/footer.jsp" %>
 </body>
 </html>

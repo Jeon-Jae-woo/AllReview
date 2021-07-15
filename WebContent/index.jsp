@@ -63,7 +63,7 @@
 	position: relative;
 	/* border: 1px dashed red; */
 	left: 6%;
-	top:80px;
+	top:20px;
 	width: 400px;
 	color: white;
 	text-shadow: 1px 1px 1px gray;
@@ -75,7 +75,7 @@
 	width: 95%;
 	left: 2.5%;
 	height: 750px;
-	top: 90px;
+	top: 50px;
 	background-color: white;
 	background-color: rgba( 255, 255, 255, 0.8 );	
 	
@@ -190,7 +190,6 @@ body{
 	background-repeat: no-repeat;
 	background-position: left top;
 	background-size: cover;
-
 }
 </style>
 
@@ -271,17 +270,7 @@ body{
 	
 	
 	<br><br><br><br><br><br><br><br><br><br>
-	<!-- admin 페이지 작업을 위해서 임시로 만들어놓은 form 입니다 -->	
-	<form method="get" action="userController">
-		<input type="hidden" name="email" value="jaewoo68@naver.com">
-		<input type="hidden" name="levelNo" value="1">
-		<input type="hidden" name="command" value="adminLevelUpdate">
-		<input type="submit">
-	</form>
-	
-	<%-- <h1><%= session.getAttribute("level")  %></h1> --%>
 
-	<a href='noticeTest.jsp'>공지테스트</a>
 	<%@ include file="Fix/footer.jsp" %>
 </body>
 </html>

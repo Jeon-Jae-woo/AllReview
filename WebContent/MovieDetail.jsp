@@ -236,10 +236,11 @@ body{
 	background-size: cover;
 }
 #reviewimg{
-	position:relative;
-	left: 20px;
-	bottom: 230px;
+position: relative;
+left: 10px;
+bottom: 215px;
 }
+
  
 </style>
 
@@ -339,8 +340,8 @@ body{
 					<div>작성일 ${dto.creatat }</div>
 				</div>
 				<div id="content">
-					<textarea rows="23" cols="118" readonly="readonly">${dto.review_content}</textarea>
-					<img alt="" src="resources/uploadImage/${dto.review_img}" width="200" height="200">
+					<textarea rows="23" cols="105" readonly="readonly">${dto.review_content}</textarea>
+					<img id="reviewimg" alt="" src="resources/uploadImage/${dto.review_img}" width="200" height="200">
 				</div>
 			</div>
 			<div class="bottombox">

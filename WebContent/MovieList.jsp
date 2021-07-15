@@ -22,29 +22,8 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-/* $(function(){
-	$("#online").click(function(){
-		$("#online_sub").toggle();
-	});
-	
-	$("#moive").click(function(){
-		$("#movie_sub").toggle();
-		
-	});
-	
-	$("#shop").click(function(){
-		$("#shop_sub").toggle();
-		
-	});
-	
-	$("#book").click(function(){
-		$("#book_sub").toggle();
-		
-	});
-}); */ 
 
 </script>
-
 
 <style type="text/css">
 	
@@ -58,7 +37,6 @@
 	height: 100px;
 	background-color: white;
 	background-color: rgba( 255, 255, 255, 0.8 );
-	
 	}
 #nav ul li{
 	list-style: none;
@@ -116,11 +94,10 @@
 #subcategory1 ul li:hover{
 	color:gray;
 }
-
 .category{
 	position: absolute;
 	float: left;
-	top: 500px;
+	top: 490px;
 	left: 9%;
 	color: white;
 	font-weight: bold;
@@ -130,7 +107,7 @@
 	width: 60%;
 	height: 383px;
 	border: 1px solid black;
-	top: 140px;
+	top: 130px;
 	left: 9%;
 	position: relative;
 	color: black;
@@ -147,7 +124,6 @@
   	top: 10px;
 	left: 10px;
 }
-
 .poster{
 	/* border: 1px dashed red; */
 	width: 270px;
@@ -156,21 +132,17 @@
 	margin: auto;
 	/* background: gray; */
 }
-
 .list{
 	position: relative;
 	height: 320px;
-	left: 33%;
+	left: 30%;
 	bottom: 330px;
 	font-size: 18px;
 	width: 800px;
 }
-
 .list tr th{
 	text-align: center;
-	
 }
-
 .listtitle{
 	float: left;
 	left: 9%;
@@ -178,9 +150,7 @@
 	top: 1020px;
 	color: white;
 	font-weight: bold;
-	
 } 
-
 #mypage_board{
 	width:60%;
 	margin-top:20px;
@@ -188,7 +158,7 @@
 	margin-bottom:20px;
 	margin-right:auto;
 	position: relative;
-	top: 240px;
+	top: 210px;
 	float: left;
 	left: 9%;
 	color: black;
@@ -196,16 +166,14 @@
 	background-color: white;
 	background-color: rgba( 255, 255, 255, 0.8 );
 }
-
 .bottombutton{
 	float: right;
-	position: absolute;
-	right: 31%;
-	top: 1320px;
-}
-
-#writebutton{
 	position: relative;
+	right: 31%;
+	top: 500px;
+}
+#writebutton{
+/* 	position: relative; */
 	font-size: 15px;
 	height: 30px;
 }
@@ -215,8 +183,7 @@
 	height: 40px;
 	top: 550px;
 	float: right;
-	right: 50%;
-
+	right: 40%;
 }
 .pagination{
 	position: relative;
@@ -235,7 +202,6 @@ body{
 	hegiht: 290px;
 	object-fit:cover;
 	border-radius: 5px 5px 5px 5px;
-
 }
 
 </style>
@@ -305,7 +271,6 @@ body{
 
 	
 	<!-- 영화기본정보 + 리뷰리스트 조회 -->
-	<div>
 		<div class="category">
 			<h2>${category_name}</h2>
 		</div>
@@ -336,7 +301,7 @@ body{
 		</div>
 	
 		<!-- 영화 리뷰리스트  -->
-		<div>
+		<div id="section">
 			<div class="listtitle">
 				<h4>${dto.movie_title }  Review List</h4>
 			</div>
@@ -411,16 +376,11 @@ body{
 			      		</a>
 			    	</li>
 				</ul>
-				
-			
 			</nav>
 			   </div>
 			</div>
-			
 		</div>
 	
-	
-	</div>
 	<!-- 추천수 조회수 top5 -->
 	<%@ include file="MovieTop5.jsp" %>
 	
