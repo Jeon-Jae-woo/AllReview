@@ -5,28 +5,56 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <style type="text/css">
-	#login_div{
-  		  width:500px;
-		  height:400px;
-		  padding: 30px, 20px;
-		  text-align:center;
-		  border-radius: 15px;
-		  border: 2px black solid;
-		  margin-top:100px;
-	}
-	#login_form{
-		margin-top:70px;
-		margin-left:10px;
-	}
+
+#login_div{
+	position: relative;
+	top:80px;
+	width:500px;
+	height:400px;
+	padding: 30px, 20px;
+	text-align:center;
+	border-radius: 15px;
+	border: 2px black solid;
+	margin-top:100px;
+	color: black;
+	text-shadow: 1px 1px 1px gray;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );	
+}
+
+#login_form{
+	position: relative;
+	top: 40px;
+	margin-top:70px;
+	margin-left:10px;
+}
+	
+body{
+	background-image: url("./resources/Image/forest1.jpg");
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: cover;
+}
+#loginbutton{
+	position: relative;
+	top: 40px;
+}
+#logintitle{
+	position: relative;
+	top: 30px;
+
+}
 </style>
+
 </head>
 <body>
 	<%@ include file="../Fix/header.jsp" %>
 	
 	<!-- 로그인  , 현재 세션은 없음-->
 	<div class="container px-4 px-lg-5 mt-5" id="login_div">
-		<div class="col-md-12 text-center" style="margin-bottom:20px;">
+		<div class="col-md-12 text-center" id="logintitle" style="margin-bottom:20px;">
 				<h1>Login</h1>
 		</div>
 		<!-- 추가 작업 필요  -->
@@ -44,14 +72,15 @@
 		      		<input type="password" class="form-control" id="password" name="password" placeholder="비밀번호">
 		    	</div>
 		  	</div>
-		  	<div class="form-group">
+		  	<div class="form-group" id="loginbutton">
 		    	<div class="col-sm-offset-2 col-sm-8">
 		    		<input type="submit" class="btn btn-primary btn-lg btn-block" value="로그인">
 		    	</div>
 		  	</div>
 		</form>
-		
 	</div>
+	
+	<br><br><br><br><br><br><br><br><br><br>
 	<%@ include file="../Fix/footer.jsp" %>
 </body>
 </html>
