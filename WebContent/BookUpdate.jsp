@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <% request.setCharacterEncoding("UTF-8"); %>
-<% response.setContentType("text/html; charset=UTF-8"); %>
+<% response.setContentType("text/html; UTF-8"); %>  
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,22 +31,26 @@
 		$("#book_sub").toggle();
 		
 	});
-});  */
+}); */ 
+
 </script>
 
 <style type="text/css">
+
 .categorybox{
-	/*border: 1px solid gray;*/
 	height: 260px;
-	
+
+
 }
 #nav{
 	left: 0px;
-	right:0px;
+	right: 0px;
 	height: 100px;
-	background-color: black;
+	background-color: white;
 	background-color: rgba( 255, 255, 255, 0.8 );
-	}
+
+}
+
 #nav ul li{
 	list-style: none;
 	display: inline;
@@ -76,13 +80,13 @@
 	display: none;
 }
 #movie_sub{
-	display: none; 
+	display: none;
 }
 #shop_sub{
 	display: none;
 }
 #book_sub{
-	/*display: none;*/
+	/* display: none; */
 }
 
 #subcategory1 ul li{
@@ -102,116 +106,114 @@
 	width: 15%;
 	text-shadow: 1px 1px 1px gray;
 }
+
 #subcategory1 ul li:hover{
 	color:gray;
 }
-.headtitle{
+
+.category{
 	position: absolute;
 	float: left;
-	top: 500px;
+	top: 450px;
 	left: 9%;
 	color: white;
 }
- .totalbox{
-	height: 800px;
-	left: 9%;
+
+#box{
 	width: 60%;
-	top: 140px;
-	position: relative;
-}
-.titlebox{
-	border: 1px solid gray;
-	height: 60px;
-	left: 1%;
-	width: 98%;
-	top: 10px;
+	height: 350px;
+	border: 1px solid black;
+	top: 180px;
+	left: 9%;
 	position: relative;
 	background-color: white;
 	background-color: rgba( 255, 255, 255, 0.8 );
 	
-}
-
-.contentbox{
-	border: 1px solid gray;
-	height: 550px;
-	left: 1%;
-	width: 98%;
-	top: 20px;
-	position: relative;
-	background-color: white;
-	background-color: rgba( 255, 255, 255, 0.8 );
 	
 }
 
-#reviewtitle{
+#wrap{
+	border: 1px solid black;
+	width: 280px;
+	height: 330px;
+	padding-top: 3px;
 	position: relative;
-	top:11px;
-	left: 15px;
-	width: 40%;
-	height: 35px;
-}
-#content{
-	position: relative;
-	top:11px;
-	left: 15px
+  	top: 10px;
+	left: 10px;
 }
 
-.bottombox{
-	/* border: 1px dashed red; */
-	position: relative;
-	top: 20px;
+.poster{
+	border: 1px dashed red;
+	width: 270px;
+	height: 320px;
+	text-align: center;
+	margin: auto;
+	background: gray;
 }
 
-.imgupload{
-	position: relative ;
-	top:20px;
-	left: 25px;
-	width: 250px;
+.list{
+	position: relative;
+	height: 320px;
+	left: 28%;
+	bottom: 315px;
+	font-size: 18px;
+	width: 800px;
+	/* border: 1px solid; */
+}
+
+.list tr th{
+text-align: center;
+}
+
+.attached_poster{
+	float: left;
+	left: 10%;
+	top: 1030px;
+	position: absolute;
+	font-size: 15px;
 	color: white;
 }
 
-.reciptupload{
-	position: relative;	
-	bottom: 24px;
-	left: 260px;
-	width: 250px; 
+.comment{
+	float: left;
+	left: 10%;
+	top: 1000px;
+	position: absolute;
+	font-size: 15px;
 	color: white;
 }
 
-.bookgrade{
-	position: relative;	
-	bottom: 50px;
-	left: 600px;
-	width: 250px; 
-	color: white;
+.create{
+	float: left;
+	left: 32%;
+	top: 1100px;
+	position: absolute;
+	font-size: 15px;
+	width: 70px;
 }
-
-.reviewwrite{
-	position: relative;
-	left: 340px;
-	top: 30px;
-	width: 80px;
-}
-.reviewcancel{
-	position: relative;
-	left: 370px;
-	top: 30px;
-	width: 80px;
+.cancel{
+	float: left;
+	left: 37%;
+	top: 1100px;
+	position: absolute;
+	font-size: 15px;
+	width: 70px;
 }
 body{
 	background-image: url("./resources/Image/forest1.jpg");
 	background-repeat: no-repeat;
 	background-position: left top;
 	background-size: cover;
-
 }
+ 
 
 </style>
 </head>
 <body>
 	<%@ include file="Fix/header.jsp" %>
+
 	
-	
+	<br>
 	<div class="categorybox">
 		<div id="nav">
 			<ul>
@@ -265,55 +267,61 @@ body{
 	    </div>
     </div>
 	<br>
-	
-	
-	
-	<div class="headtitle">
-	 <h3>도서 리뷰 수정</h3>
-	</div>
-	
+	<!-- 업뎃할 도서내용 -->
 	<div>
-	<div class="totalbox">
-	<form action="bookController" method="post">
- 		<input type="hidden" name="command" value="reviewUpdate">
- 		<input type="hidden" name="review_id" value="${dto.review_id }">
+			<div class="category">
+				<h1>${category_name}</h1>
+			</div>
 		
-		<div class="titlebox">
-			<input type="text" name="reviewtitle" id="reviewtitle" value="${dto.review_title }">
+			<form action="bookController?command=bookupdate" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="category" value="${category }">
+			<div id="box">
+				<div id="wrap">
+					<div class="poster">도서 목록</div>
+				</div>
+			     <table class="list"  style="text-align: left">
+		            <tr>
+		                <th style="width:100px" >도서명 : </th>
+		                <td style="width:250px"><input type="text" name="book_title"></td>
+		                
+		            </tr>
+		            <tr>
+		                <th>기본정보 : </th>
+		                <td><input type="text" name="book_type_nm" value="${category_name}" readonly="readonly"></td>
+		            </tr>
+		             <tr>
+		                <th>작가 : </th>
+		                <td><input type="text" name="writer"></td>
+		            </tr>
+		             <tr>
+		                <th>출판사 : </th>
+		                <td><input type="text" name="publisher"></td>
+		            </tr>
+		        </table>	
+		        
+			</div>
+			
+			
+			<div class="comment">도서 첨부</div>
+			<div class="attached_poster">
+				<input type="file" id="ex_file" name="poster">
+			</div>
+			
+			<div>
+				<input class="create" type="submit" value="등록">
+				<input class="cancel" type="button" value="취소" onclick="location.href='bookController?command=bookListCate'" >
+			</div>
+			</form>
+			
+			
 		</div>
-		<div class="contentbox">
-			<textarea rows="25" cols="104" id="content" name="content">${dto.review_content }</textarea>
-		</div>
-		<div class="bottombox">
-			<div class="imgupload">
-				이미지 첨부: <input type="file" id="ex_file">
-			</div>
-			<div class="reciptupload">
-				영수증 첨부: <input type="file" id="ex_file">
-			</div>
-			<div class="bookgrade">
-				도서평점: <input type="radio" name="bookgrade" value="5">
-				<input type="radio" name="bookgrade" value="4">
-				<input type="radio" name="bookgrade" value="3">
-				<input type="radio" name="bookgrade" value="2">
-				<input type="radio" name="bookgrade" value="1">
-			</div>
-		</div>
-			<div class="bottombutton">
-				<input class="reviewwrite" type="submit" value="수정" onclick="location='bookController?command=bookdetail&book_id=${dto.book_id}'">
-				<input class="reviewcancel" type="button" value="취소" onclick="location='bookController?command=bookdetail&book_id=${dto.book_id}'">
-			</div>
-		</form>
-	</div>
-	</div>	
-		
-		
-	<%@ include file="BookTop6.jsp" %>	
-	
-	<br><br><br><br><br><br><br><br><br><br><br><br>
-	
-	<%@ include file="Fix/footer.jsp" %>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
+	<!-- 오른쪽 사이드 Top5 테아블 -->		
+	<%@ include file="BookTop6.jsp" %>
+	<br><br><br><br><br><br><br>
 	
+	<!-- footer -->
+	<%@ include file="../Fix/footer.jsp" %>	
 </body>
 </html>
