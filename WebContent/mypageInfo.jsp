@@ -6,29 +6,66 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	#mypage_div{
-		border: 1px black solid;
-		height:600px;
-		margin-left:100px;
-		margin-top:50px;
-	}
+
+h1{
+position: relative;
+top: 50px;
+left: 6%;
+text-shadow: 1px 1px 1px gray;
+}
+#mypage_div{
+	border: 1px black solid;
+	height:600px;
+	margin-left:100px;
+	margin-top:50px;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );
+	border-radius: 10px 10px 10px 10px;
+	font-weight: bold;
+	text-align:center;
+	position: relative;
+	top: 50px;
+
+}
+
+#mypage_div2{
+	border: 1px black solid;
+	height:600px;
+	margin-left:100px;
+	margin-top:50px;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );
+	border-radius: 10px 10px 10px 10px;
+	color: black;
+	font-weight: bold;
+	position: relative;
+	top: 50px;
 	
-	#mypage_div2{
-		border: 1px black solid;
-		height:600px;
-		margin-left:100px;
-		margin-top:50px;
-	}
+}
+
+.side{
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+#mypage_form{
+	margin-left:50px;
+	margin-top:30px;
+	position: relative;
+	top: 30px;
+	left: 8%;
 	
-	.side{
-		margin-top:10px;
-		margin-bottom:10px;
-	}
-	
-	#mypage_form{
-		margin-left:50px;
-		margin-top:30px;
-	}
+}
+body{
+	background-image: url("./resources/Image/forest1.jpg");
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: cover;
+}
+#sidenav{
+	position: relative;
+	top: 40px;
+}
 	
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -86,7 +123,7 @@ function updateCheck(){
 
 	<%@ include file="../Fix/header.jsp" %>
 	
-	<div class="container" style="text-align:center;">
+	<div class="container" style="text-align:center; color:white;">
 		<h1>마이페이지</h1>
 	</div>
 	
@@ -95,7 +132,7 @@ function updateCheck(){
 		<div class="container col-sm-2" id="mypage_div">
 			<div class="row flex-nowrap">
     			<div class="col-3 bd-sidebar">
-      				<ul class="nav">
+      				<ul class="nav" id="sidenav">
 				        <li class="side"><a href="userController?command=mypageInfo">회원 정보</a></li>
 				        <li class="side"><a href="userController?command=writelist">내가 쓴 게시글</a></li>
 				        <li class="side"><a href="mypageLeave.jsp">회원 탈퇴</a></li>
@@ -177,7 +214,7 @@ function updateCheck(){
 		</form>
 		</div>
 	</div>
-	
+	<br><br><br><br><br><br><br><br><br>
 	<%@ include file="../Fix/footer.jsp" %>
 </body>
 </html>

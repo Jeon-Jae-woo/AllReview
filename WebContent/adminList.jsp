@@ -11,36 +11,42 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	#mypage_div{
-		border: 1px black solid;
-		height:600px;
-		margin-left:100px;
-		margin-top:50px;
-	}
-	
-	#mypage_div2{
-		border: 1px black solid;
-		height:600px;
-		margin-left:100px;
-		margin-top:50px;
-	}
-	
-	.side{
-		margin-top:10px;
-		margin-bottom:10px;
-	}
-	
-	#mypage_form{
-		margin-left:50px;
-		margin-top:30px;
-	}
-	#mypage_board{
-		width:800px;
-		margin-top:20px;
-		margin-left:auto;
-		margin-bottom:20px;
-		margin-right:auto;
-	}
+#mypage_div{
+	border: 1px black solid;
+	height:600px;
+	margin-left:100px;
+	margin-top:50px;
+}
+
+#mypage_div2{
+	border: 1px black solid;
+	height:600px;
+	margin-left:100px;
+	margin-top:50px;
+}
+
+.side{
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+#mypage_form{
+	margin-left:50px;
+	margin-top:30px;
+}
+#mypage_board{
+	width:800px;
+	margin-top:20px;
+	margin-left:auto;
+	margin-bottom:20px;
+	margin-right:auto;
+}
+body{
+	background-image: url("./resources/Image/forest1.jpg");
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: cover;
+}
 	
 </style>
 </head>

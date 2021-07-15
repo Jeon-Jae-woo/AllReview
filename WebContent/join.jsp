@@ -6,22 +6,39 @@
 <meta charset="UTF-8">
 
 <title>Insert title here</title>
+
 <style type="text/css">
-	#join_div{
-  		  width:600px;
-		  height:600px;
-		  padding: 30px, 20px;
-		  text-align:center;
-		  border-radius: 15px;
-		  border: 2px black solid;
-		  margin-top:100px;
-	}
-	#join_form{
-		margin-top:70px;
-		margin-left:10px;
-		margin-right:10px;
-	}
+#join_div{
+	width:600px;
+	height:600px;
+	padding: 30px, 20px;
+	text-align:center;
+	border-radius: 15px;
+	border: 2px black solid;
+	margin-top:100px;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );
+	color: black;
+	text-shadow: 1px 1px 1px gray;
+}
+#join_form{
+	margin-top:70px;
+	margin-left:10px;
+	margin-right:10px;
+}
+body{
+	background-image: url("./resources/Image/forest1.jpg");
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: cover;
+}
+#joinbutton{
+position: relative;
+top: 20px;
+}
+	
 </style>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="resources/js/userform.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -99,6 +116,8 @@ function addressForm() {
 </head>
 <body>
 	<%@ include file="../Fix/header.jsp" %>
+	
+	<br><br><br>
 	<section class="py-5">
 		
 	<!-- 회원가입  -->
@@ -176,7 +195,7 @@ function addressForm() {
 		      		<input type="text" class="form-control" id="address2" placeholder="상세주소" name="address2">
 		    	</div>
 		    </div>
-		  	<div class="form-group">
+		  	<div class="form-group" id="joinbutton">
 		    	<div class="col-sm-offset-2 col-sm-8">
 		      		<input type="button" class="btn btn-primary btn-lg btn-block" onclick="joinCheck();" value="회원가입">
 		    	</div>
@@ -185,7 +204,9 @@ function addressForm() {
 	</div>
 	</section>
 
-<%@ include file="../Fix/footer.jsp" %>
+	<br><br><br><br><br><br><br><br><br>
+	
+	<%@ include file="../Fix/footer.jsp" %>
 
 </body>
 </html>
