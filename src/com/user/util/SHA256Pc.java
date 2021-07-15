@@ -8,7 +8,7 @@ public class SHA256Pc {
 		StringBuffer result = new StringBuffer();
 		try {
 			MessageDigest digest = MessageDigest.getInstance("SHA-256");
-			byte[] salt = "test salt".getBytes();
+			byte[] salt = "allreview_salt".getBytes();
 			digest.reset();
 			digest.update(salt);
 			byte[] chars = digest.digest(input.getBytes("UTF-8"));

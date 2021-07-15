@@ -33,5 +33,16 @@ public interface adminBiz {
 	//글 승인 및 거절 처리(카테고리 구분)
 	public int approvalService(int status, String bigCate, int review_id);
 	
+	//유저 검색(이메일)
+	public List<userDto> searchEmailService(String email, int pageNum);
+	public pagingDto searchCountService(String email, int pageNum);
+	
+	//관리자 검색(이메일)
+	public List<userDto> searchAdminService(String email, int pageNum);
+	public pagingDto searchAdminCountService(String email, int pageNum);
+	
+	
+	
+	
 	
 }
