@@ -342,6 +342,7 @@ public class BookBoardDaoImpl implements BookBoardDao {
 				dto.setRcreateat(rs.getDate(8));
 				dto.setReview_img(rs.getString(9));
 				dto.setStatus(rs.getInt(10));
+				dto.setReceipt(rs.getString(11));
 			}
 			
 		} catch (SQLException e) {
