@@ -189,7 +189,7 @@ body{
 	<c:set var="j" value="4" />
 	<c:set var="r" value="0" />
 	<c:set var="r2" value="0" />
-	
+	<c:set var="img" value="img/SHOP.png" />
 	<table class="table">
 		<c:choose>
 			<c:when test="${empty list }">
@@ -203,15 +203,31 @@ body{
 				<c:if test="${i%j ==0 }">
 				<tr>
 				</c:if>
+				<c:choose>
+					<c:when test="${empty dto.upload_img}">
 					<td>
-						<img src="resources/uploadImage/${dto.upload_img }" class="img-responsive" alt="Responsive image" onclick="location.href='shop.do?command=shopdetail&shopno=${dto.shopno }'">
-						<a href="shop.do?command=shopdetail&shopno=${dto.shopno }">${dto.shopno } ${dto.title }</a><br>
+						<img src="${img }" class="img-responsive" alt="Responsive image" onclick="location.href='shop.do?command=shopdetail&shopno=${dto.shopno }'">
+						<a href="shop.do?command=shopdetail&shopno=${dto.shopno }">${dto.title }</a><br>
 						<label>평점 ★:  </label>${Math.round((((dto.service)+(dto.clean)+(dto.traffic))/3)*100)/100.0 }<br>
 						<label>조회수:${dto.hit } </label>
 						<label>추천수:${dto.reco } </label>
 						
 						<div></div>
 					</td>
+					</c:when>
+					<c:otherwise>
+					<td>
+						<img src="resources/uploadImage/${dto.upload_img }" class="img-responsive" alt="Responsive image" onclick="location.href='shop.do?command=shopdetail&shopno=${dto.shopno }'">
+						<a href="shop.do?command=shopdetail&shopno=${dto.shopno }">${dto.title }</a><br>
+						<label>평점 ★:  </label>${Math.round((((dto.service)+(dto.clean)+(dto.traffic))/3)*100)/100.0 }<br>
+						<label>조회수:${dto.hit } </label>
+						<label>추천수:${dto.reco } </label>
+						
+						<div></div>
+					</td>
+					</c:otherwise>
+				</c:choose>
+					
 				<c:if test="${i%j == j-1 }">
 				</tr>
 				</c:if>
@@ -300,7 +316,7 @@ body{
 		</div>
 		
 	</div>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>v
+	<br><br><br>
 	
 	
 	

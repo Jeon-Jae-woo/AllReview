@@ -46,11 +46,13 @@ public class adminController extends HttpServlet {
 		
 		//회원 및 관리자 목록 조회
 		if(command.equals("userList")) {
+			//검색이 들어간 경우 다른 메소드가 실행되도록 구성?
 			
 			String pageNumParam = request.getParameter("pageNum");
 			String adminCheck = request.getParameter("adminCheck");
 			
-			System.out.println("adminCheck : " + adminCheck);
+			//검색
+			String searchEmail = request.getParameter("searchEmail");
 			
 			int pageNum = 0;
 			if(pageNumParam == null) {
@@ -61,22 +63,32 @@ public class adminController extends HttpServlet {
 			
 			List<userDto> userlist = null;
 			pagingDto paging = null;
-			if(adminCheck==null) {
+			
+			//일반 유저 검색(이메일)
+			if(searchEmail!=null && adminCheck==null){
+				userlist = adminbiz.searchEmailService(searchEmail, pageNum);
+				paging = adminbiz.searchCountService(searchEmail, pageNum);
+			}
+			//일반 유저 모든 리스트
+			else if(adminCheck==null) {
 				userlist = adminbiz.allUserListService(pageNum); 
 				paging = adminbiz.userListPaging(pageNum);
 			}
+			//관리자 유저 검색
+			else if(adminCheck.equals("true") && searchEmail != null) {
+				userlist = adminbiz.searchAdminService(searchEmail, pageNum);
+				paging = adminbiz.searchAdminCountService(searchEmail, pageNum);
+			}
+			//관리자 유저 모든 리스트
 			else if(adminCheck.equals("true")) {
 				userlist = adminbiz.adminUserListService(pageNum);
 				paging = adminbiz.adminListPaging(pageNum);
 			}
-			
-			for(userDto dto : userlist) {
-				System.out.println("----");
-				System.out.println(dto.getEmail());
-				System.out.println("----");
+
+			if(adminCheck !=null) {
+				request.setAttribute("adminCheck", adminCheck);
 			}
 			
-			System.out.println("끝");
 			request.setAttribute("userlist", userlist);
 			request.setAttribute("paging", paging);
 			
@@ -176,6 +188,11 @@ public class adminController extends HttpServlet {
 			int status = Integer.parseInt(request.getParameter("status"));
 			String bigCate = request.getParameter("bigCate");
 			int review_id = Integer.parseInt(request.getParameter("review_id"));
+			
+			System.out.println("status = " + status);
+			System.out.println("bigCate = " + bigCate);
+			System.out.println("review_id = " + review_id);
+			
 			
 			int result = adminbiz.approvalService(status, bigCate, review_id);
 			

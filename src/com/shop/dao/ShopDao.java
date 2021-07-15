@@ -201,7 +201,7 @@ public class ShopDao {
 		ResultSet rs = null;
 		ShopDto res = null;
 
-		String sql = " SELECT * FROM SHOP_TB WHERE SHOP_NO=? AND STATUS=1 AND DELETES=0 ";
+		String sql = " SELECT * FROM SHOP_TB WHERE SHOP_NO=? AND DELETES=0 ";
 		// AND RECIPT=1 넣기
 		try {
 			pstm = con.prepareStatement(sql);
@@ -235,7 +235,7 @@ public class ShopDao {
 		PreparedStatement pstm = null;
 		int res = 0;
 
-		String sql = " INSERT INTO SHOP_TB VALUES(SHOPSQ.NEXTVAL,?,?,?,?,?,?,?,?,?,0,0,0,1,SYSDATE,SYSDATE,0,?,?) ";
+		String sql = " INSERT INTO SHOP_TB VALUES(SHOPSQ.NEXTVAL,?,?,?,?,?,?,?,?,?,0,0,0,0,SYSDATE,SYSDATE,0,?,?) ";
 
 		try {
 			pstm = con.prepareStatement(sql);
