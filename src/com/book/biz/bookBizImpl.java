@@ -1,5 +1,8 @@
 package com.book.biz;
 
+import static common.JDBCTemplate.*;
+
+import java.sql.Connection;
 import java.util.List;
 
 import com.book.dao.BookBoardDao;
@@ -12,6 +15,7 @@ import com.user.dto.pagingDto;
 public class bookBizImpl implements bookBiz{
 
 	private BookBoardDao dao = new BookBoardDaoImpl();
+	
 	
 	//카테고리별 책 리스트
 	@Override
@@ -103,6 +107,23 @@ public class bookBizImpl implements bookBiz{
 	public int reviewUpdateService(BookReviewDto dto) {
 		int result = dao.ReviewUpdate(dto);
 		return result;
+	}
+
+	@Override
+	
+	public int bookinsert(BookBoardDto dto) {
+		Connection con = getConnection();
+		
+		int res = dao.bookinsert(con, dto);
+		
+		if(res>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		close(con);
+					
+		return res;
 	}
 
 }
