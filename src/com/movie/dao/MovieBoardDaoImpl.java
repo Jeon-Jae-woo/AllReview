@@ -371,12 +371,14 @@ public class MovieBoardDaoImpl implements MovieBoardDao{
 			System.out.println(dto.getReview_content());
 			System.out.println(dto.getReview_id());
 			System.out.println(dto.getNickname());
+			System.out.println(dto.getReview_img());
 			
 			pstm.setString(1, dto.getReview_title());
 			pstm.setString(2, dto.getReview_content());
 			pstm.setInt(3, dto.getMovie_grade());
-			pstm.setInt(4, dto.getReview_id());
-			pstm.setString(5, dto.getNickname());
+			pstm.setString(4, dto.getReview_img());
+			pstm.setInt(5, dto.getReview_id());
+			pstm.setString(6, dto.getNickname());
 			
 			result = pstm.executeUpdate();
 			

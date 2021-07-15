@@ -37,9 +37,16 @@
 </head>
 <body>
 	<%@ include file="../Fix/header.jsp" %>
-	
+	<c:set var="adminCheck" value="${adminCheck}"/>
 	<div class="container" style="text-align:center;">
-		<h1>회원 목록</h1>
+		<c:choose>
+			<c:when test="${adminCheck != null }">
+		    	<h1>관리자 목록</h1>
+		    </c:when>
+		    <c:otherwise>
+		    	<h1>회원 목록</h1>
+		    </c:otherwise>
+		</c:choose>
 	</div>
 	<div class="row">
 		<!-- 좌측 nav -->
@@ -74,9 +81,16 @@
 		<!-- 우측, 회원 리스트 게시판  -->
 		<div class="container col-sm-6 text-center" id="adminpage_div2">
 			  <!-- 유저 검색  -->
-		     <form class="navbar-form text-center" role="search">
+			  
+		     <form class="navbar-form text-center" role="search" action="adminController" method="post">
+		     	<input type="hidden" name="command" value="userList">
+		     	<c:choose>
+		     		<c:when test="${adminCheck != null }">
+		     			<input type="hidden" name="adminCheck" value="true">
+		     		</c:when>
+		     	</c:choose>
         		<div class="form-group">
-          			<input type="text" class="form-control" placeholder="User email">
+          			<input type="text" class="form-control" placeholder="User email" name="searchEmail">
         		</div>
         		<button type="submit" class="btn btn-default">검색</button>
       		</form>
@@ -111,7 +125,7 @@
 				</tbody>
 			</table>
 			<hr>
-			<!-- pagination 필요, 기능구현에서 바뀜 -->
+			
 			<nav class="pull-bottom">
 			<c:set var="pageNum" value="${paging.pageNum }"/>
 			<c:set var="startPage" value="${paging.startPage}"/>

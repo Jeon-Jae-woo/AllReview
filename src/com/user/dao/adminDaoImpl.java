@@ -60,11 +60,17 @@ public class adminDaoImpl implements adminDao {
 	public int totaluserCount() {
 		Connection con = getConnection();
 		Statement stmt = null;
+		ResultSet rs = null;
 		int count = 0;
 		
 		try {
 			stmt = con.createStatement();
-			count = stmt.executeUpdate(userAllCount);
+			rs = stmt.executeQuery(userAllCount);
+			
+			while(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -187,11 +193,17 @@ public class adminDaoImpl implements adminDao {
 	public int totalAdminuserCount() {
 		Connection con = getConnection();
 		Statement stmt = null;
+		ResultSet rs = null;
 		int count = 0;
 		
 		try {
 			stmt = con.createStatement();
-			count = stmt.executeUpdate(userAllCount);
+			rs = stmt.executeQuery(userAllCount);
+			
+			while(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -199,6 +211,153 @@ public class adminDaoImpl implements adminDao {
 			close(stmt);
 			close(con);
 		}
+		return count;
+	}
+
+	//유저 검색 조회(이메일)
+	@Override
+	public List<userDto> searchUserList(String email, int pageNum) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		List<userDto> userList = new ArrayList<userDto>();
+		userDto dto = null;
+		
+		//페이징
+		int startRow = (pageNum-1)*10+1;
+		int endRow = pageNum*10+1;
+		
+		try {
+			pstm = con.prepareStatement(searchUserEmail);
+			pstm.setString(1, email);
+			pstm.setInt(2, endRow);
+			pstm.setInt(3, startRow);
+			
+			rs = pstm.executeQuery();
+			
+			while(rs.next()) {
+				dto = new userDto();
+				dto.setEmail(rs.getString(2));
+				dto.setNickName(rs.getString(3));
+				dto.setCreatedAt(rs.getDate(4));
+				
+				userList.add(dto);
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+			close(con);
+		}
+		
+		
+		return userList;
+	}
+
+	//유저 검색 row 반환
+	@Override
+	public int searchCount(String email) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		int count = 0;
+		
+		try {
+			pstm = con.prepareStatement(searchCountRow);
+			pstm.setString(1, email);
+			
+			rs = pstm.executeQuery();
+			
+			while(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+			close(con);
+		}
+		
+		return count;
+	}
+
+	//관리자 검색(이메일)
+	@Override
+	public List<userDto> searchAdminList(String email, int pageNum) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		List<userDto> userList = new ArrayList<userDto>();
+		userDto dto = null;
+		
+		//페이징
+		int startRow = (pageNum-1)*10+1;
+		int endRow = pageNum*10+1;
+		
+		try {
+			pstm = con.prepareStatement(searchAdminEmail);
+			pstm.setString(1, email);
+			pstm.setInt(2, endRow);
+			pstm.setInt(3, startRow);
+			
+			rs = pstm.executeQuery();
+			
+			while(rs.next()) {
+				dto = new userDto();
+				dto.setEmail(rs.getString(2));
+				dto.setNickName(rs.getString(3));
+				dto.setCreatedAt(rs.getDate(4));
+				
+				userList.add(dto);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+			close(con);
+		}
+		
+		
+		return userList;
+	}
+	
+	//관리자 검색 카운트
+	@Override
+	public int searchAdminCount(String email) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		int count = 0;
+		
+		try {
+			pstm = con.prepareStatement(searchAdminCount);
+			pstm.setString(1, email);
+			
+			rs = pstm.executeQuery();
+			
+			while(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+			close(con);
+		}
+		
 		return count;
 	}
 

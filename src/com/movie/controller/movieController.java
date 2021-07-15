@@ -222,6 +222,7 @@ public class movieController extends HttpServlet {
 			request.setAttribute("moiveListCate", moiveListCate);
 			request.setAttribute("dto", dto);
 			
+			
 			dispatch("MovieUpdate.jsp", request, response);
 		}
 		//리뷰 수정 로그인 세션 
@@ -234,15 +235,42 @@ public class movieController extends HttpServlet {
 			
 			String nickname = (String)session.getAttribute("nickname");
 
-			int review_id = Integer.parseInt(request.getParameter("review_id"));
-			String title = request.getParameter("reviewtitle");
-			String content = request.getParameter("content");
+			//파일 처리
+			String realFolder="";
+			String saveFolder = "resources/uploadImage";		//사진을 저장할 경로
+			String encType = "utf-8";				//변환형식
+			int maxSize=5*1024*1024;				//사진의 size
+				
+			ServletContext context = this.getServletContext();		//절대경로를 얻는다
+			realFolder = context.getRealPath(saveFolder);
+			
+			System.out.println(realFolder);
+			MultipartRequest multi = new MultipartRequest(request, realFolder, maxSize, encType,
+	                   new DefaultFileRenamePolicy());
+			
+			String review_img = multi.getFilesystemName("uploadImg");
+			
+			System.out.println("file1 + " + review_img);
+			
+			//이미지를 수정 안하는 경우 
+			if(review_img == null) {
+				review_img = multi.getParameter("review_img");
+			}
+			
+			
+			int review_id = Integer.parseInt(multi.getParameter("review_id"));
+			String title = multi.getParameter("reviewtitle");
+			String content = multi.getParameter("content");
+			int movieGrade = Integer.parseInt(multi.getParameter("moviegrade"));
 			
 			MovieReviewDto dto = new MovieReviewDto();
 			dto.setReview_id(review_id);
 			dto.setReview_title(title);
 			dto.setReview_content(content);
 			dto.setNickname(nickname);
+			dto.setMovie_grade(movieGrade);
+			dto.setReview_img(review_img);
+			
 			
 			
 			int result = biz.reviewUpdateService(dto); 

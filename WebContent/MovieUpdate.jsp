@@ -213,7 +213,18 @@ body{
 
 
 </style>
-
+<script type="text/javascript">
+	window.onload = function(){
+		var selectedData = '<c:out value="${dto.movie_grade}"/>';
+		var selectBox = document.getElementsByName("moviegrade");
+		console.log(selectBox.length);
+		for(var i=0; i<selectBox.length;i++){
+			if(selectBox[i].value==selectedData){
+				selectBox[i].checked=true;
+			}
+		}
+	}
+</script>
 
 </head>
 <body>
@@ -285,10 +296,9 @@ body{
 	<!-- 리뷰(게시글) 수정 -->
 	<div>
 		<div class="totalbox">
-			<form action="movieController" method="post">
-				<input type="hidden" name="command" value="reviewUpdate">
-				<input type="hidden" name="review_id" value="${dto.review_id }">
-				
+			<form action="movieController?command=reviewUpdate" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="review_id" value="${dto.review_id}">
+				<input type="hidden" name="review_img" value="${dto.review_img}">
 				<div class="titlebox">
 					<input type="text" name="reviewtitle" id="reviewtitle" value="${dto.review_title }">
 				</div>
@@ -297,11 +307,9 @@ body{
 				</div>
 				<div class="bottombox">
 					<div class="imgupload">
-						이미지 첨부 : <input type="file" id="ex_file"> 
+						이미지 첨부 : <input type="file" id="uploadImg" name="uploadImg"> 
 					</div>
-					<div class="reciptupload">
-						관람인증 첨부: <input type="file" id="ex_file"> 
-					</div>
+
 					<div class="moviegrade">
 						영화평점 : <input type="radio" name="moviegrade" value="1">
 						<input type="radio" name="moviegrade" value="2">
@@ -314,7 +322,6 @@ body{
 					<input class="reviewwrite" type="submit" value="수정" onclick="location='movieController?command=detail&movie_id=${dto.movie_id}'">
 					<input class="reviewcancel" type="button" value="취소" onclick="location='movieController?command=detail&movie_id=${dto.movie_id}'">
 				</div>
-					
 			</form>
 		</div>
 	</div>

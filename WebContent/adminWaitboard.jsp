@@ -51,9 +51,17 @@
 </head>
 <body>
 	<%@ include file="../Fix/header.jsp" %>
-	
+	<c:set var="newStatus" value="${status}"/>
 	<div class="container" style="text-align:center;">
-		<h1>승인 대기중인 글</h1>
+	<c:choose>
+		<c:when test="${newStatus eq '0'}">
+			<h1>승인 대기중인 글</h1>		
+		</c:when>
+		<c:otherwise>
+			<h1>승인 거절된 글</h1>
+		</c:otherwise>
+	</c:choose>
+	
 	</div>
 	<!-- 좌측 nav -->
 	<div class="row">
@@ -172,7 +180,7 @@
 			<c:set var="endPage" value="${paging.endPage}"/>
 			<c:set var="totalPage" value="${paging.totalPage}"/>
 			<c:set var="itemCount" value="${paging.itemCount}"/>
-			<c:set var="newStatus" value="${status}"/>
+			
 				<ul class="pagination">
 					<li>
 			      		<a href="adminController?command=waitList&pageNum=1&category=${category}&status=${newStatus}" aria-label="Previous">

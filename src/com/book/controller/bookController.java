@@ -106,6 +106,7 @@ public class bookController extends HttpServlet {
 			
 		}
 		//리뷰 글 조회
+		//수정 작업 필요
 		else if(command.equals("reviewDetail")) {
 			int review_id = Integer.parseInt(request.getParameter("review_id"));
 			
