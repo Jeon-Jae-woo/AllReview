@@ -107,7 +107,7 @@
 #mainlistreviewtitle1{
 	text-align: center;
 	position: relative;
-	top: 95%;
+	top: 10px;
 	color: black;
 	font-weight: bold;
 	/* text-shadow: 1px 1px 1px gray; */
@@ -115,7 +115,7 @@
 #mainlistreviewtitle2{
 	text-align: center;
 	position: relative;
-	top: 95%;
+	top: 10px;
 	color: black;
 	font-weight: bold;
 	/* text-shadow: 1px 1px 1px gray; */
@@ -123,7 +123,7 @@
 #mainlistreviewtitle3{
 	text-align: center;
 	position: relative;
-	top: 95%;
+	top: 10px;
 	color: black;
 	font-weight: bold;
 	/* text-shadow: 1px 1px 1px gray; */
@@ -131,7 +131,7 @@
 #mainlistreviewtitle4{
 	text-align: center;
 	position: relative;
-	top: 95%;
+	top: 10px;
 	color: black;
 	font-weight: bold;
 	/* text-shadow: 1px 1px 1px gray; */
@@ -139,7 +139,7 @@
 #mainlistreviewtitle5{
 	text-align: center;
 	position: relative;
-	top: 95%;
+	top: 10px;
 	color: black;
 	font-weight: bold;
 	/* text-shadow: 1px 1px 1px gray; */
@@ -147,7 +147,7 @@
 #mainlistreviewtitle6{
 	text-align: center;
 	position: relative;
-	top: 95%;
+	top: 10px;
 	color: black;
 	font-weight: bold;
 	/* text-shadow: 1px 1px 1px gray; */
@@ -155,7 +155,7 @@
 #mainlistreviewtitle7{
 	text-align: center;
 	position: relative;
-	top: 95%;
+	top: 10px;
 	color: black;
 	font-weight: bold;
 	/* text-shadow: 1px 1px 1px gray; */
@@ -163,7 +163,7 @@
 #mainlistreviewtitle8{
 	text-align: center;
 	position: relative;
-	top: 95%;
+	top: 10px;
 	color: black;
 	font-weight: bold;
 	/* text-shadow: 1px 1px 1px gray; */
@@ -171,7 +171,7 @@
 #mainlistreviewtitle9{
 	text-align: center;
 	position: relative;
-	top: 95%;
+	top: 10px;
 	color: black;
 	font-weight: bold;
 	/* text-shadow: 1px 1px 1px gray; */
@@ -179,7 +179,7 @@
 #mainlistreviewtitle10{
 	text-align: center;
 	position: relative;
-	top: 95%;
+	top: 10px;
 	color: black;
 	font-weight: bold;
 	/* text-shadow: 1px 1px 1px gray; */
@@ -191,6 +191,12 @@ body{
 	background-position: left top;
 	background-size: cover;
 }
+#movieposter{
+	width: 178px;
+	object-fit:cover;
+	border-radius: 5px 5px 5px 5px;
+}
+
 </style>
 
 </head>
@@ -237,28 +243,28 @@ body{
 						<c:when test="${dto.bigCategory eq '영화' }">
 							<!-- 값 수정 -->
 							<div>
-								<div><a href="movieController?command=reviewDetail&review_id=${dto.boardNo}"><img id="movieposter" src="resources/uploadImage/${dto.reviewImg}" width="100" height="100"></a></div>
+								<div><a href="movieController?command=reviewDetail&review_id=${dto.boardNo}"><img id="movieposter" src="resources/uploadImage/${dto.reviewImg}"></a></div>
 								<div id="mainlistreviewtitle10">${dto.title}</div>
 							</div>
 						</c:when>
 						<c:when test="${dto.bigCategory eq '매장' }">
 							<!-- 값 수정 -->
 							<div>
-								<div><a href="shop.do?command=shopdetail&shopno=${dto.boardNo}"><img id="movieposter" src="resources/uploadImage/${dto.reviewImg}" width="100" height="100"></a></div>
+								<div><a href="shop.do?command=shopdetail&shopno=${dto.boardNo}"><img id="movieposter" src="resources/uploadImage/${dto.reviewImg}"></a></div>
 								<div id="mainlistreviewtitle10">${dto.title}</div>
 							</div>
 						</c:when>
 						<c:when test="${dto.bigCategory eq '온라인' }">
 							<!-- 값 수정 -->
 							<div>
-								<div><a href="onlineController?command=detail&board_id=${dto.boardNo}"><img id="movieposter" src="resources/uploadImage/${dto.reviewImg}" width="100" height="100"></a></div>
+								<div><a href="onlineController?command=detail&board_id=${dto.boardNo}"><img id="movieposter" src="resources/uploadImage/${dto.reviewImg}"></a></div>
 								<div id="mainlistreviewtitle10">${dto.title}</div>
 							</div>
 						</c:when>
 						<c:when test="${dto.bigCategory eq '도서' }">
 							<!-- 값 수정 -->
 							<div>
-								<div><a href="bookController?command=reviewDetail&review_id=${dto.boardNo}"><img id="movieposter" src="resources/uploadImage/${dto.reviewImg}" width="100" height="100"></a></div>
+								<div><a href="bookController?command=reviewDetail&review_id=${dto.boardNo}"><img id="movieposter" src="resources/uploadImage/${dto.reviewImg}"></a></div>
 								<div id="mainlistreviewtitle10">${dto.title}</div>
 							</div>
 						</c:when>
