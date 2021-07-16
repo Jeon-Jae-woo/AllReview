@@ -43,18 +43,18 @@ public interface MovieBoardDao {
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	//조회수 정렬
-	String hittopsql = " SELECT * FROM MOVIE_REVIEW ORDER BY REVIEW_V_NUM DESC ";
+	String hittopsql = " SELECT * FROM MOVIE_REVIEW WHERE DELETE_N=0 ORDER BY REVIEW_V_NUM DESC ";
 	//조회수 
 	String hitinsertsql = " INSERT INTO MOVIE_HIT VALUES(MOVIE_HITSEQ.NEXTVAL,?,?)";
 	//조회수 증가
-	String hitupdatesql = " UPDATE MOVIE_REVIEW SET REVIEW_V_NUM=REVIEW_V_NUM+1 WHERE REVIEW_ID=? ";
+	String hitupdatesql = " UPDATE MOVIE_REVIEW SET REVIEW_V_NUM=REVIEW_V_NUM+1 WHERE REVIEW_ID=?  ";
 
 	//추천수 정렬
-	String recotopsql = " SELECT * FROM MOVIE_REVIEW ORDER BY REVIEW_R_NUM DESC ";
+	String recotopsql = " SELECT * FROM MOVIE_REVIEW WHERE DELETE_N=0 ORDER BY REVIEW_R_NUM DESC ";
 	//추천수
 	String recoinsertsql = " INSERT INTO MOVIE_RECO VALUES(MOVIE_RECOSEQ.NEXTVAL,?,?) ";
 	//추천수 증가
-	String recoupdatesql = " UPDATE MOVIE_REVIEW SET REVIEW_R_NUM=REVIEW_R_NUM+1 WHERE REVIEW_ID=? ";
+	String recoupdatesql = " UPDATE MOVIE_REVIEW SET REVIEW_R_NUM=REVIEW_R_NUM+1 WHERE REVIEW_ID =? ";
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
