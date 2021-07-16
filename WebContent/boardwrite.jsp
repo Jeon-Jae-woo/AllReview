@@ -16,13 +16,6 @@ height: 300px;
 
 }
 
-/* #secmain{
-border: none;
-padding-top:20px;
-height: 900px;
-padding-left: 40px;
-} */
-
 .catemain{
 margin-left: 30px;
 font-size: 20px;
@@ -119,7 +112,7 @@ font-size: 30px;
 	width: 20%;
 	color: black;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 18px;
 	text-shadow: 1px 1px 1px gray;
    }
 
@@ -190,7 +183,7 @@ display: inline-block;
 
 .btn1{
 width:80px;
-left: 78%;
+left: 65%;
 bottom:90px;
 position: relative;
 
@@ -198,7 +191,7 @@ position: relative;
 }
 .btn2{
 width:80px;
-left: 80%;
+left: 67%;
 bottom:90px;
 position: relative;
 /* transform: translateX(-24%) */
@@ -209,9 +202,16 @@ width:700px;
 }
 
 .contentbox{
-padding: 2em 2em; margin: 2em 10px; font-weight: 
-bold; color: #565656; background: #E4FCFF; 
-box-shadow: 0px 0px 0px 10px #E4FCFF; border: solid 2px skyblue; border-radius: 8px;
+padding: 2em 2em; 
+margin: 2em 10px; 
+font-weight: bold; 
+color: #565656; 
+background: #E4FCFF; 
+box-shadow: 0px 0px 0px 10px #E4FCFF; 
+border: solid 2px skyblue; 
+border-radius: 8px;
+position: relative;
+left: 6%;
 
 }
 
@@ -221,15 +221,17 @@ color: #232323; background: #E4FCFF; border-left: solid 10px #1DC1D6; border: sk
 }
 
 .autobox{
+
+
 padding: .43em 0em .35em .7em; margin: 1em 0; 
 font-weight: bold; color: #232323; 
-background: #F8E8FF; border-left: solid 10px #8A66AE;
+background: #E4FCFF; border-left: solid 10px #1DC1D6;
 }
 
 #btncss{
  border: 1px solid white;
-    background-color: #58FAF4;
-    color: #6E6E6E;
+    background-color: white;
+    color: black;
     padding: 5px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -238,12 +240,12 @@ background: #F8E8FF; border-left: solid 10px #8A66AE;
 }
 
 #btncss:hover{
-    color:white;
-    background-color:skyblue;
+     color: #08088A;
+  background-color: #EFFBFB;
 }
 
 body{
-	background-image: url("./resources/Image/on2.png");
+	background-image: url("./resources/Image/forest1.jpg");
 	background-repeat: no-repeat;
 	background-position: left top;
 	background-size: cover;
@@ -267,9 +269,10 @@ bottom: 57px;
 #topbox{
 
 position: relative;
-left: 0.5%;
+left: 6%;
 width: 70%;
 }
+
 #bottombutton{
 width: 85%;
 }
@@ -277,15 +280,19 @@ width: 85%;
 
 width: 11%;
 position: relative;
+left: 8%;
 }
 
 #uploadImg{
 
 width: 11%;
 position: relative;
-left: 13%;
+left: 22%;
 bottom: 46px;;
 }
+
+
+
 
 </style>
 <!-- ------------------------------------------------------------------------------ -->
@@ -394,7 +401,7 @@ bottom: 46px;;
     <!-- ---------------------------------------------------------------------------------------------------------------------------------- -->
 	<!-- Section -->
 	<section class="sec1">
-		<div id="secmain">
+		<div class="sectiondiv" >
 			<form class="writer" action="onlineController?command=write" method="post" enctype="multipart/form-data">
 			<div id="topbox">	
 			<!-- <input type="hidden" name="command" value="write">  -->
@@ -411,6 +418,7 @@ bottom: 46px;;
 			
 			<div id="price"><span style="color:white; text-weight:bold;">가격만족도 :</span> <input type="hidden" name="price_sat" id="price_sat" value="">  
 			<select name="pirce_sat" id="price_sat" onchange="document.getElementById('price_sat').value = this.options[this.selectedIndex].value">
+			<option value="" selected disabled>선택 </option>
 			<option value='0.5'>0.5</option>
 			<option value='1'>1</option>
 			<option value='1.5'>1.5</option>
@@ -422,11 +430,12 @@ bottom: 46px;;
 			<option value='4.5'>4.5</option>
 			<option value='5'>5</option>
 			</select>
-			</div>
+			</div> 
 		
 		
 			<div id="good"><span style="color:white; text-weight:bold;">상품만족도 :</span> <input type="hidden" name="product_sat" id="product_sat" value="">   
 			<select name="product_sat" id="product_sat" onchange="document.getElementById('product_sat').value = this.options[this.selectedIndex].value">
+			<option value="" selected disabled>선택 </option>
 			<option value='0.5'>0.5</option>
 			<option value='1'>1</option>
 			<option value='1.5'>1.5</option>
@@ -441,13 +450,9 @@ bottom: 46px;;
 			</div>
 			</div>
 			
-			<!-- 텍스트 일때는 잘 넘어간다 해결완료 -->
-			<!-- <input type="text" value="가격만족도" name="price_sat" value="1"><br> --> 
-			<!--  <input type="text" value="상품만족도" name="product_sat" value="1"><br> -->
-			
 			
 			<!-- 내용 -->
-			<textarea rows="30" cols="170" name="content" placeholder="내용을 입력하세요" class="contentbox"></textarea><br><br>
+			<textarea rows="30" cols="130" name="content" placeholder="내용을 입력하세요" class="contentbox"></textarea><br><br>
 			
 			<div id="bottombutton">
 			<div id="receipt">
@@ -457,18 +462,6 @@ bottom: 46px;;
 			<span style="color:white; text-weight:bold;">상품사진 첨부: </span><input style="color:white" type="file" name="uploadImg" >
 			</div>
 			
-			
-			<!-- 나중에참고 --><!--  구매영수증 첨부: <input type="text" name="receipt" value=""> -->
-			<!-- <br><strong>구매내역 첨부 (필수)</strong>
-			<input type="file" name="receiptupload" accept ="image/*" />
-			 -->
-			
-			<!-- 나중에참고 --><!--상품영수증 첨부: <input type="text" name="product_add" value=""> -->
-			<!--  <p>상품사진 첨부
-			<input multiple="multiple" type="file" name="productupload" accept ="image/*" />
-		 	 -->
-			
-				
 			<!-- 작성취소 -->
 			<input type="button" value="작성 취소" onclick="history.go(-1)" class="btn1" id="btncss"> <!-- 이전페이지 돌아가기 -->
 			<!-- 작성 완료 -->

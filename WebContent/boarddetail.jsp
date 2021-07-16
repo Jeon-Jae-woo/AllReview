@@ -122,7 +122,7 @@ font-size: 30px;
 	width: 20%;
 	color: black;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 18px;
 	text-shadow: 1px 1px 1px gray;
    }
 
@@ -208,35 +208,40 @@ transform: translateX(-24%)
 .csbt{
 width:70px;
 position: absolute;
-right: 28%;
-transform: translateX(-28%)
+right: 17%;
+transform: translateX(-28%);
+top: 112px;
 }
 
 .wrtbt {
 width:70px;
 position: absolute;
-right: 24%;
-transform: translateX(-24%)
+right: 10%;
+transform: translateX(-24%);
+top: 112px;
 }
 
 .deletebt {
 width:100px;
 height: 35px;
+position: absolute;
+left: 7%;
+
 }
 
 .listbt{
 width:150px;
 position: absolute;
-right: 57%;
+right: 53%;
 height: 35px;
-transform: translateX(-57%)
+transform: translateX(-53%)
 }
 
 .btn{
 width:100px;
 position: absolute;
 right: 24%;
-transform: translateX(-24%)
+transform: translateX(-22%)
 }
 .titleop{
 width: 1142px;
@@ -255,7 +260,9 @@ box-shadow: 0px 0px 0px 10px #E4FCFF; border: solid 2px skyblue; border-radius: 
 }
 
 .titlebox{
-padding: .43em 0em .35em .7em; margin: 0em 0; font-weight: bold; 
+padding: .43em 0em .35em .7em; 
+margin: 0em 0; 
+font-weight: bold; 
 color: #232323; background: #E4FCFF; border-left: solid 10px #1DC1D6; border: skyblue;
 width: 700px;
 }
@@ -263,7 +270,7 @@ width: 700px;
 .autobox{
 padding: .43em 0em .35em .7em; margin: 0em 0; 
 font-weight: bold; color: #232323; 
-background: #F8E8FF; border-left: solid 10px #8A66AE;
+background: #E4FCFF; border-left: solid 10px #1DC1D6;
 }
 
 #btngroup{
@@ -283,11 +290,17 @@ background: #F8E8FF; border-left: solid 10px #8A66AE;
 }
 
 #updatebtn{
-	 border: 1px solid #08088A;
-    /* background-color: rgba(0,0,0,0); */
+	 /* border: 1px solid #08088A;
+    background-color: rgba(0,0,0,0); 
     background-color:#08088A;
-    /* color: #08088A; */
+    color: #08088A; 
     color:white;
+    padding: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px; */
+     color: black;
     padding: 5px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -295,17 +308,20 @@ background: #F8E8FF; border-left: solid 10px #8A66AE;
     border-bottom-right-radius: 5px;
 }
 #updatebtn:hover{
-  /* color:white; */
+/*   color:white; 
   color: #08088A;
-  /*  background-color:#08088A; */
-   /* background-color: rgba(0,0,0,0); */
-   background-color:skyblue;
+   background-color:#08088A; 
+  background-color: rgba(0,0,0,0);
+   background-color:skyblue; */
+   color: #08088A;
+  	/* background-color:#E6E6E6; */
+  	background-color: #EFFBFB;
 }
 
 #listbtn{
-	border: 1px solid green;
-    background-color: green;
-    color: white;
+	/* border: 1px solid green; */
+    /* background-color: green; */
+    color: black;
     padding: 5px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -316,26 +332,35 @@ background: #F8E8FF; border-left: solid 10px #8A66AE;
 #listbtn:hover{
  	/* color:white; */
  	color: #08088A;
-  	background-color:yellowgreen;
+  	background-color:#EFFBFB;
 }
 
 #deletebtn{
-	border: 1px solid #FE2E64;
+	/* border: 1px solid #FE2E64;
     background-color: #FE2E64;
     color: white;
     padding: 5px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px; */
+     color: black;
+    padding: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+
 }
 
 #deletebtn:hover{
-	color:#08088A;
-  	background-color: #F6CEE3;
+	/* color:#08088A;
+  	background-color: #F6CEE3; */
+  	color: #08088A;
+  	background-color:#EFFBFB;
 }
 body{
-	background-image: url("./resources/Image/on2.png");
+	background-image: url("./resources/Image/forest1.jpg");
 	background-repeat: no-repeat;
 	background-position: left top;
 	background-size: cover;
@@ -345,27 +370,38 @@ body{
 #titlebox{
 
 padding: 15px;
-width: 76%;
-height: 220px;
-/* position: relative; */
-background-color: white;
-background-color: rgba( 255, 255, 255, 0.8 );
+width: 70%;
+height: 160px;
+position: relative;
+left: 4%;
+color: white;
 	
 }
 #content{
 top: 60px;
 position:relative;
+left: 4%;
 }
 
 #uploadImage{
 position:relative;
 bottom: 200px;
 float: left;
-left: 3%;
+left: 7%;
 }
-#bottombutton{
-position: relative;
-bottom: 110px;
+#reciptImage{
+position:relative;
+bottom: 200px;
+float: right;
+right: 74%
+
+}
+
+.satbtn{
+width: 35px;
+font-size: 10px bold;
+text-align: center;
+border : none;
 }
 
 </style>
@@ -375,28 +411,6 @@ bottom: 110px;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-$(function(){
-	   $("#online").click(function(){
-	      $("#online_sub1").toggle();
-	      $("#online_sub2").toggle();
-	   });
-	   
-	   $("#moive").click(function(){
-	      $("#movie_sub").toggle();
-	      
-	   });
-	   
-	   $("#shop").click(function(){
-	      $("#shop_sub").toggle();
-	      
-	   });
-	   
-	   $("#book").click(function(){
-	      $("#book_sub").toggle();
-	      
-	   });
-	}); 
-
 
 </script>
 
@@ -480,16 +494,16 @@ $(function(){
 		<div id="secmain">
 			<div id="titlebox">
 				<!-- 제목출력-->
-				<h1><input type="text" value="제목 : ${dto.online_title }" readonly="readonly" class="titlebox" ></h1><br>
+				<h3><input type="text" value="제목 : ${dto.online_title }" readonly="readonly" class="titlebox" ></h3><br>
 				<input type="text" value="작성자: ${dto.nickname }" readonly="readonly" class="autobox"> &nbsp;&nbsp;
 				<!-- 카테고리 출력 -->
 				<input type="text" value="카테고리: ${dto.category_name }" readonly="readonly" class="autobox">&nbsp;&nbsp;
 		
 				
 				<!-- 만족도 출력 -->
-				가격만족도  <input type="text" value="${dto.price_sat }" readonly="readonly"> &nbsp;
-				상품만족도  <input type="text" value="${dto.product_sat }" readonly="readonly"> &nbsp;
-				평점  <input type="text" value="${dto.satavg }" readonly="readonly"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				가격만족도  <input type="text" style="color:black;" value="${dto.price_sat }" readonly="readonly" class="satbtn"> &nbsp;
+				상품만족도  <input type="text" style="color:black;" value="${dto.product_sat }" readonly="readonly" class="satbtn"> &nbsp;
+				평점  <input type="text" style="color:black;" value="${dto.satavg }" readonly="readonly" class="satbtn"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<!-- 조회수,추천수 출력 -->
 				
 				조회수  <strong>${dto.hits }</strong>&nbsp;&nbsp;&nbsp;
@@ -502,18 +516,18 @@ $(function(){
 			</div>
 		
 		<!-- 내용 출력-->
-		<textarea id="content" rows="27" cols="165" class="contentbox" readonly="readonly">${dto.online_content } </textarea> <br>
+		<textarea id="content" rows="27" cols="150" class="contentbox" readonly="readonly">${dto.online_content } </textarea> <br>
 		
 		
 		<c:choose>
 			<c:when test="${level eq '1' || level eq '2'}">
-				<img alt="" src="resources/uploadImage/${dto.add_receipt}" width="200" height="200">
+				<img id="reciptImage" alt="" src="resources/uploadImage/${dto.add_receipt}" width="200" height="200">
 			</c:when>
 		</c:choose>
 		<img id="uploadImage" alt="" src="resources/uploadImage/${dto.add_product}" width="200" height="200">
-		<br>
+		<br><br><br><br>
 		<!-- 게시글 삭제버튼 , 게시글작성자한테만 노출 -->
-		<div id="bottombutton">
+		<div>
 		<input type="button" value="작성 글 삭제" class="deletebt" id="deletebtn"
 				onclick="location.href='onlineController?command=delete&board_id=${dto.online_board_id}&category_id=${dto.category_id }'" >
 				
@@ -522,6 +536,7 @@ $(function(){
 		<input type="button" class="listbt" id="listbtn" onclick="history.back();" value="이전 목록으로">
 				
 		<input type="button" class="btn" id="updatebtn" value="글 수정하기" onclick="location.href='onlineController?command=updateForm&board_id=${dto.online_board_id}'">
+		</div>
 		
 			<!-- 관리자만 보이도록 설정  -->
 			<c:choose>
@@ -535,11 +550,7 @@ $(function(){
 				</c:when>
 			</c:choose>
 			
-				
-	
 		
-		
-		</div>
 		</div>
 	</section>
 	

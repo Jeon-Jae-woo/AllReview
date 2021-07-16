@@ -96,6 +96,8 @@ font-size: 30px;
    left: 0px;
    right:0px;
    height: 100px;
+     background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );
 
    }
 #nav ul li{
@@ -109,9 +111,10 @@ font-size: 30px;
 	left: 9%;
 	top: 25px;
 	width: 20%;
-	color: white;
+	color: black;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 18px;
+	text-shadow: 1px 1px 1px gray;
    }
 
 #nav ul li:hover{
@@ -139,7 +142,7 @@ font-size: 30px;
 #subcategory1 ul li{
 border-inline: 1px solid lightgray;
 	background-color: white;
-	background-color: rgba( 255, 255, 255, 0.4 );
+	background-color: rgba( 255, 255, 255, 0.8 );
 	list-style: none;
 	position: relative;
 	padding: 0;
@@ -151,6 +154,7 @@ border-inline: 1px solid lightgray;
 	top: 10px;
 	left: 4%;
 	width: 15%;
+	text-shadow: 1px 1px 1px gray;
 }
 
 #subcategory1 ul li:hover{
@@ -182,13 +186,13 @@ display: inline-block;
 .btn1{
 width:80px;
 position: absolute;
-right: 30%;
+right: 39.5%;
 transform: translateX(-30%)
 }
 .btn2{
 width:80px;
 position: absolute;
-right: 24%;
+right: 33.5%;
 transform: translateX(-24%)
 }
 
@@ -201,6 +205,9 @@ padding: 2em 2em; margin: 0em 10px; font-weight:
 bold; color: #565656; background: #E4FCFF; 
 box-shadow: 0px 0px 0px 10px #E4FCFF; border: solid 2px skyblue; 
 border-radius: 8px;
+position: relative;
+left: 6%;
+
 }
 
 .titlebox{
@@ -211,13 +218,13 @@ color: #232323; background: #E4FCFF; border-left: solid 10px #1DC1D6; border: sk
 .autobox{
 padding: .43em 0em .35em .7em; margin: 0em 0; 
 font-weight: bold; color: #232323; 
-background: #F8E8FF; border-left: solid 10px #8A66AE;
+background: #E4FCFF; border-left: solid 10px #1DC1D6;
 }
 
 #btncss{
- border: 1px solid #FE2EF7;
-    background-color: rgba(0,0,0,0);
-    color: #FE2EF7;
+border: 1px solid white;
+    background-color: white;
+    color: black;
     padding: 5px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -226,12 +233,12 @@ background: #F8E8FF; border-left: solid 10px #8A66AE;
 }
 
 #btncss:hover{
-    color:white;
-    background-color:#FE2EF7;
+     color: #08088A;
+  background-color: #EFFBFB;
 }
 
 body{
-	background-image: url("./resources/Image/on2.png");
+	background-image: url("./resources/Image/forest1.jpg");
 	background-repeat: no-repeat;
 	background-position: left top;
 	background-size: cover;
@@ -241,7 +248,7 @@ body{
 #topbox{
 
 position: relative;
-left: 0.5%;
+left: 6%;
 width: 70%;
 
 }
@@ -250,14 +257,23 @@ width: 70%;
 position: relative;
 width: 170px;
 left: 58%;
-bottom: 35px;
+bottom: 31px;
+font-size: 17px;
 }
 #good{
 
 position: relative;
 width: 170px;
-left: 70%;
-bottom: 57px;
+left: 72%;
+bottom: 56px;
+font-size: 17px;
+}
+
+#uploadImg{
+
+width: 11%;
+position: relative;
+left: 7%;
 }
 
 </style>
@@ -381,8 +397,8 @@ $(function(){
 			<!-- 카테고리 출력 -->
 			<input type="text" value="카테고리 : ${dto.category_name }" readonly="readonly" class="autobox">  &nbsp;&nbsp;
 			<!-- 조회수,추천수 출력 -->
-			조회  <strong>${dto.hits }</strong>&nbsp;
-			추천  <strong>${dto.recomd }</strong>
+			  <strong style="color:white;">조회 &nbsp; ${dto.hits }</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			  <strong style="color:white;">추천  &nbsp; ${dto.recomd }</strong>
 			
 			<br><br>
 			<!-- 제목출력-->
@@ -392,6 +408,7 @@ $(function(){
 			
 			<div id="price"><span style="color:white; text-weight:bold;">가격만족도 : </span> <input type="hidden" name="price_sat" id="price_sat" value="">
 			<select onchange="document.getElementById('price_sat').value = this.options[this.selectedIndex].value">
+			<option value="" selected disabled>선택 </option>
 			<option value='0.5' >0.5</option>
 			<option value='1'>1</option>
 			<option value='1.5'>1.5</option>
@@ -403,10 +420,11 @@ $(function(){
 			<option value='4.5'>4.5</option>
 			<option value='5'>5</option>
 			</select>
-			</div>
+			</div> 
 			
 			<div id="good"><span style="color:white; text-weight:bold;">상품만족도 :</span> <input type="hidden" name="product_sat" id="product_sat" value="">
 			<select onchange="document.getElementById('product_sat').value = this.options[this.selectedIndex].value">
+			<option value="" selected disabled>선택 </option>
 			<option value='0.5'>0.5</option>
 			<option value='1'>1</option>
 			<option value='1.5'>1.5</option>
@@ -427,16 +445,18 @@ $(function(){
 		
 	
 		<!-- 내용 출력-->
-		<textarea rows="30" cols="170" class="contentbox" name="content">${dto.online_content } </textarea>
+		<textarea rows="30" cols="130" class="contentbox" name="content">${dto.online_content } </textarea>
 		<br><br>
 		<div id="bottombutton">
 		<input type="button" value="수정 취소" class="btn1" onclick="history.go(-1)" id="btncss">
 		<input type="submit" class="btn2" value="수정 완료" id="btncss">
 		
 		<div id="uploadImg">
-		<span style="color:white; text-weight:bold;">상품사진 첨부: </span><input style="color:white" type="file" name="uploadImg" >
+		<span style="color:white; text-weight:bold;">상품사진 변경: </span><input style="color:white" type="file" name="uploadImg" >
 		</div>
 		</div>
+		
+		
 		
 		
 		</form>
@@ -446,10 +466,11 @@ $(function(){
 		
 	</section>
 	
-	<hr>
+
 	
 		<%@ include file="OnlineTop5.jsp" %>
-	
+		
+		<br><br><br><br><br><br><br><br><br>
 	<!-- Footer -->
 		<%@ include file="Fix/footer.jsp" %>
 </body>

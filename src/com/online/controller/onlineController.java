@@ -61,18 +61,26 @@ public class onlineController extends HttpServlet {
 				category_id = Integer.parseInt(category);
 			}
 			
+			//이곳이 문제점--- 여기서 리스트를 못받음
 			List<onlineDto> list = biz.selectListCateService(category_id, pageNum);
-			System.out.println("size:" + list.size());
+			System.out.println("컨트롤러 첫번째 list값 확인: " + list);
+			//카테id랑, pageNum 값은 정상적으로 불러옴. 리스트에 안담기는것 같다.
 			
 			pagingDto paging = biz.OnlineListPaging(pageNum, category_id);
+			
 			//String category_name = list.get(0).getCategory_name();
 			String category_name = biz.categoryNameService(category_id);
 			
 			request.setAttribute("paging", paging);
+			
+			//위에서 못받아서 여기도 비어있다.
 			request.setAttribute("list", list);
+			System.out.println("list 확인: " + list); // 
+			
 			request.setAttribute("category_id", category_id);
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("category_name", category_name);
+			
 			dispatch("online01.jsp",request,response);
 			
 		}
@@ -107,19 +115,20 @@ public class onlineController extends HttpServlet {
 		else if(command.equals("updateForm")) {
 			int board_id = Integer.parseInt(request.getParameter("board_id"));
 			onlineDto dto = biz.selectOnlineService(board_id);
+			System.out.println("board_id: " + board_id);
+			
 			request.setAttribute("dto", dto);
 			dispatch("boardupdate.jsp", request, response);
 		}
 		//게시글 수정
 		else if(command.equals("update")) {
 			
-			int board_id = Integer.parseInt(request.getParameter("board_id"));
 			HttpSession session = request.getSession();
 			if(session.getAttribute("email") == null) {
 				jsResponse("로그인이 되어있지 않습니다", "index.jsp", response);
 			}
 			
-			//파일 처리
+			//파일 처리 
 			String realFolder="";
 			String saveFolder = "resources/uploadImage";		//사진을 저장할 경로
 			String encType = "utf-8";				//변환형식
@@ -133,16 +142,23 @@ public class onlineController extends HttpServlet {
 	                   new DefaultFileRenamePolicy());
 			
 			
-			String nickname = (String)session.getAttribute("nickname");
 			
+			int board_id = Integer.parseInt(multi.getParameter("board_id"));
+			System.out.println("board_id"+ board_id);
+			String nickname = (String)session.getAttribute("nickname");
+			System.out.println("nickname" + nickname);
 			//ONLINE_TITLE=?, ONLINE_CONTENT=?, PRICE_SAT=?, PRODUCT_SAT=?, 
 			//		ADD_PRODUCT=?, UPDATEAT=SYSDATE WHERE ONLINE_BOARD_ID=? AND NICKNAME=?";
 			String title = multi.getParameter("title");
 			String content = multi.getParameter("content");
 			double price_sat = Double.parseDouble(multi.getParameter("price_sat"));
 			double product_sat = Double.parseDouble(multi.getParameter("product_sat"));
+//			String add_product = multi.getParameter("add_product");
 			String review_img = multi.getFilesystemName("uploadImg");
+			
+			
 			System.out.println("file2 + " + review_img); 
+			
 			
 			onlineDto dto = new onlineDto();
 			dto.setOnline_board_id(board_id);
@@ -151,12 +167,12 @@ public class onlineController extends HttpServlet {
 			dto.setOnline_content(content);
 			dto.setPrice_sat(price_sat);
 			dto.setProduct_sat(product_sat);
+			System.out.println("통과1");
 			dto.setAdd_product(review_img);
-			
-			
+			System.out.println("통과2");
 			
 			int result = biz.updateOnlineService(dto);
-			
+			System.out.println("통과3");
 			if(result>0) {
 				jsResponse("리뷰 수정 성공","onlineController?command=detail&board_id="+board_id,response);
 			}else {
@@ -235,13 +251,9 @@ public class onlineController extends HttpServlet {
 			
 			//제목, 내용, 카테고리, 가격만족도, 상품만족도, 사진, 영수증, 닉네임
 			String title = multi.getParameter("title");
-			System.out.println("title: " + title);
 			String content = multi.getParameter("content");
-			System.out.println("content: " + content);
 			System.out.println(multi.getParameter("price_sat"));
 			double price_sat = Double.parseDouble(multi.getParameter("price_sat"));
-			System.out.println("price_sat: " + price_sat);
-			System.out.println("여기 넘어가나?");
 			double product_sat = Double.parseDouble(multi.getParameter("product_sat"));
 			//상품 , 영수증 사진
 			//String product_add =request.getParameter("product_add");
