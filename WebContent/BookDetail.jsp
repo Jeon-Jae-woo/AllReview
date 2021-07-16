@@ -294,23 +294,23 @@ body{
 				<div>${dto.review_title }</div>
 			</div>
 			<div id="nickname">
-				<div>닉네임${dto.nickname }</div>
+				<div>닉네임: ${dto.nickname }</div>
 			</div>
 			<div id="bookgrade">
-				<div>도서평점${dto.book_grade }</div>
+				<div>도서평점: ${dto.book_grade }</div>
 			</div>
 			<div id="recommand">
-				<div>추천${dto.review_r_num }</div>
+				<div>추천: ${dto.review_r_num }</div>
 			</div>
 			<div id="view">
-				<div>조회${dto.review_v_num }</div>
+				<div>조회: ${dto.review_v_num }</div>
 			</div>
 	
 		</div>
 		<!-- 내용부분 -->
 		<div class="contentbox">
 			<div id="date">
-				<div>작성일${dto.rcreateat }</div>
+				<div>작성일: ${dto.rcreateat }</div>
 			</div>
 			<div id="content">
 				<textarea rows="23" cols="118" readonly="readonly">${dto.review_content }</textarea>
@@ -322,8 +322,8 @@ body{
 				<input id="repo_button" type="submit" value="신고">
 			</div>
 			<div class="lastbutton">
-				<input id="list" type="button" value="수정" onclick="location='movieController?command=reviewUpdateForm&review_id=${dto.review_id}'">
-				<input id="update" type="button" value="목록" onclick="location='MovieList.jsp'">
+				<input id="list" type="button" value="수정" onclick="location='bookController?command=reviewUpdateForm&review_id=${dto.review_id}'">
+				<input id="update" type="button" value="목록" onclick="location='BookImfo.jsp'">
 				<input id="delete" type="button" value="삭제" onclick="location.href='bookController?command=reviewDelete&book_id=${dto.book_id}&review_id=${dto.review_id}'">
 			</div>
 			<c:set var="level" value="${level}"/>

@@ -27,6 +27,12 @@ public interface userDao{
 	//유저 상태 조회
 	String userStatusQuery = "SELECT EMAIL, STATUS_NO FROM MEMBER WHERE EMAIL=?";
 	
+	//유저 비밀번호 찾기(이메일, 닉네임으로 검사)
+	String userFindEmailandPassowrd = "SELECT EMAIL FROM MEMBER WHERE EMAIL=? AND NICKNAME=? AND STATUS_NO=1";
+	//비밀번호 세팅
+	String updateTempPassword = "UPDATE MEMBER SET PASSWORD=? WHERE EMAIL=? AND STATUS_NO=1";
+	
+	
 	/*
 	 * 기능
 	 */
@@ -46,7 +52,10 @@ public interface userDao{
 	//유저 상태 조회
 	public userDto userStatus(String email);
 	
-	
+	//비밀번호 찾기 유저 검색
+	public userDto userFindEN(String email, String nickname);
+	//비밀번호 세팅
+	public int updateTempPassword(String email, String tempPassword);
 	
 	
 }

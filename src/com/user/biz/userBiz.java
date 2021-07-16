@@ -38,5 +38,10 @@ public interface userBiz {
 	//유저 상태 조회
 	public userDto userStatusService(String email);
 	
+	//유저 이메일 닉네임으로 검색
+	public userDto finduserENService(String email, String nickname);
+	//유저 임시 비밀번호 세팅
+	public int updateTempPasswordService(String email, String tempPassword);
+	
 	
 }

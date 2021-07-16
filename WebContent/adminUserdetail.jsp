@@ -119,16 +119,6 @@ h1{
 				        <li class="side"><a href="adminController?command=waitList&status=0">승인 대기중인 글</a></li>
 				        <li class="side"><a href="adminController?command=waitList&status=2">승인 거절된 글</a></li>
       				</ul>
-      			
-      			<h4  id="h4_sub">공지사항</h4>
-      		      	<ul class="nav" id="sidenav">
-				        <li class="side"><a href="adminNotice.jsp">게시판 공지사항</a></li>
-      				</ul>
-    			
-    			<h4  id="h4_sub">신고 관리</h4>
-    			    <ul class="nav" id="sidenav">
-				        <li class="side"><a href="adminReportboard.jsp">신고 목록</a></li>
-      				</ul>
       			</div>
     		</div>
 		</div>
@@ -160,23 +150,30 @@ h1{
 		    						<div class="col-sm-3">
 		      							<input type="email" class="form-control" id="nickname" aria-describedby="sizing-addon2" value="${userdetail.nickname}" readonly="readonly">
 		    						</div>
-							  	<label for="" class="col-sm-2 control-label">상태</label>
+		    					<c:set var="adminLevel" value="${adminLevel}"/>
+		    					<c:choose>
+									<c:when test="${adminLevel eq 1}">
+										<label for="" class="col-sm-2 control-label">직위</label>
+							  				<div class="col-sm-3">
+		      					  				<select class="form-control" id="levelSelect" name="levelSelect">
+    												<option value="3">회원</option>
+    												<option value="2">부관리자</option>
+  												</select>
+		    								</div>
+									</c:when>
+								</c:choose>
+
+							 </div>
+						</div>
+						<!-- 정관리자만 보이도록 수정  -->
+						<div class="container col-sm-12" style="height:60px;">
+							<div class="form-group" style="margin-top:10px;">
+								<label for="" class="col-sm-2 control-label">상태</label>
 							  		<div class="col-sm-3">
 		      					  		<select class="form-control" id="statusSelect" name="statusSelect">
     										<option value="1">활동</option>
     										<option value="2">정지</option>
     										<option value="3">탈퇴</option>
-  										</select>
-		    						</div>
-							 </div>
-						</div>
-						<div class="container col-sm-12" style="height:60px;">
-							<div class="form-group" style="margin-top:10px;">
-								<label for="" class="col-sm-2 control-label">직위</label>
-							  		<div class="col-sm-3">
-		      					  		<select class="form-control" id="levelSelect" name="levelSelect">
-    										<option value="3">회원</option>
-    										<option value="2">부관리자</option>
   										</select>
 		    						</div>
 							<input type="submit" class="btn btn-primary" style="margin-left:200px;" value="변경">

@@ -288,7 +288,7 @@ body{
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="cate" items="${categoryList }">
-	       					<li><onclik href="bookController?command=bookListCate&category=${cate.book_type}&pageNum=1">${cate.book_type_name }</onclick></li>
+	       					<li onclick="location.href='bookController?command=bookList&category=${cate.book_type}&pageNum=1'">${cate.book_type_name }</li>
 	       					</c:forEach>
 						</c:otherwise>
 					</c:choose>

@@ -207,7 +207,7 @@ body{
 				<c:choose>
 					<c:when test="${empty dto.upload_img}">
 					<td>
-						<img src="${img }" class="img-responsive" alt="Responsive image" onclick="location.href='shop.do?command=shopdetail&shopno=${dto.shopno }'">
+						<img src="${img }" class="img-responsive" alt="Responsive image" onclick="location.href='shop.do?command=shopdetail&shopno=${dto.shopno }'" style="width:200px; height:200px;">
 						<a href="shop.do?command=shopdetail&shopno=${dto.shopno }">${dto.title }</a><br>
 						<label>평점 ★:  </label>${Math.round((((dto.service)+(dto.clean)+(dto.traffic))/3)*100)/100.0 }<br>
 						<label>조회수:${dto.hit } </label>
@@ -218,7 +218,7 @@ body{
 					</c:when>
 					<c:otherwise>
 					<td>
-						<img src="resources/uploadImage/${dto.upload_img }" class="img-responsive" alt="Responsive image" onclick="location.href='shop.do?command=shopdetail&shopno=${dto.shopno }'">
+						<img src="resources/uploadImage/${dto.upload_img }" class="img-responsive" alt="Responsive image" onclick="location.href='shop.do?command=shopdetail&shopno=${dto.shopno }'" style="width:200px; height:200px;">
 						<a href="shop.do?command=shopdetail&shopno=${dto.shopno }">${dto.title }</a><br>
 						<label>평점 ★:  </label>${Math.round((((dto.service)+(dto.clean)+(dto.traffic))/3)*100)/100.0 }<br>
 						<label>조회수:${dto.hit } </label>
@@ -245,7 +245,7 @@ body{
 	
 	<div class="side_table">
 		<div class="side_title01">
-			<h4 style="color:white; text-weight:bold;"> 영화 리뷰 추천수 상위 top5 </h4>
+			<h4 style="color:white; text-weight:bold;"> 매장 리뷰 추천수 상위 top5 </h4>
 		</div>
 			
 		<div>
@@ -282,7 +282,7 @@ body{
 		
 		<br>
 		<div class="side_title02">
-			<h4 style="color:white; text-weight:bold;"> 영화 리뷰 조회수 상위 top5 </h4>
+			<h4 style="color:white; text-weight:bold;"> 매장 리뷰 조회수 상위 top5 </h4>
 		</div>
 		
 		<div>

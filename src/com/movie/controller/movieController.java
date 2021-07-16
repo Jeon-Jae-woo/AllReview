@@ -120,6 +120,8 @@ public class movieController extends HttpServlet {
 			request.setAttribute("moiveListCate", moiveListCate);
 			dispatch("MovieList.jsp", request, response);
 		}
+		
+		
 		//리뷰 글작성
 		else if(command.equals("reviewWriteForm")) {
 			int movie_id = Integer.parseInt(request.getParameter("movie_id"));

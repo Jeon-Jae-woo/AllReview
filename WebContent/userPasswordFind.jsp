@@ -55,11 +55,12 @@ body{
 	<!-- 로그인  , 현재 세션은 없음-->
 	<div class="container px-4 px-lg-5 mt-5" id="login_div">
 		<div class="col-md-12 text-center" id="logintitle" style="margin-bottom:20px;">
-				<h1>Login</h1>
+				<h2>비밀번호 찾기</h2>
+				<p>찾으시고자 하는 이메일과 등록한 닉네임을 입력해주세요</p>
 		</div>
 		<!-- 추가 작업 필요  -->
 		<form class="form-horizontal" id="login_form" action="userController" method="post">
-			<input type="hidden" name="command" value="loginCheck">
+			<input type="hidden" name="command" value="passwordFind">
 		  	<div class="form-group">
 		    	<label for="email" class="col-sm-2 control-label">Email</label>
 		    	<div class="col-sm-8">
@@ -67,17 +68,14 @@ body{
 		    	</div>
 		  	</div>
 		  	<div class="form-group">
-		    	<label for="password" class="col-sm-2 control-label">Password</label>
+		    	<label for="password" class="col-sm-2 control-label">닉네임</label>
 		    	<div class="col-sm-8">
-		      		<input type="password" class="form-control" id="password" name="password" placeholder="비밀번호">
+		      		<input type="text" class="form-control" id="nickname" name="nickname" placeholder="닉네임">
 		    	</div>
-		  	</div>
-		  	<div class="form-group">
-		    	<a href="userPasswordFind.jsp">비밀번호 찾기</a>
 		  	</div>
 		  	<div class="form-group" id="loginbutton">
 		    	<div class="col-sm-offset-2 col-sm-8">
-		    		<input type="submit" class="btn btn-primary btn-lg btn-block" value="로그인">
+		    		<input type="submit" class="btn btn-primary btn-lg btn-block" value="이메일 보내기">
 		    	</div>
 		  	</div>
 		</form>
