@@ -84,8 +84,6 @@
 	 }
  
 
-
-
 </script>
 
 
@@ -162,7 +160,7 @@
 .category{
 	position: absolute;
 	float: left;
-	top: 450px;
+	top: 65%;
 	left: 9%;
 	color: white;
 }
@@ -170,7 +168,7 @@
 	width: 60%;
 	height: 350px;
 	border: 1px solid black;
-	top: 180px;
+	top: 160px;
 	left: 9%;
 	position: relative;
 	background-color: white;
@@ -226,16 +224,16 @@ text-align: center;
 }
 .create{
 	float: left;
-	left: 32%;
-	top: 1100px;
+	left: 34%;
+	top: 1050px;
 	position: absolute;
 	font-size: 15px;
 	width: 70px;
 }
 .cancel{
 	float: left;
-	left: 37%;
-	top: 1100px;
+	left: 40%;
+	top: 1050px;
 	position: absolute;
 	font-size: 15px;
 	width: 70px;
@@ -328,7 +326,6 @@ body{
 			
 			<div class="comment">영화 포스터를 첨부하세요</div>
 			<div class="attached_poster">
-				<!-- <input class="image" type="file" id="ex_file" name="poster" accept="image/*" onchange="setThumbnail(event);" > -->
 				<input type="file" id="ex_file" name="poster" onchange="previewImage(this,'previewId')" >
 			</div>
 			

@@ -68,10 +68,10 @@ h4{
 	position: relative;
 	top: 40px;
 }
-.pull-bottom{
+/* .pull-bottom{
 	position: relative;
 	top: 40px;
-}
+} */
 #pull-bottom_line{
 	position: relative;
 	top: 40px;
@@ -79,6 +79,10 @@ h4{
 #adminpage_div2_sub{
 	position: relative;
 	top: 40px;
+}
+.col-md-6{
+position: relative;
+right: 14%;
 }
 	
 </style>
@@ -162,7 +166,9 @@ h4{
 					</tr>
 				</tbody>
 			</table>
+			
 			<hr id="pull-bottom_line">
+			
 			<div class="container" style="width:600px; margin-left:300px;">
 			<div class="row">
 				<div class="col-md-6">

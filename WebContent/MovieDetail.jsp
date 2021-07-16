@@ -179,6 +179,7 @@
 .lastbutton{
 	position: relative;
 	top: 40px;
+	right:6%;
 	font-weight: bold;
 }
 #list{
@@ -203,11 +204,43 @@ body{
 	background-size: cover;
 }
 #reviewimg{
-position: relative;
-left: 10px;
-bottom: 215px;
+	position: relative;
+	left: 10px;
+	bottom: 215px;
 }
-
+#adminbutton{
+	position: relative;
+	top: 50px;
+	left: 10%;
+}
+#receiptimgtitle{
+	position: relative;
+	left: 1%;
+	top: 10px;
+	width: 170px;
+	height: 30px;
+	text-align: center;
+	font-weight: bold;
+	line-height: 30px;
+	color: black;
+	background-color: gray;
+	border-radius: 5px 5px 5px 5px;
+	background-color: rgba( 190, 190, 190, 0.8 );
+}
+#listsub1{
+	position: relative;
+	width: 80px;
+	left: 24%;
+	bottom: 170px;
+	font-weight: bold;
+}
+#listsub2{
+	position: relative;
+	width: 80px;
+	left: 26%;
+	bottom: 170px;
+	font-weight: bold;
+}
  
 </style>
 
@@ -255,7 +288,7 @@ bottom: 215px;
 	</div>
 
 	<!-- 게시글 상세보기 -->
-	<div>
+
 		<!-- 전체박스 -->
 		<div class="totalbox">
 			<!-- 상단 제목 박스 -->
@@ -288,48 +321,47 @@ bottom: 215px;
 				</div>
 			</div>
 			<div class="bottombox">
-				<input id="reco_button" type="submit" value="추천">
+				<input id="reco_button" type="button" value="추천" onclick="location.href='movieController?command=reco&review_id=${dto.review_id}'">
 				<input id="repo_button" type="submit" value="신고">
 			</div>
-			<div class="lastbutton">
-				<input id="list" type="button" value="수정" onclick="location='movieController?command=reviewUpdateForm&review_id=${dto.review_id}'">
-				<input id="update" type="button" value="목록" onclick="location='movieController?command=detail&movie_id=${dto.movie_id}&category_name=${category_name}'">
-				<input id="delete" type="button" value="삭제" onclick="location.href='movieController?command=reviewDelete&movie_id=${dto.movie_id}&review_id=${dto.review_id}'">
-			</div>
+		</div>
+	
+	
+		<div class="lastbutton">
+			<input id="list" type="button" value="수정" onclick="location='movieController?command=reviewUpdateForm&review_id=${dto.review_id}'">
+			<input id="update" type="button" value="목록" onclick="location='movieController?command=detail&movie_id=${dto.movie_id}&category_name=${category_name}'">
+			<input id="delete" type="button" value="삭제" onclick="location.href='movieController?command=reviewDelete&movie_id=${dto.movie_id}&review_id=${dto.review_id}'">
+		</div>
+		
 		<c:set var="level" value="${level}"/>
 		<c:set var="status" value="${dto.status_no}"/>
-		<br><br>
-			<!-- 관리자만 보이도록 설정  -->
+		
+		<!-- 관리자만 보이도록 설정  -->
+		<div id="adminbutton">
+			<c:choose>
+				<c:when test="${level eq '1' || level eq '2'}">
+					<img id="receiptimg" alt="" src="resources/uploadImage/${dto.receipt}" width="200" height="150">
+					<div id="receiptimgtitle">관람인증 영수증</div>
+				</c:when>
+			</c:choose>
 			<c:choose>
 				<c:when test="${status eq '0'}">
 					<c:choose>
 						<c:when test="${level eq '1' || level eq '2'}">
-							<input id="list" type="button" value="승인" onclick="location='adminController?command=approval&review_id=${dto.review_id}&bigCate=${bigCate}&status=1'">
-							<input id="list" type="button" value="거절" onclick="location='adminController?command=approval&review_id=${dto.review_id}&bigCate=${bigCate}&status=2'">
+							<input id="listsub1" type="button" value="승인" onclick="location='adminController?command=approval&review_id=${dto.review_id}&bigCate=${bigCate}&status=1'">
+							<input id="listsub2" type="button" value="거절" onclick="location='adminController?command=approval&review_id=${dto.review_id}&bigCate=${bigCate}&status=2'">
 						</c:when>
 					</c:choose>
 				</c:when>
 			</c:choose>
-			
-				
-					<c:choose>
-						<c:when test="${level eq '1' || level eq '2'}">
-							<img alt="" src="resources/uploadImage/${dto.receipt}" width="200" height="200">
-						</c:when>
-					</c:choose>
-			
-		
 		</div>
-	</div>
-
 	
 	
 	
 	<!-- 조회순 추천순 top5 -->
 	<%@ include file="MovieTop5.jsp" %>
 	
-	<br><br><br><br><br><br><br><br><br><br><br><br>
-	
+	<br><br><br><br><br><br><br>
 	<!-- footer -->
 	<%@ include file="../Fix/footer.jsp" %>
 
