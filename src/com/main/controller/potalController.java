@@ -37,10 +37,10 @@ public class potalController extends HttpServlet {
 		if(command.equals("mainPageList")) {
 			List<PotalMainDto> allList = potalbiz.PotalMainList();
 			
-			
 			request.setAttribute("allList", allList);
 			
-			dispatch("index.jsp", request, response);
+			
+			dispatch("mainPage.jsp", request, response);
 		}
 		
 		

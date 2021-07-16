@@ -355,7 +355,7 @@ body{
 						<c:otherwise>
 							<c:forEach var="list" items="${totalList}">
 								<tr>
-									<td><a href="movieController?command=reviewDetail&review_id=${list.review_id}">${list.review_title}</a></td>
+									<td><a href="bookController?command=reviewDetail&review_id=${list.review_id}">${list.review_title}</a></td>
 									<td>${list.nickname }</td>
 									<td>${list.creatat}</td>
 									<td>${list.book_grade}</td>
@@ -370,7 +370,7 @@ body{
 		
 			<!-- 게시글 작성 버튼  -->
 			<div class="bottombutton">
-				<input id="writebutton" type="button" value="리뷰 등록하기" onclick="location='movieController?command=reviewWriteForm&movie_id=${movie_id}'">
+				<input id="writebutton" type="button" value="리뷰 등록하기" onclick="location='bookController?command=reviewWriteForm&book_id=${book_id}'">
 			</div>
 			
 			<!-- 페이징처리 -->
