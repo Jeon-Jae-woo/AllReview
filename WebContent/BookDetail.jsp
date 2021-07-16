@@ -310,7 +310,7 @@ body{
 		<!-- 내용부분 -->
 		<div class="contentbox">
 			<div id="date">
-				<div>작성일${dto.creatat }</div>
+				<div>작성일${dto.rcreateat }</div>
 			</div>
 			<div id="content">
 				<textarea rows="23" cols="118" readonly="readonly">${dto.review_content }</textarea>
@@ -324,10 +324,10 @@ body{
 			<div class="lastbutton">
 				<input id="list" type="button" value="수정" onclick="location='movieController?command=reviewUpdateForm&review_id=${dto.review_id}'">
 				<input id="update" type="button" value="목록" onclick="location='MovieList.jsp'">
-				<input id="delete" type="button" value="삭제" onclick="location.href='movieController?command=reviewDelete&movie_id=${dto.movie_id}&review_id=${dto.review_id}'">
+				<input id="delete" type="button" value="삭제" onclick="location.href='bookController?command=reviewDelete&book_id=${dto.book_id}&review_id=${dto.review_id}'">
 			</div>
 			<c:set var="level" value="${level}"/>
-		<c:set var="status" value="${dto.status_no}"/>
+		<c:set var="status" value="${dto.status}"/>
 		<br><br>
 			<!-- 관리자만 보이도록 설정  -->
 			<c:choose>

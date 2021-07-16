@@ -3,6 +3,9 @@
     
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; UTF-8"); %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
     
 <!DOCTYPE html>
 <html>
@@ -62,7 +65,6 @@
 		</div>
 			
 		<div>
-			<form>
 				<table id="reco_tb" border=1 >
 					<thead>
 						<tr >
@@ -72,35 +74,24 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td><a href="">제목입니다</a></td>
-							<td>10</td>
-						</tr>
-	 					<tr>
-							<td>2</td>
-							<td><a href="">제목입니다</a></td>
-							<td>9</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td><a href="">제목입니다</a></td>
-							<td>8</td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td><a href="">제목입니다</td>
-							<td>7</td>
-						</tr>
-						<tr>
-							<td>5</td>
-							<td><a href="">제목입니다</a></td>
-							<td>8</td>
-						</tr>
+						<c:choose>
+							<c:when test="${empty list2 }">
+								<tr>
+									<td>---리뷰 없음---</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="dto2" items="${list2 }" end="4">
+									<tr>
+										<td>${r=r+1 }</td>
+										<td><a href="movieController?command=reviewDetail&review_id=${dto2.review_id }">${dto2.review_title }</a></td>
+										<td>${dto2.review_r_num }</td>  
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 					</tbody>
-					
 				</table>
-			</form>
 		</div>
 		
 		<br>
@@ -119,31 +110,22 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td><a href="">제목입니다</a></td>
-							<td>10</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td><a href="">제목입니다</a></td>
-							<td>9</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td><a href="">제목입니다</a></td>
-							<td>8</td>
-						</tr>
-						<tr>
-							<td>4</td>
-							<td><a href="">제목입니다</a></td>
-							<td>7</td>
-						</tr>
-						<tr>
-							<td>5</td>
-							<td><a href="">제목입니다</a></td>
-							<td>8</td>
-						</tr>
+						<c:choose>
+							<c:when test="${empty list3 }">
+								<tr>
+									<td>---리뷰 없음---</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="dto3" items="${list3 }" end="4">
+									<tr>
+										<td>${r2=r2+1 }</td>
+										<td><a href="movieController?command=reviewDetail&review_id=${dto3.review_id }">${dto3.review_title }</a></td>
+										<td>${dto3.review_v_num }</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 					</tbody>
 					
 				</table>

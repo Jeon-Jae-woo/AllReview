@@ -51,7 +51,7 @@
 	width: 20%;
 	color: black;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 18px;
 	text-shadow: 1px 1px 1px gray;
 	}
 #nav ul li:hover{
@@ -175,6 +175,7 @@
 #writebutton{
 /* 	position: relative; */
 	font-size: 15px;
+	font-weight: bold;
 	height: 30px;
 }
 .pull-bottom{
@@ -217,22 +218,14 @@ body{
 	<div class="categorybox">
 		<div id="nav">
 				<ul>
-	            	<li id="online">온라인 쇼핑</li>
+	            	<li id="online" onclick="location.href='onlineController?command=list'">온라인 쇼핑</li>
 	            	<li id="moive" onclick="location.href='movieController?command=moiveListCate'">영화 </li>
 	            	<li id="shop" onclick="location.href='shop.do?command=shoplist'">매장</li>
-	            	<li id="book">도서</li>
+	            	<li id="book" onclick="location.href='bookController?command=bookList'">도서</li>
 	            </ul>
 	    </div>
 		<div id="subcategorybox">
 	       	<div id="subcategory1">
-	       		<ul id="online_sub">
-	       			<li onclick="">세부 카테고리1</li>
-	       			<li onclick="">세부 카테고리2</li>
-	       			<li onclick="">세부 카테고리3</li>
-	       			<li onclick="">세부 카테고리4</li>
-	       			<li onclick="">세부 카테고리5</li>
-	       			<li onclick="">세부 카테고리6</li>
-	       		</ul>
 	       		<ul id="movie_sub">
 	       			<c:choose>
 						<c:when test="${empty moiveListCate }">
@@ -247,22 +240,6 @@ body{
 						</c:otherwise>
 					</c:choose>
 	       			
-	       		</ul>
-	       		<ul id="shop_sub">
-	    			<li onclick="">세부 카테고리1</li>
-	       			<li onclick="">세부 카테고리2</li>
-	       			<li onclick="">세부 카테고리3</li>
-	       			<li onclick="">세부 카테고리4</li>
-	       			<li onclick="">세부 카테고리5</li>
-	       			<li onclick="">세부 카테고리6</li>
-	       		</ul>
-	       		<ul id="book_sub">
-	    			<li onclick="">세부 카테고리1</li>
-	       			<li onclick="">세부 카테고리2</li>
-	       			<li onclick="">세부 카테고리3</li>
-	       			<li onclick="">세부 카테고리4</li>
-	       			<li onclick="">세부 카테고리5</li>
-	       			<li onclick="">세부 카테고리6</li>
 	       		</ul>
 	       	</div>
 	    </div>

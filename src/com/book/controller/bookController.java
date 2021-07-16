@@ -132,7 +132,25 @@ public class bookController extends HttpServlet {
 			
 			request.setAttribute("dto", dto);
 			
-			dispatch("BookDetail.jsp", request, response);
+			//승인 및 거절된 글은 관리자만 열람 가능, 승인된 글은 일반 유저도 접근 가능
+			int level = 0;
+			HttpSession session = request.getSession();
+			if(session.getAttribute("level")!=null) {
+				level = (Integer)session.getAttribute("level");
+				request.setAttribute("bigCate", "도서");
+				request.setAttribute("level", level);
+			}
+
+			if((dto.getStatus()==0 || dto.getStatus()==2) && (level==1 || level==2)) {
+				dispatch("BookDetail.jsp", request, response);	
+			}
+			else if(dto.getStatus()==1){
+				dispatch("BookDetail.jsp", request, response);	
+			}else {
+				jsResponse("유효하지 않은 접근입니다", "index.jsp", response);
+			}
+			
+			
 		}
 		//글 등록 페이지 이동
 		else if(command.equals("reviewWriteForm")) {

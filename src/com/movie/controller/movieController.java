@@ -62,9 +62,9 @@ public class movieController extends HttpServlet {
 			}
 			
 			List<MovieBoardDto> list = biz.movieselectAll(category, pageNum);
-			
-			
 			List<MovieCategoryDto> moiveListCate = biz.categoryselectAll();
+			List<MovieReviewDto> list2 = biz.recoTop();
+			List<MovieReviewDto> list3 = biz.hitTop();
 			
 			pagingDto paging = biz.movieListPaging(pageNum, category); 
 			
@@ -75,6 +75,8 @@ public class movieController extends HttpServlet {
 			
 			request.setAttribute("paging", paging);
 			request.setAttribute("list", list);		
+			request.setAttribute("list2", list2);
+			request.setAttribute("list3", list3);
 			request.setAttribute("moiveListCate", moiveListCate);
 			request.setAttribute("category", category);
 			request.setAttribute("category_name", category_name);
@@ -100,11 +102,18 @@ public class movieController extends HttpServlet {
 			List<MovieReviewDto> list = biz.reviewListService(movie_id, pageNum);
 			
 			List<MovieCategoryDto> moiveListCate = biz.categoryselectAll();
+			List<MovieReviewDto> list2 = biz.recoTop();
+			List<MovieReviewDto> list3 = biz.hitTop();
+			
+	
 			
 			pagingDto paging = biz.movieReviewPaging(pageNum, movie_id);
 			System.out.println("이미지 : " + dto.getMovie_img());
+			
 			request.setAttribute("paging", paging);
 			request.setAttribute("totalList", list);	
+			request.setAttribute("list2", list2);
+			request.setAttribute("list3", list3);
 			request.setAttribute("dto", dto);
 			request.setAttribute("category_name", category_name);
 			request.setAttribute("movie_id", movie_id);
@@ -119,7 +128,11 @@ public class movieController extends HttpServlet {
 				jsResponse("로그인이 되어있지 않습니다", "index.jsp", response);
 			}
 			List<MovieCategoryDto> moiveListCate = biz.categoryselectAll();
+			List<MovieReviewDto> list2 = biz.recoTop();
+			List<MovieReviewDto> list3 = biz.hitTop();
 			
+			request.setAttribute("list2", list2);
+			request.setAttribute("list3", list3);
 			request.setAttribute("moiveListCate", moiveListCate);
 			request.setAttribute("movie_id", movie_id);
 			System.out.println("reviewWriteForm"+movie_id);
@@ -183,19 +196,33 @@ public class movieController extends HttpServlet {
 		}
 		//리뷰 글 조회
 		else if(command.equals("reviewDetail")) {
+			HttpSession session = request.getSession();
+			String nickname = (String)session.getAttribute("nickname");
+
 			int review_id = Integer.parseInt(request.getParameter("review_id"));
+			String category_name = request.getParameter("category_name");
+
 			
 			List<MovieCategoryDto> moiveListCate = biz.categoryselectAll();
-			
 			MovieReviewDto dto = biz.reviewSelectService(review_id);
+			List<MovieReviewDto> list2 = biz.recoTop();
+			List<MovieReviewDto> list3 = biz.hitTop();
 			
+			int res = biz.inserthit(review_id, nickname);
+			
+			if(res>0) {
+				biz.updatehit(review_id);
+			}
+			request.setAttribute("list2", list2);
+			request.setAttribute("list3", list3);
 			request.setAttribute("moiveListCate", moiveListCate);
+			request.setAttribute("category_name", category_name);
 			request.setAttribute("dto", dto);
 			
 			
 			//승인 및 거절된 글은 관리자만 열람 가능, 승인된 글은 일반 유저도 접근 가능
 			int level = 0;
-			HttpSession session = request.getSession();
+			
 			if(session.getAttribute("level")!=null) {
 				level = (Integer)session.getAttribute("level");
 				request.setAttribute("bigCate", "영화");
@@ -211,6 +238,7 @@ public class movieController extends HttpServlet {
 				jsResponse("유효하지 않은 접근입니다", "index.jsp", response);
 			}
 			
+			
 		}
 		//리뷰 수정
 		else if(command.equals("reviewUpdateForm")) {
@@ -218,6 +246,11 @@ public class movieController extends HttpServlet {
 			
 			MovieReviewDto dto = biz.reviewSelectService(review_id);
 			List<MovieCategoryDto> moiveListCate = biz.categoryselectAll();
+			List<MovieReviewDto> list2 = biz.recoTop();
+			List<MovieReviewDto> list3 = biz.hitTop();
+			
+			request.setAttribute("list2", list2);
+			request.setAttribute("list3", list3);
 			
 			request.setAttribute("moiveListCate", moiveListCate);
 			request.setAttribute("dto", dto);
@@ -310,10 +343,13 @@ public class movieController extends HttpServlet {
 			String category_name = request.getParameter("category_name");
 			
 			List<MovieCategoryDto> moiveListCate = biz.categoryselectAll();
-
+			List<MovieReviewDto> list2 = biz.recoTop();
+			List<MovieReviewDto> list3 = biz.hitTop();
+			
+			request.setAttribute("list2", list2);
+			request.setAttribute("list3", list3);
 			request.setAttribute("category_name", category_name);
 			request.setAttribute("category", category);
-
 			request.setAttribute("moiveListCate", moiveListCate);
 		
 			dispatch("MovieCreate.jsp", request, response);
@@ -365,7 +401,20 @@ public class movieController extends HttpServlet {
 				jsResponse("영화 등록 실패","movieController?command=moiveListCate&category="+category,response);	
 			}
 			
+		}else if(command.equals("reco")) {
+			HttpSession session = request.getSession();
+			String nickname = (String)session.getAttribute("nickname");
 			
+			int review_id = Integer.parseInt(request.getParameter("review_id"));
+			
+			int res = biz.insertreco(review_id,nickname);
+			
+			if(res>0) {
+				biz.updatereco(review_id);
+				jsResponse("글 추천 완료", "movieController?command=reviewDetail&review_id="+review_id, response);
+			}else {
+				jsResponse("이미 추천한 글 입니다.", "movieController?command=reviewDetail&review_id="+review_id, response);
+			}
 		}
 	}	 	
 
