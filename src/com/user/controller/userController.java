@@ -28,6 +28,7 @@ import com.user.dto.userDto;
 
 import com.user.util.Gmail;
 import com.user.util.SHA256Pc;
+import com.user.util.randomPassword;
 
 @WebServlet("/userController")
 public class userController extends HttpServlet {
@@ -362,7 +363,81 @@ public class userController extends HttpServlet {
 			}
 			
 		}
-		
+		//비밀번호 찾기
+		else if(command.equals("passwordFind")) {
+			String email = request.getParameter("email");
+			String nickname = request.getParameter("nickname");
+			
+			System.out.println(email);
+			System.out.println(nickname);
+			
+			int result = 0;
+			//유저 찾기
+			userDto user = userbiz.finduserENService(email, nickname);
+			
+			if(user.getEmail()==null) {
+				jsResponse("존재하지 않는 회원입니다", "userPasswordFind.jsp", response);
+			}else {
+				//유저가 있다면 password 세팅
+				randomPassword rp = new randomPassword();
+				String tempPassword = rp.getRamdomPassword(10);
+				
+				//임시 비밀번호 유저에 세팅
+				result = userbiz.updateTempPasswordService(email, tempPassword);
+				
+				if(result>0) {
+					//이메일 send
+					//호스트 주소
+					String host = "http://localhost:8787/semi/";
+					//구글 계정(보내는 사람)
+					String from = "jaewoo68366@gmail.com";
+					//받는사람
+					String to = email;
+					//제목
+					String subject = "AllReview 임시 비밀번호 발급";
+					//내용
+					String content = "<h2>Allreview 임시 비밀번호 입니다<h2><br>" 
+							+ "<h3>"+tempPassword + "</h3>";
+					
+					//smtp 접속
+					Properties p = new Properties();
+					p.put("mail.smtp.user", from );
+					p.put("mail.smtp.host", "smtp.googlemail.com" );
+					p.put("mail.smtp.port", "465");
+					p.put("mail.smtp.starttls.enable", "true" );
+					p.put("mail.smtp.auth", "true" );
+					p.put("mail.smtp.debug", "true" );
+					p.put("mail.smtp.socketFactory.port", "465");
+					p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+					p.put("mail.smtp.socketFactory.fallback", "false");
+					
+					//이메일 전송
+					try {
+						Authenticator auth = new Gmail();
+						Session ses = Session.getInstance(p, auth);
+						ses.setDebug(true);
+						MimeMessage msg = new MimeMessage(ses);
+						msg.setSubject(subject);
+						Address fromAddr = new InternetAddress(from);
+						msg.setFrom(fromAddr);
+						Address toAddr = new InternetAddress(to);
+						msg.addRecipient(Message.RecipientType.TO, toAddr);
+						msg.setContent(content, "text/html;charset=UTF8");
+						Transport.send(msg);
+						
+					}catch(Exception e) {
+						e.printStackTrace();
+					}	
+				}
+				
+			}
+
+			if(result>0) {
+				jsResponse("해당 이메일로 임시 비밀번호를 전송하였습니다", "./index.jsp", response);
+			}else {
+				jsResponse("임시 비밀번호 부여 실패", "./index.jsp", response);
+			}
+		}
 		
 		
 
