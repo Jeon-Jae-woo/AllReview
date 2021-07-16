@@ -132,54 +132,33 @@ public class MovieBoardDaoImpl implements MovieBoardDao{
 		return res;
 	}
 
-	@Override
-	public boolean movieupdate(Connection con, MovieBoardDto dto) {
-		PreparedStatement pstm = null;
-		int res = 0;
-		
-		try {
-			pstm = con.prepareStatement(movieupdateSql);
-			pstm.setString(2, dto.getMovie_title());
-			pstm.setString(3, dto.getDirector());
-			pstm.setString(4, dto.getActor());
-			pstm.setInt(5, dto.getParticipant());
-			System.out.println("03.query 준비:" + movieupdateSql);
-			
-			res = pstm.executeUpdate();
-			System.out.println("04.query 실행 및 리턴");
-			
-		} catch (SQLException e) {
-			System.out.println("3/4단계 에러");
-			e.printStackTrace();
-		}finally {
-			close(pstm);
-			System.out.println("05.db 종료\n");
-		}
-		return (res>0)?true:false;
-	}
-
-	@Override
-	public boolean moviedelete(Connection con, int movie_id) {
-		PreparedStatement pstm =null;
-		int res = 0;
-		
-		try {
-			pstm = con.prepareStatement(moviedeleteSql);
-			pstm.setInt(1, movie_id);
-			System.out.println("03.query 준비:" + moviedeleteSql);
-			
-			res = pstm.executeUpdate();
-			System.out.println("04.query 실행 및 리턴");
-			
-		} catch (SQLException e) {
-			System.out.println("3/4단계 에러");
-			e.printStackTrace();
-		}finally {
-			close(pstm);
-			System.out.println("05.db종료/n");
-		}
-		return (res>0)?true:false;
-	}
+	/*
+	 * @Override public boolean movieupdate(Connection con, MovieBoardDto dto) {
+	 * PreparedStatement pstm = null; int res = 0;
+	 * 
+	 * try { pstm = con.prepareStatement(movieupdateSql); pstm.setString(2,
+	 * dto.getMovie_title()); pstm.setString(3, dto.getDirector());
+	 * pstm.setString(4, dto.getActor()); pstm.setInt(5, dto.getParticipant());
+	 * System.out.println("03.query 준비:" + movieupdateSql);
+	 * 
+	 * res = pstm.executeUpdate(); System.out.println("04.query 실행 및 리턴");
+	 * 
+	 * } catch (SQLException e) { System.out.println("3/4단계 에러");
+	 * e.printStackTrace(); }finally { close(pstm);
+	 * System.out.println("05.db 종료\n"); } return (res>0)?true:false; }
+	 * 
+	 * @Override public boolean moviedelete(Connection con, int movie_id) {
+	 * PreparedStatement pstm =null; int res = 0;
+	 * 
+	 * try { pstm = con.prepareStatement(moviedeleteSql); pstm.setInt(1, movie_id);
+	 * System.out.println("03.query 준비:" + moviedeleteSql);
+	 * 
+	 * res = pstm.executeUpdate(); System.out.println("04.query 실행 및 리턴");
+	 * 
+	 * } catch (SQLException e) { System.out.println("3/4단계 에러");
+	 * e.printStackTrace(); }finally { close(pstm); System.out.println("05.db종료/n");
+	 * } return (res>0)?true:false; }
+	 */
 
 	//카테고리별 row 반환
 	@Override
@@ -422,6 +401,111 @@ public class MovieBoardDaoImpl implements MovieBoardDao{
 		return result;
 	}
 	
+	//조회수
+	public int inserthit(Connection con, int shopno, String nickname) {
+		PreparedStatement pstm = null;
+		int res = 0;
+
+		String sql = " INSERT INTO SHOP_HIT VALUES(HITSQ.NEXTVAL,?,?) ";
+
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, nickname);
+			pstm.setInt(2, shopno);
+			System.out.println("03. query 준비: " + sql);
+
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 에러");
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+			System.out.println("05. db 종료\n");
+		}
+
+		return res;
+	}
+	//조회수 증가
+	public int updatehit(Connection con, int shopno) {
+		PreparedStatement pstm = null;
+		int res = 0;
+
+		String sql = " UPDATE SHOP_TB SET HIT=HIT+1 WHERE SHOP_NO=? ";
+
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setInt(1, shopno);
+			System.out.println("03. query 준비: " + sql);
+
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 에러");
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+			System.out.println("05. db 종료\n");
+		}
+
+		return res;
+	}
+	//추천수
+	public int insertreco(Connection con, int shopno, String nickname) {
+		PreparedStatement pstm = null;
+		int res = 0;
+
+		String sql = " INSERT INTO SHOP_RECO VALUES(RECOSQ.NEXTVAL,?,?) ";
+
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setString(1, nickname);
+			pstm.setInt(2, shopno);
+			System.out.println("03. query 준비 : " + sql);
+
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 에러");
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+			System.out.println("05. db 종료\n");
+		}
+
+		return res;
+	}
+	
+	//추천수 증가
+	public int updatereco(Connection con, int shopno) {
+		PreparedStatement pstm = null;
+		int res = 0;
+		
+		String sql = " UPDATE SHOP_TB SET RECO=RECO+1 WHERE SHOP_NO=? ";
+		
+		try {
+			pstm = con.prepareStatement(sql);
+			pstm.setInt(1, shopno);
+			System.out.println("03. query 준비: " + sql);
+			
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+			
+			
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 에러");
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+			System.out.println("05. db 종료\n");
+		}
+		
+		
+		return res;
+	}
 	
 	
 }
