@@ -123,6 +123,8 @@
 	top: 500px;
 	left: 9%;
 } */
+
+
 #box{
 	width: 60%;
 	height: 383px;
@@ -135,6 +137,7 @@
 	background-color: white;
 	background-color: rgba( 255, 255, 255, 0.8 );
 }
+
 #wrap{
 	border: 1px solid black;
 	width: 280px;
@@ -145,12 +148,16 @@
 	left: 10px;
 }
 
+
+
 .poster{
 	width: 270px;
 	height: 357px;
 	text-align: center;
 	margin: auto;
 }
+
+
 
 .list{
 	position: relative;
@@ -304,7 +311,7 @@ h2{
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="cate" items="${categoryList }">
-	       					<li><a href="bookController?command=bookList&category=${cate.book_type}&pageNum=1">${cate.book_type_name }</a></li>
+	       					<li onclick="location.href='bookController?command=bookList&category=${cate.book_type}&pageNum=1">${cate.book_type_name }</a></li>
 	       					</c:forEach>
 						</c:otherwise>
 					</c:choose>
@@ -315,7 +322,7 @@ h2{
 	<br>
 	
 	    
-			<div class="top">
+			<div class="category">
 			<h2>${category_name}</h2>
 			</div>
 		
@@ -373,6 +380,7 @@ h2{
 									<td><a href="bookController?command=reviewDetail&review_id=${list.review_id}">${list.review_title}</a></td>
 									<td>${list.nickname }</td>
 									<td>${list.rcreateat}</td>
+									<td>${list.book_grade }
 									<td>${list.review_r_num }</td>
 									<td>${list.review_v_num }</td>
 								</tr>

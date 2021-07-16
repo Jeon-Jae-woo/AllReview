@@ -279,7 +279,7 @@ body{
  		<input type="hidden" name="review_id" value="${dto.review_id }">
 		
 		<div class="titlebox">
-			<input type="text" name="reviewtitle" id="reviewtitle" value="${dto.review_title }">
+			<input type="text" name="title" id="reviewtitle" value="${dto.review_title }">
 		</div>
 		<div class="contentbox">
 			<textarea rows="25" cols="104" id="content" name="content">${dto.review_content }</textarea>

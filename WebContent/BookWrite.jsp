@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-$(function(){
+/*$(function(){
 	$("#online").click(function(){
 		$("#online_sub").toggle();
 	});
@@ -31,7 +31,8 @@ $(function(){
 		$("#book_sub").toggle();
 		
 	});
-}); 
+});
+*/
 </script>
 
 <style type="text/css">
@@ -89,7 +90,7 @@ $(function(){
 #subcategory1 ul li{
 	border-inline: 1px solid lightgray;
 	background-color: white;
-	background-color: rgba( 255, 255, 255, 0.4 );
+	background-color: rgba( 255, 255, 255, 0.8 );
 	list-style: none;
 	position: relative;
 	padding: 0;
@@ -287,15 +288,16 @@ body{
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="cate" items="${categoryList }">
-	       					<li><a href="bookController?command=bookList&category=${cate.book_type}&pageNum=1">${cate.book_type_name }</a></li>
+	       					<li onclick="location.href='bookController?command=bookList&category=${cate.book_type}&pageNum=1'">${cate.book_type_name }</li>
 	       					</c:forEach>
 						</c:otherwise>
 					</c:choose>
 	       		</ul>
 	       	</div>
 	    </div>
-    </div>
+   	</div>
 	<br>
+	
 	
 
 	<div class="title">
@@ -315,8 +317,6 @@ body{
 					<textarea rows="25" cols="104" id="content" placeholder="내용을 작성 하세요" name="content"></textarea>
 				</div>
 				<div class="bottonmbox">
-				<br>
-				<br>
 					<div class="imgupload">
 						이미지 첨부: <input type="file" id="ex_file" name="uploadImg">
 					</div>
@@ -324,23 +324,22 @@ body{
 						영수증 첨부: <input type="file" id="ex_file" name="receipt">
 					</div>
 					<div class="bookgrade">
-						영화평점: <input type="radio" name="bookgrade" value="5">
-						<input type="radio" name="bookgrade" value="4">
-						<input type="radio" name="bookgrade" value="3">
+						도서평점: <input type="radio" name="bookgrade" value="1">
 						<input type="radio" name="bookgrade" value="2">
-						<input type="radio" name="bookgrade" value="1">
+						<input type="radio" name="bookgrade" value="3">
+						<input type="radio" name="bookgrade" value="4">
+						<input type="radio" name="bookgrade" value="5">
+					</div>
 					</div>
 					<div class="bottonbutton">
 						<input class="reviewwrite" type="submit" value="등록">
 						<input class="reviewcancel" type="button" value="취소" onclick="javascript:history.back(-1)">
 					</div>
 				
-				</div>	
+				
 		
 			</form>
-		</div>
-		
-			
+		</div>	
 	</div>
 				
 	<%@ include file="BookTop6.jsp" %>	
