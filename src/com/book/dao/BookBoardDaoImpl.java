@@ -342,6 +342,7 @@ public class BookBoardDaoImpl implements BookBoardDao {
 				dto.setRcreateat(rs.getDate(8));
 				dto.setReview_img(rs.getString(9));
 				dto.setStatus(rs.getInt(10));
+				dto.setReceipt(rs.getString(11));
 			}
 			
 		} catch (SQLException e) {
@@ -368,9 +369,10 @@ public class BookBoardDaoImpl implements BookBoardDao {
 			pstm.setString(1, dto.getReview_title());
 			pstm.setString(2, dto.getReview_content());
 			pstm.setString(3, dto.getNickname());
-			pstm.setInt(4, dto.getBook_grade());
-			pstm.setInt(5, dto.getBook_id());
+			pstm.setInt(4, dto.getBook_id());
+			pstm.setInt(5, dto.getBook_grade());
 			pstm.setString(6, dto.getReview_img());
+			pstm.setString(7, dto.getReceipt());
 			
 			result = pstm.executeUpdate();
 			
@@ -446,6 +448,36 @@ public class BookBoardDaoImpl implements BookBoardDao {
 		}
 		
 		return result;
+	}
+	@Override
+	public int bookinsert(Connection con, BookBoardDto dto) {
+		PreparedStatement pstm = null;
+		int res = 0;
+		
+		try {
+			pstm = con.prepareStatement(bookinsertSql);
+			pstm.setInt(1, dto.getBook_type());
+			pstm.setString(2, dto.getBook_title());
+			pstm.setString(3, dto.getWriter());
+			pstm.setString(4, dto.getPublisher());
+			pstm.setString(5, dto.getBook_img());
+			System.out.println("03.query 준비: " +bookinsertSql);
+			
+			res = pstm.executeUpdate();
+			System.out.println("04.query 실행 및 리턴");
+			
+			if(res>0) {
+				commit(con);
+			}
+				
+		} catch (SQLException e) {
+			System.out.println("3/4단계 에러");
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+			System.out.println("05.db종료\n");
+		}
+		return res;
 	}
 
 }

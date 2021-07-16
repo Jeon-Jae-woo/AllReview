@@ -92,7 +92,7 @@ public interface totalBoardDao {
 	//영화 
 	String movieStatusPc = "UPDATE MOVIE_REVIEW SET STATUS_NO=? WHERE REVIEW_ID=? AND DELETE_N=0";
 	//책
-	String bookStatusPc = "UPDATE REVIEW_BOARD SET STATUS=? WHERE REVIEW_ID=?";
+	String bookStatusPc = "UPDATE BOOK_REVIEW_BOARD SET STATUS=? WHERE REVIEW_ID=? AND DELETE_N=0";
 	//온라인
 	String onlineStatusPc = "UPDATE ONLINE_BOARD SET STATUS=? WHERE ONLINE_BOARD_ID=? AND DELETE_N=0";
 	
