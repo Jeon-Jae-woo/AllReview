@@ -12,11 +12,16 @@ public class PotalMainBizImpl implements PotalMainBiz {
 	
 	@Override
 	public List<PotalMainDto> PotalMainList() {
-		dao.ClearList();
-		dao.MovieList();
-		
 		List<PotalMainDto> allList = dao.getAllList();
 		
+		for(PotalMainDto dto : allList) {
+			System.out.println("-----------");
+			System.out.println(dto.getBigCategory());
+			System.out.println(dto.getTitle());
+			System.out.println(dto.getReviewImg());
+			System.out.println(dto.getView());
+			System.out.println("-----------");
+		}
 		return allList;
 	}
 
