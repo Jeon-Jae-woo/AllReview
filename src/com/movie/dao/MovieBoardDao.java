@@ -53,15 +53,22 @@ public interface MovieBoardDao {
 	public int reviewUpdate(Connection con, MovieReviewDto dto);
 	//리뷰 글 삭제
 	public int reviewDelete(Connection con, String nickname, int review_id);
-	
-	
+	//카테고리 연결
 	public List<MovieBoardDto> movieselectAll(Connection con, int category, int pageNum);
+	// 영화 기본정보 조회
 	public MovieBoardDto movieselectOne(Connection con, int movie_id);
 	//영화 등록
 	public int movieinsert(Connection con, MovieBoardDto dto);
 	
-	
-	public boolean movieupdate(Connection con, MovieBoardDto dto);
-	public boolean moviedelete(Connection con, int movie_id);
 	public int MovieRowCount(int category);
+	
+	
+	
+	
+	//------------------------------------------------------------
+	/*
+	 * public boolean movieupdate(Connection con, MovieBoardDto dto); public boolean
+	 * moviedelete(Connection con, int movie_id);
+	 */
+	
 }
