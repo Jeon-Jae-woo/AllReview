@@ -57,7 +57,7 @@ h1{
 	left: 6%;
 	text-shadow: 1px 1px 1px gray;
 }
-h4{
+#h4_sub{
 	position: relative;
 	top: 40px;
 }
@@ -108,24 +108,24 @@ h4{
 			<div class="row flex-nowrap">
     			<div class="col-3 bd-sidebar text-center">
     			<br>
-    			<h4 id="h4">회원 관리</h4>
+    			<h4  id="h4_sub">회원 관리</h4>
       				<ul class="nav" id="sidenav">
 				        <li class="side"><a href="adminController?command=userList">회원 목록</a></li>
 				        <li class="side"><a href="adminController?command=userList&adminCheck=true">관리자 목록</a></li>
       				</ul>
       		
-      			<h4>게시판 글 처리</h4>
+      			<h4  id="h4_sub">게시판 글 처리</h4>
       			     <ul class="nav" id="sidenav">
 				        <li class="side"><a href="adminController?command=waitList&status=0">승인 대기중인 글</a></li>
 				        <li class="side"><a href="adminController?command=waitList&status=2">승인 거절된 글</a></li>
       				</ul>
       			
-      			<h4>공지사항</h4>
+      			<h4  id="h4_sub">공지사항</h4>
       		      	<ul class="nav" id="sidenav">
 				        <li class="side"><a href="adminNotice.jsp">게시판 공지사항</a></li>
       				</ul>
     			
-    			<h4>신고 관리</h4>
+    			<h4  id="h4_sub">신고 관리</h4>
     			    <ul class="nav" id="sidenav">
 				        <li class="side"><a href="adminReportboard.jsp">신고 목록</a></li>
       				</ul>
@@ -136,7 +136,7 @@ h4{
 		<div class="container col-sm-6" id="userdetail_div2">
 			<div class="row">
 				<!-- 회원 정보 -->
-				<div class="container col-sm-12" title="userdetail_div2">
+				<div class="container col-sm-12" id="subsub" title="userdetail_div2">
 					<h4>회원 정보</h4>
 					<!-- 추가 작업 필요함  -->
 					<form class="form-horizontal" action="adminController" method="post">
@@ -188,7 +188,7 @@ h4{
 			</div>
 			<!-- 작성 글 목록  -->
 			<div class="row">
-				<div class="container col-sm-12" title="userdetail_div2" style="height:600px">
+				<div class="container col-sm-12" id="subsub" title="userdetail_div2" style="height:600px">
 					<h4>작성 글 목록</h4>
 					<form class="form-horizontal" action="adminController" method="post">
 						<input type="hidden" name="command" value="userdetail">

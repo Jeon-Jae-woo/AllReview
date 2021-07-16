@@ -14,26 +14,6 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-/* $(function(){
-	$("#online").click(function(){
-		$("#online_sub").toggle();
-	});
-	
-	$("#moive").click(function(){
-		$("#movie_sub").toggle();
-		
-	});
-	
-	$("#shop").click(function(){
-		$("#shop_sub").toggle();
-		
-	});
-	
-	$("#book").click(function(){
-		$("#book_sub").toggle();
-		
-	});
-});  */
 
 </script>
 
@@ -64,10 +44,9 @@
 	width: 20%;
 	color: black;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 18px;
 	text-shadow: 1px 1px 1px gray;
 	}
-
 #nav ul li:hover{
 	color:gray;
 	}
@@ -88,7 +67,6 @@
 #book_sub{
 	display: none;
 }
-
 #subcategory1 ul li{
 	border-inline: 1px solid lightgray;
 	background-color: white;
@@ -106,11 +84,9 @@
 	width: 15%;
 	text-shadow: 1px 1px 1px gray;
 }
-
 #subcategory1 ul li:hover{
 	color:gray;
 }
-
 .title{
 	position: absolute;
 	float: left;
@@ -124,8 +100,6 @@
 	width: 60%;
 	top: 140px;
 	position: relative;
-	
-	
 }
 .titlebox{
 	border: 1px solid gray;
@@ -142,32 +116,26 @@
 	position: relative;
 	left: 20px;
 	top: 20px;
-	
-	
 }
 #nickname{
 	position: relative;
 	left: 42%;	
-	
 }
 #moviegrade{
 	position: relative;
 	left: 62%;
 	bottom: 20px;
-	
 }
 #recommand{
 	position: relative;
 	left: 80%;
 	bottom: 39px;
-	
 }
 #view{
 	position: relative;
 	left: 90%;
 	bottom: 59px;
 }
-
 #date{
 	position: relative;
 	float: right;
@@ -191,7 +159,6 @@
 	top: 30px;
 	font-weight: bold;
 }
-
 .bottombox{
 	position: relative;
 	bottom: 25px;
@@ -254,22 +221,14 @@ bottom: 215px;
 	<div class="categorybox">
 		<div id="nav">
 			<ul>
-            	<li id="online">온라인 쇼핑</li>
-            	<li id="moive" onclick="location.href='movieController?command=moiveListCate'">영화</li>
+            	<li id="online" onclick="location.href='onlineController?command=list'">온라인 쇼핑</li>
+            	<li id="moive" onclick="location.href='movieController?command=moiveListCate'">영화 </li>
             	<li id="shop" onclick="location.href='shop.do?command=shoplist'">매장</li>
-            	<li id="book">도서</li>
+            	<li id="book" onclick="location.href='bookController?command=bookList'">도서</li>
             </ul>
 		</div>
 		<div id="subcategorybox">
 	       	<div id="subcategory1">
-	       		<ul id="online_sub">
-	       			<li onclick="">세부 카테고리1</li>
-	       			<li onclick="">세부 카테고리2</li>
-	       			<li onclick="">세부 카테고리3</li>
-	       			<li onclick="">세부 카테고리4</li>
-	       			<li onclick="">세부 카테고리5</li>
-	       			<li onclick="">세부 카테고리6</li>
-	       		</ul>
 	       		<ul id="movie_sub">
 	       			<c:choose>
 						<c:when test="${empty moiveListCate }">
@@ -284,22 +243,6 @@ bottom: 215px;
 						</c:otherwise>
 					</c:choose>
 	       			
-	       		</ul>
-	       		<ul id="shop_sub">
-	    			<li onclick="">세부 카테고리1</li>
-	       			<li onclick="">세부 카테고리2</li>
-	       			<li onclick="">세부 카테고리3</li>
-	       			<li onclick="">세부 카테고리4</li>
-	       			<li onclick="">세부 카테고리5</li>
-	       			<li onclick="">세부 카테고리6</li>
-	       		</ul>
-	       		<ul id="book_sub">
-	    			<li onclick="">세부 카테고리1</li>
-	       			<li onclick="">세부 카테고리2</li>
-	       			<li onclick="">세부 카테고리3</li>
-	       			<li onclick="">세부 카테고리4</li>
-	       			<li onclick="">세부 카테고리5</li>
-	       			<li onclick="">세부 카테고리6</li>
 	       		</ul>
 	       	</div>
 	    </div>

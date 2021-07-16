@@ -15,32 +15,82 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-/* $(function(){
-	$("#online").click(function(){
-		$("#online_sub").toggle();
-	});
+ 
+ function previewImage(targetObj, previewId) {
+	 var preview = document.getElementById(previewId);  //div id   
+	 var ua = window.navigator.userAgent; 
+	 
+	 if (ua.indexOf("MSIE") > -1) {  //ie일때
+		 targetObj.select(); 
+	 
+	 try { var src = document.selection.createRange().text;   // get file full path 
+	 var ie_preview_error = document .getElementById("ie_preview_error_" + previewId); 
+	 
+	 if (ie_preview_error) { preview.removeChild(ie_preview_error);   //error가 있으면 delete
+	 } 
+	 
+	 var img = document.getElementById(previewId);    //이미지가 뿌려질 곳 
+	 img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + src + "', sizingMethod='scale')";
+	 //이미지 로딩, sizingMethod는 div에 맞춰서 사이즈를 자동조절 하는 역할
 	
-	$("#moive").click(function(){
-		$("#movie_sub").toggle();
+	 } catch (e) {
+		 if (!document.getElementById("ie_preview_error_" + previewId)) { 
+			 var info = document.createElement("<p>");
+			 info.id = "ie_preview_error_" + previewId;
+			 info.innerHTML = "a"; preview.insertBefore(info, null);
+			 }
+		 }
+	 } else {   //ie가 아닐때
+		 var files = targetObj.files;
+	 for ( var i = 0; i < files.length; i++) { 
 		
-	});
-	
-	$("#shop").click(function(){
-		$("#shop_sub").toggle();
-		
-	});
-	
-	$("#book").click(function(){
-		$("#book_sub").toggle();
-		
-	});
-});  */
+		 var file = files[i];
+		 
+		 var imageType = /image.*/;    //이미지 파일일경우만.. 뿌려준다.
+		 if (!file.type.match(imageType)) 
+			 continue; 
+		 
+		 var prevImg = document.getElementById("prev_" + previewId);      //이전에 미리보기가 있다면 삭제
+		 if (prevImg) {
+			 preview.removeChild(prevImg);
+			 }
+		 
+		 var img = document.createElement("img"); //크롬은 div에 이미지가 뿌려지지 않는다. 그래서 자식Element를 만든다
+		 img.id = "prev_" + previewId;
+		 img.classList.add("obj");
+		 img.file = file; 
+		 img.style.width = '270px';      //기본설정된 div의 안에 뿌려지는 효과를 주기 위해서 div크기와 같은 크기를 지정해준다
+		 img.style.height = '320px'; 
+		 preview.appendChild(img); 
+		 
+		 if (window.FileReader) { 
+		 var reader = new FileReader();
+		 reader.onloadend = (function(aImg) {
+			 return function(e) {
+				 aImg.src = e.target.result;
+				 };
+				 })(img);
+		 reader.readAsDataURL(file);
+		 } else { 		 
+		 if (!document.getElementById("sfr_preview_error_" + previewId)) {
+			 var info = document.createElement("p");
+			 info.id = "sfr_preview_error_" + previewId;
+			 info.innerHTML = "not supported FileReader";
+			 preview.insertBefore(info, null);
+			 }
+		 }
+		 }
+	 }
+	 }
+ 
+
+
 
 </script>
 
 
-<style type="text/css">
 
+<style type="text/css">
 	
 .categorybox{
 /* 	border: 1px solid gray; */
@@ -66,10 +116,9 @@
 	width: 20%;
 	color: black;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 18px;
 	text-shadow: 1px 1px 1px gray;
 	}
-
 #nav ul li:hover{
 	color:gray;
 	}
@@ -90,7 +139,6 @@
 #book_sub{
 	display: none;
 }
-
 #subcategory1 ul li{
 	border-inline: 1px solid lightgray;
 	background-color: white;
@@ -108,11 +156,9 @@
 	width: 15%;
 	text-shadow: 1px 1px 1px gray;
 }
-
 #subcategory1 ul li:hover{
 	color:gray;
 }
-
 .category{
 	position: absolute;
 	float: left;
@@ -120,7 +166,6 @@
 	left: 9%;
 	color: white;
 }
-
 #box{
 	width: 60%;
 	height: 350px;
@@ -132,7 +177,6 @@
 	background-color: rgba( 255, 255, 255, 0.8 );
 	border-radius: 5px 5px 5px 5px;
 }
-
 #wrap{
 	border: 1px solid black;
 	width: 280px;
@@ -143,7 +187,6 @@
 	left: 10px;
 	border-radius: 5px 5px 5px 5px;
 }
-
 .poster{
 	border-radius: 5px 5px 5px 5px;
 	width: 270px;
@@ -152,7 +195,6 @@
 	margin: auto;
 	background: gray;
 }
-
 .list{
 	position: relative;
 	height: 320px;
@@ -163,11 +205,9 @@
 	color: black;
 	/* border: 1px solid; */
 }
-
 .list tr th{
 text-align: center;
 }
-
 .attached_poster{
 	float: left;
 	left: 10%;
@@ -176,7 +216,6 @@ text-align: center;
 	font-size: 15px;
 	color: white;
 }
-
 .comment{
 	float: left;
 	left: 10%;
@@ -185,7 +224,6 @@ text-align: center;
 	font-size: 15px;
 	color: white;
 }
-
 .create{
 	float: left;
 	left: 32%;
@@ -207,7 +245,6 @@ body{
 	background-repeat: no-repeat;
 	background-position: left top;
 	background-size: cover;
-
 }
 
 </style>
@@ -222,22 +259,14 @@ body{
 	<div class="categorybox">
 		<div id="nav">
 			<ul>
-            	<li id="online">온라인 쇼핑</li>
-            	<li id="moive" onclick="location.href='movieController?command=moiveListCate'">영화</li>
+            	<li id="online" onclick="location.href='onlineController?command=list'">온라인 쇼핑</li>
+            	<li id="moive" onclick="location.href='movieController?command=moiveListCate'">영화 </li>
             	<li id="shop" onclick="location.href='shop.do?command=shoplist'">매장</li>
-            	<li id="book">도서</li>
+            	<li id="book" onclick="location.href='bookController?command=bookList'">도서</li>
             </ul>
 		</div>
 		<div id="subcategorybox">
 	       	<div id="subcategory1">
-	       		<ul id="online_sub">
-	       			<li onclick="">세부 카테고리1</li>
-	       			<li onclick="">세부 카테고리2</li>
-	       			<li onclick="">세부 카테고리3</li>
-	       			<li onclick="">세부 카테고리4</li>
-	       			<li onclick="">세부 카테고리5</li>
-	       			<li onclick="">세부 카테고리6</li>
-	       		</ul>
 	       		<ul id="movie_sub">
 	       			<c:choose>
 						<c:when test="${empty moiveListCate }">
@@ -251,23 +280,6 @@ body{
 	       					</c:forEach>
 						</c:otherwise>
 					</c:choose>
-	       			
-	       		</ul>
-	       		<ul id="shop_sub">
-	    			<li onclick="">세부 카테고리1</li>
-	       			<li onclick="">세부 카테고리2</li>
-	       			<li onclick="">세부 카테고리3</li>
-	       			<li onclick="">세부 카테고리4</li>
-	       			<li onclick="">세부 카테고리5</li>
-	       			<li onclick="">세부 카테고리6</li>
-	       		</ul>
-	       		<ul id="book_sub">
-	    			<li onclick="">세부 카테고리1</li>
-	       			<li onclick="">세부 카테고리2</li>
-	       			<li onclick="">세부 카테고리3</li>
-	       			<li onclick="">세부 카테고리4</li>
-	       			<li onclick="">세부 카테고리5</li>
-	       			<li onclick="">세부 카테고리6</li>
 	       		</ul>
 	       	</div>
 	    </div>
@@ -283,7 +295,9 @@ body{
 			<input type="hidden" name="category" value="${category }">
 			<div id="box">
 				<div id="wrap">
-					<div class="poster">영화포스터</div>
+					<div class="poster">
+						<div id='previewId' style='width: 270px; height: 320px; position: absolute; '></div>
+					</div>
 				</div>
 			     <table class="list"  style="text-align: left">
 		            <tr>
@@ -314,7 +328,8 @@ body{
 			
 			<div class="comment">영화 포스터를 첨부하세요</div>
 			<div class="attached_poster">
-				<input type="file" id="ex_file" name="poster">
+				<!-- <input class="image" type="file" id="ex_file" name="poster" accept="image/*" onchange="setThumbnail(event);" > -->
+				<input type="file" id="ex_file" name="poster" onchange="previewImage(this,'previewId')" >
 			</div>
 			
 			<div>

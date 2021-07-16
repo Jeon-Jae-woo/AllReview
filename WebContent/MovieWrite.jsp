@@ -14,26 +14,7 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-/* $(function(){
-	$("#online").click(function(){
-		$("#online_sub").toggle();
-	});
-	
-	$("#moive").click(function(){
-		$("#movie_sub").toggle();
-		
-	});
-	
-	$("#shop").click(function(){
-		$("#shop_sub").toggle();
-		
-	});
-	
-	$("#book").click(function(){
-		$("#book_sub").toggle();
-		
-	});
-});  */
+
 </script>
 
 <style type="text/css">
@@ -48,7 +29,6 @@
 	height: 100px;
 	background-color: white;
 	background-color: rgba( 255, 255, 255, 0.8 );
-
 	}
 #nav ul li{
 	list-style: none;
@@ -63,10 +43,9 @@
 	width: 20%;
 	color: black;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 18px;
 	text-shadow: 1px 1px 1px gray;
 	}
-
 #nav ul li:hover{
 	color:gray;
 	}
@@ -87,7 +66,6 @@
 #book_sub{
 	display: none;
 }
-
 #subcategory1 ul li{
 	border-inline: 1px solid lightgray;
 	background-color: white;
@@ -105,17 +83,15 @@
 	width: 15%;
 	text-shadow: 1px 1px 1px gray;
 }
-
 #subcategory1 ul li:hover{
 	color:gray;
 }
-
 .title{
 	position: absolute;
 	float: left;
 	left: 9%;
 	top: 500px;
-		color: white;
+	color: white;
 	font-weight: bold;
 	text-shadow: 1px 1px 1px gray;
 }
@@ -202,9 +178,7 @@
 	right: 30px;
 	height: 600px;
 	top: 550px;
-	
 }
-
 #reco_tb{
 	width: 300px;
 	text-align: center;
@@ -214,8 +188,6 @@
  	/* text-shadow: 1px 1px 1px gray; */
 	background-color: white;
 	background-color: rgba( 255, 255, 255, 0.8 );
-	
-
 }
 #view_tb{
 	top:350px;
@@ -233,7 +205,6 @@ body{
 	background-repeat: no-repeat;
 	background-position: left top;
 	background-size: cover;
-
 }
 
 </style>
@@ -248,22 +219,14 @@ body{
 	<div class="categorybox">
 		<div id="nav">
 			<ul>
-            	<li id="online">온라인 쇼핑</li>
-            	<li id="moive" onclick="location.href='movieController?command=moiveListCate'">영화</li>
+            	<li id="online" onclick="location.href='onlineController?command=list'">온라인 쇼핑</li>
+            	<li id="moive" onclick="location.href='movieController?command=moiveListCate'">영화 </li>
             	<li id="shop" onclick="location.href='shop.do?command=shoplist'">매장</li>
-            	<li id="book">도서</li>
+            	<li id="book" onclick="location.href='bookController?command=bookList'">도서</li>
             </ul>
 		</div>
 		<div id="subcategorybox">
 	       	<div id="subcategory1">
-	       		<ul id="online_sub">
-	       			<li onclick="">세부 카테고리1</li>
-	       			<li onclick="">세부 카테고리2</li>
-	       			<li onclick="">세부 카테고리3</li>
-	       			<li onclick="">세부 카테고리4</li>
-	       			<li onclick="">세부 카테고리5</li>
-	       			<li onclick="">세부 카테고리6</li>
-	       		</ul>
 	       		<ul id="movie_sub">
 	       			<c:choose>
 						<c:when test="${empty moiveListCate }">
@@ -277,23 +240,6 @@ body{
 	       					</c:forEach>
 						</c:otherwise>
 					</c:choose>
-	       			
-	       		</ul>
-	       		<ul id="shop_sub">
-	    			<li onclick="">세부 카테고리1</li>
-	       			<li onclick="">세부 카테고리2</li>
-	       			<li onclick="">세부 카테고리3</li>
-	       			<li onclick="">세부 카테고리4</li>
-	       			<li onclick="">세부 카테고리5</li>
-	       			<li onclick="">세부 카테고리6</li>
-	       		</ul>
-	       		<ul id="book_sub">
-	    			<li onclick="">세부 카테고리1</li>
-	       			<li onclick="">세부 카테고리2</li>
-	       			<li onclick="">세부 카테고리3</li>
-	       			<li onclick="">세부 카테고리4</li>
-	       			<li onclick="">세부 카테고리5</li>
-	       			<li onclick="">세부 카테고리6</li>
 	       		</ul>
 	       	</div>
 	    </div>

@@ -47,7 +47,7 @@
 	width: 20%;
 	color: black;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 18px;
 	text-shadow: 1px 1px 1px gray;
 	}
 
@@ -125,6 +125,7 @@ body{
 <body>
 	<header ><%@ include file="Fix/header.jsp" %></header>
 	
+	<br>
 	<div class="categorybox">
 		<div id="nav">
 				<ul>
@@ -353,7 +354,7 @@ body{
 		<!-- <a href="shop.do?command=shopwriteform">글쓰기</a> -->
 	</div>
 	
-	
+	<br><br><br><br><br><br><br>
 	<footer ><%@ include file="Fix/footer.jsp" %></footer>
 </body>
 </html>

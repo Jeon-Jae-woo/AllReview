@@ -15,36 +15,14 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-/* $(function(){
-	$("#online").click(function(){
-		$("#online_sub").toggle();
-	});
-	
-	$("#moive").click(function(){
-		$("#movie_sub").toggle();
-		
-	});
-	
-	$("#shop").click(function(){
-		$("#shop_sub").toggle();
-		
-	});
-	
-	$("#book").click(function(){
-		$("#book_sub").toggle();
-		
-	});
-});  */
 
 </script>
-
 
 <style type="text/css">
 
 .categorybox{
 	/* border: 1px solid gray; */
 	height: 260px;
-
 }
 #nav{
 	left: 0px;
@@ -66,10 +44,9 @@
 	width: 20%;
 	color: black;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 18px;
 	text-shadow: 1px 1px 1px gray;
 	}
-
 #nav ul li:hover{
 	color:gray;
 	}
@@ -90,7 +67,6 @@
 #book_sub{
 	display: none;
 }
-
 #subcategory1 ul li{
 	border-inline: 1px solid lightgray;
 	background-color: white;
@@ -124,7 +100,6 @@
 	width: 60%;
 	top: 140px;
 	position: relative;
-	
 }
 .titlebox{
 	border: 1px solid gray;
@@ -136,7 +111,6 @@
 	background-color: white;
 	background-color: rgba( 255, 255, 255, 0.8 );
 }
-
 .contentbox{
 	border: 1px solid gray;
 	height: 550px;
@@ -147,7 +121,6 @@
 	background-color: white;
 	background-color: rgba( 255, 255, 255, 0.8 );
 }
-
 #reviewtitle{
 	position: relative;
 	top:11px;
@@ -160,13 +133,11 @@
 	top:11px;
 	left: 15px
 }
-
 .bottombox{
 	/* border: 1px dashed red; */
 	position: relative;
 	top: 20px;
 }
-
 .imgupload{
 	position: relative ;
 	top:20px;
@@ -174,7 +145,6 @@
 	width: 250px;
 	color: white;
 }
-
 .reciptupload{
 	position: relative;	
 	bottom: 24px;
@@ -182,15 +152,13 @@
 	width: 250px;
 	color: white;
 }
-
 .moviegrade{
 	position: relative;	
-	bottom: 50px;
+	bottom: 10px;
 	left: 600px;
 	width: 250px; 
 	color: white;
 }
-
 .reviewwrite{
 	position: relative;
 	left: 340px;
@@ -208,7 +176,6 @@ body{
 	background-repeat: no-repeat;
 	background-position: left top;
 	background-size: cover;
-
 }
 
 
@@ -236,22 +203,14 @@ body{
 	<div class="categorybox">
 		<div id="nav">
 			<ul>
-            	<li id="online">온라인 쇼핑</li>
-            	<li id="moive" onclick="location.href='movieController?command=moiveListCate'">영화</li>
+            	<li id="online" onclick="location.href='onlineController?command=list'">온라인 쇼핑</li>
+            	<li id="moive" onclick="location.href='movieController?command=moiveListCate'">영화 </li>
             	<li id="shop" onclick="location.href='shop.do?command=shoplist'">매장</li>
-            	<li id="book">도서</li>
+            	<li id="book" onclick="location.href='bookController?command=bookList'">도서</li>
             </ul>
 		</div>
 		<div id="subcategorybox">
 	       	<div id="subcategory1">
-	       		<ul id="online_sub">
-	       			<li onclick="">세부 카테고리1</li>
-	       			<li onclick="">세부 카테고리2</li>
-	       			<li onclick="">세부 카테고리3</li>
-	       			<li onclick="">세부 카테고리4</li>
-	       			<li onclick="">세부 카테고리5</li>
-	       			<li onclick="">세부 카테고리6</li>
-	       		</ul>
 	       		<ul id="movie_sub">
 	       			<c:choose>
 						<c:when test="${empty moiveListCate }">
@@ -265,23 +224,6 @@ body{
 	       					</c:forEach>
 						</c:otherwise>
 					</c:choose>
-	       			
-	       		</ul>
-	       		<ul id="shop_sub">
-	    			<li onclick="">세부 카테고리1</li>
-	       			<li onclick="">세부 카테고리2</li>
-	       			<li onclick="">세부 카테고리3</li>
-	       			<li onclick="">세부 카테고리4</li>
-	       			<li onclick="">세부 카테고리5</li>
-	       			<li onclick="">세부 카테고리6</li>
-	       		</ul>
-	       		<ul id="book_sub">
-	    			<li onclick="">세부 카테고리1</li>
-	       			<li onclick="">세부 카테고리2</li>
-	       			<li onclick="">세부 카테고리3</li>
-	       			<li onclick="">세부 카테고리4</li>
-	       			<li onclick="">세부 카테고리5</li>
-	       			<li onclick="">세부 카테고리6</li>
 	       		</ul>
 	       	</div>
 	    </div>
