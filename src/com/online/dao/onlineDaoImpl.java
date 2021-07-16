@@ -21,6 +21,10 @@ public class onlineDaoImpl implements onlineDao {
 		PreparedStatement pstm = null;
 		ResultSet res = null;
 		List<onlineDto> list = new ArrayList<onlineDto>();
+		
+		//여기도 카테id, 페이지 넘은 잘 받는다.
+		System.out.println("다오 리스트: " + list);
+		
 		onlineDto dto = null;
 		
 		System.out.println("page : " + pageNum);
@@ -35,7 +39,7 @@ public class onlineDaoImpl implements onlineDao {
 			pstm.setInt(1, category_id);
 			pstm.setInt(2, endRow+1);
 			pstm.setInt(3, startRow);
-			System.out.println("카테고리 : " + category_id);
+			
 			res = pstm.executeQuery();
 			
 			if(res.next()) {
@@ -51,8 +55,10 @@ public class onlineDaoImpl implements onlineDao {
 				dto.setRecomd(res.getInt(8));
 				dto.setHits(res.getInt(9));
 				dto.setCategory_name(res.getString(10));
+				dto.setAdd_product(res.getString(11)); // 상품사진
 				
 				list.add(dto);
+				
 			}
 			}
 			
@@ -63,7 +69,6 @@ public class onlineDaoImpl implements onlineDao {
 			close(res);
 			close(pstm);
 		}
-		
 
 		return list;
 	}

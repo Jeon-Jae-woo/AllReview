@@ -41,6 +41,23 @@ public interface MovieBoardDao {
 	//영화 등록한거 삭제
 	String moviedeleteSql = "DELETE FROM MOVIE_BOARD WHERE MOVIE_ID=?";
 	
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	//조회수 정렬
+	String hittopsql = " SELECT * FROM MOVIE_REVIEW ORDER BY REVIEW_V_NUM DESC ";
+	//조회수 
+	String hitinsertsql = " INSERT INTO MOVIE_HIT VALUES(MOVIE_HITSEQ.NEXTVAL,?,?)";
+	//조회수 증가
+	String hitupdatesql = " UPDATE MOVIE_REVIEW SET REVIEW_V_NUM=REVIEW_V_NUM+1 WHERE REVIEW_ID=? ";
+
+	//추천수 정렬
+	String recotopsql = " SELECT * FROM MOVIE_REVIEW ORDER BY REVIEW_R_NUM DESC ";
+	//추천수
+	String recoinsertsql = " INSERT INTO MOVIE_RECO VALUES(MOVIE_RECOSEQ.NEXTVAL,?,?) ";
+	//추천수 증가
+	String recoupdatesql = " UPDATE MOVIE_REVIEW SET REVIEW_R_NUM=REVIEW_R_NUM+1 WHERE REVIEW_ID=? ";
+	//////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
 	//리뷰 리스트
 	public List<MovieReviewDto> reviewList(Connection con, int movie_id, int pageNum);
 	public int MovieReviewCount(Connection con, int movie_id);
@@ -62,13 +79,21 @@ public interface MovieBoardDao {
 	
 	public int MovieRowCount(int category);
 	
+	//////////////////////////////////////////////////////////////////////////////////////////////////
+	//조회수 정렬
+	public List<MovieReviewDto> hitTop(Connection con);
+	//조회수
+	public int inserthit(Connection con, int review_id, String nickname);
+	//조회수 증가
+	public int updatehit(Connection con, int review_id);
 	
+	//추천수 정렬
+	public List<MovieReviewDto> recoTop(Connection con);
+	//추천수
+	public int insertreco(Connection con, int review_id, String nickname);
+	//추천수 증가
+	public int updatereco(Connection con, int review_id);
+	//////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	
-	//------------------------------------------------------------
-	/*
-	 * public boolean movieupdate(Connection con, MovieBoardDto dto); public boolean
-	 * moviedelete(Connection con, int movie_id);
-	 */
 	
 }

@@ -16,13 +16,6 @@ height: 300px;
 
 }
 
-/* #secmain{
-border: 1px red dotted;
-padding-top:20px;
-height: 900px;
-
-
-} */
 
 .catemain{
 margin-left: 30px;
@@ -95,7 +88,6 @@ font-size: 30px;
 
 
 .categorybox{
-	/* border: 1px solid gray; */
 	height: 260px;
 }
 #nav{
@@ -118,7 +110,7 @@ font-size: 30px;
 	width: 20%;
 	color: black;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 18px;
 	text-shadow: 1px 1px 1px gray;
    }
 
@@ -126,13 +118,11 @@ font-size: 30px;
 	color:gray;
    }
 #subcategorybox{
-   /*border:1px dashed red;*/
  height: 100px;
 	position: relative;
 	top: 20px;
 }
 #online_sub{
-   /* display: none; */
 }
 #movie_sub{
    display: none;
@@ -167,16 +157,6 @@ border-inline: 1px solid lightgray;
   color:gray;
 }
 
-/* .containe{
-	position: relative;
-	left: 5%;
-	top: 60px;
-	padding: 5px;
-	width: 67%;
-	height: 720px;
-	
-} */
-
 
 .mainbox{
 	width: 220px;
@@ -193,17 +173,9 @@ border-inline: 1px solid lightgray;
 	width: 70%;
 	height: 60%;
 	position: relative;
-	left:5%;
+	left:6%;
 	top: 100px;
 }
-
-/* .container{
-border:1px dashed red;
-width: 70%;
-padding:5px;
-position: relative;
-
-} */
 
 .consub{
 border:none;
@@ -231,13 +203,13 @@ margin:0 auto;
 	width:120px;
 	height: 35px;
 	position: absolute;
-	right: 25%;
+	right: 22.5%;
 	transform: translateX(-25%);
 	font-size: 18px;
 	margin-top: 37px;
-   border: 1px solid skyblue;
-    background-color: rgba(0,0,0,0);
-    color: skyblue;
+   border: 1px solid #08088A;
+   background-color: ;
+    color: black;
     padding: 5px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -245,8 +217,8 @@ margin:0 auto;
     border-bottom-right-radius: 5px;
 }
 .wrtbtn:hover{
-   color:white;
-    background-color:skyblue;
+   color:#08088A;
+   background-color:#EFFBFB;
 }
 
 .contentbox{
@@ -277,7 +249,7 @@ transform: translateX(-51.5%);
 text-decoration: none; text-shadow: 0 0 24px; 
 }
 body{
-	background-image: url("./resources/Image/on2.png");
+	background-image: url("./resources/Image/forest1.jpg");
 	background-repeat: no-repeat;
 	background-position: left top;
 	background-size: cover;
@@ -291,27 +263,6 @@ body{
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-/* $(function(){
-	   $("#online").click(function(){
-	      $("#online_sub1").toggle();
-	      $("#online_sub2").toggle();
-	   });
-	   
-	   $("#moive").click(function(){
-	      $("#movie_sub").toggle();
-	      
-	   });
-	   
-	   $("#shop").click(function(){
-	      $("#shop_sub").toggle();
-	      
-	   });
-	   
-	   $("#book").click(function(){
-	      $("#book_sub").toggle();
-	      
-	   });
-	});  */
 
 
 </script>
@@ -402,7 +353,7 @@ body{
 								
 								<div class="imgbox">
 								<!--  <img class="img" src="${dto.add_product }"> -->
-								<img class="img" src="./resources/Image/icon01.jpg"> <!-- 이부분 dto.add_product로 바뀌어야함. 아직 글등록시 확인불가. -->
+								<img class="img" src="resources/uploadImage/${dto.add_product }"> <!-- 이부분 dto.add_product로 바뀌어야함. 아직 글등록시 확인불가. -->
 								
 								</div>
 								<br>
@@ -425,10 +376,10 @@ body{
 				</div>
 			<!-- </div> -->
 	</section>
-	<br><br><br>
+	<br><br><br><br>
 	<input type="button" class="wrtbtn" value="글 작성하기" onclick="location.href='onlineController?command=writeForm&category_id=${category_id}&category_name=${category_name }'"><br>
 	<!-- 페이징기능 -->
-				<nav class="pull-bottom" id="navv">
+			<nav class="pull-bottom" id="navv">
 			<c:set var="pageNum" value="${paging.pageNum }"/>
 			<c:set var="startPage" value="${paging.startPage}"/>
 			<c:set var="endPage" value="${paging.endPage}"/>
@@ -454,15 +405,15 @@ body{
 			      		</a>
 			    	</li>
 				</ul>
-			
 			</nav>
 	
-	<br><br><br><br>
+	
 	
 	<%@ include file="OnlineTop5.jsp" %>
 	
-
+	<br><br><br><br><br><br><br><br><br>
 	<!-- Footer -->
-		<%@ include file="Fix/footer.jsp" %>
+	<%@ include file="Fix/footer.jsp" %>
+	
 </body>
 </html>
