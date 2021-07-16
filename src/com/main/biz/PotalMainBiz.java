@@ -10,4 +10,6 @@ public interface PotalMainBiz {
 	public List<PotalMainDto> PotalMainList(); 
 	
 	
+	
+	
 }

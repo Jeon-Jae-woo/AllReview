@@ -11,9 +11,9 @@ public class dtoComparator implements Comparator {
 		int view2 = ((PotalMainDto)o2).getView();
 		
 		if(view1>view2) {
-			return 1;
-		}else if(view1<view2) {
 			return -2;
+		}else if(view1<view2) {
+			return 1;
 		}else {
 			return 0;
 		}
