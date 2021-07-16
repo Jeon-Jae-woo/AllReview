@@ -1,6 +1,5 @@
 package com.movie.biz;
 
-import java.sql.Connection;
 import java.util.List;
 
 import com.movie.dto.MovieBoardDto;
@@ -54,4 +53,26 @@ public interface movieBiz {
 	//리뷰 삭제
 	public int reviewDeleteService(String nickname, int review_id);
 
+	
+	//////////////////////////////////////////////////////////////
+	//조회수정렬
+	public List<MovieReviewDto> hitTop();
+	//조회수
+	public int inserthit(int review_id, String nickname);
+	//조회수 증가
+	public void updatehit(int review_id);
+	
+	
+	//추천수 정렬
+	public List<MovieReviewDto> recoTop();
+	//추천수 
+	public int insertreco(int review_id, String nickname);
+	//추천수 증가
+	public void updatereco(int review_id);
+	///////////////////////////////////////////////////////////////
+
+
+	
+	
+	
 }

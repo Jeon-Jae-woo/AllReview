@@ -1,24 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <% request.setCharacterEncoding("UTF-8"); %>
-<% response.setContentType("text/html; charset=UTF-8"); %>
+<% response.setContentType("text/html; UTF-8"); %>      
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>영화 기본정보 및 리뷰 리스트 조회</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 /* $(function(){
 	$("#online").click(function(){
@@ -39,17 +41,16 @@
 		$("#book_sub").toggle();
 		
 	});
-}); 
- */
+}); */ 
+
 </script>
 
 
 <style type="text/css">
-
+	
 .categorybox{
 	/* border: 1px solid gray; */
 	height: 260px;
-
 }
 #nav{
 	left: 0px;
@@ -87,13 +88,13 @@
 	display: none;
 }
 #movie_sub{
-	display: none;
+	/* display: none; */
 }
 #shop_sub{
 	display: none;
 }
 #book_sub{
-	/* display: none; */
+	display: none;
 }
 #subcategory1 ul li{
 	border-inline: 1px solid lightgray;
@@ -116,13 +117,15 @@
 	color:gray;
 }
 
-/* .category{
-	border: 1px dashed red;
+.category{
 	position: absolute;
 	float: left;
 	top: 500px;
 	left: 9%;
-} */
+	color: white;
+	font-weight: bold;
+	text-shadow: 1px 1px 1px gray;
+}
 #box{
 	width: 60%;
 	height: 383px;
@@ -146,10 +149,12 @@
 }
 
 .poster{
+	/* border: 1px dashed red; */
 	width: 270px;
 	height: 357px;
 	text-align: center;
 	margin: auto;
+	/* background: gray; */
 }
 
 .list{
@@ -162,7 +167,8 @@
 }
 
 .list tr th{
-text-align: center;
+	text-align: center;
+	
 }
 
 .listtitle{
@@ -172,6 +178,7 @@ text-align: center;
 	top: 1020px;
 	color: white;
 	font-weight: bold;
+	
 } 
 
 #mypage_board{
@@ -191,17 +198,16 @@ text-align: center;
 }
 
 .bottombutton{
-	border: 1px dashed red;
 	float: right;
-	position: relative;
+	position: absolute;
 	right: 31%;
+	top: 1320px;
 }
 
 #writebutton{
 	position: relative;
 	font-size: 15px;
 	height: 30px;
-	top: 550px;
 }
 .pull-bottom{
 	position: relative;
@@ -222,28 +228,7 @@ body{
 	background-repeat: no-repeat;
 	background-position: left top;
 	background-size: cover;
-
 }
-h2{
-	display: inline;
-	position: relative;
-	left: 5%;
-	top: 5px;
-	color: white;
-}
-
-.top{
-	/* border: 1px dashed red; */
-	padding: 0px;
-	margin: 0px;
-	width: 100%;
-	float: left;
-	left: 100px;
-	height: 80px;
-	color: white;
-	text-shadow: 1px 1px 1px gray;
-}
-
 #bookposter{
 	top: 1px;
 	width: 270px;
@@ -251,17 +236,20 @@ h2{
 	object-fit:cover;
 	border-radius: 5px 5px 5px 5px;
 
-	
 }
+
 </style>
+
 </head>
 <body>
 
-	<%@ include file="Fix/header.jsp" %>
+	<!-- header -->
+	<%@ include file="../Fix/header.jsp" %>
 	<br>
 	
+	<!-- 카테고리 박스  -->
 	<div class="categorybox">
-		<div id ="nav">
+		<div id="nav">
 				<ul>
 	            	<li id="online">온라인 쇼핑</li>
 	            	<li id="moive" onclick="location.href='movieController?command=moiveListCate'">영화 </li>
@@ -269,127 +257,126 @@ h2{
 	            	<li id="book">도서</li>
 	            </ul>
 	    </div>
-	    <div id="subcategorybox">
+		<div id="subcategorybox">
 	       	<div id="subcategory1">
 	       		<ul id="online_sub">
-	       			<li><a href="">세부 카테고리1</a></li>
-	       			<li><a href="">세부 카테고리2</a></li>
-	       			<li><a href="">세부 카테고리3</a></li>
-	       			<li><a href="">세부 카테고리4</a></li>
-	       			<li><a href="">세부 카테고리5</a></li>
-	       			<li><a href="">세부 카테고리6</a></li>
+	       			<li onclick="">세부 카테고리1</li>
+	       			<li onclick="">세부 카테고리2</li>
+	       			<li onclick="">세부 카테고리3</li>
+	       			<li onclick="">세부 카테고리4</li>
+	       			<li onclick="">세부 카테고리5</li>
+	       			<li onclick="">세부 카테고리6</li>
 	       		</ul>
 	       		<ul id="movie_sub">
-	       			<li><a href="">세부 카테고리1</a></li>
-	       			<li><a href="">세부 카테고리2</a></li>
-	       			<li><a href="">세부 카테고리3</a></li>
-	       			<li><a href="">세부 카테고리4</a></li>
-	       			<li><a href="">세부 카테고리5</a></li>
-	       			<li><a href="">세부 카테고리6</a></li>	
+	       			<li onclick="">세부 카테고리1</li>
+	       			<li onclick="">세부 카테고리2</li>
+	       			<li onclick="">세부 카테고리3</li>
+	       			<li onclick="">세부 카테고리4</li>
+	       			<li onclick="">세부 카테고리5</li>
+	       			<li onclick="">세부 카테고리6</li> 			
 	       		</ul>
 	       		<ul id="shop_sub">
-	       			<li><a href="">세부 카테고리1</a></li>
-	       			<li><a href="">세부 카테고리2</a></li>
-	       			<li><a href="">세부 카테고리3</a></li>
-	       			<li><a href="">세부 카테고리4</a></li>
-	       			<li><a href="">세부 카테고리5</a></li>
-	       			<li><a href="">세부 카테고리6</a></li>
+	    			<li onclick="">세부 카테고리1</li>
+	       			<li onclick="">세부 카테고리2</li>
+	       			<li onclick="">세부 카테고리3</li>
+	       			<li onclick="">세부 카테고리4</li>
+	       			<li onclick="">세부 카테고리5</li>
+	       			<li onclick="">세부 카테고리6</li>
 	       		</ul>
 	       		<ul id="book_sub">
-					<c:choose>
-						<c:when test="${empty categoryList }">
-							<tr>
-								<td colspan ="4">----작성된 글이 존재하지 않습니다----</td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-							<c:forEach var="cate" items="${categoryList }">
-	       					<li><a href="bookController?command=bookList&category=${cate.book_type}&pageNum=1">${cate.book_type_name }</a></li>
-	       					</c:forEach>
-						</c:otherwise>
-					</c:choose>
+	    			<li onclick="">세부 카테고리1</li>
+	       			<li onclick="">세부 카테고리2</li>
+	       			<li onclick="">세부 카테고리3</li>
+	       			<li onclick="">세부 카테고리4</li>
+	       			<li onclick="">세부 카테고리5</li>
+	       			<li onclick="">세부 카테고리6</li>
 	       		</ul>
 	       	</div>
 	    </div>
     </div>
 	<br>
+
 	
-	    
-			<div class="top">
+	<!-- 영화기본정보 + 리뷰리스트 조회 -->
+	<div>
+		<div class="category">
 			<h2>${category_name}</h2>
-			</div>
-		
-		<!-- 도서 기본 정보 -->
-		<div id="box" style="border-radius: 5px 5px 5px 5px;">
-			<div id="wrap"  style="border-radius: 5px 5px 5px 5px;">
-				<div class="poster" style="border-radius: 5px 5px 5px 5px;"><img id="bookposter" src="resources/uploadImage/${bookInfo.book_img}">
-				</div>
-			</div>
-			<table class="list" style="text-align: left">
-				<tr>
-					<th style="width:100px">도서명: </th>
-					<td style="width:250px">${bookInfo.book_title }</td>
-				</tr>
-				<tr>
-					<th>기본정보: </th>
-					<td>${bookInfo.book_type_name}</td>
-				</tr>
-				<tr>
-					<th>작가: </th>
-					<td>${bookInfo.writer }</td>
-				</tr>
-				<tr>
-					<th>출판사: </th>
-					<td>${bookInfo.publisher}</td>
-				</tr>
-			</table>
 		</div>
-		<!-- 리뷰 리스트 보여주기 -->
+	
+		<!-- 영화 기본 정보 -->
+		<div id="box" style="border-radius: 5px 5px 5px 5px;">
+			<div id="wrap" style="border-radius: 5px 5px 5px 5px;">
+				<div class="poster" style="border-radius: 5px 5px 5px 5px;"><img id="movieposter" src="resources/uploadImage/${dto.movie_img}"></div>
+			</div>
+		     <table class="list"  style="text-align: left">
+				<tr>
+		        	<th style="width:100px" >도서명 : </th>
+		            <td style="width:250px">${dto.book_title }</td>
+	            </tr>
+	            <tr>
+	                <th>기본정보 : </th>
+	                <td>${dto.book_type_name}</td>
+	            </tr>
+	             <tr>
+	                <th>작가 : </th>
+	                <td>${dto.writer}</td>
+	            </tr>
+	             <tr>
+	                <th>출판사 : </th>
+	                <td>${dto.publisher}</td>
+	            </tr>
+	        </table>	
+		</div>
+	
+		<!-- 영화 리뷰리스트  -->
 		<div>
 			<div class="listtitle">
-				<h4>${bookInfo.book_title}</h4>
+				<h4>${dto.book_title }  Review List</h4>
 			</div>
-			<table class="table text-center table=hover" id="mypage_board">
+	
+			<table class="table text-center table-hover" id="mypage_board">
 				<thead>
 					<tr>
 						<th class="active text-center" style="width:250px; height:45px;">제목</th>
 						<th class="active text-center" style="width:100px">닉네임</th>
 						<th class="active text-center" style="width:100px">날짜</th>
-						<th class="active text-center" style="width:80px">평점</th>
+						<th class="active text-center" style="width:100px">평점</th>
 						<th class="active text-center" style="width:80px">추천</th>
 						<th class="active text-center" style="width:80px">조회</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody >
 					<c:choose>
-						<c:when test="${empty reviewList }">
+						<c:when test="${empty totalList }">
 							<tr>
 								<td colspan="4">작성된 글이 존재하지 않습니다</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach var="list" items="${reviewList}">
+							<c:forEach var="list" items="${totalList}">
 								<tr>
 									<td><a href="bookController?command=reviewDetail&review_id=${list.review_id}">${list.review_title}</a></td>
 									<td>${list.nickname }</td>
-									<td>${list.rcreateat}</td>
+									<td>${list.creatat}</td>
+									<td>${list.book_grade}</td>
 									<td>${list.review_r_num }</td>
 									<td>${list.review_v_num }</td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
-					
 				</tbody>
-				
 			</table>
 		
-			<div class="buttonbutton">
-				<input id="writebutton" type="button" value="리뷰 등록하기" onclick="location.href='bookController?command=reviewWriteForm&book_id=${bookInfo.book_id}'">
+			<!-- 게시글 작성 버튼  -->
+			<div class="bottombutton">
+				<input id="writebutton" type="button" value="리뷰 등록하기" onclick="location='bookController?command=reviewWriteForm&book_id=${book_id}'">
 			</div>
-		
-		
-	
+			
+			<!-- 페이징처리 -->
+			<div class="page_wrap">
+			   <div class="page_nation">
+			     			<!-- 페이징처리 -->
 			<nav class="pull-bottom">
 			<c:set var="pageNum" value="${paging.pageNum }"/>
 			<c:set var="startPage" value="${paging.startPage}"/>
@@ -397,35 +384,46 @@ h2{
 			<c:set var="totalPage" value="${paging.totalPage}"/>
 			<c:set var="itemCount" value="${paging.itemCount}"/>
 				<ul class="pagination">
+					
 					<li>
-			      		<a href="bookController?command=bookDetail&book_id=${book_id }&pageNum=1" aria-label="Previous">
+			      		<a href="movieController?command=detail&movie_id=${movie_id}&pageNum=1" aria-label="Previous">
 			        	<span aria-hidden="true">&laquo;</span>
 			      		</a>
 			    	</li>
 					<c:forEach var="item" varStatus="status" begin="${ startPage }" end="${ endPage }" step="1">
                 		<c:if test="${ pageNum == item }">
-                    		<li><a href="bookController?command=bookDetail&book_id=${book_id }&pageNum=1">${ item }</a></li>
+                    		<li><a href="bookController?command=detail&book_id=${book_id}&pageNum=1">${ item }</a></li>
                 		</c:if>
                 		<c:if test="${ pageNum != item }">
-		 					<li><a href="bookController?command=bookDetail&pageNum=${ item }&book_id=${book_id }">${ item }</a></li>
+		 					<li><a href="bookController?command=detail&pageNum=${ item }&movie_id=${book_id}">${ item }</a></li>
                 		</c:if>
             		</c:forEach>
             		<li>
-			      		<a href="bookController?command=bookDetail&pageNum=${totalPage}&book_id=${book_id }" aria-label="Next">
+			      		<a href="bookController?command=detail&pageNum=${totalPage}&book_id=${book_id}" aria-label="Next">
 			        	<span aria-hidden="true">&raquo;</span>
 			      		</a>
 			    	</li>
 				</ul>
+				
 			
 			</nav>
-	</div>
+			   </div>
+			</div>
+			
+		</div>
 	
+	
+	</div>
+	<!-- 추천수 조회수 top5 -->
 	<%@ include file="BookTop6.jsp" %>
 	
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br>
-	
-	<%@ include file="Fix/footer.jsp" %>
+			
+	<!-- footer  -->
+	<%@ include file="../Fix/footer.jsp" %>
+
+
 </body>
 </html>

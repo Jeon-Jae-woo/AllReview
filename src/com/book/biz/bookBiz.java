@@ -5,6 +5,7 @@ import java.util.List;
 import com.book.dto.BookBoardDto;
 import com.book.dto.BookCategoryDto;
 import com.book.dto.BookReviewDto;
+import com.movie.dto.MovieBoardDto;
 import com.user.dto.pagingDto;
 
 public interface bookBiz {
@@ -30,5 +31,8 @@ public interface bookBiz {
 	public int reviewDeleteService(String nickname, int review_id);
 	//리뷰 글 수정
 	public int reviewUpdateService(BookReviewDto dto);
+	
+	//도서등록
+	public int bookinsert(BookBoardDto dto);
 	
 }

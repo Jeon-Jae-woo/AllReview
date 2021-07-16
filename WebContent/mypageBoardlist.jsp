@@ -9,32 +9,80 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	#mypage_div{
-		border: 1px black solid;
-		height:600px;
-		margin-left:100px;
-		margin-top:50px;
-	}
-	
-	#mypage_div2{
-		border: 1px black solid;
-		height:600px;
-		margin-left:100px;
-		margin-top:50px;
-	}
-	
-	.side{
-		margin-top:10px;
-		margin-bottom:10px;
-	}
-	
-	#mypage_board{
-		width:800px;
-		margin-top:20px;
-		margin-left:auto;
-		margin-bottom:20px;
-		margin-right:auto;
-	}
+#mypage_div{
+	border: 1px black solid;
+	height:600px;
+	margin-left:100px;
+	margin-top:50px;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );
+	border-radius: 10px 10px 10px 10px;
+	font-weight: bold;
+	text-align:center;
+	position: relative;
+	top: 50px;
+}
+
+#mypage_div2{
+	border: 1px black solid;
+	height:600px;
+	margin-left:100px;
+	margin-top:50px;
+	background-color: white;
+	background-color: rgba( 255, 255, 255, 0.8 );
+	border-radius: 10px 10px 10px 10px;
+	color: black;
+	font-weight: bold;
+	position: relative;
+	top: 50px;
+}
+
+.side{
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+#mypage_board{
+	width:800px;
+	margin-top:20px;
+	margin-left:auto;
+	margin-bottom:20px;
+	margin-right:auto;
+	position: relative;
+	top: 40px;
+}
+
+body{
+	background-image: url("./resources/Image/forest1.jpg");
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: cover;
+}
+
+h1{
+	position: relative;
+	top: 50px;
+	left: 6%;
+	text-shadow: 1px 1px 1px gray;
+}
+#sidenav{
+	position: relative;
+	top: 40px;
+}
+#mypage_div2_sub{
+	position: relative;
+	top: 40px;
+
+}
+.pull-bottom{
+	position: relative;
+	top: 40px;
+}
+#pull-bottom_line{
+	position: relative;
+	top: 40px;
+
+}
 	
 	
 </style>
@@ -56,7 +104,7 @@
 
 	<%@ include file="../Fix/header.jsp" %>
 	
-	<div class="container" style="text-align:center;">
+	<div class="container" style="text-align:center; color:white;">
 		<h1>내가 쓴 게시글</h1>
 	</div>
 	
@@ -65,7 +113,7 @@
 		<div class="container col-sm-2" id="mypage_div">
 			<div class="row flex-nowrap">
     			<div class="col-3 bd-sidebar">
-      				<ul class="nav">
+      				<ul class="nav" id="sidenav">
 				        <li class="side"><a href="userController?command=mypageInfo">회원 정보</a></li>
 				        <li class="side"><a href="userController?command=writelist">내가 쓴 게시글</a></li>
 				        <li class="side"><a href="mypageLeave.jsp">회원 탈퇴</a></li>
@@ -78,7 +126,7 @@
 		<div class="container col-sm-6 text-center" id="mypage_div2">
 		<form class="form-horizontal" action="userController" method="post">
 			<input type="hidden" name="command" value="writelist">
-			<div class="container" style="margin-top:10px">
+			<div class="container" id="mypage_div2_sub" style="margin-top:10px">
 				<div class="col-sm-2">
 		      		<select class="form-control" name="category" id="category">
     					<option value="매장">매장</option>
@@ -153,7 +201,7 @@
 				</tbody>
 			</table>
 
-			<hr>
+			<hr id="pull-bottom_line">
 			<nav class="pull-bottom">
 			<c:set var="pageNum" value="${paging.pageNum }"/>
 			<c:set var="startPage" value="${paging.startPage}"/>
@@ -186,6 +234,7 @@
 		</div>
 	</div>
 	
+	<br><br><br><br><br><br><br><br><br>
 	<%@ include file="../Fix/footer.jsp" %>
 </body>
 </html>

@@ -1,7 +1,6 @@
 package com.movie.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -132,54 +131,33 @@ public class MovieBoardDaoImpl implements MovieBoardDao{
 		return res;
 	}
 
-	@Override
-	public boolean movieupdate(Connection con, MovieBoardDto dto) {
-		PreparedStatement pstm = null;
-		int res = 0;
-		
-		try {
-			pstm = con.prepareStatement(movieupdateSql);
-			pstm.setString(2, dto.getMovie_title());
-			pstm.setString(3, dto.getDirector());
-			pstm.setString(4, dto.getActor());
-			pstm.setInt(5, dto.getParticipant());
-			System.out.println("03.query 준비:" + movieupdateSql);
-			
-			res = pstm.executeUpdate();
-			System.out.println("04.query 실행 및 리턴");
-			
-		} catch (SQLException e) {
-			System.out.println("3/4단계 에러");
-			e.printStackTrace();
-		}finally {
-			close(pstm);
-			System.out.println("05.db 종료\n");
-		}
-		return (res>0)?true:false;
-	}
-
-	@Override
-	public boolean moviedelete(Connection con, int movie_id) {
-		PreparedStatement pstm =null;
-		int res = 0;
-		
-		try {
-			pstm = con.prepareStatement(moviedeleteSql);
-			pstm.setInt(1, movie_id);
-			System.out.println("03.query 준비:" + moviedeleteSql);
-			
-			res = pstm.executeUpdate();
-			System.out.println("04.query 실행 및 리턴");
-			
-		} catch (SQLException e) {
-			System.out.println("3/4단계 에러");
-			e.printStackTrace();
-		}finally {
-			close(pstm);
-			System.out.println("05.db종료/n");
-		}
-		return (res>0)?true:false;
-	}
+	/*
+	 * @Override public boolean movieupdate(Connection con, MovieBoardDto dto) {
+	 * PreparedStatement pstm = null; int res = 0;
+	 * 
+	 * try { pstm = con.prepareStatement(movieupdateSql); pstm.setString(2,
+	 * dto.getMovie_title()); pstm.setString(3, dto.getDirector());
+	 * pstm.setString(4, dto.getActor()); pstm.setInt(5, dto.getParticipant());
+	 * System.out.println("03.query 준비:" + movieupdateSql);
+	 * 
+	 * res = pstm.executeUpdate(); System.out.println("04.query 실행 및 리턴");
+	 * 
+	 * } catch (SQLException e) { System.out.println("3/4단계 에러");
+	 * e.printStackTrace(); }finally { close(pstm);
+	 * System.out.println("05.db 종료\n"); } return (res>0)?true:false; }
+	 * 
+	 * @Override public boolean moviedelete(Connection con, int movie_id) {
+	 * PreparedStatement pstm =null; int res = 0;
+	 * 
+	 * try { pstm = con.prepareStatement(moviedeleteSql); pstm.setInt(1, movie_id);
+	 * System.out.println("03.query 준비:" + moviedeleteSql);
+	 * 
+	 * res = pstm.executeUpdate(); System.out.println("04.query 실행 및 리턴");
+	 * 
+	 * } catch (SQLException e) { System.out.println("3/4단계 에러");
+	 * e.printStackTrace(); }finally { close(pstm); System.out.println("05.db종료/n");
+	 * } return (res>0)?true:false; }
+	 */
 
 	//카테고리별 row 반환
 	@Override
@@ -371,12 +349,14 @@ public class MovieBoardDaoImpl implements MovieBoardDao{
 			System.out.println(dto.getReview_content());
 			System.out.println(dto.getReview_id());
 			System.out.println(dto.getNickname());
+			System.out.println(dto.getReview_img());
 			
 			pstm.setString(1, dto.getReview_title());
 			pstm.setString(2, dto.getReview_content());
 			pstm.setInt(3, dto.getMovie_grade());
-			pstm.setInt(4, dto.getReview_id());
-			pstm.setString(5, dto.getNickname());
+			pstm.setString(4, dto.getReview_img());
+			pstm.setInt(5, dto.getReview_id());
+			pstm.setString(6, dto.getNickname());
 			
 			result = pstm.executeUpdate();
 			
@@ -419,7 +399,175 @@ public class MovieBoardDaoImpl implements MovieBoardDao{
 		
 		return result;
 	}
+	////////////////////////////////////////////////////////////////////////////////////
+	@Override
+	//조회수 정렬
+	public List<MovieReviewDto> hitTop(Connection con){
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		List<MovieReviewDto> res = new ArrayList<MovieReviewDto>();
+		
+		try {
+			pstm = con.prepareStatement(hittopsql);
+			System.out.println("03. query 준비: " + hittopsql);
+			
+			rs = pstm.executeQuery();
+			System.out.println("04. query 실행 및 리턴");
+			
+			while(rs.next()) {
+				MovieReviewDto tmp = new MovieReviewDto(rs.getInt(1), rs.getString(2),rs.getInt(3),
+						rs.getString(4), rs.getString(5), rs.getInt(6), rs.getInt(7), rs.getInt(8),
+						rs.getString(9), rs.getInt(10), rs.getInt(11),rs.getDate(12), rs.getDate(13), rs.getString(14));
+				
+				res.add(tmp);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+		}
+		
+		return res;
+	}
 	
+	@Override
+	//추천수 정렬
+	public List<MovieReviewDto> recoTop(Connection con){
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		List<MovieReviewDto> res = new ArrayList<MovieReviewDto>();
+		
+		try {
+			pstm = con.prepareStatement(recotopsql);
+			System.out.println("03. query 준비: " + recotopsql);
+			
+			rs = pstm.executeQuery();
+			System.out.println("04. query 실행 및 리턴");
+			
+			while(rs.next()) {
+				MovieReviewDto tmp = new MovieReviewDto(rs.getInt(1), rs.getString(2),rs.getInt(3),
+						rs.getString(4), rs.getString(5), rs.getInt(6), rs.getInt(7), rs.getInt(8),
+						rs.getString(9), rs.getInt(10), rs.getInt(11),rs.getDate(12), rs.getDate(13), rs.getString(14));
+				
+				res.add(tmp);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+		}
+		
+		return res;
+	}
+	
+	@Override
+	//조회수
+	public int inserthit(Connection con, int review_id, String nickname) {
+		PreparedStatement pstm = null;
+		int res = 0;
+
+		try {
+			pstm = con.prepareStatement(hitinsertsql);
+			pstm.setString(1, nickname);
+			pstm.setInt(2, review_id);
+			System.out.println("03. query 준비: " + hitinsertsql);
+
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 에러");
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+			System.out.println("05. db 종료\n");
+		}
+
+		return res;
+	}
+	
+	@Override
+	//조회수 증가
+	public int updatehit(Connection con, int review_id) {
+		PreparedStatement pstm = null;
+		int res = 0;
+
+		try {
+			pstm = con.prepareStatement(hitupdatesql);
+			pstm.setInt(1, review_id);
+			System.out.println("03. query 준비: " + hitupdatesql);
+
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 에러");
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+			System.out.println("05. db 종료\n");
+		}
+
+		return res;
+	}
+	
+	@Override
+	//추천수
+	public int insertreco(Connection con, int review_id, String nickname) {
+		PreparedStatement pstm = null;
+		int res = 0;
+
+		try {
+			pstm = con.prepareStatement(recoinsertsql);
+			pstm.setString(1, nickname);
+			pstm.setInt(2, review_id);
+			System.out.println("03. query 준비 : " + recoinsertsql);
+
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 에러");
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+			System.out.println("05. db 종료\n");
+		}
+
+		return res;
+	}
+	
+	@Override
+	//추천수 증가
+	public int updatereco(Connection con, int review_id) {
+		PreparedStatement pstm = null;
+		int res = 0;
+		
+		try {
+			pstm = con.prepareStatement(recoupdatesql);
+			pstm.setInt(1, review_id);
+			System.out.println("03. query 준비: " + recoupdatesql);
+			
+			res = pstm.executeUpdate();
+			System.out.println("04. query 실행 및 리턴");
+			
+			
+		} catch (SQLException e) {
+			System.out.println("3/4 단계 에러");
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+			System.out.println("05. db 종료\n");
+		}
+		
+		
+		return res;
+	}
 	
 	
 }

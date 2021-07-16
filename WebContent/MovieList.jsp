@@ -22,29 +22,8 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-/* $(function(){
-	$("#online").click(function(){
-		$("#online_sub").toggle();
-	});
-	
-	$("#moive").click(function(){
-		$("#movie_sub").toggle();
-		
-	});
-	
-	$("#shop").click(function(){
-		$("#shop_sub").toggle();
-		
-	});
-	
-	$("#book").click(function(){
-		$("#book_sub").toggle();
-		
-	});
-}); */ 
 
 </script>
-
 
 <style type="text/css">
 	
@@ -58,7 +37,6 @@
 	height: 100px;
 	background-color: white;
 	background-color: rgba( 255, 255, 255, 0.8 );
-	
 	}
 #nav ul li{
 	list-style: none;
@@ -73,7 +51,7 @@
 	width: 20%;
 	color: black;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 18px;
 	text-shadow: 1px 1px 1px gray;
 	}
 #nav ul li:hover{
@@ -116,11 +94,10 @@
 #subcategory1 ul li:hover{
 	color:gray;
 }
-
 .category{
 	position: absolute;
 	float: left;
-	top: 500px;
+	top: 490px;
 	left: 9%;
 	color: white;
 	font-weight: bold;
@@ -130,7 +107,7 @@
 	width: 60%;
 	height: 383px;
 	border: 1px solid black;
-	top: 140px;
+	top: 130px;
 	left: 9%;
 	position: relative;
 	color: black;
@@ -147,7 +124,6 @@
   	top: 10px;
 	left: 10px;
 }
-
 .poster{
 	/* border: 1px dashed red; */
 	width: 270px;
@@ -156,21 +132,17 @@
 	margin: auto;
 	/* background: gray; */
 }
-
 .list{
 	position: relative;
 	height: 320px;
-	left: 33%;
+	left: 30%;
 	bottom: 330px;
 	font-size: 18px;
 	width: 800px;
 }
-
 .list tr th{
 	text-align: center;
-	
 }
-
 .listtitle{
 	float: left;
 	left: 9%;
@@ -178,9 +150,7 @@
 	top: 1020px;
 	color: white;
 	font-weight: bold;
-	
 } 
-
 #mypage_board{
 	width:60%;
 	margin-top:20px;
@@ -188,7 +158,7 @@
 	margin-bottom:20px;
 	margin-right:auto;
 	position: relative;
-	top: 240px;
+	top: 210px;
 	float: left;
 	left: 9%;
 	color: black;
@@ -196,17 +166,16 @@
 	background-color: white;
 	background-color: rgba( 255, 255, 255, 0.8 );
 }
-
 .bottombutton{
 	float: right;
-	position: absolute;
-	right: 31%;
-	top: 1320px;
-}
-
-#writebutton{
 	position: relative;
+	right: 31%;
+	top: 500px;
+}
+#writebutton{
+/* 	position: relative; */
 	font-size: 15px;
+	font-weight: bold;
 	height: 30px;
 }
 .pull-bottom{
@@ -215,8 +184,7 @@
 	height: 40px;
 	top: 550px;
 	float: right;
-	right: 50%;
-
+	right: 40%;
 }
 .pagination{
 	position: relative;
@@ -235,7 +203,6 @@ body{
 	hegiht: 290px;
 	object-fit:cover;
 	border-radius: 5px 5px 5px 5px;
-
 }
 
 </style>
@@ -251,22 +218,14 @@ body{
 	<div class="categorybox">
 		<div id="nav">
 				<ul>
-	            	<li id="online">온라인 쇼핑</li>
+	            	<li id="online" onclick="location.href='onlineController?command=list'">온라인 쇼핑</li>
 	            	<li id="moive" onclick="location.href='movieController?command=moiveListCate'">영화 </li>
 	            	<li id="shop" onclick="location.href='shop.do?command=shoplist'">매장</li>
-	            	<li id="book">도서</li>
+	            	<li id="book" onclick="location.href='bookController?command=bookList'">도서</li>
 	            </ul>
 	    </div>
 		<div id="subcategorybox">
 	       	<div id="subcategory1">
-	       		<ul id="online_sub">
-	       			<li onclick="">세부 카테고리1</li>
-	       			<li onclick="">세부 카테고리2</li>
-	       			<li onclick="">세부 카테고리3</li>
-	       			<li onclick="">세부 카테고리4</li>
-	       			<li onclick="">세부 카테고리5</li>
-	       			<li onclick="">세부 카테고리6</li>
-	       		</ul>
 	       		<ul id="movie_sub">
 	       			<c:choose>
 						<c:when test="${empty moiveListCate }">
@@ -282,22 +241,6 @@ body{
 					</c:choose>
 	       			
 	       		</ul>
-	       		<ul id="shop_sub">
-	    			<li onclick="">세부 카테고리1</li>
-	       			<li onclick="">세부 카테고리2</li>
-	       			<li onclick="">세부 카테고리3</li>
-	       			<li onclick="">세부 카테고리4</li>
-	       			<li onclick="">세부 카테고리5</li>
-	       			<li onclick="">세부 카테고리6</li>
-	       		</ul>
-	       		<ul id="book_sub">
-	    			<li onclick="">세부 카테고리1</li>
-	       			<li onclick="">세부 카테고리2</li>
-	       			<li onclick="">세부 카테고리3</li>
-	       			<li onclick="">세부 카테고리4</li>
-	       			<li onclick="">세부 카테고리5</li>
-	       			<li onclick="">세부 카테고리6</li>
-	       		</ul>
 	       	</div>
 	    </div>
     </div>
@@ -305,7 +248,6 @@ body{
 
 	
 	<!-- 영화기본정보 + 리뷰리스트 조회 -->
-	<div>
 		<div class="category">
 			<h2>${category_name}</h2>
 		</div>
@@ -336,7 +278,7 @@ body{
 		</div>
 	
 		<!-- 영화 리뷰리스트  -->
-		<div>
+		<div id="section">
 			<div class="listtitle">
 				<h4>${dto.movie_title }  Review List</h4>
 			</div>
@@ -411,16 +353,11 @@ body{
 			      		</a>
 			    	</li>
 				</ul>
-				
-			
 			</nav>
 			   </div>
 			</div>
-			
 		</div>
 	
-	
-	</div>
 	<!-- 추천수 조회수 top5 -->
 	<%@ include file="MovieTop5.jsp" %>
 	

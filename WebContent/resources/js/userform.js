@@ -1,5 +1,5 @@
 function joinCheck(){
-	
+	console.log("회원가입 체크 로직 동작");
 	var form = document.join_form;
 	
 	//이메일 체크
@@ -21,7 +21,15 @@ function joinCheck(){
 		form.password.focus();
 		return false;
 	}
-	
+	//비밀번호 일치 체크
+	var password2 = form.password2.value;
+	if(password != password2){
+		alert("비밀번호가 일치하지 않습니다");
+		form.password.focus();
+		return false;
+	}
+	console.log(password);
+	console.log(password2);
 	//이름 체크
 	var name = form.name.value.replace(/\s/g, "");
 	if(name==null || name==""){
@@ -37,7 +45,7 @@ function joinCheck(){
 	
 	var birth = birth1+"-"+birth2+"-"+birth3;
 	
-	console.log("birth: "+ birth);
+	
 	try {
 	    var date = birth.split("-");
 	    var y = parseInt(date[0], 10),
@@ -60,6 +68,7 @@ function joinCheck(){
 		return false;
 	}
 	
+	
 	//별명 체크
 	var nickname = form.nickname.value.replace(/\s/g, "");
 	var checknickname = form.checknickname.value;
@@ -79,7 +88,7 @@ function joinCheck(){
 		form.address2.focus();
 		return false;
 	}
-	
+	return false;
 	form.submit();
 	
 }

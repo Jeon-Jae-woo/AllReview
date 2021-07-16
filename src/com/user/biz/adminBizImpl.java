@@ -138,4 +138,47 @@ public class adminBizImpl implements adminBiz {
 		return result;
 	}
 
+	//유저 검색
+	@Override
+	public List<userDto> searchEmailService(String email, int pageNum) {
+		List<userDto> userList = admindao.searchUserList(email, pageNum);
+		return userList;
+	}
+
+	@Override
+	public pagingDto searchCountService(String email, int pageNum) {
+		pagingDto paging = new pagingDto();
+		paging.setPageNum(pageNum);
+		paging.setItemCount(10);
+		
+		int size = admindao.searchCount(email);
+		
+		paging.setTotalCount(size);
+		paging.pagination();
+		
+		return paging;
+	}
+
+	//관리자 검색
+	@Override
+	public List<userDto> searchAdminService(String email, int pageNum) {
+		List<userDto> userList = admindao.searchAdminList(email, pageNum);
+		return userList;
+	}
+
+	//관리자 검색 카운트
+	@Override
+	public pagingDto searchAdminCountService(String email, int pageNum) {
+		pagingDto paging = new pagingDto();
+		paging.setPageNum(pageNum);
+		paging.setItemCount(10);
+		
+		int size = admindao.searchAdminCount(email);
+		
+		paging.setTotalCount(size);
+		paging.pagination();
+		
+		return paging;
+	}
+
 }

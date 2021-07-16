@@ -47,7 +47,7 @@
 	width: 20%;
 	color: black;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 18px;
 	text-shadow: 1px 1px 1px gray;
 	}
 
@@ -125,6 +125,7 @@ body{
 <body>
 	<header ><%@ include file="Fix/header.jsp" %></header>
 	
+	<br>
 	<div class="categorybox">
 		<div id="nav">
 				<ul>
@@ -189,7 +190,7 @@ body{
 	<c:set var="j" value="4" />
 	<c:set var="r" value="0" />
 	<c:set var="r2" value="0" />
-	
+	<c:set var="img" value="img/SHOP.png" />
 	<table class="table">
 		<c:choose>
 			<c:when test="${empty list }">
@@ -203,15 +204,31 @@ body{
 				<c:if test="${i%j ==0 }">
 				<tr>
 				</c:if>
+				<c:choose>
+					<c:when test="${empty dto.upload_img}">
 					<td>
-						<img src="resources/uploadImage/${dto.upload_img }" class="img-responsive" alt="Responsive image" onclick="location.href='shop.do?command=shopdetail&shopno=${dto.shopno }'">
-						<a href="shop.do?command=shopdetail&shopno=${dto.shopno }">${dto.shopno } ${dto.title }</a><br>
+						<img src="${img }" class="img-responsive" alt="Responsive image" onclick="location.href='shop.do?command=shopdetail&shopno=${dto.shopno }'" style="width:200px; height:200px;">
+						<a href="shop.do?command=shopdetail&shopno=${dto.shopno }">${dto.title }</a><br>
 						<label>평점 ★:  </label>${Math.round((((dto.service)+(dto.clean)+(dto.traffic))/3)*100)/100.0 }<br>
 						<label>조회수:${dto.hit } </label>
 						<label>추천수:${dto.reco } </label>
 						
 						<div></div>
 					</td>
+					</c:when>
+					<c:otherwise>
+					<td>
+						<img src="resources/uploadImage/${dto.upload_img }" class="img-responsive" alt="Responsive image" onclick="location.href='shop.do?command=shopdetail&shopno=${dto.shopno }'" style="width:200px; height:200px;">
+						<a href="shop.do?command=shopdetail&shopno=${dto.shopno }">${dto.title }</a><br>
+						<label>평점 ★:  </label>${Math.round((((dto.service)+(dto.clean)+(dto.traffic))/3)*100)/100.0 }<br>
+						<label>조회수:${dto.hit } </label>
+						<label>추천수:${dto.reco } </label>
+						
+						<div></div>
+					</td>
+					</c:otherwise>
+				</c:choose>
+					
 				<c:if test="${i%j == j-1 }">
 				</tr>
 				</c:if>
@@ -228,7 +245,7 @@ body{
 	
 	<div class="side_table">
 		<div class="side_title01">
-			<h4 style="color:white; text-weight:bold;"> 영화 리뷰 추천수 상위 top5 </h4>
+			<h4 style="color:white; text-weight:bold;"> 매장 리뷰 추천수 상위 top5 </h4>
 		</div>
 			
 		<div>
@@ -265,7 +282,7 @@ body{
 		
 		<br>
 		<div class="side_title02">
-			<h4 style="color:white; text-weight:bold;"> 영화 리뷰 조회수 상위 top5 </h4>
+			<h4 style="color:white; text-weight:bold;"> 매장 리뷰 조회수 상위 top5 </h4>
 		</div>
 		
 		<div>
@@ -300,7 +317,7 @@ body{
 		</div>
 		
 	</div>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>v
+	<br><br><br>
 	
 	
 	
@@ -337,7 +354,7 @@ body{
 		<!-- <a href="shop.do?command=shopwriteform">글쓰기</a> -->
 	</div>
 	
-	
+	<br><br><br><br><br><br><br>
 	<footer ><%@ include file="Fix/footer.jsp" %></footer>
 </body>
 </html>

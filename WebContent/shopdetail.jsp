@@ -80,11 +80,18 @@
 		${dto.updateat }
 	</th>
 	</tr>
-	<tr>
-		<td colspan="4">
-			<img src="resources/uploadImage/${dto.upload_img }" width="200" height="200">
-		</td>
-	</tr>
+	<c:choose>
+		<c:when test="${empty dto.upload_img }">
+		</c:when>
+		<c:otherwise>
+			<tr>
+				<td colspan="4">
+					<img src="resources/uploadImage/${dto.upload_img }" width="200" height="200">
+				</td>
+			</tr>
+		</c:otherwise>
+	</c:choose>
+
 	<tr>
 		<td colspan="4">
 			<textarea rows="10" cols="80" readonly="readonly">${dto.content }</textarea>

@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <% request.setCharacterEncoding("UTF-8"); %>
-<% response.setContentType("text/html; charset=UTF-8"); %>
+<% response.setContentType("text/html; UTF-8"); %>  
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-$(function(){
+/* $(function(){
 	$("#online").click(function(){
 		$("#online_sub").toggle();
 	});
@@ -31,23 +31,26 @@ $(function(){
 		$("#book_sub").toggle();
 		
 	});
-}); 
+}); */ 
 
 </script>
+
 <style type="text/css">
+
 .categorybox{
-	/*border: 1px solid gray;*/
 	height: 260px;
-	
+
+
 }
 #nav{
 	left: 0px;
-	right:0px;
+	right: 0px;
 	height: 100px;
 	background-color: white;
 	background-color: rgba( 255, 255, 255, 0.8 );
 
-	}
+}
+
 #nav ul li{
 	list-style: none;
 	display: inline;
@@ -63,7 +66,6 @@ $(function(){
 	font-weight: bold;
 	font-size: 15px;
 	text-shadow: 1px 1px 1px gray;
-	
 	}
 
 #nav ul li:hover{
@@ -78,19 +80,19 @@ $(function(){
 	display: none;
 }
 #movie_sub{
-	display: none; 
+	display: none;
 }
 #shop_sub{
 	display: none;
 }
 #book_sub{
-	/*display: none;*/
+	/* display: none; */
 }
 
 #subcategory1 ul li{
 	border-inline: 1px solid lightgray;
 	background-color: white;
-	background-color: rgba( 255, 255, 255, 0.4 );
+	background-color: rgba( 255, 255, 255, 0.8 );
 	list-style: none;
 	position: relative;
 	padding: 0;
@@ -109,111 +111,93 @@ $(function(){
 	color:gray;
 }
 
-.title{
+.category{
 	position: absolute;
 	float: left;
+	top: 450px;
 	left: 9%;
-	top: 500px;
 	color: white;
 }
-.totalbox{
-	height: 800px;
-	left: 9%;
+
+#box{
 	width: 60%;
-	top: 140px;
-	position: relative;
-}
-.titlebox{
-	border: 1px solid gray;
-	height: 60px;
-	left: 1%;
-	width: 98%;
-	top: 10px;
+	height: 350px;
+	border: 1px solid black;
+	top: 180px;
+	left: 9%;
 	position: relative;
 	background-color: white;
 	background-color: rgba( 255, 255, 255, 0.8 );
-}
-#title{
-	position: relative;
-	left: 20px;
-	top: 20px;
-}
-#nickname{
-	position: relative;
-	left: 42%;	
-}
-#bookgrade{
-	position: relative;
-	left: 62%;
-	bottom: 20px;
-}
-#recommand{
-	position: relative;
-	left: 80%;
-	bottom: 39px;
-}
-#view{
-	position: relative;
-	left: 90%;
-	bottom: 59px;
+	
+	
 }
 
-#date{
+#wrap{
+	border: 1px solid black;
+	width: 280px;
+	height: 330px;
+	padding-top: 3px;
 	position: relative;
-	float: right;
-	right: 20px;
-	top: 14px;
-}
-.contentbox{
-	border: 1px solid gray;
-	height: 580px;
-	left: 1%;
-	width: 98%;
-	top: 20px;
-	position: relative;
-	background-color: white;
-	background-color: rgba( 255, 255, 255, 0.8 );
-}
-#content{
-	position: relative;
-	left: 5px;
-	top: 30px;
+  	top: 10px;
+	left: 10px;
 }
 
-.bottombox{
+.poster{
+	border: 1px dashed red;
+	width: 270px;
+	height: 320px;
+	text-align: center;
+	margin: auto;
+	background: gray;
+}
+
+.list{
 	position: relative;
-	bottom: 25px;
+	height: 320px;
+	left: 28%;
+	bottom: 315px;
+	font-size: 18px;
+	width: 800px;
+	/* border: 1px solid; */
 }
-#reco_button{
- 	position: absolute;
-	float:right;
-	right: 120px;
-	width: 80px;
+
+.list tr th{
+text-align: center;
 }
-#repo_button{
+
+.attached_poster{
+	float: left;
+	left: 10%;
+	top: 1030px;
 	position: absolute;
-	float:right;
-	right: 25px;
-	width: 80px;
+	font-size: 15px;
+	color: white;
 }
-.lastbutton{
-	position: relative;
-	top: 40px;
+
+.comment{
+	float: left;
+	left: 10%;
+	top: 1000px;
+	position: absolute;
+	font-size: 15px;
+	color: white;
 }
-#list{
-	position: relative;
-	width: 80px;
-	left: 36%;
+
+.create{
+	float: left;
+	left: 32%;
+	top: 1100px;
+	position: absolute;
+	font-size: 15px;
+	width: 70px;
 }
-#update{
-	position: relative;
-	width: 80px;
-	left: 38%;
-} 
-#delete{
-	position: relative;
-	width: 80px;
-	left: 40%;
+.cancel{
+	float: left;
+	left: 37%;
+	top: 1100px;
+	position: absolute;
+	font-size: 15px;
+	width: 70px;
 }
 body{
 	background-image: url("./resources/Image/forest1.jpg");
@@ -222,11 +206,12 @@ body{
 	background-size: cover;
 }
  
-</style>
 
+</style>
 </head>
 <body>
 	<%@ include file="Fix/header.jsp" %>
+
 	
 	<br>
 	<div class="categorybox">
@@ -278,87 +263,65 @@ body{
 						</c:otherwise>
 					</c:choose>
 	       		</ul>
-	       </div>
+	       	</div>
 	    </div>
     </div>
 	<br>
-	
-	<div class="title">
-		<h3>리뷰글 상세보기</h3>
-	</div>
-	
+	<!-- 업뎃할 도서내용 -->
 	<div>
-		<div class="totalbox">
-		 <div class="titlebox">
-			<div id="title">
-				<div>${dto.review_title }</div>
+			<div class="category">
+				<h1>${category_name}</h1>
 			</div>
-			<div id="nickname">
-				<div>닉네임${dto.nickname }</div>
+		
+			<form action="bookController?command=bookupdate" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="category" value="${category }">
+			<div id="box">
+				<div id="wrap">
+					<div class="poster">도서 목록</div>
+				</div>
+			     <table class="list"  style="text-align: left">
+		            <tr>
+		                <th style="width:100px" >도서명 : </th>
+		                <td style="width:250px"><input type="text" name="book_title"></td>
+		                
+		            </tr>
+		            <tr>
+		                <th>기본정보 : </th>
+		                <td><input type="text" name="book_type_nm" value="${category_name}" readonly="readonly"></td>
+		            </tr>
+		             <tr>
+		                <th>작가 : </th>
+		                <td><input type="text" name="writer"></td>
+		            </tr>
+		             <tr>
+		                <th>출판사 : </th>
+		                <td><input type="text" name="publisher"></td>
+		            </tr>
+		        </table>	
+		        
 			</div>
-			<div id="bookgrade">
-				<div>도서평점${dto.book_grade }</div>
-			</div>
-			<div id="recommand">
-				<div>추천${dto.review_r_num }</div>
-			</div>
-			<div id="view">
-				<div>조회${dto.review_v_num }</div>
-			</div>
-	
-		</div>
-		<!-- 내용부분 -->
-		<div class="contentbox">
-			<div id="date">
-				<div>작성일${dto.rcreateat }</div>
-			</div>
-			<div id="content">
-				<textarea rows="23" cols="118" readonly="readonly">${dto.review_content }</textarea>
-				<img alt="" src="resources/uploadImage/${dto.review_img}" width="200" height="200">
-			</div>
-		</div>
-		<div class="bottombox">
-				<input id="reco_button" type="submit" value="추천">
-				<input id="repo_button" type="submit" value="신고">
-			</div>
-			<div class="lastbutton">
-				<input id="list" type="button" value="수정" onclick="location='movieController?command=reviewUpdateForm&review_id=${dto.review_id}'">
-				<input id="update" type="button" value="목록" onclick="location='MovieList.jsp'">
-				<input id="delete" type="button" value="삭제" onclick="location.href='bookController?command=reviewDelete&book_id=${dto.book_id}&review_id=${dto.review_id}'">
-			</div>
-			<c:set var="level" value="${level}"/>
-		<c:set var="status" value="${dto.status}"/>
-		<br><br>
-			<!-- 관리자만 보이도록 설정  -->
-			<c:choose>
-				<c:when test="${status eq '0'}">
-					<c:choose>
-						<c:when test="${level eq '1' || level eq '2'}">
-							<input id="list" type="button" value="승인" onclick="location='adminController?command=approval&review_id=${dto.review_id}&bigCate=${bigCate}&status=1'">
-							<input id="list" type="button" value="거절" onclick="location='adminController?command=approval&review_id=${dto.review_id}&bigCate=${bigCate}&status=2'">
-						</c:when>
-					</c:choose>
-				</c:when>
-			</c:choose>
 			
-				
-					<c:choose>
-						<c:when test="${level eq '1' || level eq '2'}">
-							<img alt="" src="resources/uploadImage/${dto.receipt}" width="200" height="200">
-						</c:when>
-					</c:choose>
+			
+			<div class="comment">도서 첨부</div>
+			<div class="attached_poster">
+				<input type="file" id="ex_file" name="poster">
+			</div>
+			
+			<div>
+				<input class="create" type="submit" value="등록">
+				<input class="cancel" type="button" value="취소" onclick="location.href='bookController?command=bookListCate'" >
+			</div>
+			</form>
+			
 			
 		</div>
-	</div>
-	
-	
-	
-	<%@ include file="BookTop6.jsp" %>
-	
-	<br><br><br><br><br><br><br><br><br><br><br><br>
-	
-	<%@ include file="Fix/footer.jsp" %>
-	
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
+	<!-- 오른쪽 사이드 Top5 테아블 -->		
+	<%@ include file="BookTop6.jsp" %>
+	<br><br><br><br><br><br><br>
+	
+	<!-- footer -->
+	<%@ include file="../Fix/footer.jsp" %>	
 </body>
 </html>

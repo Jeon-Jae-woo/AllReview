@@ -15,36 +15,14 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-/* $(function(){
-	$("#online").click(function(){
-		$("#online_sub").toggle();
-	});
-	
-	$("#moive").click(function(){
-		$("#movie_sub").toggle();
-		
-	});
-	
-	$("#shop").click(function(){
-		$("#shop_sub").toggle();
-		
-	});
-	
-	$("#book").click(function(){
-		$("#book_sub").toggle();
-		
-	});
-});  */
 
 </script>
-
 
 <style type="text/css">
 
 .categorybox{
 	/* border: 1px solid gray; */
 	height: 260px;
-
 }
 #nav{
 	left: 0px;
@@ -66,10 +44,9 @@
 	width: 20%;
 	color: black;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 18px;
 	text-shadow: 1px 1px 1px gray;
 	}
-
 #nav ul li:hover{
 	color:gray;
 	}
@@ -90,7 +67,6 @@
 #book_sub{
 	display: none;
 }
-
 #subcategory1 ul li{
 	border-inline: 1px solid lightgray;
 	background-color: white;
@@ -124,7 +100,6 @@
 	width: 60%;
 	top: 140px;
 	position: relative;
-	
 }
 .titlebox{
 	border: 1px solid gray;
@@ -136,7 +111,6 @@
 	background-color: white;
 	background-color: rgba( 255, 255, 255, 0.8 );
 }
-
 .contentbox{
 	border: 1px solid gray;
 	height: 550px;
@@ -147,7 +121,6 @@
 	background-color: white;
 	background-color: rgba( 255, 255, 255, 0.8 );
 }
-
 #reviewtitle{
 	position: relative;
 	top:11px;
@@ -160,13 +133,11 @@
 	top:11px;
 	left: 15px
 }
-
 .bottombox{
 	/* border: 1px dashed red; */
 	position: relative;
 	top: 20px;
 }
-
 .imgupload{
 	position: relative ;
 	top:20px;
@@ -174,7 +145,6 @@
 	width: 250px;
 	color: white;
 }
-
 .reciptupload{
 	position: relative;	
 	bottom: 24px;
@@ -182,15 +152,13 @@
 	width: 250px;
 	color: white;
 }
-
 .moviegrade{
 	position: relative;	
-	bottom: 50px;
+	bottom: 10px;
 	left: 600px;
 	width: 250px; 
 	color: white;
 }
-
 .reviewwrite{
 	position: relative;
 	left: 340px;
@@ -208,12 +176,22 @@ body{
 	background-repeat: no-repeat;
 	background-position: left top;
 	background-size: cover;
-
 }
 
 
 </style>
-
+<script type="text/javascript">
+	window.onload = function(){
+		var selectedData = '<c:out value="${dto.movie_grade}"/>';
+		var selectBox = document.getElementsByName("moviegrade");
+		console.log(selectBox.length);
+		for(var i=0; i<selectBox.length;i++){
+			if(selectBox[i].value==selectedData){
+				selectBox[i].checked=true;
+			}
+		}
+	}
+</script>
 
 </head>
 <body>
@@ -225,22 +203,14 @@ body{
 	<div class="categorybox">
 		<div id="nav">
 			<ul>
-            	<li id="online">온라인 쇼핑</li>
-            	<li id="moive" onclick="location.href='movieController?command=moiveListCate'">영화</li>
+            	<li id="online" onclick="location.href='onlineController?command=list'">온라인 쇼핑</li>
+            	<li id="moive" onclick="location.href='movieController?command=moiveListCate'">영화 </li>
             	<li id="shop" onclick="location.href='shop.do?command=shoplist'">매장</li>
-            	<li id="book">도서</li>
+            	<li id="book" onclick="location.href='bookController?command=bookList'">도서</li>
             </ul>
 		</div>
 		<div id="subcategorybox">
 	       	<div id="subcategory1">
-	       		<ul id="online_sub">
-	       			<li onclick="">세부 카테고리1</li>
-	       			<li onclick="">세부 카테고리2</li>
-	       			<li onclick="">세부 카테고리3</li>
-	       			<li onclick="">세부 카테고리4</li>
-	       			<li onclick="">세부 카테고리5</li>
-	       			<li onclick="">세부 카테고리6</li>
-	       		</ul>
 	       		<ul id="movie_sub">
 	       			<c:choose>
 						<c:when test="${empty moiveListCate }">
@@ -254,23 +224,6 @@ body{
 	       					</c:forEach>
 						</c:otherwise>
 					</c:choose>
-	       			
-	       		</ul>
-	       		<ul id="shop_sub">
-	    			<li onclick="">세부 카테고리1</li>
-	       			<li onclick="">세부 카테고리2</li>
-	       			<li onclick="">세부 카테고리3</li>
-	       			<li onclick="">세부 카테고리4</li>
-	       			<li onclick="">세부 카테고리5</li>
-	       			<li onclick="">세부 카테고리6</li>
-	       		</ul>
-	       		<ul id="book_sub">
-	    			<li onclick="">세부 카테고리1</li>
-	       			<li onclick="">세부 카테고리2</li>
-	       			<li onclick="">세부 카테고리3</li>
-	       			<li onclick="">세부 카테고리4</li>
-	       			<li onclick="">세부 카테고리5</li>
-	       			<li onclick="">세부 카테고리6</li>
 	       		</ul>
 	       	</div>
 	    </div>
@@ -285,10 +238,9 @@ body{
 	<!-- 리뷰(게시글) 수정 -->
 	<div>
 		<div class="totalbox">
-			<form action="movieController" method="post">
-				<input type="hidden" name="command" value="reviewUpdate">
-				<input type="hidden" name="review_id" value="${dto.review_id }">
-				
+			<form action="movieController?command=reviewUpdate" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="review_id" value="${dto.review_id}">
+				<input type="hidden" name="review_img" value="${dto.review_img}">
 				<div class="titlebox">
 					<input type="text" name="reviewtitle" id="reviewtitle" value="${dto.review_title }">
 				</div>
@@ -297,11 +249,9 @@ body{
 				</div>
 				<div class="bottombox">
 					<div class="imgupload">
-						이미지 첨부 : <input type="file" id="ex_file"> 
+						이미지 첨부 : <input type="file" id="uploadImg" name="uploadImg"> 
 					</div>
-					<div class="reciptupload">
-						관람인증 첨부: <input type="file" id="ex_file"> 
-					</div>
+
 					<div class="moviegrade">
 						영화평점 : <input type="radio" name="moviegrade" value="1">
 						<input type="radio" name="moviegrade" value="2">
@@ -314,7 +264,6 @@ body{
 					<input class="reviewwrite" type="submit" value="수정" onclick="location='movieController?command=detail&movie_id=${dto.movie_id}'">
 					<input class="reviewcancel" type="button" value="취소" onclick="location='movieController?command=detail&movie_id=${dto.movie_id}'">
 				</div>
-					
 			</form>
 		</div>
 	</div>
