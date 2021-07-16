@@ -37,8 +37,10 @@
 	<input type="button" class="btn btn-success" value="확인" onclick="emailTrue();">
 	</div>
 <% }else{ %>
+	<div class="container text-center">
 	<h1>사용할 수 없는 이메일 입니다</h1>
-	<input type="button" value="확인" onclick="emailFalse()">
+	<input type="button" class="btn btn-warning" value="확인" onclick="emailFalse()">
+	</div>
 <% } %>
 
 </body>
