@@ -11,6 +11,7 @@ import com.movie.dao.MovieCategoryDaoImpl;
 import com.movie.dto.MovieBoardDto;
 import com.movie.dto.MovieCategoryDto;
 import com.movie.dto.MovieReviewDto;
+import com.shop.dto.ShopDto;
 import com.user.dto.pagingDto;
 
 public class MovieBizImple implements movieBiz{
@@ -152,6 +153,93 @@ public class MovieBizImple implements movieBiz{
 		int result = movievBoardDao.reviewDelete(con, nickname, review_id);
 		close(con);
 		return result;
+	}
+	//조회수 정렬
+	@Override
+	public List<MovieReviewDto> hitTop() {
+		Connection con = getConnection();
+
+		List<MovieReviewDto> list = movievBoardDao.hitTop(con);
+
+		close(con);
+		
+		return list;
+	}
+	//조회수
+	@Override
+	public int inserthit(int review_id, String nickname) {
+		Connection con = getConnection();
+		
+		int res = movievBoardDao.inserthit(con, review_id, nickname);
+		
+		if(res>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return res;
+	}
+	//조회수 증가
+	@Override
+	public void updatehit(int review_id) {
+		Connection con = getConnection();
+		
+		int res = movievBoardDao.updatehit(con, review_id);
+		
+		if(res>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+	}
+	//추천수 정렬
+	@Override
+	public List<MovieReviewDto> recoTop() {
+		Connection con = getConnection();
+		
+		List<MovieReviewDto> list = movievBoardDao.recoTop(con);
+		
+		close(con);
+		
+		return list;
+	}
+	//추천수
+	@Override
+	public int insertreco(int review_id, String nickname) {
+		Connection con = getConnection();
+		
+		int res = movievBoardDao.insertreco(con,review_id,nickname);
+		
+		if(res>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return res;
+	}
+	//추천수 증가
+	@Override
+	public void updatereco(int review_id) {
+		Connection con = getConnection();
+		
+		int res = movievBoardDao.updatereco(con,review_id);
+		
+		if(res>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);		
 	}
 
 }

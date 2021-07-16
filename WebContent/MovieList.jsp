@@ -175,6 +175,7 @@
 #writebutton{
 /* 	position: relative; */
 	font-size: 15px;
+	font-weight: bold;
 	height: 30px;
 }
 .pull-bottom{
