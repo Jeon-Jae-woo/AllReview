@@ -22,6 +22,10 @@ public class onlineBizImpl implements onlineBiz {
 	public List<onlineDto> selectListCateService(int category_id, int pageNum) {
 		Connection con = getConnection();
 		List<onlineDto> list = dao.selectListCate(con, category_id, pageNum);
+		
+		// category id, pageNum은 잘 받아옴 , 리스트만 못받음
+		System.out.println("bizimpl 리스트값 : " + list);
+		
 		close(con);
 		return list;
 	}
@@ -33,7 +37,7 @@ public class onlineBizImpl implements onlineBiz {
 		paging.setPageNum(pageNum);
 		int size = 0;
 		size = dao.OnlineRowCount(category);
-
+		
 		paging.setTotalCount(size);
 		paging.pagination();
 		

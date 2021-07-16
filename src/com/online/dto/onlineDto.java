@@ -35,9 +35,6 @@ public class onlineDto {
 	public onlineDto() {
 		super();
 	}
-	//
-	
-	
 	
 	//전체생성자
 	public onlineDto(int online_board_id, String nickname, int category_id, String online_title,
