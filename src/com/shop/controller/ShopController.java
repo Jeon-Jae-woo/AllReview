@@ -219,15 +219,29 @@ public class ShopController extends HttpServlet {
 			
 			
 		}else if(command.equals("shopdelete")) {
+			HttpSession session = request.getSession();
+			
 			int shopno = Integer.parseInt(request.getParameter("shopno"));
 			
-			int res = biz.delete(shopno);
+			ShopDto dto = biz.selectOne(shopno);
 			
-			if(res>0) {
-				jsResponse("글 삭제 성공", "shop.do?command=shoplist", response);
+			
+			
+			String dtonickname = dto.getNickname();
+			String nickname = (String)session.getAttribute("nickname");
+			
+			if(nickname.equals(dtonickname) ) {
+				int res = biz.delete(shopno);
+				if(res>0) {
+					jsResponse("글 삭제 성공", "shop.do?command=shoplist", response);
+				}else {
+					jsResponse("글 삭제 실패", "shop.do?command=shopdetail&shopno="+shopno, response);
+				}
 			}else {
-				jsResponse("글 삭제 실패", "shop.do?command=shopdetail&shopno="+shopno, response);
+				jsResponse("본인의 글이 아닙니다.", "shop.do?command=shopdetail&shopno="+shopno, response);
 			}
+			
+			
 			
 			
 		}else if(command.equals("shopupdateform")) {
