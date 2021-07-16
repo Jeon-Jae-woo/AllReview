@@ -56,7 +56,7 @@ top: 10px;
 				url:"userController?command=emailchk&email="+email,
 				method:"get",
 				success:function(result){
-					window.open("emailCheckForm.jsp?email="+email+"&result="+result, "중복체크", "width=400, height=400");
+					window.open("emailCheckForm.jsp?email="+email+"&result="+result, "중복체크", "width=500, height=200");
 				},
 				error:function(){
 					console.log("join 통신 실패");

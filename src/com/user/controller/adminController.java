@@ -111,6 +111,9 @@ public class adminController extends HttpServlet {
 				category="매장";
 			}
 			
+			int adminLevel = adminCheckLevel(request, response);
+			
+			
 			adminUserDto userdetail = adminbiz.userdetailService(user);
 			
 			List<totalBoardDto> totalList = userbiz.userWriteListService(userdetail.getNickname(), pageNum, category);
@@ -122,6 +125,7 @@ public class adminController extends HttpServlet {
 			request.setAttribute("paging", paging);
 			request.setAttribute("category", category);
 			request.setAttribute("email", email);
+			request.setAttribute("adminLevel", adminLevel);
 			dispatch("adminUserdetail.jsp", request, response);
 						
 
@@ -240,4 +244,14 @@ public class adminController extends HttpServlet {
 		return (String)session.getAttribute("email");
 		
 	}
+	
+	private int adminCheckLevel(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession session = request.getSession();
+		Integer userLevel = (Integer)session.getAttribute("level");
+		if(userLevel==3) {
+			jsResponse("유효하지 않은 접근입니다", "index.jsp", response);
+		}
+		return userLevel;
+	}
+	
 }

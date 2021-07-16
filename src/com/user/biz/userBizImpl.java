@@ -125,10 +125,19 @@ public class userBizImpl implements userBiz {
 		return dto;
 	}
 
+	//유저 검색 이메일 닉네임
+	@Override
+	public userDto finduserENService(String email, String nickname) {
+		userDto dto = userdao.userFindEN(email, nickname);
+		return dto;
+	}
 
-
-	
-
+	//유저 비밀번호 세팅
+	@Override
+	public int updateTempPasswordService(String email, String tempPassword) {
+		int result = userdao.updateTempPassword(email, tempPassword);
+		return result;
+	}
 	
 	
 }

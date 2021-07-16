@@ -308,6 +308,65 @@ public class userDaoImpl implements userDao {
 		return dto;
 	}
 
+	//유저 비밀번호 찾기(검색)
+	@Override
+	public userDto userFindEN(String email, String nickname) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		userDto finduser = new userDto();
+		
+		try {
+			pstm = con.prepareStatement(userFindEmailandPassowrd);
+			pstm.setString(1, email);
+			pstm.setString(2, nickname);
+			
+			rs = pstm.executeQuery();
+			
+			while(rs.next()) {
+				finduser.setEmail(rs.getString(1));
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstm);
+			close(con);
+		}
+		
+		return finduser;
+	}
+
+	@Override
+	public int updateTempPassword(String email, String tempPassword) {
+		Connection con = getConnection();
+		PreparedStatement pstm = null;
+		int result = 0;
+		
+		try {
+			pstm = con.prepareStatement(updateTempPassword);
+			pstm.setString(1, tempPassword);
+			pstm.setString(2, email);
+			
+			result = pstm.executeUpdate();
+			
+			if(result>0) {
+				commit(con);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstm);
+			close(con);
+		}
+		
+		return result;
+	}
+
 	
 	
 	

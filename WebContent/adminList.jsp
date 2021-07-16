@@ -72,16 +72,6 @@ body{
 				        <li class="side"><a href="adminWaitboard.jsp">승인 대기중인 글</a></li>
 				        <li class="side"><a href="adminRefusalboard.jsp">승인 거절된 글</a></li>
       				</ul>
-      			
-      			<h4>공지사항</h4>
-      		      	<ul class="nav">
-				        <li class="side"><a href="adminNotice.jsp">게시판 공지사항</a></li>
-      				</ul>
-    			
-    			<h4>신고 관리</h4>
-    			    <ul class="nav">
-				        <li class="side"><a href="adminReportboard.jsp">신고 목록</a></li>
-      				</ul>
       			</div>
     		</div>
 		</div>
